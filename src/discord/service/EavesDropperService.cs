@@ -31,7 +31,7 @@ namespace FrankieBot.Discord.Services
 		}
 
 		/// <summary>
-		///  Initializes the Service
+		/// Initializes the Service
 		/// </summary>
 		/// <returns></returns>
 		public async Task InitializeAsync()

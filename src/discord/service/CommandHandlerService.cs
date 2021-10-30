@@ -51,7 +51,7 @@ namespace FrankieBot.Discord.Services
 		/// Event Handler method called when receiving messages
 		/// </summary>
 		/// <param name="sourceMessage"></param>
-		public async Task OnMessageReceived(SocketMessage sourceMessage)
+		private async Task OnMessageReceived(SocketMessage sourceMessage)
 		{
 			if (!(sourceMessage is SocketUserMessage message))
 			{
@@ -82,7 +82,7 @@ namespace FrankieBot.Discord.Services
 		/// <param name="command"></param>
 		/// <param name="context"></param>
 		/// <param name="result"></param>
-		public async Task OnCommandExecuted(Optional<CommandInfo> command, ICommandContext context, IResult result)
+		private async Task OnCommandExecuted(Optional<CommandInfo> command, ICommandContext context, IResult result)
 		{
 			if (!command.IsSpecified)
 			{

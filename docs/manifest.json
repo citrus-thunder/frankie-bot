@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.DBConfig.html",
-          "hash": "ipMJVrQ6NEqHwbVbF3nUBwlHrw5QiwlTqrHcnKqjr68="
+          "hash": "8O/Z4DziW7dXA5rvijsA0K2tvwEeU4LwLJSMCJYSjBE="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -21,10 +21,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Server.html",
-          "hash": "0wGLkeKu8+J1ASosLCKV7r9hOg1CfdUrKZMCvqW5mro="
+          "hash": "upPzFPEVbQeXpXCpzm8IogOWLgJuneaEzOvQZ+pRe+A="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.User.html",
-          "hash": "2m4il8DkH8A7XfuFD3Kn3NYKp+CBwKQEVt8tEfNYx8o="
+          "hash": "j9BRROljhKqNHDIqNVcegVHW04PJZXBq9+ORBTNKNtg="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -48,7 +48,7 @@
           "hash": "N8i3ilGK/pMt8+DAnIK2MSpJNFYMBpSJ21TJuTPxls8="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ServerModel.html",
-          "hash": "H4fQBC+0VxQHE7/RB/zSLIDm7WU3NH9/FQD+bbql1VE="
+          "hash": "0f+5z/h2a8hW06Oayvcchz0s3gUlaOh+uiL0cpX/ajA="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.UserModel.html",
-          "hash": "d2LqRqktI+5aVZYNG2AqKnfFV6LrOEl2MgbkQEWG86U="
+          "hash": "7oCXsoDE1dc/ry6tVGmQMat5fhNVp3EPJxcQV6q7Ns4="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -84,7 +84,7 @@
           "hash": "WAqcvzKXqcqUN8Te8vCMfV3LYBb9MEDdArXB5RJm4Sk="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Bot.html",
-          "hash": "WFWiBPkpa7NNldzekGHL+SbYKe9nYGKQw96l/UgJdSY="
+          "hash": "SqaRHizt816WyxINznuJUte7Iet5vTfngMNNoqBtHPc="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -105,10 +105,22 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.ChatModule.html",
-          "hash": "UkjlbhUO8Kaasrmk1f+6dVJcR7+O/jJxHk+pEYospZE="
+          "hash": "6JwBFdr6bFL/mqUVhaARbV9zaB9+eSSpIb5zfUu1t0A="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Modules.QuoteModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Modules.QuoteModule.html",
+          "hash": "H6yQUW0x2MhE29kB5iVUimACoWSKTCSXMwO6/x48Oqw="
+        }
+      },
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,10 +129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.html",
-          "hash": "km+ZvSOteSwJI8z4OSrBs2lhi5yq+xWiOLHNGNP91l8="
+          "hash": "rcsGQfqDznaPFAlRpvyOW7b72jv55DnhpxPRARUrBsE="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -129,10 +141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.CommandHandlerService.html",
-          "hash": "92zyBeidjGwZe2M7RqECEOM/l0FxKYgpPEf34qeNCjM="
+          "hash": "KXoIlvCqRl61XOXDpyP6Hah3QTTbuKSbPhoEfD9EE8U="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -141,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.EavesDropperService.html",
-          "hash": "AS3YUyOVKsOwdi6x1e7Gtnfg/0YtKzrAw+t4KY31tKE="
+          "hash": "hPW+T4sh2INgOfGfTh1GF0KGGBqnyKFwOFU+gIheInc="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -156,7 +168,7 @@
           "hash": "KpLkGHubk5EYNmhnsfK45BCMic7O7BLiCkrGiL/qDVw="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -168,7 +180,7 @@
           "hash": "9fFh/jmAi9bnCOoEHD9NfcUdHW0H9qEDhNdTiVdZkH4="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -177,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DunceDetector.html",
-          "hash": "yyjXoI/4IRRkYSl46kzyLDnGnERV1iaa4WxujZavocE="
+          "hash": "qeo66ml41iHeCdoIY5jpg2S0KivZSbV33qr4NU9071w="
         }
       },
       "is_incremental": false,
@@ -204,7 +216,7 @@
           "hash": "5iRAuldpj6x7veLbyLRTDr6IHm9qfqAqTs2M/R8kg+c="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -213,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "32826oTHzEr/0zQIiiUhFZ7EDRkKaPmS4Y8KdN0ug/0="
+          "hash": "/EajYGYG8ytVtx+iRgIvWVvEtVpqtTWVyaMqZT3KIt8="
         }
       },
       "is_incremental": false,
@@ -286,8 +298,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 16,
-          "skipped_file_count": 15
+          "total_file_count": 17,
+          "skipped_file_count": 5
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
