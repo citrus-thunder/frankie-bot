@@ -1,27 +1,15 @@
 {
   "homepages": [],
-  "source_base_path": "/bot/frankie/dev/max-100/docs-src",
+  "source_base_path": "E:/Projects/frankie-bot/docs-src",
   "xrefmap": "xrefmap.yml",
   "files": [
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/FrankieBot.Bot.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/FrankieBot.Bot.html",
-          "hash": "d3uGc+mpMMc0ff1QHFTVV3gYCOkesGzrnNVTvoCeIQo="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
     {
       "type": "ManagedReference",
       "source_relative_path": "api/FrankieBot.DB.DBConfig.yml",
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.DBConfig.html",
-          "hash": "F8hJ0F0JCTKDAYPebuORszN6NtNcwlD1XSeg3xAG15U="
+          "hash": "ipMJVrQ6NEqHwbVbF3nUBwlHrw5QiwlTqrHcnKqjr68="
         }
       },
       "is_incremental": false,
@@ -33,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Server.html",
-          "hash": "HRofcvpxNsa8I96eaiTJFIKI0NOaen8g8j9aPyDM3xs="
+          "hash": "0wGLkeKu8+J1ASosLCKV7r9hOg1CfdUrKZMCvqW5mro="
         }
       },
       "is_incremental": false,
@@ -45,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.User.html",
-          "hash": "6zuxje6O7cGSF+TYHG9DW5ETUUiazKUhcKjhfwjj6Wc="
+          "hash": "2m4il8DkH8A7XfuFD3Kn3NYKp+CBwKQEVt8tEfNYx8o="
         }
       },
       "is_incremental": false,
@@ -57,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.html",
-          "hash": "qRnjCZkEy8gW1P5ojTx+XeuIOG9sLDOxFllN5Hz1aao="
+          "hash": "N8i3ilGK/pMt8+DAnIK2MSpJNFYMBpSJ21TJuTPxls8="
         }
       },
       "is_incremental": false,
@@ -69,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ServerModel.html",
-          "hash": "f39/uRsLCBw/kgDbKn2s+OHWCfzH1IZYUJOA9PBVRfA="
+          "hash": "H4fQBC+0VxQHE7/RB/zSLIDm7WU3NH9/FQD+bbql1VE="
         }
       },
       "is_incremental": false,
@@ -81,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.UserModel.html",
-          "hash": "SgZxhK5yQRcO+HrHpLUgP1PrZh9slttardj0w7jKlbk="
+          "hash": "d2LqRqktI+5aVZYNG2AqKnfFV6LrOEl2MgbkQEWG86U="
         }
       },
       "is_incremental": false,
@@ -93,7 +81,19 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.html",
-          "hash": "0zqOHm4ka/Trv7ZS5i6I1clmOr7kaAIqD6k0livsqmI="
+          "hash": "WAqcvzKXqcqUN8Te8vCMfV3LYBb9MEDdArXB5RJm4Sk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Bot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Bot.html",
+          "hash": "WFWiBPkpa7NNldzekGHL+SbYKe9nYGKQw96l/UgJdSY="
         }
       },
       "is_incremental": false,
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.ChatModule.html",
-          "hash": "UNuyBojMBkGUVWAan1omDLFiuDSIajtR5qDDVA5ocIk="
+          "hash": "UkjlbhUO8Kaasrmk1f+6dVJcR7+O/jJxHk+pEYospZE="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.html",
-          "hash": "d8v8QgHVF7jM0zg4/SWi2uSzQmCdRqMPajsnOsPmjg8="
+          "hash": "km+ZvSOteSwJI8z4OSrBs2lhi5yq+xWiOLHNGNP91l8="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,19 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.CommandHandlerService.html",
-          "hash": "KSoCpb37j4I5uyGF4OWq3ubLPEZjy/XgREKO+MN/t5c="
+          "hash": "92zyBeidjGwZe2M7RqECEOM/l0FxKYgpPEf34qeNCjM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Services.EavesDropperService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Services.EavesDropperService.html",
+          "hash": "AS3YUyOVKsOwdi6x1e7Gtnfg/0YtKzrAw+t4KY31tKE="
         }
       },
       "is_incremental": false,
@@ -141,7 +153,31 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.html",
-          "hash": "oakupQ63ybmIx2B7fTDVPFR7eXeINTCM36AGzYJrNtw="
+          "hash": "KpLkGHubk5EYNmhnsfK45BCMic7O7BLiCkrGiL/qDVw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.html",
+          "hash": "9fFh/jmAi9bnCOoEHD9NfcUdHW0H9qEDhNdTiVdZkH4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DunceDetector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DunceDetector.html",
+          "hash": "HK+7Tcf4X5qFwPLaWwhbYvy23hmpN9qTjCL2zDvLzqw="
         }
       },
       "is_incremental": false,
@@ -153,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.html",
-          "hash": "XLUBx1MTaAfuMR6lFUxL2YzNk8iyqISUjSMiA+9Uuu4="
+          "hash": "IMdVh9bg0ZhKIt4KbPHrii5r9JUEIJnc6D0moryBOLI="
         }
       },
       "is_incremental": false,
@@ -165,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "t0ggrnYj9jd8OHlVJT7vHm5nMTkFuoDZ1Ao5xOjdVJQ="
+          "hash": "5iRAuldpj6x7veLbyLRTDr6IHm9qfqAqTs2M/R8kg+c="
         }
       },
       "is_incremental": false,
@@ -177,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "pFFRTr9om5BPfutdYxxPc5pzrhQXohcuv5eV1xWKsQw="
+          "hash": "32826oTHzEr/0zQIiiUhFZ7EDRkKaPmS4Y8KdN0ug/0="
         }
       },
       "is_incremental": false,
@@ -189,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "A284K6pPOSIRZkD3Ri/dtyJEmBWtSO7yNfhTnhRv+w8="
+          "hash": "27hExnmzZDkRmXLxx8KSny/nLDBaoCPnVAAEgCE2oz0="
         }
       },
       "is_incremental": false,
@@ -213,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "UBPTUYP0dMUmH86yHdZMLtpiygVayc2w31Zpv+Uh4/U="
+          "hash": "zFGbuf7MMbEap6KdDEsgH9OvoW+7OK2sbB/pVT8pDp4="
         }
       },
       "is_incremental": false,
@@ -252,7 +288,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 13,
+          "total_file_count": 16,
           "skipped_file_count": 0
         },
         "TocDocumentProcessor": {

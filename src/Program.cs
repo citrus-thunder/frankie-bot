@@ -1,15 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Discord;
-using Discord.WebSocket;
+﻿using FrankieBot.Discord;
 
-namespace FrankieBot
+class Program
 {
-	class Program
+	public static void Main(string[] args)
 	{
-		public static void Main(string[] args)
-		{
-			new Bot().Run().GetAwaiter().GetResult();
-		}
+		new Bot().Run().GetAwaiter().GetResult();
 	}
 }

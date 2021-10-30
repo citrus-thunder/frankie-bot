@@ -14,6 +14,10 @@ namespace FrankieBot.Discord.Services
 	/// <summary>
 	/// Primary command handling service
 	/// </summary>
+	/// <remarks>
+	/// This service is specifically responsible for commands that must be explicitly invoked by users.
+	/// Commands that respond to the content of user messages, see EavesDropperService
+	/// </remarks>
 	public class CommandHandlerService
 	{
 		private readonly DiscordSocketClient _client;

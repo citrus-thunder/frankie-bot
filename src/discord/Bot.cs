@@ -10,7 +10,7 @@ using Discord.WebSocket;
 using FrankieBot.Discord.Modules;
 using FrankieBot.Discord.Services;
 
-namespace FrankieBot
+namespace FrankieBot.Discord
 {
 	/// <summary>
 	/// FrankieBot's core application
@@ -33,12 +33,14 @@ namespace FrankieBot
 		{
 			using (var services = ConfigureServices())
 			{
-				var client = services.GetRequiredService<DiscordSocketClient>();
+				var client = services.GetRequiredService<DiscordSocketClient>();		
 				await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("FRANKIE_TOKEN"));
 
 				await client.StartAsync();
 
 				await services.GetRequiredService<CommandHandlerService>().InitializeAsync();
+
+				await services.GetRequiredService<EavesDropperService>().InitializeAsync();
 
 				// Block task until program close
 				await Task.Delay(-1);
@@ -63,6 +65,7 @@ namespace FrankieBot
 		{
 			return new ServiceCollection()
 				.AddSingleton<DiscordSocketClient>()
+				.AddSingleton<EavesDropperService>()
 				.AddSingleton<CommandService>()
 				.AddSingleton<CommandHandlerService>()
 				.BuildServiceProvider();

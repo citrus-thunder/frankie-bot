@@ -7,38 +7,6 @@ references:
   commentId: N:FrankieBot
   fullName: FrankieBot
   nameWithType: FrankieBot
-- uid: FrankieBot.Bot
-  name: Bot
-  href: api/FrankieBot.Bot.html
-  commentId: T:FrankieBot.Bot
-  fullName: FrankieBot.Bot
-  nameWithType: Bot
-- uid: FrankieBot.Bot.#ctor
-  name: Bot()
-  href: api/FrankieBot.Bot.html#FrankieBot_Bot__ctor
-  commentId: M:FrankieBot.Bot.#ctor
-  fullName: FrankieBot.Bot.Bot()
-  nameWithType: Bot.Bot()
-- uid: FrankieBot.Bot.#ctor*
-  name: Bot
-  href: api/FrankieBot.Bot.html#FrankieBot_Bot__ctor_
-  commentId: Overload:FrankieBot.Bot.#ctor
-  isSpec: "True"
-  fullName: FrankieBot.Bot.Bot
-  nameWithType: Bot.Bot
-- uid: FrankieBot.Bot.Run
-  name: Run()
-  href: api/FrankieBot.Bot.html#FrankieBot_Bot_Run
-  commentId: M:FrankieBot.Bot.Run
-  fullName: FrankieBot.Bot.Run()
-  nameWithType: Bot.Run()
-- uid: FrankieBot.Bot.Run*
-  name: Run
-  href: api/FrankieBot.Bot.html#FrankieBot_Bot_Run_
-  commentId: Overload:FrankieBot.Bot.Run
-  isSpec: "True"
-  fullName: FrankieBot.Bot.Run
-  nameWithType: Bot.Run
 - uid: FrankieBot.DB
   name: FrankieBot.DB
   href: api/FrankieBot.DB.html
@@ -145,6 +113,44 @@ references:
   commentId: T:FrankieBot.DB.UserModel
   fullName: FrankieBot.DB.UserModel
   nameWithType: UserModel
+- uid: FrankieBot.Discord
+  name: FrankieBot.Discord
+  href: api/FrankieBot.Discord.html
+  commentId: N:FrankieBot.Discord
+  fullName: FrankieBot.Discord
+  nameWithType: FrankieBot.Discord
+- uid: FrankieBot.Discord.Bot
+  name: Bot
+  href: api/FrankieBot.Discord.Bot.html
+  commentId: T:FrankieBot.Discord.Bot
+  fullName: FrankieBot.Discord.Bot
+  nameWithType: Bot
+- uid: FrankieBot.Discord.Bot.#ctor
+  name: Bot()
+  href: api/FrankieBot.Discord.Bot.html#FrankieBot_Discord_Bot__ctor
+  commentId: M:FrankieBot.Discord.Bot.#ctor
+  fullName: FrankieBot.Discord.Bot.Bot()
+  nameWithType: Bot.Bot()
+- uid: FrankieBot.Discord.Bot.#ctor*
+  name: Bot
+  href: api/FrankieBot.Discord.Bot.html#FrankieBot_Discord_Bot__ctor_
+  commentId: Overload:FrankieBot.Discord.Bot.#ctor
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Bot.Bot
+  nameWithType: Bot.Bot
+- uid: FrankieBot.Discord.Bot.Run
+  name: Run()
+  href: api/FrankieBot.Discord.Bot.html#FrankieBot_Discord_Bot_Run
+  commentId: M:FrankieBot.Discord.Bot.Run
+  fullName: FrankieBot.Discord.Bot.Run()
+  nameWithType: Bot.Run()
+- uid: FrankieBot.Discord.Bot.Run*
+  name: Run
+  href: api/FrankieBot.Discord.Bot.html#FrankieBot_Discord_Bot_Run_
+  commentId: Overload:FrankieBot.Discord.Bot.Run
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Bot.Run
+  nameWithType: Bot.Run
 - uid: FrankieBot.Discord.Modules
   name: FrankieBot.Discord.Modules
   href: api/FrankieBot.Discord.Modules.html
@@ -182,11 +188,11 @@ references:
   commentId: T:FrankieBot.Discord.Services.CommandHandlerService
   fullName: FrankieBot.Discord.Services.CommandHandlerService
   nameWithType: CommandHandlerService
-- uid: FrankieBot.Discord.Services.CommandHandlerService.#ctor(IServiceProvider)
+- uid: FrankieBot.Discord.Services.CommandHandlerService.#ctor(System.IServiceProvider)
   name: CommandHandlerService(IServiceProvider)
-  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService__ctor_IServiceProvider_
-  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.#ctor(IServiceProvider)
-  fullName: FrankieBot.Discord.Services.CommandHandlerService.CommandHandlerService(IServiceProvider)
+  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService__ctor_System_IServiceProvider_
+  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.#ctor(System.IServiceProvider)
+  fullName: FrankieBot.Discord.Services.CommandHandlerService.CommandHandlerService(System.IServiceProvider)
   nameWithType: CommandHandlerService.CommandHandlerService(IServiceProvider)
 - uid: FrankieBot.Discord.Services.CommandHandlerService.#ctor*
   name: CommandHandlerService
@@ -208,13 +214,13 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.CommandHandlerService.InitializeAsync
   nameWithType: CommandHandlerService.InitializeAsync
-- uid: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Optional{CommandInfo},ICommandContext,IResult)
+- uid: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Discord.Optional{Discord.Commands.CommandInfo},Discord.Commands.ICommandContext,Discord.Commands.IResult)
   name: OnCommandExecuted(Optional<CommandInfo>, ICommandContext, IResult)
-  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService_OnCommandExecuted_Optional_CommandInfo__ICommandContext_IResult_
-  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Optional{CommandInfo},ICommandContext,IResult)
+  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService_OnCommandExecuted_Discord_Optional_Discord_Commands_CommandInfo__Discord_Commands_ICommandContext_Discord_Commands_IResult_
+  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Discord.Optional{Discord.Commands.CommandInfo},Discord.Commands.ICommandContext,Discord.Commands.IResult)
   name.vb: OnCommandExecuted(Optional(Of CommandInfo), ICommandContext, IResult)
-  fullName: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Optional<CommandInfo>, ICommandContext, IResult)
-  fullName.vb: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Optional(Of CommandInfo), ICommandContext, IResult)
+  fullName: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Discord.Optional<Discord.Commands.CommandInfo>, Discord.Commands.ICommandContext, Discord.Commands.IResult)
+  fullName.vb: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted(Discord.Optional(Of Discord.Commands.CommandInfo), Discord.Commands.ICommandContext, Discord.Commands.IResult)
   nameWithType: CommandHandlerService.OnCommandExecuted(Optional<CommandInfo>, ICommandContext, IResult)
   nameWithType.vb: CommandHandlerService.OnCommandExecuted(Optional(Of CommandInfo), ICommandContext, IResult)
 - uid: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted*
@@ -224,11 +230,11 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.CommandHandlerService.OnCommandExecuted
   nameWithType: CommandHandlerService.OnCommandExecuted
-- uid: FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived(SocketMessage)
+- uid: FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived(Discord.WebSocket.SocketMessage)
   name: OnMessageReceived(SocketMessage)
-  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService_OnMessageReceived_SocketMessage_
-  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived(SocketMessage)
-  fullName: FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived(SocketMessage)
+  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService_OnMessageReceived_Discord_WebSocket_SocketMessage_
+  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived(Discord.WebSocket.SocketMessage)
+  fullName: FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived(Discord.WebSocket.SocketMessage)
   nameWithType: CommandHandlerService.OnMessageReceived(SocketMessage)
 - uid: FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived*
   name: OnMessageReceived
@@ -237,3 +243,60 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.CommandHandlerService.OnMessageReceived
   nameWithType: CommandHandlerService.OnMessageReceived
+- uid: FrankieBot.Discord.Services.EavesDropperService
+  name: EavesDropperService
+  href: api/FrankieBot.Discord.Services.EavesDropperService.html
+  commentId: T:FrankieBot.Discord.Services.EavesDropperService
+  fullName: FrankieBot.Discord.Services.EavesDropperService
+  nameWithType: EavesDropperService
+- uid: FrankieBot.Discord.Services.EavesDropperService.#ctor(System.IServiceProvider)
+  name: EavesDropperService(IServiceProvider)
+  href: api/FrankieBot.Discord.Services.EavesDropperService.html#FrankieBot_Discord_Services_EavesDropperService__ctor_System_IServiceProvider_
+  commentId: M:FrankieBot.Discord.Services.EavesDropperService.#ctor(System.IServiceProvider)
+  fullName: FrankieBot.Discord.Services.EavesDropperService.EavesDropperService(System.IServiceProvider)
+  nameWithType: EavesDropperService.EavesDropperService(IServiceProvider)
+- uid: FrankieBot.Discord.Services.EavesDropperService.#ctor*
+  name: EavesDropperService
+  href: api/FrankieBot.Discord.Services.EavesDropperService.html#FrankieBot_Discord_Services_EavesDropperService__ctor_
+  commentId: Overload:FrankieBot.Discord.Services.EavesDropperService.#ctor
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.EavesDropperService.EavesDropperService
+  nameWithType: EavesDropperService.EavesDropperService
+- uid: FrankieBot.Discord.Services.EavesDropperService.InitializeAsync
+  name: InitializeAsync()
+  href: api/FrankieBot.Discord.Services.EavesDropperService.html#FrankieBot_Discord_Services_EavesDropperService_InitializeAsync
+  commentId: M:FrankieBot.Discord.Services.EavesDropperService.InitializeAsync
+  fullName: FrankieBot.Discord.Services.EavesDropperService.InitializeAsync()
+  nameWithType: EavesDropperService.InitializeAsync()
+- uid: FrankieBot.Discord.Services.EavesDropperService.InitializeAsync*
+  name: InitializeAsync
+  href: api/FrankieBot.Discord.Services.EavesDropperService.html#FrankieBot_Discord_Services_EavesDropperService_InitializeAsync_
+  commentId: Overload:FrankieBot.Discord.Services.EavesDropperService.InitializeAsync
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.EavesDropperService.InitializeAsync
+  nameWithType: EavesDropperService.InitializeAsync
+- uid: FrankieBot.DunceDetector
+  name: DunceDetector
+  href: api/FrankieBot.DunceDetector.html
+  commentId: T:FrankieBot.DunceDetector
+  fullName: FrankieBot.DunceDetector
+  nameWithType: DunceDetector
+- uid: FrankieBot.DunceDetector.Detect(System.String)
+  name: Detect(String)
+  href: api/FrankieBot.DunceDetector.html#FrankieBot_DunceDetector_Detect_System_String_
+  commentId: M:FrankieBot.DunceDetector.Detect(System.String)
+  fullName: FrankieBot.DunceDetector.Detect(System.String)
+  nameWithType: DunceDetector.Detect(String)
+- uid: FrankieBot.DunceDetector.Detect*
+  name: Detect
+  href: api/FrankieBot.DunceDetector.html#FrankieBot_DunceDetector_Detect_
+  commentId: Overload:FrankieBot.DunceDetector.Detect
+  isSpec: "True"
+  fullName: FrankieBot.DunceDetector.Detect
+  nameWithType: DunceDetector.Detect
+- uid: FrankieBot.DunceDetector.TriggerPhrases
+  name: TriggerPhrases
+  href: api/FrankieBot.DunceDetector.html#FrankieBot_DunceDetector_TriggerPhrases
+  commentId: F:FrankieBot.DunceDetector.TriggerPhrases
+  fullName: FrankieBot.DunceDetector.TriggerPhrases
+  nameWithType: DunceDetector.TriggerPhrases
