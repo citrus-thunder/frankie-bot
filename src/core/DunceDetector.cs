@@ -8,7 +8,7 @@ namespace FrankieBot
 	public static class DunceDetector
 	{
 		/// <summary>
-		/// List of exact 
+		/// List of exact phrases that should trigger duncing
 		/// </summary>
 		public static readonly List<string> TriggerPhrases;
 
