@@ -1,0 +1,284 @@
+{
+  "homepages": [],
+  "source_base_path": "/bot/frankie/dev/max-100/docs-src",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Bot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Bot.html",
+          "hash": "d3uGc+mpMMc0ff1QHFTVV3gYCOkesGzrnNVTvoCeIQo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.DBConfig.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.DBConfig.html",
+          "hash": "F8hJ0F0JCTKDAYPebuORszN6NtNcwlD1XSeg3xAG15U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.Model.Server.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.Model.Server.html",
+          "hash": "HRofcvpxNsa8I96eaiTJFIKI0NOaen8g8j9aPyDM3xs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.Model.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.Model.User.html",
+          "hash": "6zuxje6O7cGSF+TYHG9DW5ETUUiazKUhcKjhfwjj6Wc="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.Model.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.Model.html",
+          "hash": "qRnjCZkEy8gW1P5ojTx+XeuIOG9sLDOxFllN5Hz1aao="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.ServerModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.ServerModel.html",
+          "hash": "f39/uRsLCBw/kgDbKn2s+OHWCfzH1IZYUJOA9PBVRfA="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.UserModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.UserModel.html",
+          "hash": "SgZxhK5yQRcO+HrHpLUgP1PrZh9slttardj0w7jKlbk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.html",
+          "hash": "0zqOHm4ka/Trv7ZS5i6I1clmOr7kaAIqD6k0livsqmI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Modules.ChatModule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Modules.ChatModule.html",
+          "hash": "UNuyBojMBkGUVWAan1omDLFiuDSIajtR5qDDVA5ocIk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Modules.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Modules.html",
+          "hash": "d8v8QgHVF7jM0zg4/SWi2uSzQmCdRqMPajsnOsPmjg8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Services.CommandHandlerService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Services.CommandHandlerService.html",
+          "hash": "KSoCpb37j4I5uyGF4OWq3ubLPEZjy/XgREKO+MN/t5c="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Services.html",
+          "hash": "oakupQ63ybmIx2B7fTDVPFR7eXeINTCM36AGzYJrNtw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.html",
+          "hash": "XLUBx1MTaAfuMR6lFUxL2YzNk8iyqISUjSMiA+9Uuu4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "t0ggrnYj9jd8OHlVJT7vHm5nMTkFuoDZ1Ao5xOjdVJQ="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "pFFRTr9om5BPfutdYxxPc5pzrhQXohcuv5eV1xWKsQw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "A284K6pPOSIRZkD3Ri/dtyJEmBWtSO7yNfhTnhRv+w8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "BlPxk5mtl2kgfcZUgkEguqiSAR/EUyUTT4EdebwkQvs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "UBPTUYP0dMUmH86yHdZMLtpiygVayc2w31Zpv+Uh4/U="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "WSuRrYiGwKKMbtdG9z8W9fXmLoCyTnGg9AxbPKLXm2Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 13,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
