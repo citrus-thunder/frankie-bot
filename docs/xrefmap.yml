@@ -836,6 +836,86 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.CommandHandlerService.InitializeAsync
   nameWithType: CommandHandlerService.InitializeAsync
+- uid: FrankieBot.Discord.Services.DataBaseService
+  name: DataBaseService
+  href: api/FrankieBot.Discord.Services.DataBaseService.html
+  commentId: T:FrankieBot.Discord.Services.DataBaseService
+  fullName: FrankieBot.Discord.Services.DataBaseService
+  nameWithType: DataBaseService
+- uid: FrankieBot.Discord.Services.DataBaseService.#ctor(System.IServiceProvider)
+  name: DataBaseService(IServiceProvider)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService__ctor_System_IServiceProvider_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.#ctor(System.IServiceProvider)
+  fullName: FrankieBot.Discord.Services.DataBaseService.DataBaseService(System.IServiceProvider)
+  nameWithType: DataBaseService.DataBaseService(IServiceProvider)
+- uid: FrankieBot.Discord.Services.DataBaseService.#ctor*
+  name: DataBaseService
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService__ctor_
+  commentId: Overload:FrankieBot.Discord.Services.DataBaseService.#ctor
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.DataBaseService.DataBaseService
+  nameWithType: DataBaseService.DataBaseService
+- uid: FrankieBot.Discord.Services.DataBaseService.AddQuote(Discord.Commands.SocketCommandContext,Discord.IUser,System.String,Discord.IUser)
+  name: AddQuote(SocketCommandContext, IUser, String, IUser)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_AddQuote_Discord_Commands_SocketCommandContext_Discord_IUser_System_String_Discord_IUser_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.AddQuote(Discord.Commands.SocketCommandContext,Discord.IUser,System.String,Discord.IUser)
+  fullName: FrankieBot.Discord.Services.DataBaseService.AddQuote(Discord.Commands.SocketCommandContext, Discord.IUser, System.String, Discord.IUser)
+  nameWithType: DataBaseService.AddQuote(SocketCommandContext, IUser, String, IUser)
+- uid: FrankieBot.Discord.Services.DataBaseService.AddQuote*
+  name: AddQuote
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_AddQuote_
+  commentId: Overload:FrankieBot.Discord.Services.DataBaseService.AddQuote
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.DataBaseService.AddQuote
+  nameWithType: DataBaseService.AddQuote
+- uid: FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext,System.UInt64)
+  name: GetQuote(SocketCommandContext, UInt64)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_GetQuote_Discord_Commands_SocketCommandContext_System_UInt64_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext,System.UInt64)
+  fullName: FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext, System.UInt64)
+  nameWithType: DataBaseService.GetQuote(SocketCommandContext, UInt64)
+- uid: FrankieBot.Discord.Services.DataBaseService.GetQuote*
+  name: GetQuote
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_GetQuote_
+  commentId: Overload:FrankieBot.Discord.Services.DataBaseService.GetQuote
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.DataBaseService.GetQuote
+  nameWithType: DataBaseService.GetQuote
+- uid: FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext,FrankieBot.DB.ViewModel.Quote)
+  name: PostQuote(SocketCommandContext, Quote)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_PostQuote_Discord_Commands_SocketCommandContext_FrankieBot_DB_ViewModel_Quote_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext,FrankieBot.DB.ViewModel.Quote)
+  fullName: FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext, FrankieBot.DB.ViewModel.Quote)
+  nameWithType: DataBaseService.PostQuote(SocketCommandContext, Quote)
+- uid: FrankieBot.Discord.Services.DataBaseService.PostQuote*
+  name: PostQuote
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_PostQuote_
+  commentId: Overload:FrankieBot.Discord.Services.DataBaseService.PostQuote
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.DataBaseService.PostQuote
+  nameWithType: DataBaseService.PostQuote
+- uid: FrankieBot.Discord.Services.DataBaseService.QuoteAdded
+  name: QuoteAdded
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_QuoteAdded
+  commentId: E:FrankieBot.Discord.Services.DataBaseService.QuoteAdded
+  fullName: FrankieBot.Discord.Services.DataBaseService.QuoteAdded
+  nameWithType: DataBaseService.QuoteAdded
+- uid: FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext,System.Action{Discord.Commands.SocketCommandContext})
+  name: RunDBAction(SocketCommandContext, Action<SocketCommandContext>)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_RunDBAction_Discord_Commands_SocketCommandContext_System_Action_Discord_Commands_SocketCommandContext__
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext,System.Action{Discord.Commands.SocketCommandContext})
+  name.vb: RunDBAction(SocketCommandContext, Action(Of SocketCommandContext))
+  fullName: FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext, System.Action<Discord.Commands.SocketCommandContext>)
+  fullName.vb: FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext, System.Action(Of Discord.Commands.SocketCommandContext))
+  nameWithType: DataBaseService.RunDBAction(SocketCommandContext, Action<SocketCommandContext>)
+  nameWithType.vb: DataBaseService.RunDBAction(SocketCommandContext, Action(Of SocketCommandContext))
+- uid: FrankieBot.Discord.Services.DataBaseService.RunDBAction*
+  name: RunDBAction
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_RunDBAction_
+  commentId: Overload:FrankieBot.Discord.Services.DataBaseService.RunDBAction
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.DataBaseService.RunDBAction
+  nameWithType: DataBaseService.RunDBAction
 - uid: FrankieBot.Discord.Services.EavesDropperService
   name: EavesDropperService
   href: api/FrankieBot.Discord.Services.EavesDropperService.html

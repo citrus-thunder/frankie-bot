@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 
+using FrankieBot.Discord.Services;
+
 namespace FrankieBot.Discord.Modules
 {
 	/// <summary>

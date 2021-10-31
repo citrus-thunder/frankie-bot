@@ -189,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.QuoteModule.html",
-          "hash": "EaSIBIVWjhUa1Yhgwu23MWET7ukrfkxG3MZkvKzuRCw="
+          "hash": "u/tlqdB2bQlqSE5FBf/HwpjMolDugcV7MhPGBdj3YyM="
         }
       },
       "is_incremental": false,
@@ -221,6 +221,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.Discord.Services.DataBaseService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.Discord.Services.DataBaseService.html",
+          "hash": "ckvbCOftChdc1I7BK/1x245O/XBYD2d+cF+efZuiW1w="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/FrankieBot.Discord.Services.EavesDropperService.yml",
       "output": {
         ".html": {
@@ -237,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.html",
-          "hash": "KpLkGHubk5EYNmhnsfK45BCMic7O7BLiCkrGiL/qDVw="
+          "hash": "UWiO83/64qGgs/bsWfstFxlaVvSSIzbBuqnPkPnB1NM="
         }
       },
       "is_incremental": false,
@@ -285,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "5iRAuldpj6x7veLbyLRTDr6IHm9qfqAqTs2M/R8kg+c="
+          "hash": "7S943uMbnGY/4MzAvKNpC+BtVM3ETXrC7iokmrIoaEs="
         }
       },
       "is_incremental": false,
@@ -297,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "WB9nHROltgwlhPPCyZtHgbVrDCoVMfkJ0Z8fw4QFQtI="
+          "hash": "KXLJWzEkAOwegJtdRMKAUtSy7oX8VkGQIFCq4iDGYQU="
         }
       },
       "is_incremental": false,
@@ -309,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/intro.html",
-          "hash": "27hExnmzZDkRmXLxx8KSny/nLDBaoCPnVAAEgCE2oz0="
+          "hash": "tBXkYg6cjjsttlFeLS6/yQRqvq90vlfU+llpLoJxNy0="
         }
       },
       "is_incremental": true,
@@ -333,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "zFGbuf7MMbEap6KdDEsgH9OvoW+7OK2sbB/pVT8pDp4="
+          "hash": "0dhA5Gc7rjqAfFE/DoiGISH23bDsozUHbSy8sMVrnSE="
         }
       },
       "is_incremental": true,
@@ -370,8 +382,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 23,
-          "skipped_file_count": 9
+          "total_file_count": 24,
+          "skipped_file_count": 20
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
