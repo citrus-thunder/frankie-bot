@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Threading;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.IO;
 
@@ -130,6 +131,34 @@ namespace FrankieBot.Discord.Services
 			});
 		}
 
+		public async Task ListQuotes(SocketCommandContext context, IUser user)
+		{
+			await RunDBAction(context, async (c) => 
+			{
+				List<Quote> quoteList;
+				using (var connection = new DBConnection(GetServerDBFilePath(c.Guild)))
+				{
+					var userID = user.Id.ToString();
+					var quotes = DBContainer<Quote>.Find(connection, (quote) => quote.AuthorID == userID);
+					quoteList = new List<Quote>(quotes.Content);
+				}
+
+				if (quoteList.Count < 1)
+				{
+					await context.Channel.SendMessageAsync($"No quotes found yet for {user.Username}");
+				}
+				else
+				{
+					var quotes = new List<VModel.Quote>();
+					foreach (var quote in quoteList)
+					{
+						quotes.Add(new VModel.Quote(context.Guild, quote));
+					}
+					await PostQuoteList(context, quotes);
+				}
+			});
+		}
+
 		/// <summary>
 		/// Posts a Quote embed as a reply
 		/// </summary>
@@ -142,6 +171,24 @@ namespace FrankieBot.Discord.Services
 				.WithAuthor(quote.User)
 				.WithDescription(quote.Content)
 				.WithTimestamp(new DateTimeOffset(quote.QuoteTimeStamp.ToUniversalTime()));
+
+			await context.Channel.SendMessageAsync(embed: eb.Build());
+		}
+
+		public async Task PostQuoteList(SocketCommandContext context, List<VModel.Quote> quotes)
+		{
+			var eb = new EmbedBuilder()
+				.WithTitle($"Quotes by {quotes[0].User.Username}");
+			
+			var fields = new List<EmbedFieldBuilder>();
+			foreach (var quote in quotes)
+			{
+				var newField = new EmbedFieldBuilder()
+					.WithName(quote.Content)
+					.WithValue(quote.QuoteTimeStamp.ToString("d MMMM yyyy"));
+				fields.Add(newField);
+			}
+			eb.WithFields(fields);
 
 			await context.Channel.SendMessageAsync(embed: eb.Build());
 		}

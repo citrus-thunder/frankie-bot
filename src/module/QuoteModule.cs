@@ -79,5 +79,11 @@ namespace FrankieBot.Discord.Modules
 					Context.Message.Author);
 			}
 		}
+
+		[Command("list")]
+		public async Task ListQuotes(IUser user)
+		{
+			await DataBaseService.ListQuotes(Context, user);
+		}
 	}
 }
