@@ -9,7 +9,67 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.DBConfig.html",
-          "hash": "8O/Z4DziW7dXA5rvijsA0K2tvwEeU4LwLJSMCJYSjBE="
+          "hash": "B/H/+sH+h5kIAenZ0EEjv0m++gRtnQ0tcGUVwy+FzPg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.DBConnection.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.DBConnection.html",
+          "hash": "yGCNiquS+2BGq+v8dVHmD6aWHepVxJqVTyGG4xkq/Yw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.DBContainer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.DBContainer-1.html",
+          "hash": "w7GBWYstvlhVK4jPKF5ZNBpeVid02pNbKNQRKkuWi5k="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.DBModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.DBModel.html",
+          "hash": "F0fNh8MBE2jaOcPhcEiVmeTJ3mS9/JqbPon2MKcWV9o="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.Model.Option.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.Model.Option.html",
+          "hash": "YM+raFgGoj9ouJvJnk0a0MWp681C3av2kjGhu7Ecqmk="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.Model.Quote.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.Model.Quote.html",
+          "hash": "ub+2T3d9C/y1AoDVi7kR4zaihiI0DTXDZ58Hc28QBZQ="
         }
       },
       "is_incremental": false,
@@ -21,19 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Server.html",
-          "hash": "upPzFPEVbQeXpXCpzm8IogOWLgJuneaEzOvQZ+pRe+A="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/FrankieBot.DB.Model.User.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/FrankieBot.DB.Model.User.html",
-          "hash": "j9BRROljhKqNHDIqNVcegVHW04PJZXBq9+ORBTNKNtg="
+          "hash": "zTHFANPaDcZoTY4Pww9eUYRO/yu2Qlzn205G2SxeIqQ="
         }
       },
       "is_incremental": false,
@@ -45,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.html",
-          "hash": "N8i3ilGK/pMt8+DAnIK2MSpJNFYMBpSJ21TJuTPxls8="
+          "hash": "vvQe2XIOb7JXJkJnszKn9PsYLJ+Tuxq+XQZbr1aRwps="
         }
       },
       "is_incremental": false,
@@ -53,11 +101,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/FrankieBot.DB.ServerModel.yml",
+      "source_relative_path": "api/FrankieBot.DB.ViewModel.Quote.yml",
       "output": {
         ".html": {
-          "relative_path": "api/FrankieBot.DB.ServerModel.html",
-          "hash": "0f+5z/h2a8hW06Oayvcchz0s3gUlaOh+uiL0cpX/ajA="
+          "relative_path": "api/FrankieBot.DB.ViewModel.Quote.html",
+          "hash": "XRweT/ViH+ZuCIjl4lEI5jBUFDCe7U4iclXDcT8h3O4="
         }
       },
       "is_incremental": false,
@@ -65,11 +113,35 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/FrankieBot.DB.UserModel.yml",
+      "source_relative_path": "api/FrankieBot.DB.ViewModel.Server.yml",
       "output": {
         ".html": {
-          "relative_path": "api/FrankieBot.DB.UserModel.html",
-          "hash": "7oCXsoDE1dc/ry6tVGmQMat5fhNVp3EPJxcQV6q7Ns4="
+          "relative_path": "api/FrankieBot.DB.ViewModel.Server.html",
+          "hash": "IsxLl7yK6tR+MvcB01ecGcGemIoQUV99VA7IHLdojvI="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.ViewModel.ViewModel-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.ViewModel.ViewModel-1.html",
+          "hash": "1ZvfgEgKvYcL04DytCyZzVvMOy0oondYUbjc1nYHA/s="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.ViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.ViewModel.html",
+          "hash": "bWIs6hT0jlrD4VhqRxiJ8VrQ3YA4XxoguzsLDziDFKQ="
         }
       },
       "is_incremental": false,
@@ -81,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.html",
-          "hash": "WAqcvzKXqcqUN8Te8vCMfV3LYBb9MEDdArXB5RJm4Sk="
+          "hash": "trGnM3RFN11FBATMG3LfntKy/Vn5zCumXlTg3w7j9o0="
         }
       },
       "is_incremental": false,
@@ -117,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.QuoteModule.html",
-          "hash": "H6yQUW0x2MhE29kB5iVUimACoWSKTCSXMwO6/x48Oqw="
+          "hash": "EaSIBIVWjhUa1Yhgwu23MWET7ukrfkxG3MZkvKzuRCw="
         }
       },
       "is_incremental": false,
@@ -225,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "/EajYGYG8ytVtx+iRgIvWVvEtVpqtTWVyaMqZT3KIt8="
+          "hash": "WB9nHROltgwlhPPCyZtHgbVrDCoVMfkJ0Z8fw4QFQtI="
         }
       },
       "is_incremental": false,
@@ -298,8 +370,8 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 17,
-          "skipped_file_count": 5
+          "total_file_count": 23,
+          "skipped_file_count": 9
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

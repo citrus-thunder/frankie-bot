@@ -1,0 +1,629 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DBConnection
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DBConnection
+   ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="FrankieBot.DB.DBConnection">
+  
+  
+  <h1 id="FrankieBot_DB_DBConnection" data-uid="FrankieBot.DB.DBConnection" class="text-break">Class DBConnection
+  </h1>
+  <div class="markdown level0 summary"><p>Manages connection between FrankieBot a database</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">SQLite.SQLiteConnection</span></div>
+    <div class="level2"><span class="xref">DBConnection</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IDisposable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.EnableWriteAheadLogging()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.EnableLoadExtension(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.GetMapping(System.Type, SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.GetMapping&lt;T&gt;(SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DropTable&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DropTable(SQLite.TableMapping)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateTable&lt;T&gt;(SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateTable(System.Type, SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateTables&lt;T, T2&gt;(SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateTables&lt;T, T2, T3&gt;(SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateTables&lt;T, T2, T3, T4&gt;(SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateTables&lt;T, T2, T3, T4, T5&gt;(SQLite.CreateFlags)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateTables(SQLite.CreateFlags, System.Type[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateIndex(System.String, System.String, System.String[], System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateIndex(System.String, System.String, System.String, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateIndex(System.String, System.String, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateIndex(System.String, System.String[], System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateIndex&lt;T&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;T, System.Object&gt;&gt;, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.GetTableInfo(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.NewCommand()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateCommand(System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.CreateCommand(System.String, System.Collections.Generic.Dictionary&lt;System.String, System.Object&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Execute(System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.ExecuteScalar&lt;T&gt;(System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Query&lt;T&gt;(System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.QueryScalars&lt;T&gt;(System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DeferredQuery&lt;T&gt;(System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Query(SQLite.TableMapping, System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DeferredQuery(SQLite.TableMapping, System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Table&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Get&lt;T&gt;(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Get(System.Object, SQLite.TableMapping)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Get&lt;T&gt;(System.Linq.Expressions.Expression&lt;System.Func&lt;T, System.Boolean&gt;&gt;)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Find&lt;T&gt;(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Find(System.Object, SQLite.TableMapping)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.FindWithQuery&lt;T&gt;(System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.FindWithQuery(SQLite.TableMapping, System.String, System.Object[])</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.BeginTransaction()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.SaveTransactionPoint()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Rollback()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.RollbackTo(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Release(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Commit()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.RunInTransaction(System.Action)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.InsertAll(System.Collections.IEnumerable, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.InsertAll(System.Collections.IEnumerable, System.String, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.InsertAll(System.Collections.IEnumerable, System.Type, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Insert(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.InsertOrReplace(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Insert(System.Object, System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.InsertOrReplace(System.Object, System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Insert(System.Object, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Insert(System.Object, System.String, System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Update(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Update(System.Object, System.Type)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.UpdateAll(System.Collections.IEnumerable, System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Delete(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Delete&lt;T&gt;(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Delete(System.Object, SQLite.TableMapping)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DeleteAll&lt;T&gt;()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DeleteAll(SQLite.TableMapping)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Backup(System.String, System.String)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Dispose()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Close()</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Dispose(System.Boolean)</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Handle</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DatabasePath</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.LibVersionNumber</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.TimeExecution</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Trace</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.Tracer</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.StoreDateTimeAsTicks</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.StoreTimeSpanAsTicks</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.DateTimeStringFormat</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.BusyTimeout</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.TableMappings</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.IsInTransaction</span>
+    </div>
+    <div>
+      <span class="xref">SQLite.SQLiteConnection.TableChanged</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FrankieBot.DB.html">FrankieBot.DB</a></h6>
+  <h6><strong>Assembly</strong>: frankie-bot.dll</h6>
+  <h5 id="FrankieBot_DB_DBConnection_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DBConnection : SQLiteConnection, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_DBConnection__ctor_System_String_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConnection.%23ctor(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/DBConnection.cs/#L20">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_DBConnection__ctor_" data-uid="FrankieBot.DB.DBConnection.#ctor*"></a>
+  <h4 id="FrankieBot_DB_DBConnection__ctor_System_String_" data-uid="FrankieBot.DB.DBConnection.#ctor(System.String)">DBConnection(String)</h4>
+  <div class="markdown level1 summary"><p>Constructs a new DBConnection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DBConnection(string path)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">path</span></td>
+        <td><p>Path to the target database</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_DBConnection_Find__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConnection.Find%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/DBConnection.cs/#L42">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_DBConnection_Find_" data-uid="FrankieBot.DB.DBConnection.Find*"></a>
+  <h4 id="FrankieBot_DB_DBConnection_Find__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___" data-uid="FrankieBot.DB.DBConnection.Find``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">Find&lt;T&gt;(Expression&lt;Func&lt;T, Boolean&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Finds DBModels of the matching type using the provided expression</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DBContainer&lt;T&gt; Find&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; expression)
+    where T : DBModel, new()</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;T, <span class="xref">System.Boolean</span>&gt;&gt;</td>
+        <td><span class="parametername">expression</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FrankieBot.DB.DBContainer-1.html">DBContainer</a>&lt;T&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_DBConnection_Find__1_System_UInt64_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConnection.Find%60%601(System.UInt64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/DBConnection.cs/#L31">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_DBConnection_Find_" data-uid="FrankieBot.DB.DBConnection.Find*"></a>
+  <h4 id="FrankieBot_DB_DBConnection_Find__1_System_UInt64_" data-uid="FrankieBot.DB.DBConnection.Find``1(System.UInt64)">Find&lt;T&gt;(UInt64)</h4>
+  <div class="markdown level1 summary"><p>Finds a DBModel of the matching type with the matching ID</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T Find&lt;T&gt;(ulong id)
+    where T : DBModel, new()</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt64</span></td>
+        <td><span class="parametername">id</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_DBConnection_FindOne__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConnection.FindOne%60%601(System.Linq.Expressions.Expression%7BSystem.Func%7B%60%600%2CSystem.Boolean%7D%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/DBConnection.cs/#L53">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_DBConnection_FindOne_" data-uid="FrankieBot.DB.DBConnection.FindOne*"></a>
+  <h4 id="FrankieBot_DB_DBConnection_FindOne__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___" data-uid="FrankieBot.DB.DBConnection.FindOne``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">FindOne&lt;T&gt;(Expression&lt;Func&lt;T, Boolean&gt;&gt;)</h4>
+  <div class="markdown level1 summary"><p>Finds a single DBModel of the matching type using the given expression</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public T FindOne&lt;T&gt;(Expression&lt;Func&lt;T, bool&gt;&gt; expression)
+    where T : DBModel, new()</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Linq.Expressions.Expression</span>&lt;<span class="xref">System.Func</span>&lt;T, <span class="xref">System.Boolean</span>&gt;&gt;</td>
+        <td><span class="parametername">expression</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IDisposable</span>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_DBConnection.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConnection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/DBConnection.cs/#L13" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

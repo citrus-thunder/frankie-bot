@@ -39,7 +39,6 @@ namespace FrankieBot.Discord
 				await client.StartAsync();
 
 				await services.GetRequiredService<CommandHandlerService>().InitializeAsync();
-
 				await services.GetRequiredService<EavesDropperService>().InitializeAsync();
 
 				// Block task until program close
@@ -68,6 +67,7 @@ namespace FrankieBot.Discord
 				.AddSingleton<EavesDropperService>()
 				.AddSingleton<CommandService>()
 				.AddSingleton<CommandHandlerService>()
+				.AddSingleton<DataBaseService>()
 				.BuildServiceProvider();
 		}
 	}

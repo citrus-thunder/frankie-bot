@@ -44,7 +44,7 @@ namespace FrankieBot.Discord.Services
 		/// <returns></returns>
 		public async Task InitializeAsync()
 		{
-			await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(), services: null);
+			await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(), services: _services);
 		}
 
 		/// <summary>

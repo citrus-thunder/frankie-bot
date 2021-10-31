@@ -79,10 +79,26 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">Server</span></div>
+    <div class="level1"><a class="xref" href="FrankieBot.DB.DBModel.html">DBModel</a></div>
+    <div class="level2"><span class="xref">Server</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_ID">DBModel.ID</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Connection">DBModel.Connection</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_SetConnection_SQLite_SQLiteConnection_">DBModel.SetConnection(SQLiteConnection)</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Save">DBModel.Save()</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Delete">DBModel.Delete()</a>
+    </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
     </div>
@@ -109,29 +125,26 @@
   <h6><strong>Assembly</strong>: frankie-bot.dll</h6>
   <h5 id="FrankieBot_DB_Model_Server_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Table(&quot;Servers&quot;)]
-public class Server</code></pre>
+    <pre><code class="lang-csharp hljs">[Table(&quot;servers&quot;)]
+public class Server : DBModel</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_Model_Server_Id.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.Server.Id%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_Model_Server_LastJoinedTimestamp.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.Server.LastJoinedTimestamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/model/Server.cs/#L14">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/model/Server.cs/#L25">View Source</a>
   </span>
-  <a id="FrankieBot_DB_Model_Server_Id_" data-uid="FrankieBot.DB.Model.Server.Id*"></a>
-  <h4 id="FrankieBot_DB_Model_Server_Id" data-uid="FrankieBot.DB.Model.Server.Id">Id</h4>
-  <div class="markdown level1 summary"><p>Unique Discord Server ID</p>
+  <a id="FrankieBot_DB_Model_Server_LastJoinedTimestamp_" data-uid="FrankieBot.DB.Model.Server.LastJoinedTimestamp*"></a>
+  <h4 id="FrankieBot_DB_Model_Server_LastJoinedTimestamp" data-uid="FrankieBot.DB.Model.Server.LastJoinedTimestamp">LastJoinedTimestamp</h4>
+  <div class="markdown level1 summary"><p>Timestamp representing the last time Frankie joined this server</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[PrimaryKey]
-[AutoIncrement]
-[Column(&quot;id&quot;)]
-public int Id { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public DateTime LastJoinedTimestamp { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -143,7 +156,38 @@ public int Id { get; set; }</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Int32</span></td>
+        <td><span class="xref">System.DateTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_Model_Server_LastLeftTimestamp.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.Server.LastLeftTimestamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/model/Server.cs/#L31">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_Model_Server_LastLeftTimestamp_" data-uid="FrankieBot.DB.Model.Server.LastLeftTimestamp*"></a>
+  <h4 id="FrankieBot_DB_Model_Server_LastLeftTimestamp" data-uid="FrankieBot.DB.Model.Server.LastLeftTimestamp">LastLeftTimestamp</h4>
+  <div class="markdown level1 summary"><p>Timestamp representing the last time Frankie left this server</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DateTime LastLeftTimestamp { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.DateTime</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -159,7 +203,7 @@ public int Id { get; set; }</code></pre>
                     <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_Model_Server.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.Server%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/model/Server.cs/#L8" class="contribution-link">View Source</a>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/model/Server.cs/#L10" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

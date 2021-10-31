@@ -9,6 +9,11 @@ namespace FrankieBot.DB
 	public static class DBConfig
 	{
 		/// <summary>
+		/// File extension used by database files
+		/// </summary>
+		public const string DATABASE_FILE_EXTENSION = ".db";
+
+		/// <summary>
 		/// Root directory for FrankieBot's database filesystem
 		/// </summary>
 		public static readonly string DATABASE_ROOT;
@@ -17,32 +22,34 @@ namespace FrankieBot.DB
 		/// Root directory for FrankieBot's metadata files
 		/// </summary>
 		/// <returns></returns>
-		public static string METADATA_ROOT => Path.Combine(DATABASE_ROOT, "meta");
+		public static readonly string METADATA_ROOT;
 
 		/// <summary>
 		/// Root directory for FrankieBot's server data files
 		/// </summary>
 		/// <returns></returns>
-		public static string SERVER_DATA_ROOT => Path.Combine(DATABASE_ROOT, "servers");
+		public static readonly string SERVER_DATA_ROOT;
 
 		/// <summary>
 		/// Location of FrankieBot's server metadata file
 		/// </summary>
 		/// <returns></returns>
-		public static string SERVER_META_FILE = Path.Combine(METADATA_ROOT, "servers.db");
+		public static readonly string SERVER_META_FILE;
 
 		static DBConfig()
 		{
 			DATABASE_ROOT = Environment.GetEnvironmentVariable("FRANKIE_DB_ROOT");
+			METADATA_ROOT = Path.Combine(DATABASE_ROOT, "meta");
+			SERVER_DATA_ROOT = Path.Combine(DATABASE_ROOT, "servers");
+			SERVER_META_FILE = Path.Combine(METADATA_ROOT, "servers.db");
 			Init();
 		}
 
 		private static void Init()
 		{
-			if (!Directory.Exists(DATABASE_ROOT))
-			{
-				Directory.CreateDirectory(DATABASE_ROOT);
-			}
+			Directory.CreateDirectory(DATABASE_ROOT);
+			Directory.CreateDirectory(METADATA_ROOT);
+			Directory.CreateDirectory(SERVER_DATA_ROOT);
 
 			if (!File.Exists(SERVER_META_FILE))
 			{

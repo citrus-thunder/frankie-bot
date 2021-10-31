@@ -13,6 +13,13 @@ namespace FrankieBot.Discord.Modules
 	[Group("quote")]
 	public class QuoteModule : ModuleBase<SocketCommandContext>
 	{
+		/// <summary>
+		/// DatabaseService reference
+		/// </summary>
+		/// <remarks>
+		/// Automatically assigned via DependencyInjection
+		/// </remarks>
+		public DataBaseService DataBaseService { get; set; }
 
 		/// <summary>
 		/// Returns a random quote from the server's saved quotes
@@ -36,12 +43,22 @@ namespace FrankieBot.Discord.Modules
 		{
 			if (Context.Message.ReferencedMessage != null)
 			{
-				await AddQuoteText(Context.Message.ReferencedMessage.Author, Context.Message.ReferencedMessage.Content);
+				await DataBaseService.AddQuote(
+					Context,
+					Context.Message.ReferencedMessage.Author,
+					Context.Message.ReferencedMessage.Content,
+					Context.Message.Author);
 			}
 			else
 			{
-				await AddQuoteText(user, msg);
+				//await AddQuoteText(user, msg, Context.Message.Author);
+				await DataBaseService.AddQuote(
+					Context,
+					user, 
+					msg, 
+					Context.Message.Author);
 			}
+
 		}
 
 		/// <summary>
@@ -53,13 +70,12 @@ namespace FrankieBot.Discord.Modules
 		{
 			if (Context.Message.ReferencedMessage != null)
 			{
-				await AddQuoteText(Context.Message.ReferencedMessage.Author, Context.Message.ReferencedMessage.Content);
+				await DataBaseService.AddQuote(
+					Context,
+					Context.Message.ReferencedMessage.Author,
+					Context.Message.ReferencedMessage.Content,
+					Context.Message.Author);
 			}
-		}
-
-		private async Task AddQuoteText(IUser user, string quote)
-		{
-			await Context.Channel.SendMessageAsync($"> {quote}\n*--{user.Username}, <t:{DateTimeOffset.Now.ToUnixTimeSeconds()}:F>*");
 		}
 	}
 }
