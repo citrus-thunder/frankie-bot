@@ -80,6 +80,11 @@ namespace FrankieBot.Discord.Modules
 			}
 		}
 
+		/// <summary>
+		/// Lists quotes for the specified user
+		/// </summary>
+		/// <param name="user"></param>
+		/// <returns></returns>
 		[Command("list")]
 		public async Task ListQuotes(IUser user)
 		{

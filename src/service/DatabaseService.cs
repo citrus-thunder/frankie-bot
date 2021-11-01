@@ -131,6 +131,12 @@ namespace FrankieBot.Discord.Services
 			});
 		}
 
+		/// <summary>
+		/// Lists quotes for the specified user
+		/// </summary>
+		/// <param name="context"></param>
+		/// <param name="user"></param>
+		/// <returns></returns>
 		public async Task ListQuotes(SocketCommandContext context, IUser user)
 		{
 			await RunDBAction(context, async (c) => 
@@ -175,6 +181,12 @@ namespace FrankieBot.Discord.Services
 			await context.Channel.SendMessageAsync(embed: eb.Build());
 		}
 
+		/// <summary>
+		/// Posts a list of quotes to the context's channel
+		/// </summary>
+		/// <param name="context"></param>
+		/// <param name="quotes"></param>
+		/// <returns></returns>
 		public async Task PostQuoteList(SocketCommandContext context, List<VModel.Quote> quotes)
 		{
 			var eb = new EmbedBuilder()
