@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 using SQLite;
 
-namespace FrankieBot.DB
+namespace FrankieBot.DB.Model
 {
 	/// <summary>
 	/// Contains a set of homogenous <see cref="FrankieBot.DB.DBModel"/> objects
@@ -18,6 +18,7 @@ namespace FrankieBot.DB
 		/// <summary>
 		/// Constructs a new DBContainer
 		/// </summary>
+		[Obsolete("DBContainer is being deprecated very shortly. Switch to ViewModelContainer ASAP")]
 		public DBContainer()
 		{
 			_content = new List<T>();
@@ -105,6 +106,6 @@ namespace FrankieBot.DB
 		/// <summary>
 		/// Saves changes to all objects in this container
 		/// </summary>
-		public void Save() => ForEach((m) => m.Save());
+		//public void Save() => ForEach((m) => m.Save());
 	}
 }

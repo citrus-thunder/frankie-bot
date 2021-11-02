@@ -5,7 +5,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 
 using FrankieBot.DB;
-using FrankieBot.DB.Model;
+using FrankieBot.DB.ViewModel;
 
 /// <summary>
 /// Contains basic data required for handling and displaying

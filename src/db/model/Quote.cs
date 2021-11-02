@@ -20,7 +20,7 @@ namespace FrankieBot.DB.Model
 		{
 
 		}
-
+		/*
 		/// <summary>
 		/// Constructs a new Quote
 		/// </summary>
@@ -30,6 +30,7 @@ namespace FrankieBot.DB.Model
 		{
 
 		}
+		*/
 
 		/// <summary>
 		/// The quote's content
@@ -49,7 +50,7 @@ namespace FrankieBot.DB.Model
 		/// <summary>
 		/// Time the quote was recorded
 		/// </summary>
-		public DateTime RecordTimeSamp { get; set; }
+		public DateTime RecordTimeStamp { get; set; }
 
 		/// <summary>
 		/// Time the quote was originally said

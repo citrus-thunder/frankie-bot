@@ -7,14 +7,6 @@ namespace FrankieBot.DB.ViewModel
 	/// </summary>
 	public class Server : ViewModel<Model.Server>
 	{
-		/// <summary>
-		/// Constructs a new server Viewmodel
-		/// </summary>
-		/// <param name="model"></param>
-		/// <returns></returns>
-		public Server(Model.Server model) : base(model)
-		{
-			// NYI
-		}
+		// NYI
 	}
 }

@@ -14,8 +14,9 @@ using Discord.WebSocket;
 using SQLite;
 
 using FrankieBot.DB;
-using FrankieBot.DB.Model;
-using VModel = FrankieBot.DB.ViewModel;
+using FrankieBot.DB.ViewModel;
+
+using Model = FrankieBot.DB.Model;
 
 namespace FrankieBot.Discord.Services
 {
@@ -63,24 +64,24 @@ namespace FrankieBot.Discord.Services
 				return;
 			}
 
-			await CheckDB(context.Guild);
+			await CheckDB(context);
 
 			await Task.Run(() => action(context));
 		}
 
-		private async Task CheckDB(SocketGuild guild)
+		private async Task CheckDB(SocketCommandContext context)
 		{
 			await Task.Run(() =>
 			{
-				var dbFile = GetServerDBFilePath(guild);
+				var dbFile = GetServerDBFilePath(context.Guild);
 				if (!File.Exists(dbFile))
 				{
 					File.Create(dbFile).Close();
-					using (var connection = new DBConnection(dbFile))
+					using (var connection = new DBConnection(context, dbFile))
 					{
-						connection.CreateTable<Option>();
-						connection.CreateTable<Quote>();
-						connection.CreateTable<Server>();
+						connection.CreateTable<Model.Option>();
+						connection.CreateTable<Model.Quote>();
+						connection.CreateTable<Model.Server>();
 					}
 				}
 			});
@@ -98,14 +99,14 @@ namespace FrankieBot.Discord.Services
 		{
 			await RunDBAction(context, (c) =>
 			{
-				using (var db = new DBConnection(GetServerDBFilePath(c.Guild)))
+				using (var db = new DBConnection(c, GetServerDBFilePath(c.Guild)))
 				{
 					var quote = new Quote(db)
 					{
-						AuthorID = user.Id.ToString(),
+						Author = user,
 						Content = message,
-						RecorderID = recorder.Id.ToString(),
-						RecordTimeSamp = DateTime.UtcNow,
+						Recorder = recorder,
+						RecordTimeStamp = DateTime.UtcNow,
 						QuoteTimeStamp = DateTime.UtcNow
 					};
 
@@ -142,10 +143,11 @@ namespace FrankieBot.Discord.Services
 			await RunDBAction(context, async (c) => 
 			{
 				List<Quote> quoteList;
-				using (var connection = new DBConnection(GetServerDBFilePath(c.Guild)))
+				using (var connection = new DBConnection(context, GetServerDBFilePath(c.Guild)))
 				{
 					var userID = user.Id.ToString();
-					var quotes = DBContainer<Quote>.Find(connection, (quote) => quote.AuthorID == userID);
+					//var quotes = DBContainer<Quote>.Find(connection, (quote) => quote.AuthorID == userID);
+					var quotes = Quote.Find(connection, (quote) => quote.AuthorID == userID).ToConcrete<Quote>();
 					quoteList = new List<Quote>(quotes.Content);
 				}
 

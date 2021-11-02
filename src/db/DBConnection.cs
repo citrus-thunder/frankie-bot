@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
+using Discord;
+using Discord.Commands;
+using Discord.WebSocket;
+
 using SQLite;
 
 namespace FrankieBot.DB
@@ -17,11 +21,13 @@ namespace FrankieBot.DB
 		/// </summary>
 		/// <param name="path">Path to the target database</param>
 		/// <returns></returns>
-		public DBConnection(string path) : base(path)
+		public DBConnection(SocketCommandContext context, string path) : base(path)
 		{
-			
+			Context = context;	
 		}
 
+		public SocketCommandContext Context { get; private set; }
+		/*
 		/// <summary>
 		/// Finds a DBModel of the matching type with the matching ID
 		/// </summary>
@@ -54,5 +60,6 @@ namespace FrankieBot.DB
 		{
 			return Table<T>().Where(expression).FirstOrDefault();
 		}
+		*/
 	}
 }
