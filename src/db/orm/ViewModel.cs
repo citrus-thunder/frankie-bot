@@ -18,13 +18,29 @@ namespace FrankieBot.DB
 	/// from the Model into useful information that can be consumed by the View,
 	/// and translates user actions from the View into database operations in Model-space.
 	/// </remarks>
-	public class ViewModel<M> where M : DBModel, new()
+	public class ViewModel<M> : IViewModel where M : DBModel, new()
 	{
-		protected ViewModel()
+		/// <summary>
+		/// Constructs a new ViewModel instance
+		/// </summary>
+		/// <remarks>
+		/// It is recommended to use one of the other constructors
+		/// whenever possible
+		/// </remarks>
+		public ViewModel()
 		{
 
 		}
 
+		/// <summary>
+		/// Constructs a new ViewModel instance and establishes a
+		/// database connection
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <remarks>
+		/// This constructor is recommended when manually creating a new ViewModel.
+		/// Calls the virtual Create method upon completion
+		/// </remarks>
 		public ViewModel(DBConnection connection)
 		{
 			Connection = connection;
@@ -32,6 +48,13 @@ namespace FrankieBot.DB
 			Create();
 		}
 
+		/// <summary>
+		/// Creates a new ViewModel instance and populates it with a model from
+		/// the database matching the parameters in the provided expression
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <param name="expression"></param>
+		/// <returns></returns>
 		public ViewModel(DBConnection connection, Func<M, bool> expression) : this()
 		{
 			Connection = connection;
@@ -39,7 +62,17 @@ namespace FrankieBot.DB
 			Initialize();
 		}
 
-		protected DBConnection Connection { get; private set; }
+		/// <summary>
+		/// Unique ID
+		/// </summary>
+		/// <returns></returns>
+		public int ID => Model.ID;
+
+		/// <summary>
+		/// The connection to the database
+		/// </summary>
+		/// <value></value>
+		public DBConnection Connection { get; set; }
 
 		/// <summary>
 		/// The underlying Model managed by this ViewModel
@@ -47,14 +80,41 @@ namespace FrankieBot.DB
 		/// <value></value>
 		protected M Model { get; private set; }
 
-		public static T Create<T>(DBConnection connection) where T : ViewModel<M>, new()
+		DBModel IViewModel.Model
 		{
-			return new T
+			get => Model;
+			set
 			{
-				Connection = connection
-			};
+				if (Model == null)
+				{
+					Model = value as M;
+				}
+			}
 		}
 
+		/// <summary>
+		/// Creates a new ViewModel
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <typeparam name="T"></typeparam>
+		/// <returns></returns>
+		public static T Create<T>(DBConnection connection) where T : ViewModel<M>, new()
+		{
+			var res = new T()
+			{
+				Connection = connection,
+				Model = new M()
+			};
+			res.Create();
+			return res;
+		}
+
+		/// <summary>
+		/// Finds the first ViewModel matching the given expression
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <param name="expression"></param>
+		/// <returns></returns>
 		public static ViewModel<M> FindOne(DBConnection connection, Func<M, bool> expression)
 		{
 			var model = connection.Table<M>().Where(expression).FirstOrDefault();
@@ -67,11 +127,34 @@ namespace FrankieBot.DB
 			return res;
 		}
 
-		public static ViewModelContainer<M> Find(DBConnection connection, Func<M, bool> expression)
+		/// <summary>
+		/// Finds a ViewModel by a given ID
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public static ViewModel<M> Find(DBConnection connection, int id)
 		{
-			var container = new ViewModelContainer<M>();
+			var model = connection.Table<M>().Where((model) => model.ID == id).FirstOrDefault();
+			var res = new ViewModel<M>
+			{
+				Model = model,
+				Connection = connection
+			};
+			res.Initialize();
+			return res;
+		}
+
+		/// <summary>
+		/// Finds all ViewModels matching the given expression
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <param name="expression"></param>
+		/// <returns></returns>
+		public static ViewModelContainer<IViewModel> Find(DBConnection connection, Func<M, bool> expression)
+		{
+			var container = new ViewModelContainer<IViewModel>();
 			var models = connection.Table<M>().Where(expression).ToList<M>();
-			var viewModels = new List<ViewModel<M>>();
 			foreach (var m in models)
 			{
 				var newModel = new ViewModel<M>
@@ -80,26 +163,63 @@ namespace FrankieBot.DB
 					Connection = connection
 				};
 				newModel.Initialize();
-				viewModels.Add(newModel);
+				container.Content.Add(newModel);
 			}
-			return new ViewModelContainer<M>() { Content = viewModels as List<ViewModel<M>> };
+			return container;
 		}
 
-		protected virtual void Initialize()
+		/// <summary>
+		/// Converts a generic ViewModel to a concrete equivalent
+		/// </summary>
+		/// <typeparam name="K"></typeparam>
+		/// <returns></returns>
+		public K As<K>() where K : ViewModel<M>, new()
+		{
+			var c = new K();
+			c.Model= this.Model;
+			c.Connection = this.Connection;
+			c.Initialize();
+			return c;
+		}
+
+		/// <summary>
+		/// Initializes the ViewModel
+		/// </summary>
+		public virtual void Initialize()
 		{
 
 		}
 
+		/// <summary>
+		/// Called when a new ViewModel is created
+		/// </summary>
+		/// <remarks>
+		/// Called after <see cref="Connection"/> is assigned and
+		/// a new default <see cref="Model"/> is instantiated
+		/// </remarks>
 		protected virtual void Create()
 		{
 
 		}
 
+		/// <summary>
+		/// Saves the Model to the Database
+		/// </summary>
 		public virtual void Save()
 		{
-			Connection.InsertOrReplace(Model);
+			if (Connection.Table<M>().Any(m => m.ID == Model.ID))
+			{
+				Connection.Update(Model);
+			}
+			else
+			{
+				Connection.Insert(Model);
+			}
 		}
 
+		/// <summary>
+		/// Deletes the Model from the Database
+		/// </summary>
 		public virtual void Delete()
 		{
 			Connection.Delete(Model);

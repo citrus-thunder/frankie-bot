@@ -10,14 +10,6 @@ namespace FrankieBot.DB.Model
 	[Table("servers")]
 	public class Server : DBModel
 	{
-		/*
-		/// <summary>
-		/// Unique Discord Server ID
-		/// </summary>
-		[PrimaryKey, AutoIncrement]
-		public int ID { get; set; }
-		*/
-
 		/// <summary>
 		/// Timestamp representing the last time Frankie joined this server
 		/// </summary>

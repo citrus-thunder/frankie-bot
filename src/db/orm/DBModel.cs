@@ -1,6 +1,7 @@
 using SQLite;
 namespace FrankieBot.DB.Model
 {
+
 	/// <summary>
 	/// Model representing a database record
 	/// </summary>
@@ -10,12 +11,12 @@ namespace FrankieBot.DB.Model
 		/// Constructs a new DBModel object
 		/// </summary>
 		protected DBModel() { }
-		
+
 		/// <summary>
-		/// Unique ID for this DBModel
+		/// Unique ID
 		/// </summary>
 		/// <value></value>
 		[PrimaryKey, AutoIncrement]
-		public string ID {get; protected set;}
+		public virtual int ID {get; set;} = -1;
 	}
 }

@@ -9,10 +9,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.DBConfig.html",
-          "hash": "B/H/+sH+h5kIAenZ0EEjv0m++gRtnQ0tcGUVwy+FzPg="
+          "hash": "8UyBsHGoN2SkYjL+rIuuGNEgIit6yqq894kVQj+OBYE="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -21,34 +21,22 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.DBConnection.html",
-          "hash": "yGCNiquS+2BGq+v8dVHmD6aWHepVxJqVTyGG4xkq/Yw="
+          "hash": "bdKgAKH3Ft0c/nuL+rfr1w3Ls3yDzea1JlEXDvi5gYE="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/FrankieBot.DB.DBContainer-1.yml",
+      "source_relative_path": "api/FrankieBot.DB.Model.DBModel.yml",
       "output": {
         ".html": {
-          "relative_path": "api/FrankieBot.DB.DBContainer-1.html",
-          "hash": "w7GBWYstvlhVK4jPKF5ZNBpeVid02pNbKNQRKkuWi5k="
+          "relative_path": "api/FrankieBot.DB.Model.DBModel.html",
+          "hash": "hcu4fgHwd2mE6uFkgsXGba98W7WCadKAiNLJcp40eWo="
         }
       },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/FrankieBot.DB.DBModel.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/FrankieBot.DB.DBModel.html",
-          "hash": "F0fNh8MBE2jaOcPhcEiVmeTJ3mS9/JqbPon2MKcWV9o="
-        }
-      },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -57,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Option.html",
-          "hash": "YM+raFgGoj9ouJvJnk0a0MWp681C3av2kjGhu7Ecqmk="
+          "hash": "gOjMX7lgxovT9MigEyW8+/VqEcFTV4jmK3X5wHa1a4M="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -69,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Quote.html",
-          "hash": "ub+2T3d9C/y1AoDVi7kR4zaihiI0DTXDZ58Hc28QBZQ="
+          "hash": "j1uYnLz00Ch3DViHvbwnviarVBK5vhrnTesRTPjyQpU="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -81,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Server.html",
-          "hash": "zTHFANPaDcZoTY4Pww9eUYRO/yu2Qlzn205G2SxeIqQ="
+          "hash": "gR5HZJmyAJGZ2xBPd3XY7auTrXc550w3yubTkHySjzA="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -93,10 +81,22 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.html",
-          "hash": "vvQe2XIOb7JXJkJnszKn9PsYLJ+Tuxq+XQZbr1aRwps="
+          "hash": "TJ5cn3NKrWWjVmuryDGX478HyvzNrLkB1JMEzgnejBk="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.ViewModel-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.ViewModel-1.html",
+          "hash": "efV9dI7ZqYpVaetkNc4a6/6kOPO8Ki/ThJ8z/Meqjc4="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -105,10 +105,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Quote.html",
-          "hash": "XRweT/ViH+ZuCIjl4lEI5jBUFDCe7U4iclXDcT8h3O4="
+          "hash": "T/wCH4YbvxM6uToJ/hh1xElgh+45Uuh1vDWfOw5k0OI="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -117,22 +117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Server.html",
-          "hash": "IsxLl7yK6tR+MvcB01ecGcGemIoQUV99VA7IHLdojvI="
+          "hash": "sLLgRTZaUzGLbfbqGxdCRl6dAuW4lYf//XrPoFSujm0="
         }
       },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/FrankieBot.DB.ViewModel.ViewModel-1.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/FrankieBot.DB.ViewModel.ViewModel-1.html",
-          "hash": "1ZvfgEgKvYcL04DytCyZzVvMOy0oondYUbjc1nYHA/s="
-        }
-      },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -141,10 +129,22 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.html",
-          "hash": "bWIs6hT0jlrD4VhqRxiJ8VrQ3YA4XxoguzsLDziDFKQ="
+          "hash": "zuYGBJSeXT/RfyUyyh1EXSSshDRK1xUNwKbV1PDNmG0="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/FrankieBot.DB.ViewModelContainer-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/FrankieBot.DB.ViewModelContainer-1.html",
+          "hash": "9Pd/pP3FJCihpLgj+019sddi9SzbZrtQCFmHoIGa6qw="
+        }
+      },
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -153,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.html",
-          "hash": "trGnM3RFN11FBATMG3LfntKy/Vn5zCumXlTg3w7j9o0="
+          "hash": "EJncNe0gl/WdRLLgg3ft9Gmfuycxhfsa3BYY0+lt27U="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -165,10 +165,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Bot.html",
-          "hash": "SqaRHizt816WyxINznuJUte7Iet5vTfngMNNoqBtHPc="
+          "hash": "TflF0IiRGawVX/oJtAP60ss0lEoDH5Us8YObyyfswNs="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -177,10 +177,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.ChatModule.html",
-          "hash": "6JwBFdr6bFL/mqUVhaARbV9zaB9+eSSpIb5zfUu1t0A="
+          "hash": "vWsV6Vn2Uh/rYe2eVsgJd3uCJneuS7ID0jvfthAS5QU="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -189,10 +189,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.QuoteModule.html",
-          "hash": "u/tlqdB2bQlqSE5FBf/HwpjMolDugcV7MhPGBdj3YyM="
+          "hash": "UDvqtE/d7QqnFPqSdkbQmZHy7rCByqEY0rh2XtUU/3E="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -204,7 +204,7 @@
           "hash": "rcsGQfqDznaPFAlRpvyOW7b72jv55DnhpxPRARUrBsE="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -213,10 +213,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.CommandHandlerService.html",
-          "hash": "KXoIlvCqRl61XOXDpyP6Hah3QTTbuKSbPhoEfD9EE8U="
+          "hash": "JpeNBLaCPPGppwwBTKg9jw4/55dZ/Hh1MkEvTWkbLLI="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -225,10 +225,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.DataBaseService.html",
-          "hash": "ckvbCOftChdc1I7BK/1x245O/XBYD2d+cF+efZuiW1w="
+          "hash": "DLTAM8S88NuGKSNaJqYR5AQzpVuOhroiqXe8UvGJkes="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -237,10 +237,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.EavesDropperService.html",
-          "hash": "hPW+T4sh2INgOfGfTh1GF0KGGBqnyKFwOFU+gIheInc="
+          "hash": "ZSegykZEgobrr+kRTPKsJEkwKYklPS9tzkDWf7PFt1g="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -252,7 +252,7 @@
           "hash": "UWiO83/64qGgs/bsWfstFxlaVvSSIzbBuqnPkPnB1NM="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -264,7 +264,7 @@
           "hash": "9fFh/jmAi9bnCOoEHD9NfcUdHW0H9qEDhNdTiVdZkH4="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -273,10 +273,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DunceDetector.html",
-          "hash": "qeo66ml41iHeCdoIY5jpg2S0KivZSbV33qr4NU9071w="
+          "hash": "RiGOIH8wUYMBvk5R7hkCukg3UrYtq8/XW7z7apdDSUE="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -288,7 +288,7 @@
           "hash": "IMdVh9bg0ZhKIt4KbPHrii5r9JUEIJnc6D0moryBOLI="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -300,7 +300,7 @@
           "hash": "7S943uMbnGY/4MzAvKNpC+BtVM3ETXrC7iokmrIoaEs="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -309,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "KXLJWzEkAOwegJtdRMKAUtSy7oX8VkGQIFCq4iDGYQU="
+          "hash": "mAX2X6XxYBpYAd7+fVXkAjCR+ZTMih6TeuDLXXfrCFE="
         }
       },
       "is_incremental": false,
@@ -383,7 +383,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 24,
-          "skipped_file_count": 20
+          "skipped_file_count": 24
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

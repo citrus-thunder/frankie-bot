@@ -55,12 +55,12 @@ references:
   commentId: T:FrankieBot.DB.DBConnection
   fullName: FrankieBot.DB.DBConnection
   nameWithType: DBConnection
-- uid: FrankieBot.DB.DBConnection.#ctor(System.String)
-  name: DBConnection(String)
-  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection__ctor_System_String_
-  commentId: M:FrankieBot.DB.DBConnection.#ctor(System.String)
-  fullName: FrankieBot.DB.DBConnection.DBConnection(System.String)
-  nameWithType: DBConnection.DBConnection(String)
+- uid: FrankieBot.DB.DBConnection.#ctor(Discord.Commands.SocketCommandContext,System.String)
+  name: DBConnection(SocketCommandContext, String)
+  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection__ctor_Discord_Commands_SocketCommandContext_System_String_
+  commentId: M:FrankieBot.DB.DBConnection.#ctor(Discord.Commands.SocketCommandContext,System.String)
+  fullName: FrankieBot.DB.DBConnection.DBConnection(Discord.Commands.SocketCommandContext, System.String)
+  nameWithType: DBConnection.DBConnection(SocketCommandContext, String)
 - uid: FrankieBot.DB.DBConnection.#ctor*
   name: DBConnection
   href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection__ctor_
@@ -68,316 +68,57 @@ references:
   isSpec: "True"
   fullName: FrankieBot.DB.DBConnection.DBConnection
   nameWithType: DBConnection.DBConnection
-- uid: FrankieBot.DB.DBConnection.Find*
-  name: Find
-  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection_Find_
-  commentId: Overload:FrankieBot.DB.DBConnection.Find
+- uid: FrankieBot.DB.DBConnection.Context
+  name: Context
+  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection_Context
+  commentId: P:FrankieBot.DB.DBConnection.Context
+  fullName: FrankieBot.DB.DBConnection.Context
+  nameWithType: DBConnection.Context
+- uid: FrankieBot.DB.DBConnection.Context*
+  name: Context
+  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection_Context_
+  commentId: Overload:FrankieBot.DB.DBConnection.Context
   isSpec: "True"
-  fullName: FrankieBot.DB.DBConnection.Find
-  nameWithType: DBConnection.Find
-- uid: FrankieBot.DB.DBConnection.Find``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
-  name: Find<T>(Expression<Func<T, Boolean>>)
-  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection_Find__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___
-  commentId: M:FrankieBot.DB.DBConnection.Find``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
-  name.vb: Find(Of T)(Expression(Of Func(Of T, Boolean)))
-  fullName: FrankieBot.DB.DBConnection.Find<T>(System.Linq.Expressions.Expression<System.Func<T, System.Boolean>>)
-  fullName.vb: FrankieBot.DB.DBConnection.Find(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, System.Boolean)))
-  nameWithType: DBConnection.Find<T>(Expression<Func<T, Boolean>>)
-  nameWithType.vb: DBConnection.Find(Of T)(Expression(Of Func(Of T, Boolean)))
-- uid: FrankieBot.DB.DBConnection.Find``1(System.UInt64)
-  name: Find<T>(UInt64)
-  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection_Find__1_System_UInt64_
-  commentId: M:FrankieBot.DB.DBConnection.Find``1(System.UInt64)
-  name.vb: Find(Of T)(UInt64)
-  fullName: FrankieBot.DB.DBConnection.Find<T>(System.UInt64)
-  fullName.vb: FrankieBot.DB.DBConnection.Find(Of T)(System.UInt64)
-  nameWithType: DBConnection.Find<T>(UInt64)
-  nameWithType.vb: DBConnection.Find(Of T)(UInt64)
-- uid: FrankieBot.DB.DBConnection.FindOne*
-  name: FindOne
-  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection_FindOne_
-  commentId: Overload:FrankieBot.DB.DBConnection.FindOne
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBConnection.FindOne
-  nameWithType: DBConnection.FindOne
-- uid: FrankieBot.DB.DBConnection.FindOne``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
-  name: FindOne<T>(Expression<Func<T, Boolean>>)
-  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection_FindOne__1_System_Linq_Expressions_Expression_System_Func___0_System_Boolean___
-  commentId: M:FrankieBot.DB.DBConnection.FindOne``1(System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})
-  name.vb: FindOne(Of T)(Expression(Of Func(Of T, Boolean)))
-  fullName: FrankieBot.DB.DBConnection.FindOne<T>(System.Linq.Expressions.Expression<System.Func<T, System.Boolean>>)
-  fullName.vb: FrankieBot.DB.DBConnection.FindOne(Of T)(System.Linq.Expressions.Expression(Of System.Func(Of T, System.Boolean)))
-  nameWithType: DBConnection.FindOne<T>(Expression<Func<T, Boolean>>)
-  nameWithType.vb: DBConnection.FindOne(Of T)(Expression(Of Func(Of T, Boolean)))
-- uid: FrankieBot.DB.DBContainer`1
-  name: DBContainer<T>
-  href: api/FrankieBot.DB.DBContainer-1.html
-  commentId: T:FrankieBot.DB.DBContainer`1
-  name.vb: DBContainer(Of T)
-  fullName: FrankieBot.DB.DBContainer<T>
-  fullName.vb: FrankieBot.DB.DBContainer(Of T)
-  nameWithType: DBContainer<T>
-  nameWithType.vb: DBContainer(Of T)
-- uid: FrankieBot.DB.DBContainer`1.#ctor
-  name: DBContainer()
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1__ctor
-  commentId: M:FrankieBot.DB.DBContainer`1.#ctor
-  fullName: FrankieBot.DB.DBContainer<T>.DBContainer()
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).DBContainer()
-  nameWithType: DBContainer<T>.DBContainer()
-  nameWithType.vb: DBContainer(Of T).DBContainer()
-- uid: FrankieBot.DB.DBContainer`1.#ctor(SQLite.SQLiteConnection)
-  name: DBContainer(SQLiteConnection)
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1__ctor_SQLite_SQLiteConnection_
-  commentId: M:FrankieBot.DB.DBContainer`1.#ctor(SQLite.SQLiteConnection)
-  fullName: FrankieBot.DB.DBContainer<T>.DBContainer(SQLite.SQLiteConnection)
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).DBContainer(SQLite.SQLiteConnection)
-  nameWithType: DBContainer<T>.DBContainer(SQLiteConnection)
-  nameWithType.vb: DBContainer(Of T).DBContainer(SQLiteConnection)
-- uid: FrankieBot.DB.DBContainer`1.#ctor*
-  name: DBContainer
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1__ctor_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.#ctor
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.DBContainer
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).DBContainer
-  nameWithType: DBContainer<T>.DBContainer
-  nameWithType.vb: DBContainer(Of T).DBContainer
-- uid: FrankieBot.DB.DBContainer`1.Add(`0)
-  name: Add(T)
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Add__0_
-  commentId: M:FrankieBot.DB.DBContainer`1.Add(`0)
-  fullName: FrankieBot.DB.DBContainer<T>.Add(T)
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Add(T)
-  nameWithType: DBContainer<T>.Add(T)
-  nameWithType.vb: DBContainer(Of T).Add(T)
-- uid: FrankieBot.DB.DBContainer`1.Add(`0[])
-  name: Add(T[])
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Add__0___
-  commentId: M:FrankieBot.DB.DBContainer`1.Add(`0[])
-  name.vb: Add(T())
-  fullName: FrankieBot.DB.DBContainer<T>.Add(T[])
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Add(T())
-  nameWithType: DBContainer<T>.Add(T[])
-  nameWithType.vb: DBContainer(Of T).Add(T())
-- uid: FrankieBot.DB.DBContainer`1.Add(System.Collections.Generic.List{`0})
-  name: Add(List<T>)
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Add_System_Collections_Generic_List__0__
-  commentId: M:FrankieBot.DB.DBContainer`1.Add(System.Collections.Generic.List{`0})
-  name.vb: Add(List(Of T))
-  fullName: FrankieBot.DB.DBContainer<T>.Add(System.Collections.Generic.List<T>)
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Add(System.Collections.Generic.List(Of T))
-  nameWithType: DBContainer<T>.Add(List<T>)
-  nameWithType.vb: DBContainer(Of T).Add(List(Of T))
-- uid: FrankieBot.DB.DBContainer`1.Add*
-  name: Add
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Add_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.Add
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.Add
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Add
-  nameWithType: DBContainer<T>.Add
-  nameWithType.vb: DBContainer(Of T).Add
-- uid: FrankieBot.DB.DBContainer`1.Connection
-  name: Connection
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Connection
-  commentId: P:FrankieBot.DB.DBContainer`1.Connection
-  fullName: FrankieBot.DB.DBContainer<T>.Connection
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Connection
-  nameWithType: DBContainer<T>.Connection
-  nameWithType.vb: DBContainer(Of T).Connection
-- uid: FrankieBot.DB.DBContainer`1.Connection*
-  name: Connection
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Connection_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.Connection
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.Connection
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Connection
-  nameWithType: DBContainer<T>.Connection
-  nameWithType.vb: DBContainer(Of T).Connection
-- uid: FrankieBot.DB.DBContainer`1.Content
-  name: Content
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Content
-  commentId: P:FrankieBot.DB.DBContainer`1.Content
-  fullName: FrankieBot.DB.DBContainer<T>.Content
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Content
-  nameWithType: DBContainer<T>.Content
-  nameWithType.vb: DBContainer(Of T).Content
-- uid: FrankieBot.DB.DBContainer`1.Content*
-  name: Content
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Content_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.Content
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.Content
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Content
-  nameWithType: DBContainer<T>.Content
-  nameWithType.vb: DBContainer(Of T).Content
-- uid: FrankieBot.DB.DBContainer`1.Find(SQLite.SQLiteConnection,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})
-  name: Find(SQLiteConnection, Expression<Func<T, Boolean>>)
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Find_SQLite_SQLiteConnection_System_Linq_Expressions_Expression_System_Func__0_System_Boolean___
-  commentId: M:FrankieBot.DB.DBContainer`1.Find(SQLite.SQLiteConnection,System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})
-  name.vb: Find(SQLiteConnection, Expression(Of Func(Of T, Boolean)))
-  fullName: FrankieBot.DB.DBContainer<T>.Find(SQLite.SQLiteConnection, System.Linq.Expressions.Expression<System.Func<T, System.Boolean>>)
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Find(SQLite.SQLiteConnection, System.Linq.Expressions.Expression(Of System.Func(Of T, System.Boolean)))
-  nameWithType: DBContainer<T>.Find(SQLiteConnection, Expression<Func<T, Boolean>>)
-  nameWithType.vb: DBContainer(Of T).Find(SQLiteConnection, Expression(Of Func(Of T, Boolean)))
-- uid: FrankieBot.DB.DBContainer`1.Find*
-  name: Find
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Find_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.Find
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.Find
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Find
-  nameWithType: DBContainer<T>.Find
-  nameWithType.vb: DBContainer(Of T).Find
-- uid: FrankieBot.DB.DBContainer`1.ForEach(System.Action{`0})
-  name: ForEach(Action<T>)
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_ForEach_System_Action__0__
-  commentId: M:FrankieBot.DB.DBContainer`1.ForEach(System.Action{`0})
-  name.vb: ForEach(Action(Of T))
-  fullName: FrankieBot.DB.DBContainer<T>.ForEach(System.Action<T>)
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).ForEach(System.Action(Of T))
-  nameWithType: DBContainer<T>.ForEach(Action<T>)
-  nameWithType.vb: DBContainer(Of T).ForEach(Action(Of T))
-- uid: FrankieBot.DB.DBContainer`1.ForEach*
-  name: ForEach
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_ForEach_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.ForEach
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.ForEach
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).ForEach
-  nameWithType: DBContainer<T>.ForEach
-  nameWithType.vb: DBContainer(Of T).ForEach
-- uid: FrankieBot.DB.DBContainer`1.Save
-  name: Save()
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Save
-  commentId: M:FrankieBot.DB.DBContainer`1.Save
-  fullName: FrankieBot.DB.DBContainer<T>.Save()
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Save()
-  nameWithType: DBContainer<T>.Save()
-  nameWithType.vb: DBContainer(Of T).Save()
-- uid: FrankieBot.DB.DBContainer`1.Save*
-  name: Save
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_Save_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.Save
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.Save
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).Save
-  nameWithType: DBContainer<T>.Save
-  nameWithType.vb: DBContainer(Of T).Save
-- uid: FrankieBot.DB.DBContainer`1.SetConnection(SQLite.SQLiteConnection)
-  name: SetConnection(SQLiteConnection)
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_SetConnection_SQLite_SQLiteConnection_
-  commentId: M:FrankieBot.DB.DBContainer`1.SetConnection(SQLite.SQLiteConnection)
-  fullName: FrankieBot.DB.DBContainer<T>.SetConnection(SQLite.SQLiteConnection)
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).SetConnection(SQLite.SQLiteConnection)
-  nameWithType: DBContainer<T>.SetConnection(SQLiteConnection)
-  nameWithType.vb: DBContainer(Of T).SetConnection(SQLiteConnection)
-- uid: FrankieBot.DB.DBContainer`1.SetConnection*
-  name: SetConnection
-  href: api/FrankieBot.DB.DBContainer-1.html#FrankieBot_DB_DBContainer_1_SetConnection_
-  commentId: Overload:FrankieBot.DB.DBContainer`1.SetConnection
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBContainer<T>.SetConnection
-  fullName.vb: FrankieBot.DB.DBContainer(Of T).SetConnection
-  nameWithType: DBContainer<T>.SetConnection
-  nameWithType.vb: DBContainer(Of T).SetConnection
-- uid: FrankieBot.DB.DBModel
-  name: DBModel
-  href: api/FrankieBot.DB.DBModel.html
-  commentId: T:FrankieBot.DB.DBModel
-  fullName: FrankieBot.DB.DBModel
-  nameWithType: DBModel
-- uid: FrankieBot.DB.DBModel.#ctor
-  name: DBModel()
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel__ctor
-  commentId: M:FrankieBot.DB.DBModel.#ctor
-  fullName: FrankieBot.DB.DBModel.DBModel()
-  nameWithType: DBModel.DBModel()
-- uid: FrankieBot.DB.DBModel.#ctor(SQLite.SQLiteConnection)
-  name: DBModel(SQLiteConnection)
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel__ctor_SQLite_SQLiteConnection_
-  commentId: M:FrankieBot.DB.DBModel.#ctor(SQLite.SQLiteConnection)
-  fullName: FrankieBot.DB.DBModel.DBModel(SQLite.SQLiteConnection)
-  nameWithType: DBModel.DBModel(SQLiteConnection)
-- uid: FrankieBot.DB.DBModel.#ctor*
-  name: DBModel
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel__ctor_
-  commentId: Overload:FrankieBot.DB.DBModel.#ctor
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBModel.DBModel
-  nameWithType: DBModel.DBModel
-- uid: FrankieBot.DB.DBModel.Connection
-  name: Connection
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Connection
-  commentId: P:FrankieBot.DB.DBModel.Connection
-  fullName: FrankieBot.DB.DBModel.Connection
-  nameWithType: DBModel.Connection
-- uid: FrankieBot.DB.DBModel.Connection*
-  name: Connection
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Connection_
-  commentId: Overload:FrankieBot.DB.DBModel.Connection
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBModel.Connection
-  nameWithType: DBModel.Connection
-- uid: FrankieBot.DB.DBModel.Delete
-  name: Delete()
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Delete
-  commentId: M:FrankieBot.DB.DBModel.Delete
-  fullName: FrankieBot.DB.DBModel.Delete()
-  nameWithType: DBModel.Delete()
-- uid: FrankieBot.DB.DBModel.Delete*
-  name: Delete
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Delete_
-  commentId: Overload:FrankieBot.DB.DBModel.Delete
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBModel.Delete
-  nameWithType: DBModel.Delete
-- uid: FrankieBot.DB.DBModel.ID
-  name: ID
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_ID
-  commentId: P:FrankieBot.DB.DBModel.ID
-  fullName: FrankieBot.DB.DBModel.ID
-  nameWithType: DBModel.ID
-- uid: FrankieBot.DB.DBModel.ID*
-  name: ID
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_ID_
-  commentId: Overload:FrankieBot.DB.DBModel.ID
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBModel.ID
-  nameWithType: DBModel.ID
-- uid: FrankieBot.DB.DBModel.Save
-  name: Save()
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Save
-  commentId: M:FrankieBot.DB.DBModel.Save
-  fullName: FrankieBot.DB.DBModel.Save()
-  nameWithType: DBModel.Save()
-- uid: FrankieBot.DB.DBModel.Save*
-  name: Save
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_Save_
-  commentId: Overload:FrankieBot.DB.DBModel.Save
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBModel.Save
-  nameWithType: DBModel.Save
-- uid: FrankieBot.DB.DBModel.SetConnection(SQLite.SQLiteConnection)
-  name: SetConnection(SQLiteConnection)
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_SetConnection_SQLite_SQLiteConnection_
-  commentId: M:FrankieBot.DB.DBModel.SetConnection(SQLite.SQLiteConnection)
-  fullName: FrankieBot.DB.DBModel.SetConnection(SQLite.SQLiteConnection)
-  nameWithType: DBModel.SetConnection(SQLiteConnection)
-- uid: FrankieBot.DB.DBModel.SetConnection*
-  name: SetConnection
-  href: api/FrankieBot.DB.DBModel.html#FrankieBot_DB_DBModel_SetConnection_
-  commentId: Overload:FrankieBot.DB.DBModel.SetConnection
-  isSpec: "True"
-  fullName: FrankieBot.DB.DBModel.SetConnection
-  nameWithType: DBModel.SetConnection
+  fullName: FrankieBot.DB.DBConnection.Context
+  nameWithType: DBConnection.Context
 - uid: FrankieBot.DB.Model
   name: FrankieBot.DB.Model
   href: api/FrankieBot.DB.Model.html
   commentId: N:FrankieBot.DB.Model
   fullName: FrankieBot.DB.Model
   nameWithType: FrankieBot.DB.Model
+- uid: FrankieBot.DB.Model.DBModel
+  name: DBModel
+  href: api/FrankieBot.DB.Model.DBModel.html
+  commentId: T:FrankieBot.DB.Model.DBModel
+  fullName: FrankieBot.DB.Model.DBModel
+  nameWithType: DBModel
+- uid: FrankieBot.DB.Model.DBModel.#ctor
+  name: DBModel()
+  href: api/FrankieBot.DB.Model.DBModel.html#FrankieBot_DB_Model_DBModel__ctor
+  commentId: M:FrankieBot.DB.Model.DBModel.#ctor
+  fullName: FrankieBot.DB.Model.DBModel.DBModel()
+  nameWithType: DBModel.DBModel()
+- uid: FrankieBot.DB.Model.DBModel.#ctor*
+  name: DBModel
+  href: api/FrankieBot.DB.Model.DBModel.html#FrankieBot_DB_Model_DBModel__ctor_
+  commentId: Overload:FrankieBot.DB.Model.DBModel.#ctor
+  isSpec: "True"
+  fullName: FrankieBot.DB.Model.DBModel.DBModel
+  nameWithType: DBModel.DBModel
+- uid: FrankieBot.DB.Model.DBModel.ID
+  name: ID
+  href: api/FrankieBot.DB.Model.DBModel.html#FrankieBot_DB_Model_DBModel_ID
+  commentId: P:FrankieBot.DB.Model.DBModel.ID
+  fullName: FrankieBot.DB.Model.DBModel.ID
+  nameWithType: DBModel.ID
+- uid: FrankieBot.DB.Model.DBModel.ID*
+  name: ID
+  href: api/FrankieBot.DB.Model.DBModel.html#FrankieBot_DB_Model_DBModel_ID_
+  commentId: Overload:FrankieBot.DB.Model.DBModel.ID
+  isSpec: "True"
+  fullName: FrankieBot.DB.Model.DBModel.ID
+  nameWithType: DBModel.ID
 - uid: FrankieBot.DB.Model.Option
   name: Option
   href: api/FrankieBot.DB.Model.Option.html
@@ -422,12 +163,6 @@ references:
   commentId: M:FrankieBot.DB.Model.Quote.#ctor
   fullName: FrankieBot.DB.Model.Quote.Quote()
   nameWithType: Quote.Quote()
-- uid: FrankieBot.DB.Model.Quote.#ctor(FrankieBot.DB.DBConnection)
-  name: Quote(DBConnection)
-  href: api/FrankieBot.DB.Model.Quote.html#FrankieBot_DB_Model_Quote__ctor_FrankieBot_DB_DBConnection_
-  commentId: M:FrankieBot.DB.Model.Quote.#ctor(FrankieBot.DB.DBConnection)
-  fullName: FrankieBot.DB.Model.Quote.Quote(FrankieBot.DB.DBConnection)
-  nameWithType: Quote.Quote(DBConnection)
 - uid: FrankieBot.DB.Model.Quote.#ctor*
   name: Quote
   href: api/FrankieBot.DB.Model.Quote.html#FrankieBot_DB_Model_Quote__ctor_
@@ -487,19 +222,19 @@ references:
   isSpec: "True"
   fullName: FrankieBot.DB.Model.Quote.RecorderID
   nameWithType: Quote.RecorderID
-- uid: FrankieBot.DB.Model.Quote.RecordTimeSamp
-  name: RecordTimeSamp
-  href: api/FrankieBot.DB.Model.Quote.html#FrankieBot_DB_Model_Quote_RecordTimeSamp
-  commentId: P:FrankieBot.DB.Model.Quote.RecordTimeSamp
-  fullName: FrankieBot.DB.Model.Quote.RecordTimeSamp
-  nameWithType: Quote.RecordTimeSamp
-- uid: FrankieBot.DB.Model.Quote.RecordTimeSamp*
-  name: RecordTimeSamp
-  href: api/FrankieBot.DB.Model.Quote.html#FrankieBot_DB_Model_Quote_RecordTimeSamp_
-  commentId: Overload:FrankieBot.DB.Model.Quote.RecordTimeSamp
+- uid: FrankieBot.DB.Model.Quote.RecordTimeStamp
+  name: RecordTimeStamp
+  href: api/FrankieBot.DB.Model.Quote.html#FrankieBot_DB_Model_Quote_RecordTimeStamp
+  commentId: P:FrankieBot.DB.Model.Quote.RecordTimeStamp
+  fullName: FrankieBot.DB.Model.Quote.RecordTimeStamp
+  nameWithType: Quote.RecordTimeStamp
+- uid: FrankieBot.DB.Model.Quote.RecordTimeStamp*
+  name: RecordTimeStamp
+  href: api/FrankieBot.DB.Model.Quote.html#FrankieBot_DB_Model_Quote_RecordTimeStamp_
+  commentId: Overload:FrankieBot.DB.Model.Quote.RecordTimeStamp
   isSpec: "True"
-  fullName: FrankieBot.DB.Model.Quote.RecordTimeSamp
-  nameWithType: Quote.RecordTimeSamp
+  fullName: FrankieBot.DB.Model.Quote.RecordTimeStamp
+  nameWithType: Quote.RecordTimeStamp
 - uid: FrankieBot.DB.Model.Server
   name: Server
   href: api/FrankieBot.DB.Model.Server.html
@@ -544,12 +279,18 @@ references:
   commentId: T:FrankieBot.DB.ViewModel.Quote
   fullName: FrankieBot.DB.ViewModel.Quote
   nameWithType: Quote
-- uid: FrankieBot.DB.ViewModel.Quote.#ctor(Discord.WebSocket.SocketGuild,FrankieBot.DB.Model.Quote)
-  name: Quote(SocketGuild, Quote)
-  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote__ctor_Discord_WebSocket_SocketGuild_FrankieBot_DB_Model_Quote_
-  commentId: M:FrankieBot.DB.ViewModel.Quote.#ctor(Discord.WebSocket.SocketGuild,FrankieBot.DB.Model.Quote)
-  fullName: FrankieBot.DB.ViewModel.Quote.Quote(Discord.WebSocket.SocketGuild, FrankieBot.DB.Model.Quote)
-  nameWithType: Quote.Quote(SocketGuild, Quote)
+- uid: FrankieBot.DB.ViewModel.Quote.#ctor
+  name: Quote()
+  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote__ctor
+  commentId: M:FrankieBot.DB.ViewModel.Quote.#ctor
+  fullName: FrankieBot.DB.ViewModel.Quote.Quote()
+  nameWithType: Quote.Quote()
+- uid: FrankieBot.DB.ViewModel.Quote.#ctor(FrankieBot.DB.DBConnection)
+  name: Quote(DBConnection)
+  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote__ctor_FrankieBot_DB_DBConnection_
+  commentId: M:FrankieBot.DB.ViewModel.Quote.#ctor(FrankieBot.DB.DBConnection)
+  fullName: FrankieBot.DB.ViewModel.Quote.Quote(FrankieBot.DB.DBConnection)
+  nameWithType: Quote.Quote(DBConnection)
 - uid: FrankieBot.DB.ViewModel.Quote.#ctor*
   name: Quote
   href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote__ctor_
@@ -557,6 +298,19 @@ references:
   isSpec: "True"
   fullName: FrankieBot.DB.ViewModel.Quote.Quote
   nameWithType: Quote.Quote
+- uid: FrankieBot.DB.ViewModel.Quote.Author
+  name: Author
+  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_Author
+  commentId: P:FrankieBot.DB.ViewModel.Quote.Author
+  fullName: FrankieBot.DB.ViewModel.Quote.Author
+  nameWithType: Quote.Author
+- uid: FrankieBot.DB.ViewModel.Quote.Author*
+  name: Author
+  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_Author_
+  commentId: Overload:FrankieBot.DB.ViewModel.Quote.Author
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.Quote.Author
+  nameWithType: Quote.Author
 - uid: FrankieBot.DB.ViewModel.Quote.Content
   name: Content
   href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_Content
@@ -570,6 +324,19 @@ references:
   isSpec: "True"
   fullName: FrankieBot.DB.ViewModel.Quote.Content
   nameWithType: Quote.Content
+- uid: FrankieBot.DB.ViewModel.Quote.Initialize
+  name: Initialize()
+  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_Initialize
+  commentId: M:FrankieBot.DB.ViewModel.Quote.Initialize
+  fullName: FrankieBot.DB.ViewModel.Quote.Initialize()
+  nameWithType: Quote.Initialize()
+- uid: FrankieBot.DB.ViewModel.Quote.Initialize*
+  name: Initialize
+  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_Initialize_
+  commentId: Overload:FrankieBot.DB.ViewModel.Quote.Initialize
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.Quote.Initialize
+  nameWithType: Quote.Initialize
 - uid: FrankieBot.DB.ViewModel.Quote.QuoteTimeStamp
   name: QuoteTimeStamp
   href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_QuoteTimeStamp
@@ -609,81 +376,340 @@ references:
   isSpec: "True"
   fullName: FrankieBot.DB.ViewModel.Quote.RecordTimeStamp
   nameWithType: Quote.RecordTimeStamp
-- uid: FrankieBot.DB.ViewModel.Quote.User
-  name: User
-  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_User
-  commentId: P:FrankieBot.DB.ViewModel.Quote.User
-  fullName: FrankieBot.DB.ViewModel.Quote.User
-  nameWithType: Quote.User
-- uid: FrankieBot.DB.ViewModel.Quote.User*
-  name: User
-  href: api/FrankieBot.DB.ViewModel.Quote.html#FrankieBot_DB_ViewModel_Quote_User_
-  commentId: Overload:FrankieBot.DB.ViewModel.Quote.User
-  isSpec: "True"
-  fullName: FrankieBot.DB.ViewModel.Quote.User
-  nameWithType: Quote.User
 - uid: FrankieBot.DB.ViewModel.Server
   name: Server
   href: api/FrankieBot.DB.ViewModel.Server.html
   commentId: T:FrankieBot.DB.ViewModel.Server
   fullName: FrankieBot.DB.ViewModel.Server
   nameWithType: Server
-- uid: FrankieBot.DB.ViewModel.Server.#ctor(FrankieBot.DB.Model.Server)
-  name: Server(Server)
-  href: api/FrankieBot.DB.ViewModel.Server.html#FrankieBot_DB_ViewModel_Server__ctor_FrankieBot_DB_Model_Server_
-  commentId: M:FrankieBot.DB.ViewModel.Server.#ctor(FrankieBot.DB.Model.Server)
-  fullName: FrankieBot.DB.ViewModel.Server.Server(FrankieBot.DB.Model.Server)
-  nameWithType: Server.Server(Server)
-- uid: FrankieBot.DB.ViewModel.Server.#ctor*
-  name: Server
-  href: api/FrankieBot.DB.ViewModel.Server.html#FrankieBot_DB_ViewModel_Server__ctor_
-  commentId: Overload:FrankieBot.DB.ViewModel.Server.#ctor
-  isSpec: "True"
-  fullName: FrankieBot.DB.ViewModel.Server.Server
-  nameWithType: Server.Server
-- uid: FrankieBot.DB.ViewModel.ViewModel`1
-  name: ViewModel<T>
-  href: api/FrankieBot.DB.ViewModel.ViewModel-1.html
-  commentId: T:FrankieBot.DB.ViewModel.ViewModel`1
-  name.vb: ViewModel(Of T)
-  fullName: FrankieBot.DB.ViewModel.ViewModel<T>
-  fullName.vb: FrankieBot.DB.ViewModel.ViewModel(Of T)
-  nameWithType: ViewModel<T>
-  nameWithType.vb: ViewModel(Of T)
-- uid: FrankieBot.DB.ViewModel.ViewModel`1.#ctor(`0)
-  name: ViewModel(T)
-  href: api/FrankieBot.DB.ViewModel.ViewModel-1.html#FrankieBot_DB_ViewModel_ViewModel_1__ctor__0_
-  commentId: M:FrankieBot.DB.ViewModel.ViewModel`1.#ctor(`0)
-  fullName: FrankieBot.DB.ViewModel.ViewModel<T>.ViewModel(T)
-  fullName.vb: FrankieBot.DB.ViewModel.ViewModel(Of T).ViewModel(T)
-  nameWithType: ViewModel<T>.ViewModel(T)
-  nameWithType.vb: ViewModel(Of T).ViewModel(T)
-- uid: FrankieBot.DB.ViewModel.ViewModel`1.#ctor*
+- uid: FrankieBot.DB.ViewModel`1
+  name: ViewModel<M>
+  href: api/FrankieBot.DB.ViewModel-1.html
+  commentId: T:FrankieBot.DB.ViewModel`1
+  name.vb: ViewModel(Of M)
+  fullName: FrankieBot.DB.ViewModel<M>
+  fullName.vb: FrankieBot.DB.ViewModel(Of M)
+  nameWithType: ViewModel<M>
+  nameWithType.vb: ViewModel(Of M)
+- uid: FrankieBot.DB.ViewModel`1.#ctor
+  name: ViewModel()
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1__ctor
+  commentId: M:FrankieBot.DB.ViewModel`1.#ctor
+  fullName: FrankieBot.DB.ViewModel<M>.ViewModel()
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).ViewModel()
+  nameWithType: ViewModel<M>.ViewModel()
+  nameWithType.vb: ViewModel(Of M).ViewModel()
+- uid: FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection)
+  name: ViewModel(DBConnection)
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1__ctor_FrankieBot_DB_DBConnection_
+  commentId: M:FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection)
+  fullName: FrankieBot.DB.ViewModel<M>.ViewModel(FrankieBot.DB.DBConnection)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).ViewModel(FrankieBot.DB.DBConnection)
+  nameWithType: ViewModel<M>.ViewModel(DBConnection)
+  nameWithType.vb: ViewModel(Of M).ViewModel(DBConnection)
+- uid: FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  name: ViewModel(DBConnection, Func<M, Boolean>)
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1__ctor_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__
+  commentId: M:FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  name.vb: ViewModel(DBConnection, Func(Of M, Boolean))
+  fullName: FrankieBot.DB.ViewModel<M>.ViewModel(FrankieBot.DB.DBConnection, System.Func<M, System.Boolean>)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).ViewModel(FrankieBot.DB.DBConnection, System.Func(Of M, System.Boolean))
+  nameWithType: ViewModel<M>.ViewModel(DBConnection, Func<M, Boolean>)
+  nameWithType.vb: ViewModel(Of M).ViewModel(DBConnection, Func(Of M, Boolean))
+- uid: FrankieBot.DB.ViewModel`1.#ctor*
   name: ViewModel
-  href: api/FrankieBot.DB.ViewModel.ViewModel-1.html#FrankieBot_DB_ViewModel_ViewModel_1__ctor_
-  commentId: Overload:FrankieBot.DB.ViewModel.ViewModel`1.#ctor
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1__ctor_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.#ctor
   isSpec: "True"
-  fullName: FrankieBot.DB.ViewModel.ViewModel<T>.ViewModel
-  fullName.vb: FrankieBot.DB.ViewModel.ViewModel(Of T).ViewModel
-  nameWithType: ViewModel<T>.ViewModel
-  nameWithType.vb: ViewModel(Of T).ViewModel
-- uid: FrankieBot.DB.ViewModel.ViewModel`1.Model
-  name: Model
-  href: api/FrankieBot.DB.ViewModel.ViewModel-1.html#FrankieBot_DB_ViewModel_ViewModel_1_Model
-  commentId: P:FrankieBot.DB.ViewModel.ViewModel`1.Model
-  fullName: FrankieBot.DB.ViewModel.ViewModel<T>.Model
-  fullName.vb: FrankieBot.DB.ViewModel.ViewModel(Of T).Model
-  nameWithType: ViewModel<T>.Model
-  nameWithType.vb: ViewModel(Of T).Model
-- uid: FrankieBot.DB.ViewModel.ViewModel`1.Model*
-  name: Model
-  href: api/FrankieBot.DB.ViewModel.ViewModel-1.html#FrankieBot_DB_ViewModel_ViewModel_1_Model_
-  commentId: Overload:FrankieBot.DB.ViewModel.ViewModel`1.Model
+  fullName: FrankieBot.DB.ViewModel<M>.ViewModel
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).ViewModel
+  nameWithType: ViewModel<M>.ViewModel
+  nameWithType.vb: ViewModel(Of M).ViewModel
+- uid: FrankieBot.DB.ViewModel`1.As*
+  name: As
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_As_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.As
   isSpec: "True"
-  fullName: FrankieBot.DB.ViewModel.ViewModel<T>.Model
-  fullName.vb: FrankieBot.DB.ViewModel.ViewModel(Of T).Model
-  nameWithType: ViewModel<T>.Model
-  nameWithType.vb: ViewModel(Of T).Model
+  fullName: FrankieBot.DB.ViewModel<M>.As
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).As
+  nameWithType: ViewModel<M>.As
+  nameWithType.vb: ViewModel(Of M).As
+- uid: FrankieBot.DB.ViewModel`1.As``1
+  name: As<K>()
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_As__1
+  commentId: M:FrankieBot.DB.ViewModel`1.As``1
+  name.vb: As(Of K)()
+  fullName: FrankieBot.DB.ViewModel<M>.As<K>()
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).As(Of K)()
+  nameWithType: ViewModel<M>.As<K>()
+  nameWithType.vb: ViewModel(Of M).As(Of K)()
+- uid: FrankieBot.DB.ViewModel`1.Connection
+  name: Connection
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Connection
+  commentId: P:FrankieBot.DB.ViewModel`1.Connection
+  fullName: FrankieBot.DB.ViewModel<M>.Connection
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Connection
+  nameWithType: ViewModel<M>.Connection
+  nameWithType.vb: ViewModel(Of M).Connection
+- uid: FrankieBot.DB.ViewModel`1.Connection*
+  name: Connection
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Connection_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.Connection
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.Connection
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Connection
+  nameWithType: ViewModel<M>.Connection
+  nameWithType.vb: ViewModel(Of M).Connection
+- uid: FrankieBot.DB.ViewModel`1.Create
+  name: Create()
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Create
+  commentId: M:FrankieBot.DB.ViewModel`1.Create
+  fullName: FrankieBot.DB.ViewModel<M>.Create()
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Create()
+  nameWithType: ViewModel<M>.Create()
+  nameWithType.vb: ViewModel(Of M).Create()
+- uid: FrankieBot.DB.ViewModel`1.Create*
+  name: Create
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Create_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.Create
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.Create
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Create
+  nameWithType: ViewModel<M>.Create
+  nameWithType.vb: ViewModel(Of M).Create
+- uid: FrankieBot.DB.ViewModel`1.Create``1(FrankieBot.DB.DBConnection)
+  name: Create<T>(DBConnection)
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Create__1_FrankieBot_DB_DBConnection_
+  commentId: M:FrankieBot.DB.ViewModel`1.Create``1(FrankieBot.DB.DBConnection)
+  name.vb: Create(Of T)(DBConnection)
+  fullName: FrankieBot.DB.ViewModel<M>.Create<T>(FrankieBot.DB.DBConnection)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Create(Of T)(FrankieBot.DB.DBConnection)
+  nameWithType: ViewModel<M>.Create<T>(DBConnection)
+  nameWithType.vb: ViewModel(Of M).Create(Of T)(DBConnection)
+- uid: FrankieBot.DB.ViewModel`1.Delete
+  name: Delete()
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Delete
+  commentId: M:FrankieBot.DB.ViewModel`1.Delete
+  fullName: FrankieBot.DB.ViewModel<M>.Delete()
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Delete()
+  nameWithType: ViewModel<M>.Delete()
+  nameWithType.vb: ViewModel(Of M).Delete()
+- uid: FrankieBot.DB.ViewModel`1.Delete*
+  name: Delete
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Delete_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.Delete
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.Delete
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Delete
+  nameWithType: ViewModel<M>.Delete
+  nameWithType.vb: ViewModel(Of M).Delete
+- uid: FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  name: Find(DBConnection, Func<M, Boolean>)
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__
+  commentId: M:FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  name.vb: Find(DBConnection, Func(Of M, Boolean))
+  fullName: FrankieBot.DB.ViewModel<M>.Find(FrankieBot.DB.DBConnection, System.Func<M, System.Boolean>)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Find(FrankieBot.DB.DBConnection, System.Func(Of M, System.Boolean))
+  nameWithType: ViewModel<M>.Find(DBConnection, Func<M, Boolean>)
+  nameWithType.vb: ViewModel(Of M).Find(DBConnection, Func(Of M, Boolean))
+- uid: FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Int32)
+  name: Find(DBConnection, Int32)
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Int32_
+  commentId: M:FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Int32)
+  fullName: FrankieBot.DB.ViewModel<M>.Find(FrankieBot.DB.DBConnection, System.Int32)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Find(FrankieBot.DB.DBConnection, System.Int32)
+  nameWithType: ViewModel<M>.Find(DBConnection, Int32)
+  nameWithType.vb: ViewModel(Of M).Find(DBConnection, Int32)
+- uid: FrankieBot.DB.ViewModel`1.Find*
+  name: Find
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Find_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.Find
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.Find
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Find
+  nameWithType: ViewModel<M>.Find
+  nameWithType.vb: ViewModel(Of M).Find
+- uid: FrankieBot.DB.ViewModel`1.FindOne(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  name: FindOne(DBConnection, Func<M, Boolean>)
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_FindOne_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__
+  commentId: M:FrankieBot.DB.ViewModel`1.FindOne(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  name.vb: FindOne(DBConnection, Func(Of M, Boolean))
+  fullName: FrankieBot.DB.ViewModel<M>.FindOne(FrankieBot.DB.DBConnection, System.Func<M, System.Boolean>)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).FindOne(FrankieBot.DB.DBConnection, System.Func(Of M, System.Boolean))
+  nameWithType: ViewModel<M>.FindOne(DBConnection, Func<M, Boolean>)
+  nameWithType.vb: ViewModel(Of M).FindOne(DBConnection, Func(Of M, Boolean))
+- uid: FrankieBot.DB.ViewModel`1.FindOne*
+  name: FindOne
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_FindOne_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.FindOne
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.FindOne
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).FindOne
+  nameWithType: ViewModel<M>.FindOne
+  nameWithType.vb: ViewModel(Of M).FindOne
+- uid: FrankieBot.DB.ViewModel`1.ID
+  name: ID
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_ID
+  commentId: P:FrankieBot.DB.ViewModel`1.ID
+  fullName: FrankieBot.DB.ViewModel<M>.ID
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).ID
+  nameWithType: ViewModel<M>.ID
+  nameWithType.vb: ViewModel(Of M).ID
+- uid: FrankieBot.DB.ViewModel`1.ID*
+  name: ID
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_ID_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.ID
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.ID
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).ID
+  nameWithType: ViewModel<M>.ID
+  nameWithType.vb: ViewModel(Of M).ID
+- uid: FrankieBot.DB.ViewModel`1.Initialize
+  name: Initialize()
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Initialize
+  commentId: M:FrankieBot.DB.ViewModel`1.Initialize
+  fullName: FrankieBot.DB.ViewModel<M>.Initialize()
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Initialize()
+  nameWithType: ViewModel<M>.Initialize()
+  nameWithType.vb: ViewModel(Of M).Initialize()
+- uid: FrankieBot.DB.ViewModel`1.Initialize*
+  name: Initialize
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Initialize_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.Initialize
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.Initialize
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Initialize
+  nameWithType: ViewModel<M>.Initialize
+  nameWithType.vb: ViewModel(Of M).Initialize
+- uid: FrankieBot.DB.ViewModel`1.IViewModel#Model
+  name: IViewModel.Model
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_IViewModel_Model
+  commentId: P:FrankieBot.DB.ViewModel`1.IViewModel#Model
+  fullName: FrankieBot.DB.ViewModel<M>.IViewModel.Model
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).IViewModel.Model
+  nameWithType: ViewModel<M>.IViewModel.Model
+  nameWithType.vb: ViewModel(Of M).IViewModel.Model
+- uid: FrankieBot.DB.ViewModel`1.IViewModel#Model*
+  name: IViewModel.Model
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_IViewModel_Model_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.IViewModel#Model
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.IViewModel.Model
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).IViewModel.Model
+  nameWithType: ViewModel<M>.IViewModel.Model
+  nameWithType.vb: ViewModel(Of M).IViewModel.Model
+- uid: FrankieBot.DB.ViewModel`1.Model
+  name: Model
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Model
+  commentId: P:FrankieBot.DB.ViewModel`1.Model
+  fullName: FrankieBot.DB.ViewModel<M>.Model
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Model
+  nameWithType: ViewModel<M>.Model
+  nameWithType.vb: ViewModel(Of M).Model
+- uid: FrankieBot.DB.ViewModel`1.Model*
+  name: Model
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Model_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.Model
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.Model
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Model
+  nameWithType: ViewModel<M>.Model
+  nameWithType.vb: ViewModel(Of M).Model
+- uid: FrankieBot.DB.ViewModel`1.Save
+  name: Save()
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Save
+  commentId: M:FrankieBot.DB.ViewModel`1.Save
+  fullName: FrankieBot.DB.ViewModel<M>.Save()
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Save()
+  nameWithType: ViewModel<M>.Save()
+  nameWithType.vb: ViewModel(Of M).Save()
+- uid: FrankieBot.DB.ViewModel`1.Save*
+  name: Save
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Save_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.Save
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.Save
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Save
+  nameWithType: ViewModel<M>.Save
+  nameWithType.vb: ViewModel(Of M).Save
+- uid: FrankieBot.DB.ViewModelContainer`1
+  name: ViewModelContainer<T>
+  href: api/FrankieBot.DB.ViewModelContainer-1.html
+  commentId: T:FrankieBot.DB.ViewModelContainer`1
+  name.vb: ViewModelContainer(Of T)
+  fullName: FrankieBot.DB.ViewModelContainer<T>
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T)
+  nameWithType: ViewModelContainer<T>
+  nameWithType.vb: ViewModelContainer(Of T)
+- uid: FrankieBot.DB.ViewModelContainer`1.As*
+  name: As
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_As_
+  commentId: Overload:FrankieBot.DB.ViewModelContainer`1.As
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModelContainer<T>.As
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).As
+  nameWithType: ViewModelContainer<T>.As
+  nameWithType.vb: ViewModelContainer(Of T).As
+- uid: FrankieBot.DB.ViewModelContainer`1.As``1
+  name: As<K>()
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_As__1
+  commentId: M:FrankieBot.DB.ViewModelContainer`1.As``1
+  name.vb: As(Of K)()
+  fullName: FrankieBot.DB.ViewModelContainer<T>.As<K>()
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).As(Of K)()
+  nameWithType: ViewModelContainer<T>.As<K>()
+  nameWithType.vb: ViewModelContainer(Of T).As(Of K)()
+- uid: FrankieBot.DB.ViewModelContainer`1.Content
+  name: Content
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_Content
+  commentId: P:FrankieBot.DB.ViewModelContainer`1.Content
+  fullName: FrankieBot.DB.ViewModelContainer<T>.Content
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).Content
+  nameWithType: ViewModelContainer<T>.Content
+  nameWithType.vb: ViewModelContainer(Of T).Content
+- uid: FrankieBot.DB.ViewModelContainer`1.Content*
+  name: Content
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_Content_
+  commentId: Overload:FrankieBot.DB.ViewModelContainer`1.Content
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModelContainer<T>.Content
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).Content
+  nameWithType: ViewModelContainer<T>.Content
+  nameWithType.vb: ViewModelContainer(Of T).Content
+- uid: FrankieBot.DB.ViewModelContainer`1.Delete
+  name: Delete()
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_Delete
+  commentId: M:FrankieBot.DB.ViewModelContainer`1.Delete
+  fullName: FrankieBot.DB.ViewModelContainer<T>.Delete()
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).Delete()
+  nameWithType: ViewModelContainer<T>.Delete()
+  nameWithType.vb: ViewModelContainer(Of T).Delete()
+- uid: FrankieBot.DB.ViewModelContainer`1.Delete*
+  name: Delete
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_Delete_
+  commentId: Overload:FrankieBot.DB.ViewModelContainer`1.Delete
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModelContainer<T>.Delete
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).Delete
+  nameWithType: ViewModelContainer<T>.Delete
+  nameWithType.vb: ViewModelContainer(Of T).Delete
+- uid: FrankieBot.DB.ViewModelContainer`1.Save
+  name: Save()
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_Save
+  commentId: M:FrankieBot.DB.ViewModelContainer`1.Save
+  fullName: FrankieBot.DB.ViewModelContainer<T>.Save()
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).Save()
+  nameWithType: ViewModelContainer<T>.Save()
+  nameWithType.vb: ViewModelContainer(Of T).Save()
+- uid: FrankieBot.DB.ViewModelContainer`1.Save*
+  name: Save
+  href: api/FrankieBot.DB.ViewModelContainer-1.html#FrankieBot_DB_ViewModelContainer_1_Save_
+  commentId: Overload:FrankieBot.DB.ViewModelContainer`1.Save
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModelContainer<T>.Save
+  fullName.vb: FrankieBot.DB.ViewModelContainer(Of T).Save
+  nameWithType: ViewModelContainer<T>.Save
+  nameWithType.vb: ViewModelContainer(Of T).Save
 - uid: FrankieBot.Discord
   name: FrankieBot.Discord
   href: api/FrankieBot.Discord.html
@@ -785,6 +811,25 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Modules.QuoteModule.DataBaseService
   nameWithType: QuoteModule.DataBaseService
+- uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(Discord.IUser)
+  name: ListQuotes(IUser)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_ListQuotes_Discord_IUser_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.ListQuotes(Discord.IUser)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(Discord.IUser)
+  nameWithType: QuoteModule.ListQuotes(IUser)
+- uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(System.Int32)
+  name: ListQuotes(Int32)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_ListQuotes_System_Int32_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.ListQuotes(System.Int32)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(System.Int32)
+  nameWithType: QuoteModule.ListQuotes(Int32)
+- uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes*
+  name: ListQuotes
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_ListQuotes_
+  commentId: Overload:FrankieBot.Discord.Modules.QuoteModule.ListQuotes
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Modules.QuoteModule.ListQuotes
+  nameWithType: QuoteModule.ListQuotes
 - uid: FrankieBot.Discord.Modules.QuoteModule.Quote
   name: Quote()
   href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_Quote
@@ -868,12 +913,12 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.DataBaseService.AddQuote
   nameWithType: DataBaseService.AddQuote
-- uid: FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext,System.UInt64)
-  name: GetQuote(SocketCommandContext, UInt64)
-  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_GetQuote_Discord_Commands_SocketCommandContext_System_UInt64_
-  commentId: M:FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext,System.UInt64)
-  fullName: FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext, System.UInt64)
-  nameWithType: DataBaseService.GetQuote(SocketCommandContext, UInt64)
+- uid: FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext,System.Int32)
+  name: GetQuote(SocketCommandContext, Int32)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_GetQuote_Discord_Commands_SocketCommandContext_System_Int32_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext,System.Int32)
+  fullName: FrankieBot.Discord.Services.DataBaseService.GetQuote(Discord.Commands.SocketCommandContext, System.Int32)
+  nameWithType: DataBaseService.GetQuote(SocketCommandContext, Int32)
 - uid: FrankieBot.Discord.Services.DataBaseService.GetQuote*
   name: GetQuote
   href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_GetQuote_
@@ -881,12 +926,31 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.DataBaseService.GetQuote
   nameWithType: DataBaseService.GetQuote
+- uid: FrankieBot.Discord.Services.DataBaseService.ListQuotes(Discord.Commands.SocketCommandContext,Discord.IUser)
+  name: ListQuotes(SocketCommandContext, IUser)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_ListQuotes_Discord_Commands_SocketCommandContext_Discord_IUser_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.ListQuotes(Discord.Commands.SocketCommandContext,Discord.IUser)
+  fullName: FrankieBot.Discord.Services.DataBaseService.ListQuotes(Discord.Commands.SocketCommandContext, Discord.IUser)
+  nameWithType: DataBaseService.ListQuotes(SocketCommandContext, IUser)
+- uid: FrankieBot.Discord.Services.DataBaseService.ListQuotes*
+  name: ListQuotes
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_ListQuotes_
+  commentId: Overload:FrankieBot.Discord.Services.DataBaseService.ListQuotes
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.DataBaseService.ListQuotes
+  nameWithType: DataBaseService.ListQuotes
 - uid: FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext,FrankieBot.DB.ViewModel.Quote)
   name: PostQuote(SocketCommandContext, Quote)
   href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_PostQuote_Discord_Commands_SocketCommandContext_FrankieBot_DB_ViewModel_Quote_
   commentId: M:FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext,FrankieBot.DB.ViewModel.Quote)
   fullName: FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext, FrankieBot.DB.ViewModel.Quote)
   nameWithType: DataBaseService.PostQuote(SocketCommandContext, Quote)
+- uid: FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext,System.Int32)
+  name: PostQuote(SocketCommandContext, Int32)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_PostQuote_Discord_Commands_SocketCommandContext_System_Int32_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext,System.Int32)
+  fullName: FrankieBot.Discord.Services.DataBaseService.PostQuote(Discord.Commands.SocketCommandContext, System.Int32)
+  nameWithType: DataBaseService.PostQuote(SocketCommandContext, Int32)
 - uid: FrankieBot.Discord.Services.DataBaseService.PostQuote*
   name: PostQuote
   href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_PostQuote_
@@ -894,6 +958,22 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.DataBaseService.PostQuote
   nameWithType: DataBaseService.PostQuote
+- uid: FrankieBot.Discord.Services.DataBaseService.PostQuoteList(Discord.Commands.SocketCommandContext,System.Collections.Generic.List{FrankieBot.DB.ViewModel.Quote})
+  name: PostQuoteList(SocketCommandContext, List<Quote>)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_PostQuoteList_Discord_Commands_SocketCommandContext_System_Collections_Generic_List_FrankieBot_DB_ViewModel_Quote__
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.PostQuoteList(Discord.Commands.SocketCommandContext,System.Collections.Generic.List{FrankieBot.DB.ViewModel.Quote})
+  name.vb: PostQuoteList(SocketCommandContext, List(Of Quote))
+  fullName: FrankieBot.Discord.Services.DataBaseService.PostQuoteList(Discord.Commands.SocketCommandContext, System.Collections.Generic.List<FrankieBot.DB.ViewModel.Quote>)
+  fullName.vb: FrankieBot.Discord.Services.DataBaseService.PostQuoteList(Discord.Commands.SocketCommandContext, System.Collections.Generic.List(Of FrankieBot.DB.ViewModel.Quote))
+  nameWithType: DataBaseService.PostQuoteList(SocketCommandContext, List<Quote>)
+  nameWithType.vb: DataBaseService.PostQuoteList(SocketCommandContext, List(Of Quote))
+- uid: FrankieBot.Discord.Services.DataBaseService.PostQuoteList*
+  name: PostQuoteList
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_PostQuoteList_
+  commentId: Overload:FrankieBot.Discord.Services.DataBaseService.PostQuoteList
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.DataBaseService.PostQuoteList
+  nameWithType: DataBaseService.PostQuoteList
 - uid: FrankieBot.Discord.Services.DataBaseService.QuoteAdded
   name: QuoteAdded
   href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_QuoteAdded

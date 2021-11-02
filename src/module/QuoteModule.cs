@@ -90,5 +90,16 @@ namespace FrankieBot.Discord.Modules
 		{
 			await DataBaseService.ListQuotes(Context, user);
 		}
+
+		/// <summary>
+		/// Lists the quote with the specified ID
+		/// </summary>
+		/// <param name="quoteID"></param>
+		/// <returns></returns>
+		[Command("list")]
+		public async Task ListQuotes(int quoteID)
+		{
+			await DataBaseService.PostQuote(Context, quoteID);
+		}
 	}
 }

@@ -79,13 +79,50 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="FrankieBot.DB.ViewModel.ViewModel-1.html">ViewModel</a>&lt;<a class="xref" href="FrankieBot.DB.Model.Quote.html">Quote</a>&gt;</div>
+    <div class="level1"><a class="xref" href="FrankieBot.DB.ViewModel-1.html">ViewModel</a>&lt;<a class="xref" href="FrankieBot.DB.Model.Quote.html">Quote</a>&gt;</div>
     <div class="level2"><span class="xref">Quote</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">IViewModel</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="FrankieBot.DB.ViewModel.ViewModel-1.html#FrankieBot_DB_ViewModel_ViewModel_1_Model">ViewModel&lt;Quote&gt;.Model</a>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_ID">ViewModel&lt;Quote&gt;.ID</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Connection">ViewModel&lt;Quote&gt;.Connection</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Model">ViewModel&lt;Quote&gt;.Model</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_IViewModel_Model">ViewModel&lt;Quote&gt;.IViewModel.Model</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Create__1_FrankieBot_DB_DBConnection_">ViewModel&lt;Quote&gt;.Create&lt;T&gt;(DBConnection)</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_FindOne_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__">ViewModel&lt;Quote&gt;.FindOne(DBConnection, Func&lt;Quote, Boolean&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Int32_">ViewModel&lt;Quote&gt;.Find(DBConnection, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__">ViewModel&lt;Quote&gt;.Find(DBConnection, Func&lt;Quote, Boolean&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_As__1">ViewModel&lt;Quote&gt;.As&lt;K&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Create">ViewModel&lt;Quote&gt;.Create()</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Save">ViewModel&lt;Quote&gt;.Save()</a>
+    </div>
+    <div>
+      <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Delete">ViewModel&lt;Quote&gt;.Delete()</a>
     </div>
     <div>
       <span class="xref">System.Object.Equals(System.Object)</span>
@@ -113,25 +150,41 @@
   <h6><strong>Assembly</strong>: frankie-bot.dll</h6>
   <h5 id="FrankieBot_DB_ViewModel_Quote_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Quote : ViewModel&lt;Quote&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class Quote : ViewModel&lt;Quote&gt;, IViewModel</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote__ctor_Discord_WebSocket_SocketGuild_FrankieBot_DB_Model_Quote_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.%23ctor(Discord.WebSocket.SocketGuild%2CFrankieBot.DB.Model.Quote)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote__ctor.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/Quote.cs/#L23">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L20">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_Quote__ctor_" data-uid="FrankieBot.DB.ViewModel.Quote.#ctor*"></a>
-  <h4 id="FrankieBot_DB_ViewModel_Quote__ctor_Discord_WebSocket_SocketGuild_FrankieBot_DB_Model_Quote_" data-uid="FrankieBot.DB.ViewModel.Quote.#ctor(Discord.WebSocket.SocketGuild,FrankieBot.DB.Model.Quote)">Quote(SocketGuild, Quote)</h4>
-  <div class="markdown level1 summary"><p>Constructs a new Quote</p>
+  <h4 id="FrankieBot_DB_ViewModel_Quote__ctor" data-uid="FrankieBot.DB.ViewModel.Quote.#ctor">Quote()</h4>
+  <div class="markdown level1 summary"><p>Creates a new Quote instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Quote(SocketGuild guild, Quote model)</code></pre>
+    <pre><code class="lang-csharp hljs">public Quote()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote__ctor_FrankieBot_DB_DBConnection_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.%23ctor(FrankieBot.DB.DBConnection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L27">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_ViewModel_Quote__ctor_" data-uid="FrankieBot.DB.ViewModel.Quote.#ctor*"></a>
+  <h4 id="FrankieBot_DB_ViewModel_Quote__ctor_FrankieBot_DB_DBConnection_" data-uid="FrankieBot.DB.ViewModel.Quote.#ctor(FrankieBot.DB.DBConnection)">Quote(DBConnection)</h4>
+  <div class="markdown level1 summary"><p>Creates a new Quote instance</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Quote(DBConnection connection)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -144,13 +197,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Discord.WebSocket.SocketGuild</span></td>
-        <td><span class="parametername">guild</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="FrankieBot.DB.Model.Quote.html">Quote</a></td>
-        <td><span class="parametername">model</span></td>
+        <td><a class="xref" href="FrankieBot.DB.DBConnection.html">DBConnection</a></td>
+        <td><span class="parametername">connection</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -159,10 +207,41 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_Content.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.Content%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_Author.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.Author%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/Quote.cs/#L45">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L36">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_ViewModel_Quote_Author_" data-uid="FrankieBot.DB.ViewModel.Quote.Author*"></a>
+  <h4 id="FrankieBot_DB_ViewModel_Quote_Author" data-uid="FrankieBot.DB.ViewModel.Quote.Author">Author</h4>
+  <div class="markdown level1 summary"><p>User whom the quote is attributed to</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IUser Author { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Discord.IUser</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_Content.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.Content%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L71">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_Quote_Content_" data-uid="FrankieBot.DB.ViewModel.Quote.Content*"></a>
   <h4 id="FrankieBot_DB_ViewModel_Quote_Content" data-uid="FrankieBot.DB.ViewModel.Quote.Content">Content</h4>
@@ -171,7 +250,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string Content { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string Content { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -190,10 +269,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_QuoteTimeStamp.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.QuoteTimeStamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_QuoteTimeStamp.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.QuoteTimeStamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/Quote.cs/#L55">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L89">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_Quote_QuoteTimeStamp_" data-uid="FrankieBot.DB.ViewModel.Quote.QuoteTimeStamp*"></a>
   <h4 id="FrankieBot_DB_ViewModel_Quote_QuoteTimeStamp" data-uid="FrankieBot.DB.ViewModel.Quote.QuoteTimeStamp">QuoteTimeStamp</h4>
@@ -202,7 +281,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DateTime QuoteTimeStamp { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public DateTime QuoteTimeStamp { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -221,10 +300,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_Recorder.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.Recorder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_Recorder.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.Recorder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/Quote.cs/#L40">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L54">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_Quote_Recorder_" data-uid="FrankieBot.DB.ViewModel.Quote.Recorder*"></a>
   <h4 id="FrankieBot_DB_ViewModel_Quote_Recorder" data-uid="FrankieBot.DB.ViewModel.Quote.Recorder">Recorder</h4>
@@ -233,7 +312,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IUser Recorder { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public IUser Recorder { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -252,10 +331,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_RecordTimeStamp.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.RecordTimeStamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_RecordTimeStamp.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.RecordTimeStamp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/Quote.cs/#L50">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L80">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_Quote_RecordTimeStamp_" data-uid="FrankieBot.DB.ViewModel.Quote.RecordTimeStamp*"></a>
   <h4 id="FrankieBot_DB_ViewModel_Quote_RecordTimeStamp" data-uid="FrankieBot.DB.ViewModel.Quote.RecordTimeStamp">RecordTimeStamp</h4>
@@ -264,7 +343,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DateTime RecordTimeStamp { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public DateTime RecordTimeStamp { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -281,37 +360,31 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="methods">Methods
+  </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_User.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.User%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote_Initialize.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/Quote.cs/#L34">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L99">View Source</a>
   </span>
-  <a id="FrankieBot_DB_ViewModel_Quote_User_" data-uid="FrankieBot.DB.ViewModel.Quote.User*"></a>
-  <h4 id="FrankieBot_DB_ViewModel_Quote_User" data-uid="FrankieBot.DB.ViewModel.Quote.User">User</h4>
-  <div class="markdown level1 summary"><p>User whom the quote is attributed to</p>
+  <a id="FrankieBot_DB_ViewModel_Quote_Initialize_" data-uid="FrankieBot.DB.ViewModel.Quote.Initialize*"></a>
+  <h4 id="FrankieBot_DB_ViewModel_Quote_Initialize" data-uid="FrankieBot.DB.ViewModel.Quote.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>Initializes this Quote instance, populating complex fields from
+the simple data in the underlying model</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public IUser User { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Discord.IUser</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">FrankieBot.DB.ViewModel&lt;FrankieBot.DB.Model.Quote&gt;.Initialize()</span></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">IViewModel</span>
+  </div>
 </article>
           </div>
           
@@ -320,10 +393,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_ViewModel_Quote.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.Quote%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/Quote.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/viewmodel/Quote.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

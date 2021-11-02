@@ -8,14 +8,6 @@ namespace FrankieBot.DB.Model
 	[Table("options")]
 	public class Option : DBModel
 	{
-		/*
-		/// <summary>
-		/// Unique option ID
-		/// </summary>
-		[PrimaryKey, AutoIncrement]
-		public int ID { get; set; }
-		*/
-
 		/// <summary>
 		/// Option Name
 		/// </summary>

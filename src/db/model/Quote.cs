@@ -20,17 +20,6 @@ namespace FrankieBot.DB.Model
 		{
 
 		}
-		/*
-		/// <summary>
-		/// Constructs a new Quote
-		/// </summary>
-		/// <param name="connection"></param>
-		/// <returns></returns>
-		public Quote(DBConnection connection) : base(connection)
-		{
-
-		}
-		*/
 
 		/// <summary>
 		/// The quote's content

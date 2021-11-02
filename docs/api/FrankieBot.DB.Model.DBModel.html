@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class ViewModel&lt;T&gt;
+    <title>Class DBModel
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class ViewModel&lt;T&gt;
+    <meta name="title" content="Class DBModel
    ">
     <meta name="generator" content="docfx 2.58.0.0">
     
@@ -68,20 +68,21 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="FrankieBot.DB.ViewModel.ViewModel`1">
+            <article class="content wrap" id="_content" data-uid="FrankieBot.DB.Model.DBModel">
   
   
-  <h1 id="FrankieBot_DB_ViewModel_ViewModel_1" data-uid="FrankieBot.DB.ViewModel.ViewModel`1" class="text-break">Class ViewModel&lt;T&gt;
+  <h1 id="FrankieBot_DB_Model_DBModel" data-uid="FrankieBot.DB.Model.DBModel" class="text-break">Class DBModel
   </h1>
-  <div class="markdown level0 summary"><p>Abstract ViewModel definition</p>
+  <div class="markdown level0 summary"><p>Model representing a database record</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">ViewModel&lt;T&gt;</span></div>
-      <div class="level2"><a class="xref" href="FrankieBot.DB.ViewModel.Quote.html">Quote</a></div>
-      <div class="level2"><a class="xref" href="FrankieBot.DB.ViewModel.Server.html">Server</a></div>
+    <div class="level1"><span class="xref">DBModel</span></div>
+      <div class="level2"><a class="xref" href="FrankieBot.DB.Model.Option.html">Option</a></div>
+      <div class="level2"><a class="xref" href="FrankieBot.DB.Model.Quote.html">Quote</a></div>
+      <div class="level2"><a class="xref" href="FrankieBot.DB.Model.Server.html">Server</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -107,86 +108,49 @@
       <span class="xref">System.Object.ToString()</span>
     </div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="FrankieBot.DB.ViewModel.html">FrankieBot.DB.ViewModel</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FrankieBot.DB.Model.html">FrankieBot.DB.Model</a></h6>
   <h6><strong>Assembly</strong>: frankie-bot.dll</h6>
-  <h5 id="FrankieBot_DB_ViewModel_ViewModel_1_syntax">Syntax</h5>
+  <h5 id="FrankieBot_DB_Model_DBModel_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class ViewModel&lt;T&gt;
-    where T : DBModel</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class DBModel</code></pre>
   </div>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="FrankieBot_DB_ViewModel_ViewModel_1_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>A ViewModel lies between the main application (the &quot;View&quot;), and the
-underlying data (the &quot;Model&quot;). The ViewModel helps to translate data
-from the Model into useful information that can be consumed by the View,
-and translates user actions from the View into database operations in Model-space.</p>
-</div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_ViewModel_1__ctor__0_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.ViewModel%601.%23ctor(%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_Model_DBModel__ctor.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.DBModel.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/ViewModel.cs/#L19">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/orm/DBModel.cs/#L13">View Source</a>
   </span>
-  <a id="FrankieBot_DB_ViewModel_ViewModel_1__ctor_" data-uid="FrankieBot.DB.ViewModel.ViewModel`1.#ctor*"></a>
-  <h4 id="FrankieBot_DB_ViewModel_ViewModel_1__ctor__0_" data-uid="FrankieBot.DB.ViewModel.ViewModel`1.#ctor(`0)">ViewModel(T)</h4>
-  <div class="markdown level1 summary"><p>Constructs a new ViewModel</p>
+  <a id="FrankieBot_DB_Model_DBModel__ctor_" data-uid="FrankieBot.DB.Model.DBModel.#ctor*"></a>
+  <h4 id="FrankieBot_DB_Model_DBModel__ctor" data-uid="FrankieBot.DB.Model.DBModel.#ctor">DBModel()</h4>
+  <div class="markdown level1 summary"><p>Constructs a new DBModel object</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ViewModel(T model)</code></pre>
+    <pre><code class="lang-csharp hljs">protected DBModel()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">T</span></td>
-        <td><span class="parametername">model</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_ViewModel_1_Model.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.ViewModel%601.Model%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_Model_DBModel_ID.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.DBModel.ID%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/ViewModel.cs/#L28">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/orm/DBModel.cs/#L19">View Source</a>
   </span>
-  <a id="FrankieBot_DB_ViewModel_ViewModel_1_Model_" data-uid="FrankieBot.DB.ViewModel.ViewModel`1.Model*"></a>
-  <h4 id="FrankieBot_DB_ViewModel_ViewModel_1_Model" data-uid="FrankieBot.DB.ViewModel.ViewModel`1.Model">Model</h4>
-  <div class="markdown level1 summary"><p>The underlying Model managed by this ViewModel</p>
+  <a id="FrankieBot_DB_Model_DBModel_ID_" data-uid="FrankieBot.DB.Model.DBModel.ID*"></a>
+  <h4 id="FrankieBot_DB_Model_DBModel_ID" data-uid="FrankieBot.DB.Model.DBModel.ID">ID</h4>
+  <div class="markdown level1 summary"><p>Unique ID</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public T Model { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">[PrimaryKey]
+[AutoIncrement]
+public virtual int ID { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -198,7 +162,7 @@ and translates user actions from the View into database operations in Model-spac
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">T</span></td>
+        <td><span class="xref">System.Int32</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -211,10 +175,10 @@ and translates user actions from the View into database operations in Model-spac
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/citrus-thunder/frankie-bot/new/dev/apiSpec/new?filename=FrankieBot_DB_ViewModel_ViewModel_1.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel.ViewModel%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/new/db-updates/apiSpec/new?filename=FrankieBot_DB_Model_DBModel.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.DBModel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/dev/src/core/db/viewmodel/ViewModel.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/db-updates/src/db/orm/DBModel.cs/#L8" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -14,6 +14,16 @@ namespace FrankieBot.DB.ViewModel
 	{
 		private SocketGuild _guild;
 
+		/// <summary>
+		/// Creates a new Quote instance
+		/// </summary>
+		public Quote() { }
+
+		/// <summary>
+		/// Creates a new Quote instance
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <returns></returns>
 		public Quote(DBConnection connection) : base(connection)
 		{
 			
@@ -82,7 +92,11 @@ namespace FrankieBot.DB.ViewModel
 			set => Model.RecordTimeStamp = value;
 		}
 
-		protected override void Initialize()
+		/// <summary>
+		/// Initializes this Quote instance, populating complex fields from
+		/// the simple data in the underlying model
+		/// </summary>
+		public override void Initialize()
 		{
 			_guild = Connection.Context.Guild;
 			Author = _guild.GetUser(ulong.Parse(Model.AuthorID));

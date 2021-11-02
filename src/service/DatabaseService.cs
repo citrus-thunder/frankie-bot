@@ -146,9 +146,8 @@ namespace FrankieBot.Discord.Services
 				using (var connection = new DBConnection(context, GetServerDBFilePath(c.Guild)))
 				{
 					var userID = user.Id.ToString();
-					//var quotes = DBContainer<Quote>.Find(connection, (quote) => quote.AuthorID == userID);
-					var quotes = Quote.Find(connection, (quote) => quote.AuthorID == userID).ToConcrete<Quote>();
-					quoteList = new List<Quote>(quotes.Content);
+					var quotes = Quote.Find(connection, (quote) => quote.AuthorID == userID).As<Quote>();
+					quoteList = quotes.Content;
 				}
 
 				if (quoteList.Count < 1)
@@ -157,12 +156,7 @@ namespace FrankieBot.Discord.Services
 				}
 				else
 				{
-					var quotes = new List<VModel.Quote>();
-					foreach (var quote in quoteList)
-					{
-						quotes.Add(new VModel.Quote(context.Guild, quote));
-					}
-					await PostQuoteList(context, quotes);
+					await PostQuoteList(context, quoteList);
 				}
 			});
 		}
@@ -173,14 +167,26 @@ namespace FrankieBot.Discord.Services
 		/// <param name="context"></param>
 		/// <param name="quote"></param>
 		/// <returns></returns>
-		public async Task PostQuote(SocketCommandContext context, VModel.Quote quote)
+		public async Task PostQuote(SocketCommandContext context, Quote quote)
 		{
 			var eb = new EmbedBuilder()
-				.WithAuthor(quote.User)
+				.WithAuthor(quote.Author)
 				.WithDescription(quote.Content)
-				.WithTimestamp(new DateTimeOffset(quote.QuoteTimeStamp.ToUniversalTime()));
+				.WithTimestamp(new DateTimeOffset(quote.QuoteTimeStamp.ToLocalTime()));
 
 			await context.Channel.SendMessageAsync(embed: eb.Build());
+		}
+
+		/// <summary>
+		/// Posts the quote with the specified ID
+		/// </summary>
+		/// <param name="context"></param>
+		/// <param name="quoteID"></param>
+		/// <returns></returns>
+		public async Task PostQuote(SocketCommandContext context, int quoteID)
+		{
+			var quote = await GetQuote(context, quoteID);
+			await PostQuote(context, quote);
 		}
 
 		/// <summary>
@@ -189,17 +195,18 @@ namespace FrankieBot.Discord.Services
 		/// <param name="context"></param>
 		/// <param name="quotes"></param>
 		/// <returns></returns>
-		public async Task PostQuoteList(SocketCommandContext context, List<VModel.Quote> quotes)
+		public async Task PostQuoteList(SocketCommandContext context, List<Quote> quotes)
 		{
 			var eb = new EmbedBuilder()
-				.WithTitle($"Quotes by {quotes[0].User.Username}");
+				.WithTitle($"Quotes by {quotes[0].Author.Username}")
+				.WithColor(0x00c88c);
 			
 			var fields = new List<EmbedFieldBuilder>();
 			foreach (var quote in quotes)
 			{
 				var newField = new EmbedFieldBuilder()
-					.WithName(quote.Content)
-					.WithValue(quote.QuoteTimeStamp.ToString("d MMMM yyyy"));
+					.WithName($"[#{quote.ID}]: {new DateTimeOffset(quote.QuoteTimeStamp.ToLocalTime()).ToString("d/M/yyyy hh:mm tt K")}")
+					.WithValue($"{quote.Content}");
 				fields.Add(newField);
 			}
 			eb.WithFields(fields);
@@ -213,16 +220,17 @@ namespace FrankieBot.Discord.Services
 		/// <param name="context"></param>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		public async Task<VModel.Quote> GetQuote(SocketCommandContext context, ulong id)
+		public async Task<Quote> GetQuote(SocketCommandContext context, int id)
 		{
 			return await Task.Run(() =>
 			{
 				Quote quote = null;
-				using (var connection = new DBConnection(GetServerDBFilePath(context.Guild)))
+				using (var connection = new DBConnection(context, GetServerDBFilePath(context.Guild)))
 				{
-					quote = connection.Find<Quote>(id);
+					var quoteID = id.ToString();
+					quote = Quote.Find(connection, id).As<Quote>();
 				}
-				return new VModel.Quote(context.Guild, quote);
+				return quote;
 			});
 		}
 
@@ -236,7 +244,7 @@ namespace FrankieBot.Discord.Services
 		private async void OnQuoteAdded(object sender, QuoteEventArgs q)
 		{
 			await q.Context.Channel.SendMessageAsync("New quote added!");
-			await PostQuote(q.Context, new VModel.Quote(q.Context.Guild, q.Quote));
+			await PostQuote(q.Context, q.Quote);
 		}
 	}
 }

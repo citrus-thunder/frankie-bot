@@ -19,6 +19,7 @@ namespace FrankieBot.DB
 		/// <summary>
 		/// Constructs a new DBConnection
 		/// </summary>
+		/// <param name="context">Command context which created this connection</param>
 		/// <param name="path">Path to the target database</param>
 		/// <returns></returns>
 		public DBConnection(SocketCommandContext context, string path) : base(path)
@@ -26,40 +27,10 @@ namespace FrankieBot.DB
 			Context = context;	
 		}
 
+		/// <summary>
+		/// Command context which created the connection
+		/// </summary>
+		/// <value></value>
 		public SocketCommandContext Context { get; private set; }
-		/*
-		/// <summary>
-		/// Finds a DBModel of the matching type with the matching ID
-		/// </summary>
-		/// <param name="id"></param>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public T Find<T>(ulong id) where T : DBModel, new()
-		{
-			return Table<T>().Where(m => ulong.Parse(m.ID) == id).FirstOrDefault();
-		}
-
-		/// <summary>
-		/// Finds DBModels of the matching type using the provided expression
-		/// </summary>
-		/// <param name="expression"></param>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public new DBContainer<T> Find<T>(Expression<Func<T, bool>> expression) where T : DBModel, new()
-		{
-			return DBContainer<T>.Find(this, expression);
-		}
-
-		/// <summary>
-		/// Finds a single DBModel of the matching type using the given expression
-		/// </summary>
-		/// <param name="expression"></param>
-		/// <typeparam name="T"></typeparam>
-		/// <returns></returns>
-		public T FindOne<T>(Expression<Func<T, bool>> expression) where T : DBModel, new()
-		{
-			return Table<T>().Where(expression).FirstOrDefault();
-		}
-		*/
 	}
 }
