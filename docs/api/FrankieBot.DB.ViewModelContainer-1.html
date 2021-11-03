@@ -80,6 +80,7 @@
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ViewModelContainer&lt;T&gt;</span></div>
+      <div class="level2"><a class="xref" href="FrankieBot.DB.Containers.Options.html">Options</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -171,7 +172,7 @@
   </span>
   <a id="FrankieBot_DB_ViewModelContainer_1_As_" data-uid="FrankieBot.DB.ViewModelContainer`1.As*"></a>
   <h4 id="FrankieBot_DB_ViewModelContainer_1_As__1" data-uid="FrankieBot.DB.ViewModelContainer`1.As``1">As&lt;K&gt;()</h4>
-  <div class="markdown level1 summary"><p>Converts a generic ViewModelContainer to a more concrete equivalent</p>
+  <div class="markdown level1 summary"><p>Converts the ViewModelContainer's contents to more concrete equivalent ViewModels</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -214,7 +215,7 @@
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModelContainer_1_Delete.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModelContainer%601.Delete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModelContainer.cs/#L47">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModelContainer.cs/#L64">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModelContainer_1_Delete_" data-uid="FrankieBot.DB.ViewModelContainer`1.Delete*"></a>
   <h4 id="FrankieBot_DB_ViewModelContainer_1_Delete" data-uid="FrankieBot.DB.ViewModelContainer`1.Delete">Delete()</h4>
@@ -230,7 +231,7 @@
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModelContainer_1_Save.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModelContainer%601.Save%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModelContainer.cs/#L42">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModelContainer.cs/#L59">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModelContainer_1_Save_" data-uid="FrankieBot.DB.ViewModelContainer`1.Save*"></a>
   <h4 id="FrankieBot_DB_ViewModelContainer_1_Save" data-uid="FrankieBot.DB.ViewModelContainer`1.Save">Save()</h4>
@@ -241,6 +242,56 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Save()</code></pre>
   </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModelContainer_1_ToContainer__1.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModelContainer%601.ToContainer%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModelContainer.cs/#L46">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_ViewModelContainer_1_ToContainer_" data-uid="FrankieBot.DB.ViewModelContainer`1.ToContainer*"></a>
+  <h4 id="FrankieBot_DB_ViewModelContainer_1_ToContainer__1" data-uid="FrankieBot.DB.ViewModelContainer`1.ToContainer``1">ToContainer&lt;K&gt;()</h4>
+  <div class="markdown level1 summary"><p>Returns a copy of this container as the specified type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public K ToContainer&lt;K&gt;()
+    where K : ViewModelContainer&lt;T&gt;, new()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">K</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">K</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="FrankieBot_DB_ViewModelContainer_1_ToContainer__1_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Use this to cast a generic container to a more useful user-defined container</p>
+</div>
 </article>
           </div>
           

@@ -80,6 +80,7 @@
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ViewModel&lt;M&gt;</span></div>
+      <div class="level2"><a class="xref" href="FrankieBot.DB.ViewModel.Option.html">Option</a></div>
       <div class="level2"><a class="xref" href="FrankieBot.DB.ViewModel.Quote.html">Quote</a></div>
       <div class="level2"><a class="xref" href="FrankieBot.DB.ViewModel.Server.html">Server</a></div>
   </div>
@@ -339,7 +340,7 @@ the database matching the parameters in the provided expression</p>
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_As__1.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.As%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L176">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L197">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_As_" data-uid="FrankieBot.DB.ViewModel`1.As*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_As__1" data-uid="FrankieBot.DB.ViewModel`1.As``1">As&lt;K&gt;()</h4>
@@ -386,7 +387,7 @@ the database matching the parameters in the provided expression</p>
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Create.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Create%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L200">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L221">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_Create_" data-uid="FrankieBot.DB.ViewModel`1.Create*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_Create" data-uid="FrankieBot.DB.ViewModel`1.Create">Create()</h4>
@@ -403,20 +404,19 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Create__1_FrankieBot_DB_DBConnection_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Create%60%601(FrankieBot.DB.DBConnection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Create_FrankieBot_DB_DBConnection_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Create(FrankieBot.DB.DBConnection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L101">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L100">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_Create_" data-uid="FrankieBot.DB.ViewModel`1.Create*"></a>
-  <h4 id="FrankieBot_DB_ViewModel_1_Create__1_FrankieBot_DB_DBConnection_" data-uid="FrankieBot.DB.ViewModel`1.Create``1(FrankieBot.DB.DBConnection)">Create&lt;T&gt;(DBConnection)</h4>
+  <h4 id="FrankieBot_DB_ViewModel_1_Create_FrankieBot_DB_DBConnection_" data-uid="FrankieBot.DB.ViewModel`1.Create(FrankieBot.DB.DBConnection)">Create(DBConnection)</h4>
   <div class="markdown level1 summary"><p>Creates a new ViewModel</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static T Create&lt;T&gt;(DBConnection connection)
-    where T : ViewModel&lt;M&gt;, new()</code></pre>
+    <pre><code class="lang-csharp hljs">public static ViewModel&lt;M&gt; Create(DBConnection connection)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -445,22 +445,7 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">T</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="typeParameters">Type Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="parametername">T</span></td>
+        <td><a class="xref" href="FrankieBot.DB.ViewModel-1.html">ViewModel</a>&lt;M&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -470,7 +455,7 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Delete.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Delete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L223">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L244">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_Delete_" data-uid="FrankieBot.DB.ViewModel`1.Delete*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_Delete" data-uid="FrankieBot.DB.ViewModel`1.Delete">Delete()</h4>
@@ -486,7 +471,7 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Find(FrankieBot.DB.DBConnection%2CSystem.Func%7B%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L154">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L175">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_Find_" data-uid="FrankieBot.DB.ViewModel`1.Find*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__" data-uid="FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})">Find(DBConnection, Func&lt;M, Boolean&gt;)</h4>
@@ -539,7 +524,7 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Int32_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Find(FrankieBot.DB.DBConnection%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L136">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L157">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_Find_" data-uid="FrankieBot.DB.ViewModel`1.Find*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Int32_" data-uid="FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Int32)">Find(DBConnection, Int32)</h4>
@@ -589,10 +574,58 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_FindAll_FrankieBot_DB_DBConnection_.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.FindAll(FrankieBot.DB.DBConnection)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L134">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_ViewModel_1_FindAll_" data-uid="FrankieBot.DB.ViewModel`1.FindAll*"></a>
+  <h4 id="FrankieBot_DB_ViewModel_1_FindAll_FrankieBot_DB_DBConnection_" data-uid="FrankieBot.DB.ViewModel`1.FindAll(FrankieBot.DB.DBConnection)">FindAll(DBConnection)</h4>
+  <div class="markdown level1 summary"><p>Finds all ViewModels</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ViewModelContainer&lt;IViewModel&gt; FindAll(DBConnection connection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FrankieBot.DB.DBConnection.html">DBConnection</a></td>
+        <td><span class="parametername">connection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="FrankieBot.DB.ViewModelContainer-1.html">ViewModelContainer</a>&lt;<span class="xref">IViewModel</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_FindOne_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.FindOne(FrankieBot.DB.DBConnection%2CSystem.Func%7B%600%2CSystem.Boolean%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L118">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L117">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_FindOne_" data-uid="FrankieBot.DB.ViewModel`1.FindOne*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_FindOne_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__" data-uid="FrankieBot.DB.ViewModel`1.FindOne(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})">FindOne(DBConnection, Func&lt;M, Boolean&gt;)</h4>
@@ -645,7 +678,7 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Initialize.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L188">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L209">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_Initialize_" data-uid="FrankieBot.DB.ViewModel`1.Initialize*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_Initialize" data-uid="FrankieBot.DB.ViewModel`1.Initialize">Initialize()</h4>
@@ -661,7 +694,7 @@ a new default <a class="xref" href="FrankieBot.DB.ViewModel-1.html#FrankieBot_DB
     <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_ViewModel_1_Save.md&amp;value=---%0Auid%3A%20FrankieBot.DB.ViewModel%601.Save%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L208">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/orm/ViewModel.cs/#L229">View Source</a>
   </span>
   <a id="FrankieBot_DB_ViewModel_1_Save_" data-uid="FrankieBot.DB.ViewModel`1.Save*"></a>
   <h4 id="FrankieBot_DB_ViewModel_1_Save" data-uid="FrankieBot.DB.ViewModel`1.Save">Save()</h4>
