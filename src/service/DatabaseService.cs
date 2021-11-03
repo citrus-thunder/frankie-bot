@@ -240,11 +240,21 @@ namespace FrankieBot.Discord.Services
 			});
 		}
 
+		/// <summary>
+		/// Returns the file path for the given guild's server database
+		/// </summary>
+		/// <param name="guildId"></param>
+		/// <returns></returns>
 		public string GetServerDBFilePath(ulong guildId)
 		{
 			return Path.Combine(DBConfig.SERVER_DATA_ROOT, guildId.ToString() + DBConfig.DATABASE_FILE_EXTENSION);
 		}
 
+		/// <summary>
+		/// Returns the file path for the given guild's server database
+		/// </summary>
+		/// <param name="guild"></param>
+		/// <returns></returns>
 		public string GetServerDBFilePath(SocketGuild guild) => GetServerDBFilePath(guild.Id);
 
 		private async void OnQuoteAdded(object sender, QuoteEventArgs q)

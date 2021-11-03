@@ -96,7 +96,6 @@ namespace FrankieBot.DB
 		/// Creates a new ViewModel
 		/// </summary>
 		/// <param name="connection"></param>
-		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
 		public static ViewModel<M> Create(DBConnection connection)
 		{

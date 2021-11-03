@@ -7,8 +7,16 @@ using FrankieBot.DB.ViewModel;
 
 namespace FrankieBot.DB.Containers
 {
+	/// <summary>
+	/// Container of <see cref="FrankieBot.DB.ViewModel.Option"/>s
+	/// </summary>
 	public class Options : ViewModelContainer<Option>
 	{
+		/// <summary>
+		/// Sets an option to the specified value
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="value"></param>
 		public void Set(string name, string value)
 		{
 			var option = Content.Where(o => o.Name == name).FirstOrDefault();
@@ -20,11 +28,20 @@ namespace FrankieBot.DB.Containers
 			}
 		}
 
+		/// <summary>
+		/// Gets the value of the specified option
+		/// </summary>
+		/// <param name="name"></param>
+		/// <returns></returns>
 		public string Get(string name)
 		{
 			return Content.Where(o => o.Name == name).FirstOrDefault().Value;
 		}
 
+		/// <summary>
+		/// Gets a dictionary containing all options' values
+		/// </summary>
+		/// <returns></returns>
 		public Dictionary<string, string> Get()
 		{
 			var res = new Dictionary<string, string>();
@@ -35,6 +52,11 @@ namespace FrankieBot.DB.Containers
 			return res;
 		}
 
+		/// <summary>
+		/// Gets a dictionary containing the values of the specified options
+		/// </summary>
+		/// <param name="options"></param>
+		/// <returns></returns>
 		public Dictionary<string, string> Get(params string[] options)
 		{
 			var res = new Dictionary<string, string>();

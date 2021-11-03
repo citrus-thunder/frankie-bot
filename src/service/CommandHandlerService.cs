@@ -98,7 +98,7 @@ namespace FrankieBot.Discord.Services
 			if (!message.HasMentionPrefix(_client.CurrentUser, ref argPos))
 			{
 				bool validPrefix = false;
-				await _db.RunDBAction(context, async (ctx) => 
+				await _db.RunDBAction(context, (ctx) => 
 				{
 					using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild)))
 					{

@@ -36,6 +36,13 @@ namespace FrankieBot.DB
 			return container;
 		}
 
+		/// <summary>
+		/// Returns a copy of this container as the specified type
+		/// </summary>
+		/// <typeparam name="K"></typeparam>
+		/// <remarks>
+		/// Use this to cast a generic container to a more useful user-defined container
+		/// </remarks>
 		public K ToContainer<K>() where K : ViewModelContainer<T>, new()
 		{
 			var container = new K();

@@ -14,12 +14,30 @@ using FrankieBot.DB.ViewModel;
 
 namespace FrankieBot.Discord.Modules
 {
+	/// <summary>
+	/// Administrative command module
+	/// </summary>
 	[Group("admin")]
 	[RequireUserPermission(GuildPermission.Administrator)]
 	public class AdminModule : ModuleBase<SocketCommandContext>
 	{
+		/// <summary>
+		/// Provides database services
+		/// </summary>
+		/// <value></value>
 		public DataBaseService DataBaseService { get; set; }
+		
+		/// <summary>
+		/// Provides command handling services
+		/// </summary>
+		/// <value></value>
 		public CommandHandlerService CommandHandlerService { get; set; }
+		
+		/// <summary>
+		/// Sets the prefix used to identify commands in chat messages
+		/// </summary>
+		/// <param name="prefix"></param>
+		/// <returns></returns>
 		[Command("prefix")]
 		public async Task SetPrefix(string prefix)
 		{
