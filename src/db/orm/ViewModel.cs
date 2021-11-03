@@ -98,9 +98,9 @@ namespace FrankieBot.DB
 		/// <param name="connection"></param>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		public static T Create<T>(DBConnection connection) where T : ViewModel<M>, new()
+		public static ViewModel<M> Create(DBConnection connection)
 		{
-			var res = new T()
+			var res = new ViewModel<M>()
 			{
 				Connection = connection,
 				Model = new M()
@@ -125,6 +125,28 @@ namespace FrankieBot.DB
 			};
 			res.Initialize();
 			return res;
+		}
+
+		/// <summary>
+		/// Finds all ViewModels
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <returns></returns>
+		public static ViewModelContainer<IViewModel> FindAll(DBConnection connection)
+		{
+			var container = new ViewModelContainer<IViewModel>();
+			var models = connection.Table<M>();
+			foreach (var m in models)
+			{
+				var newModel = new ViewModel<M>
+				{
+					Model = m,
+					Connection = connection
+				};
+				newModel.Initialize();
+				container.Content.Add(newModel);
+			}
+			return container;
 		}
 
 		/// <summary>

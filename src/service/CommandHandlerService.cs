@@ -9,6 +9,10 @@ using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 
+using FrankieBot.DB;
+using FrankieBot.DB.ViewModel;
+using FrankieBot.DB.Containers;
+
 namespace FrankieBot.Discord.Services
 {
 	/// <summary>
@@ -20,9 +24,23 @@ namespace FrankieBot.Discord.Services
 	/// </remarks>
 	public class CommandHandlerService
 	{
+		/// <summary>
+		/// Available prefix options for Frankie commands
+		/// </summary>
+		/// <value></value>
+		public static readonly string[] PrefixOptions = new[]
+		{
+			".",
+			"!",
+			"-",
+			"?",
+			"_"
+		};
+
 		private readonly DiscordSocketClient _client;
 		private readonly CommandService _commands;
 		private readonly IServiceProvider _services;
+		private readonly DataBaseService _db;
 
 		/// <summary>
 		/// Creates a new CommandService instance
@@ -32,6 +50,7 @@ namespace FrankieBot.Discord.Services
 		{
 			_commands = services.GetRequiredService<CommandService>();
 			_client = services.GetRequiredService<DiscordSocketClient>();
+			_db = services.GetRequiredService<DataBaseService>();
 			_services = services;
 
 			_commands.CommandExecuted += OnCommandExecuted;
@@ -66,12 +85,34 @@ namespace FrankieBot.Discord.Services
 			// offset to track where prefix ends and actual command body begins
 			int argPos = 0;
 
-			if (!message.HasCharPrefix('.', ref argPos))
+			if (!(
+				message.HasMentionPrefix(_client.CurrentUser, ref argPos) ||
+				message.HasStringPrefix(PrefixOptions, ref argPos)
+				))
 			{
 				return;
 			}
 
 			var context = new SocketCommandContext(_client, message);
+
+			if (!message.HasMentionPrefix(_client.CurrentUser, ref argPos))
+			{
+				bool validPrefix = false;
+				await _db.RunDBAction(context, async (ctx) => 
+				{
+					using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild)))
+					{
+						var options = Option.FindAll(connection).As<Option>().ToContainer<Options>();
+						var prefix = options.Get("command_prefix");
+						validPrefix = message.HasStringPrefix(prefix, ref argPos);
+					}
+				});
+
+				if (!validPrefix)
+				{
+					return;
+				}
+			}
 
 			await _commands.ExecuteAsync(context, argPos, _services);
 		}

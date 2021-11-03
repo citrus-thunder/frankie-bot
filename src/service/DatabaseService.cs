@@ -82,6 +82,12 @@ namespace FrankieBot.Discord.Services
 						connection.CreateTable<Model.Option>();
 						connection.CreateTable<Model.Quote>();
 						connection.CreateTable<Model.Server>();
+
+						// temp
+						var prefixOption = Option.Create(connection).As<Option>();
+						prefixOption.Name = "command_prefix";
+						prefixOption.Value = ".";
+						prefixOption.Save();
 					}
 				}
 			});
@@ -234,12 +240,12 @@ namespace FrankieBot.Discord.Services
 			});
 		}
 
-		private string GetServerDBFilePath(ulong guildId)
+		public string GetServerDBFilePath(ulong guildId)
 		{
 			return Path.Combine(DBConfig.SERVER_DATA_ROOT, guildId.ToString() + DBConfig.DATABASE_FILE_EXTENSION);
 		}
 
-		private string GetServerDBFilePath(SocketGuild guild) => GetServerDBFilePath(guild.Id);
+		public string GetServerDBFilePath(SocketGuild guild) => GetServerDBFilePath(guild.Id);
 
 		private async void OnQuoteAdded(object sender, QuoteEventArgs q)
 		{

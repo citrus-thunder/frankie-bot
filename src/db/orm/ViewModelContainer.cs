@@ -18,7 +18,7 @@ namespace FrankieBot.DB
 		public List<T> Content { get; set; } = new List<T>();
 
 		/// <summary>
-		/// Converts a generic ViewModelContainer to a more concrete equivalent
+		/// Converts the ViewModelContainer's contents to more concrete equivalent ViewModels
 		/// </summary>
 		/// <typeparam name="K"></typeparam>
 		/// <returns></returns>
@@ -32,6 +32,16 @@ namespace FrankieBot.DB
 				c.Connection = item.Connection;
 				c.Initialize();
 				container.Content.Add(c);
+			}
+			return container;
+		}
+
+		public K ToContainer<K>() where K : ViewModelContainer<T>, new()
+		{
+			var container = new K();
+			foreach (var item in Content)
+			{
+				container.Content.Add(item);
 			}
 			return container;
 		}
