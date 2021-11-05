@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Database Design and Operation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Database Design and Operation ">
+    <meta name="generator" content="docfx 2.58.0.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="database-design-and-operation">Database Design and Operation</h1>
+
+<h2 id="introduction">Introduction</h2>
+<p>Many of Frankie's services involve storing information about a community or its members. Frankie accomplishes this by storing data for each community in its own separate SQLite database file.</p>
+<p>This article walks through the process for storing and retrieving this information and touches on the Model/View/ViewModel paradigm used in Frankie's database API.</p>
+<h2 id="the-mvvm-pattern">The MVVM Pattern</h2>
+<p>Frankie's database API subscribes to the MVVM pattern (Model/View/ViewModel), which separates the application (the View) from the data objects used directly by the database (the Model) via an intermediary object called a ViewModel. The ViewModel facilitates interaction between the application and the database by translating raw database model information into useful application-ready properties, and by translating operations on these properties into equivalent database operations.</p>
+<p>We'll illustrate this paradigm with Frankie's quote module.</p>
+<h3 id="the-quote-model">The Quote Model</h3>
+<p>The Quote model is a simple class containing properties that represent each field of a quote record in the database, such as the quote's author, the recorder, and when the quote was recorded. The sole responsibility of this class, as for all models, is simply to represent the data of a single quote record; it contains no methods to convert, update, or even save the data to the database.</p>
+<h3 id="the-quote-viewmodel">The Quote ViewModel</h3>
+<p>The Quote viewmodel is far more interesting than its model counterpart. It contains properties equivalent to those in the Quote model, but these properties are not necessarily identical. Where in the model, we are restricted to properties that explicitly reflect exactly the data in the database, we do not face such restrictions in the viewmodel.</p>
+<p>For example, the <code>Author</code> property in the Quote model contains nothing more than a string representation of the quote author's Discord user ID. The equivalent property in the viewmodel contains an actual reference to an <code>IUser</code> object representing the Author, which can be consumed directly by the application without doing any lookups or conversions!</p>
+<p>Further, if we were to want to change the author of a quote, we wouldn't have to find the new author's id. Instead, we could simply assign a new <code>IUser</code> to the viewmodel's <code>Author</code> property and the viewmodel would automatically perform the correct conversion when saving.</p>
+<h2 id="the-databaseservice">The DataBaseService</h2>
+<p>Discord's API is built upon two primary concepts: Modules and Services. Where Modules purely provide the command interface to the users, the Services contain the core business logic of the application.</p>
+<p>The <code>DataBaseService</code> is one such service, and serves as the endpoint with which to access database resources. Any module that requires access to read from or update the database should reference this service, and all database transactions should take place through <code>DataBaseService.RunDBAction()</code>. This ensures that the database is configured and ready to receive actions and that the actions are peformed in the proper database.</p>
+<h2 id="frankies-database-api">Frankie's Database API</h2>
+<p>To best utilize the MVVM pattern, Frankie's Database workflow revolves around the use of <code>ViewModel</code> and <code>ViewModelContainer</code> instances. Generally, unless working deep under the hood, one should avoid ever working directly with <code>Model</code> instances, or directly using the <code>ViewModel.Model</code> property.</p>
+<p>The common workflow looks something like this:</p>
+<pre><code class="lang-csharp">// Get reference to DataBaseService
+DataBaseService _db;
+
+// Wrap database action in DataBaseService.RunDBAction()
+await _db.RunDBAction(Context, (context) =&gt; 
+{
+	// Establish database connection via new DBConnection instance
+	using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild))
+	{
+	// Example 1: Get Existing Quotes from the user who sent the command
+
+		// We convert the Author.Id to a string, as that is how it is stored in the database
+		// (ulong isn't yet supported in our SQLite connector)
+		var authorID = context.Message.Author.Id;
+
+		// We use As&lt;Quote&gt; since otherwise this would return a generic ViewModel&lt;Quote&gt;
+		// object when we specifically want a Quote object
+		var quote = Quote.FindOne(connection, (q) =&gt; q.Author == authorID).As&lt;Quote&gt;();
+
+	// Example 2: Update existing quote's recorded timestamp
+
+		// Edit the Quote's RecordTimeStamp property.
+		quote.RecordTimeStamp = DateTime.UtcNow;
+
+		// Save the edit. That's it!
+		quote.Save();
+
+	// Example 3: Create a new &quot;Hello World&quot; quote by the user who sent the command
+		
+		// Create new Quote object
+		var newQuote = new Quote(connection)
+		{
+			Author = context.Message.Author,
+			Content = &quot;Hello, World!&quot;,
+		}
+
+		// Save quote object to database
+		newQuote.Save();
+	}
+});
+</code></pre>
+<p>As illustrated, we are able to retrieve viewmodels by searching for them through the database connection, and we can even create our own new viewmodels which will become new models in the database upon saving. We are able to update records by simply altering the viewmodel's properties which converts those alterations to equivalent database operations.</p>
+<h3 id="viewmodelcontainers">ViewModelContainers</h3>
+<p>Where the <code>ViewModel</code> class allows us to easily perform edit, update, and delete operations upon the model it represents, the <code>ViewModelContainer</code> class takes it one step further. With a container, mass operations can be performed on all viewmodels contained within.</p>
+<h3 id="getting-a-viewmodelcontainer">Getting a ViewModelContainer</h3>
+<p>In the above example, we used <code>Quote.FindOne()</code> to find the first record matching our expression. This returns a <code>ViewModel</code> instance directly, as there isn't a need for a container containing a single viewmodel.</p>
+<p>In most cases, we will be using the <code>Find()</code> method instead, which will return <em>all</em> records matching the given expression. These records are returned as a <code>ViewModelContainer</code> containing viewmodels matching the expression.</p>
+<p>Right away, we can use this collection to access the matching viewmodels through its <code>Content</code> property, and mass-apply <code>Save()</code> or <code>Delete()</code> to every viewmodel within. Coupling a ViewModelContainer with linq's <code>ForEach()</code> method makes mass-updating the models contained within easy -- with a single caveat.</p>
+<p>It is important to note that the viewmodels contained within a container upon creation are simple, generic viewmodels which only contain default operations (Save, Delete, and a direct reference to the underlying Model, <em>which should not be manipulated directly</em>). To access properties and methods defined in concrete viewmodels (such as <code>Quote</code>), the container's contents must be converted to the concrete implementation via <code>ContentAs&lt;T&gt;()</code>.</p>
+<pre><code class="lang-csharp">// Example: Getting a container of Quote viewmodels -- not &quot;ViewModel&lt;Quote&gt;&quot; viewmodels
+var quote = Quote.Find(connection, (q) =&gt; q.Author = authorID).ContentAs&lt;Quote&gt;();
+</code></pre>
+<p>Now, with the ViewModelContainer's contents casted as <code>Quote</code> viewmodels, one can access each item's <code>Quote</code> properties</p>
+<h3 id="custom-viewmodelcontainer-implementations">Custom ViewModelContainer Implementations</h3>
+<p>As with viewmodels, while the generic <code>ViewModelContainer</code> class provides useful default operations, much more useful containers can be created by deriving <code>ViewModelContainer</code> and adding additional properties and methods.</p>
+<p>One such example of this is the <code>Options</code> class, which is derived from <code>ViewModelContainer&lt;Option&gt;</code>. With the <code>Options</code> container, not only can we mass save and delete options, we can use <code>Options.Get()</code> and <code>Options.Set()</code> to easily update options records without having to manually find and manipulate individual <code>Option</code> viewmodels.</p>
+<pre><code class="lang-csharp">// Example: Updating options records with the Options container
+
+// We use As&lt;C, O&gt;() to convert the results from a generic ViewModelContainer&lt;Option&gt; 
+// containing generic ViewModel&lt;Option&gt; objects to an Options container, which must contain Option objects
+var options = Option.FindAll(connection).As&lt;Options, Option&gt;();
+
+// Update option titled &quot;command_prefix&quot; to value &quot;!&quot;
+options.Set(&quot;command_prefix&quot;, &quot;!&quot;);
+
+// Save updated option value
+options.Save();
+</code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>Grasping the MVVM pattern, becoming familiar with the <code>Model</code>, <code>ViewModel</code>, and <code>ViewModelContainer</code> classes and their more concrete subclasses, and getting comfortable with the <code>Find()</code>, <code>FindOne()</code>, <code>FindAll()</code>, <code>ContentAs&lt;T&gt;()</code>, <code>ContainerAs&lt;T&gt;()</code>, and <code>As&lt;C,O&gt;()</code> methods will make understanding and contributing to Frankie much easier. We hope this guide can help get you on your way to making the most of Frankie.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/docs-src/articles/dev/db.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

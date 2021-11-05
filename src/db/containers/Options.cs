@@ -5,7 +5,7 @@ using System.Linq;
 using FrankieBot.DB;
 using FrankieBot.DB.ViewModel;
 
-namespace FrankieBot.DB.Containers
+namespace FrankieBot.DB.Container
 {
 	/// <summary>
 	/// Container of <see cref="FrankieBot.DB.ViewModel.Option"/>s

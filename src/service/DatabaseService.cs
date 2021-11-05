@@ -15,6 +15,7 @@ using SQLite;
 
 using FrankieBot.DB;
 using FrankieBot.DB.ViewModel;
+using FrankieBot.DB.Container;
 
 using Model = FrankieBot.DB.Model;
 
@@ -153,7 +154,7 @@ namespace FrankieBot.Discord.Services
 				using (var connection = new DBConnection(context, GetServerDBFilePath(c.Guild)))
 				{
 					var userID = user.Id.ToString();
-					var quotes = Quote.Find(connection, (quote) => quote.AuthorID == userID).As<Quote>();
+					var quotes = Quote.Find(connection, (quote) => quote.AuthorID == userID).ContentAs<Quote>();
 					quoteList = quotes.Content;
 				}
 

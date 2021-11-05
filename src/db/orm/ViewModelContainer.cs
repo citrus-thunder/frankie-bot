@@ -8,21 +8,33 @@ namespace FrankieBot.DB
 	/// <summary>
 	/// Contains multiple ViewModels and eases performing similar operations over the ViewModels contained within
 	/// </summary>
-	/// <typeparam name="T"></typeparam>
-	public class ViewModelContainer<T> where T : IViewModel
+	/// <typeparam name="V"></typeparam>
+	public class ViewModelContainer<V> where V : IViewModel
 	{
 		/// <summary>
 		/// The ViewModel's contained in this ViewModelContainer
 		/// </summary>
 		/// <returns></returns>
-		public List<T> Content { get; set; } = new List<T>();
+		public List<V> Content { get; set; } = new List<V>();
+
+		/// <summary>
+		/// Converts the ViewModelContainer to a container of a specified type
+		/// containing a specified ViewModel type
+		/// </summary>
+		/// <typeparam name="C">Container type</typeparam>
+		/// <typeparam name="K">Content type</typeparam>
+		/// <returns></returns>
+		public C As<C, K>()
+			where C : ViewModelContainer<K>, new() 
+			where K : IViewModel, new()
+		=> this.ContentAs<K>().ContainerAs<C>();
 
 		/// <summary>
 		/// Converts the ViewModelContainer's contents to more concrete equivalent ViewModels
 		/// </summary>
 		/// <typeparam name="K"></typeparam>
 		/// <returns></returns>
-		public ViewModelContainer<K> As<K>() where K : IViewModel, new()
+		public ViewModelContainer<K> ContentAs<K>() where K : IViewModel, new()
 		{
 			var container = new ViewModelContainer<K>();
 			foreach (var item in Content)
@@ -43,7 +55,7 @@ namespace FrankieBot.DB
 		/// <remarks>
 		/// Use this to cast a generic container to a more useful user-defined container
 		/// </remarks>
-		public K ToContainer<K>() where K : ViewModelContainer<T>, new()
+		public K ContainerAs<K>() where K : ViewModelContainer<V>, new()
 		{
 			var container = new K();
 			foreach (var item in Content)
