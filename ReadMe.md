@@ -11,4 +11,4 @@ Frankie is a Discord bot built to help facilitate writing activities and help in
 
 ### More Info
 
-* [Documentation]("https://citrus-thunder.github.io/frankie-bot/")
+* [Documentation](https://citrus-thunder.github.io/frankie-bot/)
