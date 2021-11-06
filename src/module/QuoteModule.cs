@@ -1,15 +1,17 @@
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Discord;
 using Discord.Commands;
 
-using FrankieBot.Discord.Services;
+using SQLite;
 
+using FrankieBot.Discord.Services;
 using FrankieBot.DB;
-using VModel = FrankieBot.DB.ViewModel;
-using FrankieBot.DB.Container;
+
+using ViewModel = FrankieBot.DB.ViewModel;
+
 
 namespace FrankieBot.Discord.Modules
 {
@@ -28,6 +30,8 @@ namespace FrankieBot.Discord.Modules
 		/// </remarks>
 		public DataBaseService DataBaseService { get; set; }
 
+		#region Commands
+
 		/// <summary>
 		/// Returns a random quote from the server's saved quotes
 		/// </summary>
@@ -38,18 +42,18 @@ namespace FrankieBot.Discord.Modules
 			// Convenience alias
 			var db = DataBaseService;
 
-			await db.RunDBAction(Context, async context => 
+			await db.RunDBAction(Context, async context =>
 			{
-				VModel.Quote quote = null;
+				ViewModel.Quote quote = null;
 				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
 				{
-					var quotes = VModel.Quote.FindAll(connection).ContentAs<VModel.Quote>();
-					
+					var quotes = ViewModel.Quote.FindAll(connection).ContentAs<ViewModel.Quote>();
+
 					var random = new Random();
 
 					quote = quotes.Content[random.Next(0, quotes.Content.Count)];
 				}
-				await db.PostQuote(Context, quote);
+				await PostQuote(Context, quote);
 			});
 		}
 
@@ -66,17 +70,17 @@ namespace FrankieBot.Discord.Modules
 
 			await db.RunDBAction(Context, async context =>
 			{
-				VModel.Quote quote = null;
+				ViewModel.Quote quote = null;
 				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
 				{
 					var authorID = user.Id.ToString();
-					var quotes = VModel.Quote.Find(connection, q => q.AuthorID == authorID).ContentAs<VModel.Quote>();
+					var quotes = ViewModel.Quote.Find(connection, q => q.AuthorID == authorID).ContentAs<ViewModel.Quote>();
 
 					var random = new Random();
 
 					quote = quotes.Content[random.Next(0, quotes.Content.Count)];
 				}
-			await db.PostQuote(Context, quote);
+				await PostQuote(Context, quote);
 			});
 		}
 
@@ -88,7 +92,7 @@ namespace FrankieBot.Discord.Modules
 		[Command]
 		public async Task Quote(int quoteID)
 		{
-			await DataBaseService.PostQuote(Context, quoteID);
+			await PostQuote(Context, quoteID);
 		}
 
 		/// <summary>
@@ -103,7 +107,7 @@ namespace FrankieBot.Discord.Modules
 		{
 			if (Context.Message.ReferencedMessage != null)
 			{
-				await DataBaseService.AddQuote(
+				await AddQuote(
 					Context,
 					Context.Message.ReferencedMessage.Author,
 					Context.Message.ReferencedMessage.Content,
@@ -111,10 +115,10 @@ namespace FrankieBot.Discord.Modules
 			}
 			else
 			{
-				await DataBaseService.AddQuote(
+				await AddQuote(
 					Context,
-					user, 
-					msg, 
+					user,
+					msg,
 					Context.Message.Author);
 			}
 		}
@@ -129,7 +133,7 @@ namespace FrankieBot.Discord.Modules
 		{
 			if (Context.Message.ReferencedMessage != null)
 			{
-				await DataBaseService.AddQuote(
+				await AddQuote(
 					Context,
 					Context.Message.ReferencedMessage.Author,
 					Context.Message.ReferencedMessage.Content,
@@ -146,8 +150,9 @@ namespace FrankieBot.Discord.Modules
 		[Alias("l", "ls")]
 		public async Task ListQuotes(IUser user)
 		{
-			await DataBaseService.ListQuotes(Context, user);
+			await ListQuotes(Context, user);
 		}
+		
 
 		/// <summary>
 		/// Removes the quote with the given ID from the database
@@ -166,7 +171,7 @@ namespace FrankieBot.Discord.Modules
 			{
 				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
 				{
-					var quote = VModel.Quote.Find(connection, quoteID);
+					var quote = ViewModel.Quote.Find(connection, quoteID);
 					if (quote.IsEmpty)
 					{
 						await context.Channel.SendMessageAsync($"Unable to find Quote with id [{quoteID}]");
@@ -175,6 +180,139 @@ namespace FrankieBot.Discord.Modules
 					{
 						quote.Delete();
 						await context.Channel.SendMessageAsync($"Quote with ID [{quoteID}] deleted");
+					}
+				}
+			});
+		}
+
+		#endregion // Commands
+
+		private async Task<ViewModel.Quote> GetQuote(SocketCommandContext context, int id)
+		{
+			ViewModel.Quote res = null;
+			
+			// Convenience Alias
+			var db = DataBaseService;
+
+			await db.RunDBAction(Context, context =>
+			{
+				ViewModel.Quote quote = null;
+				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				{
+					var quoteID = id.ToString();
+					quote = ViewModel.Quote.Find(connection, id).As<ViewModel.Quote>();
+				}
+				if (quote.IsEmpty)
+				{
+					throw new RecordNotFoundException($"Quote with ID [{id}] not found!");
+				}
+				res = quote;
+			});
+			return res;
+		}
+
+		private async Task PostQuote(SocketCommandContext context, ViewModel.Quote quote)
+		{
+			var eb = new EmbedBuilder()
+				.WithAuthor(quote.Author)
+				.WithDescription(quote.Content)
+				.WithColor(0x00c88c)
+				.WithTimestamp(new DateTimeOffset(quote.QuoteTimeStamp.ToLocalTime()));
+
+			await context.Channel.SendMessageAsync(embed: eb.Build());
+		}
+
+		private async Task PostQuote(SocketCommandContext context, int quoteID)
+		{
+			ViewModel.Quote quote = null;
+			try
+			{
+				quote = await GetQuote(context, quoteID);
+				await PostQuote(context, quote);
+			}
+			catch (DBException ex)
+			{
+				await context.Channel.SendMessageAsync(ex.Message);
+			}
+		}
+
+		private async Task PostQuoteList(SocketCommandContext context, List<ViewModel.Quote> quotes)
+		{
+			var fields = new List<EmbedFieldBuilder>();
+			foreach (var quote in quotes)
+			{
+				var newField = new EmbedFieldBuilder()
+					.WithName($"[#{quote.ID}]: {new DateTimeOffset(quote.QuoteTimeStamp.ToLocalTime()).ToString("d/M/yyyy hh:mm tt K")}")
+					.WithValue($"{quote.Content}");
+				fields.Add(newField);
+			}
+
+			var eb = new EmbedBuilder()
+				.WithAuthor(quotes[0].Author)
+				.WithColor(0x00c88c)
+				.WithFields(fields);
+
+			await context.Channel.SendMessageAsync(text: $"Quotes by {quotes[0].Author.Username}", embed: eb.Build());
+		}
+
+		private async Task ListQuotes(SocketCommandContext context, IUser user)
+		{
+			//Convenience Alias
+			var db = DataBaseService;
+
+			await db.RunDBAction(context, async (c) =>
+			{
+				List<ViewModel.Quote> quoteList;
+				using (var connection = new DBConnection(context, db.GetServerDBFilePath(c.Guild)))
+				{
+					var userID = user.Id.ToString();
+					var quotes = ViewModel.Quote.Find(connection, (quote) => quote.AuthorID == userID).ContentAs<ViewModel.Quote>();
+					quoteList = quotes.Content;
+				}
+
+				if (quoteList.Count < 1)
+				{
+					await context.Channel.SendMessageAsync($"No quotes found yet for {user.Username}");
+				}
+				else
+				{
+					await PostQuoteList(context, quoteList);
+				}
+			});
+		}
+
+		private async Task AddQuote(SocketCommandContext context, IUser user, string message, IUser recorder)
+		{
+			// Convenience Alias
+			var db = DataBaseService;
+
+			await db.RunDBAction(context, async c =>
+			{
+				using (var connection = new DBConnection(c, db.GetServerDBFilePath(c.Guild)))
+				{
+					var quote = new ViewModel.Quote(connection)
+					{
+						Author = user,
+						Content = message,
+						Recorder = recorder,
+						RecordTimeStamp = DateTime.UtcNow,
+						QuoteTimeStamp = DateTime.UtcNow
+					};
+
+					if (context.Message.ReferencedMessage != null)
+					{
+						quote.QuoteTimeStamp = context.Message.ReferencedMessage.Timestamp.UtcDateTime;
+					}
+
+					try
+					{
+						quote.Save();
+						await c.Channel.SendMessageAsync("New Quote added!");
+						await PostQuote(c, quote);
+					}
+					catch (SQLiteException ex)
+					{
+						await context.Channel.SendMessageAsync($"Something went wrong when recording that last quote. {ex}");
 					}
 				}
 			});

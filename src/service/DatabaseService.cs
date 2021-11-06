@@ -26,11 +26,6 @@ namespace FrankieBot.Discord.Services
 	/// </summary>
 	public class DataBaseService
 	{
-		/// <summary>
-		/// Fired when a new Quote is added to the database
-		/// </summary>
-		public event EventHandler<QuoteEventArgs> QuoteAdded;
-
 		private readonly IServiceProvider _services;
 
 		private readonly DiscordSocketClient _client;
@@ -43,7 +38,6 @@ namespace FrankieBot.Discord.Services
 		{
 			_services = services;
 			_client = _services.GetRequiredService<DiscordSocketClient>();
-			QuoteAdded += OnQuoteAdded;
 		}
 
 		/// <summary>
@@ -96,166 +90,6 @@ namespace FrankieBot.Discord.Services
 		}
 
 		/// <summary>
-		/// Adds a new Quote to the database
-		/// </summary>
-		/// <param name="context"></param>
-		/// <param name="user"></param>
-		/// <param name="message"></param>
-		/// <param name="recorder"></param>
-		/// <returns></returns>
-		public async Task AddQuote(SocketCommandContext context, IUser user, string message, IUser recorder)
-		{
-			await RunDBAction(context, (c) =>
-			{
-				using (var db = new DBConnection(c, GetServerDBFilePath(c.Guild)))
-				{
-					var quote = new Quote(db)
-					{
-						Author = user,
-						Content = message,
-						Recorder = recorder,
-						RecordTimeStamp = DateTime.UtcNow,
-						QuoteTimeStamp = DateTime.UtcNow
-					};
-
-					if (context.Message.ReferencedMessage != null)
-					{
-						quote.QuoteTimeStamp = context.Message.ReferencedMessage.Timestamp.UtcDateTime;
-					}
-
-					try
-					{
-						quote.Save();
-						QuoteAdded?.Invoke(this, new QuoteEventArgs()
-						{
-							Quote = quote,
-							Context = context
-						});
-					}
-					catch (SQLiteException ex)
-					{
-						context.Channel.SendMessageAsync($"Something went wrong when recording that last quote. {ex}");
-					}
-				}
-			});
-		}
-
-		/// <summary>
-		/// Lists quotes for the specified user
-		/// </summary>
-		/// <param name="context"></param>
-		/// <param name="user"></param>
-		/// <returns></returns>
-		public async Task ListQuotes(SocketCommandContext context, IUser user)
-		{
-			await RunDBAction(context, async (c) => 
-			{
-				List<Quote> quoteList;
-				using (var connection = new DBConnection(context, GetServerDBFilePath(c.Guild)))
-				{
-					var userID = user.Id.ToString();
-					var quotes = Quote.Find(connection, (quote) => quote.AuthorID == userID).ContentAs<Quote>();
-					quoteList = quotes.Content;
-				}
-
-				if (quoteList.Count < 1)
-				{
-					await context.Channel.SendMessageAsync($"No quotes found yet for {user.Username}");
-				}
-				else
-				{
-					await PostQuoteList(context, quoteList);
-				}
-			});
-		}
-
-		/// <summary>
-		/// Posts a Quote embed as a reply
-		/// </summary>
-		/// <param name="context"></param>
-		/// <param name="quote"></param>
-		/// <returns></returns>
-		public async Task PostQuote(SocketCommandContext context, Quote quote)
-		{
-			var eb = new EmbedBuilder()
-				.WithAuthor(quote.Author)
-				.WithDescription(quote.Content)
-				.WithColor(0x00c88c)
-				.WithTimestamp(new DateTimeOffset(quote.QuoteTimeStamp.ToLocalTime()));
-
-			await context.Channel.SendMessageAsync(embed: eb.Build());
-		}
-
-		/// <summary>
-		/// Posts the quote with the specified ID
-		/// </summary>
-		/// <param name="context"></param>
-		/// <param name="quoteID"></param>
-		/// <returns></returns>
-		public async Task PostQuote(SocketCommandContext context, int quoteID)
-		{
-			Quote quote = null;
-			try
-			{
-				quote = await GetQuote(context, quoteID);
-				await PostQuote(context, quote);
-			}
-			catch(DBException ex)
-			{
-				await context.Channel.SendMessageAsync(ex.Message);
-			}
-		}
-
-		/// <summary>
-		/// Posts a list of quotes to the context's channel
-		/// </summary>
-		/// <param name="context"></param>
-		/// <param name="quotes"></param>
-		/// <returns></returns>
-		public async Task PostQuoteList(SocketCommandContext context, List<Quote> quotes)
-		{
-			var fields = new List<EmbedFieldBuilder>();
-			foreach (var quote in quotes)
-			{
-				var newField = new EmbedFieldBuilder()
-					.WithName($"[#{quote.ID}]: {new DateTimeOffset(quote.QuoteTimeStamp.ToLocalTime()).ToString("d/M/yyyy hh:mm tt K")}")
-					.WithValue($"{quote.Content}");
-				fields.Add(newField);
-			}
-
-			var eb = new EmbedBuilder()
-				.WithAuthor(quotes[0].Author)
-				.WithColor(0x00c88c)
-				.WithFields(fields);
-
-			await context.Channel.SendMessageAsync(text: $"Quotes by {quotes[0].Author.Username}",embed: eb.Build());
-		}
-
-		/// <summary>
-		/// Gets a quote from the DB by ID
-		/// </summary>
-		/// <param name="context"></param>
-		/// <param name="id"></param>
-		/// <returns></returns>
-		public async Task<Quote> GetQuote(SocketCommandContext context, int id)
-		{
-			return await Task.Run(() =>
-			{
-				Quote quote = null;
-				using (var connection = new DBConnection(context, GetServerDBFilePath(context.Guild)))
-				{
-					var quoteID = id.ToString();
-					quote = Quote.Find(connection, id).As<Quote>();
-				}
-				if (quote.IsEmpty)
-				{
-					throw new RecordNotFoundException($"Quote with ID [{id}] not found!");
-				}
-				return quote;
-			});
-		}
-
-		/// <summary>
 		/// Returns the file path for the given guild's server database
 		/// </summary>
 		/// <param name="guildId"></param>
@@ -271,11 +105,5 @@ namespace FrankieBot.Discord.Services
 		/// <param name="guild"></param>
 		/// <returns></returns>
 		public string GetServerDBFilePath(SocketGuild guild) => GetServerDBFilePath(guild.Id);
-
-		private async void OnQuoteAdded(object sender, QuoteEventArgs q)
-		{
-			await q.Context.Channel.SendMessageAsync("New quote added!");
-			await PostQuote(q.Context, q.Quote);
-		}
 	}
 }
