@@ -12,7 +12,7 @@
           "hash": "BOo9BBPlYyrGVjw3j/YjfeAXvApjzk3dTSjk21JsgLM="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -24,7 +24,7 @@
           "hash": "/An77ZGfidtSthy/LfdQCMEQBDC9p7CmpSNBciHm+o4="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,10 +117,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel-1.html",
-          "hash": "kaRydXIFL57TuAihH2Z6iFu1MN2k6LhH5Dry/QnWRPs="
+          "hash": "laHUwEbTkwz25Pnt0D3WN3GZRdXD5Im1ZGF3xVrcaDY="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -129,10 +129,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Option.html",
-          "hash": "VGt1c08WVohSY16TRm1HznD6LEpZzPSCSpQ4Y/Wc7F0="
+          "hash": "Ymd13KcKUL3zhpR2/ENNdFxje7OTYXOmMZ7HQImRVzM="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -141,10 +141,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Quote.html",
-          "hash": "aCcEDtHf2jJiZSh787Xj12heBTJF0kJn7K4S1t9mLew="
+          "hash": "Gvbz+rREuMiKcDxl+Qr7t3uhM3Yy82IrYOCUF1TBzN4="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -153,10 +153,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Server.html",
-          "hash": "FMJiyYihPDU42cy8/IEi87LFTNY6ViDC5iJJECyaYBA="
+          "hash": "hmYECGZDSGj9KnJYs8uC2y+3t3vKiQoG8+0ryeldAG0="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -168,7 +168,7 @@
           "hash": "DyV4Ib5iEz7XRZhZfXBhkfJfJTl3yw65ntAoqabGMaI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -192,7 +192,7 @@
           "hash": "tMBd3ec3rZF7r2y6oYwVhiXHpwBvBvSP2bPttcmxrpA="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -216,7 +216,7 @@
           "hash": "zMP2UT32T3v15AcobkC4U0St9oqXsyCZ13WcIer4pZ0="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -237,10 +237,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.QuoteModule.html",
-          "hash": "6izp2b+8QmS9ZSYl1zkCuEG19z5EwKkHCMtcAynN1Hs="
+          "hash": "gK1ERLRyBNO1RT8LBk0xjHyMLHp+YUn9bckIp7MUyZQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -252,7 +252,7 @@
           "hash": "8i4k/fwXUvz4CjEXgq4lHyEdBu8/SFOXaD3ywNGA4UU="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -273,10 +273,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.DataBaseService.html",
-          "hash": "E/5VGJaj1WDdLX26RSQ0KwU5KmiP0fMipcox+LPh0aA="
+          "hash": "5wwCEwP0bmD8iToTOXfbA3KjGZGjLFlQXTcfg12LWA8="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -300,7 +300,7 @@
           "hash": "UWiO83/64qGgs/bsWfstFxlaVvSSIzbBuqnPkPnB1NM="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -324,7 +324,7 @@
           "hash": "nZshwRurp5VXw6vSQSfieXp98tnyImA8GHH0/oZVjpI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -336,7 +336,7 @@
           "hash": "IMdVh9bg0ZhKIt4KbPHrii5r9JUEIJnc6D0moryBOLI="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -369,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "articles/dev/db.html",
-          "hash": "HTrKqgtyxxKoVCxQKqxN4XEwxyZsigeM6O1ajcd+yKg="
+          "hash": "s/1Oa+VYEG9iM5LZVIwen2LYWoXT+KpOOOyq3tYJXlw="
         }
       },
       "is_incremental": false,
@@ -443,7 +443,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 28,
-          "skipped_file_count": 28
+          "skipped_file_count": 21
         },
         "TocDocumentProcessor": {
           "can_incremental": false,

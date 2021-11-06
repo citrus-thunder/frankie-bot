@@ -682,6 +682,23 @@ references:
   fullName.vb: FrankieBot.DB.ViewModel(Of M).Initialize
   nameWithType: ViewModel<M>.Initialize
   nameWithType.vb: ViewModel(Of M).Initialize
+- uid: FrankieBot.DB.ViewModel`1.IsEmpty
+  name: IsEmpty
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_IsEmpty
+  commentId: P:FrankieBot.DB.ViewModel`1.IsEmpty
+  fullName: FrankieBot.DB.ViewModel<M>.IsEmpty
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).IsEmpty
+  nameWithType: ViewModel<M>.IsEmpty
+  nameWithType.vb: ViewModel(Of M).IsEmpty
+- uid: FrankieBot.DB.ViewModel`1.IsEmpty*
+  name: IsEmpty
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_IsEmpty_
+  commentId: Overload:FrankieBot.DB.ViewModel`1.IsEmpty
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel<M>.IsEmpty
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).IsEmpty
+  nameWithType: ViewModel<M>.IsEmpty
+  nameWithType.vb: ViewModel(Of M).IsEmpty
 - uid: FrankieBot.DB.ViewModel`1.IViewModel#Model
   name: IViewModel.Model
   href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_IViewModel_Model
@@ -999,12 +1016,6 @@ references:
   commentId: M:FrankieBot.Discord.Modules.QuoteModule.ListQuotes(IUser)
   fullName: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(IUser)
   nameWithType: QuoteModule.ListQuotes(IUser)
-- uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(System.Int32)
-  name: ListQuotes(Int32)
-  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_ListQuotes_System_Int32_
-  commentId: M:FrankieBot.Discord.Modules.QuoteModule.ListQuotes(System.Int32)
-  fullName: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(System.Int32)
-  nameWithType: QuoteModule.ListQuotes(Int32)
 - uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes*
   name: ListQuotes
   href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_ListQuotes_
@@ -1018,6 +1029,18 @@ references:
   commentId: M:FrankieBot.Discord.Modules.QuoteModule.Quote
   fullName: FrankieBot.Discord.Modules.QuoteModule.Quote()
   nameWithType: QuoteModule.Quote()
+- uid: FrankieBot.Discord.Modules.QuoteModule.Quote(IUser)
+  name: Quote(IUser)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_Quote_IUser_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.Quote(IUser)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.Quote(IUser)
+  nameWithType: QuoteModule.Quote(IUser)
+- uid: FrankieBot.Discord.Modules.QuoteModule.Quote(System.Int32)
+  name: Quote(Int32)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_Quote_System_Int32_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.Quote(System.Int32)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.Quote(System.Int32)
+  nameWithType: QuoteModule.Quote(Int32)
 - uid: FrankieBot.Discord.Modules.QuoteModule.Quote*
   name: Quote
   href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_Quote_
@@ -1025,6 +1048,19 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Modules.QuoteModule.Quote
   nameWithType: QuoteModule.Quote
+- uid: FrankieBot.Discord.Modules.QuoteModule.RemoveQuote(System.Int32)
+  name: RemoveQuote(Int32)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_RemoveQuote_System_Int32_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.RemoveQuote(System.Int32)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.RemoveQuote(System.Int32)
+  nameWithType: QuoteModule.RemoveQuote(Int32)
+- uid: FrankieBot.Discord.Modules.QuoteModule.RemoveQuote*
+  name: RemoveQuote
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_RemoveQuote_
+  commentId: Overload:FrankieBot.Discord.Modules.QuoteModule.RemoveQuote
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Modules.QuoteModule.RemoveQuote
+  nameWithType: QuoteModule.RemoveQuote
 - uid: FrankieBot.Discord.Services
   name: FrankieBot.Discord.Services
   href: api/FrankieBot.Discord.Services.html

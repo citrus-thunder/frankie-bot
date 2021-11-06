@@ -104,7 +104,7 @@ await _db.RunDBAction(Context, (context) =&gt;
 
 		// We use As&lt;Quote&gt; since otherwise this would return a generic ViewModel&lt;Quote&gt;
 		// object when we specifically want a Quote object
-		var quote = Quote.FindOne(connection, (q) =&gt; q.Author == authorID).As&lt;Quote&gt;();
+		var quote = Quote.FindOne(connection, (q) =&gt; q.AuthorID == authorID).As&lt;Quote&gt;();
 
 	// Example 2: Update existing quote's recorded timestamp
 
@@ -137,7 +137,7 @@ await _db.RunDBAction(Context, (context) =&gt;
 <p>Right away, we can use this collection to access the matching viewmodels through its <code>Content</code> property, and mass-apply <code>Save()</code> or <code>Delete()</code> to every viewmodel within. Coupling a ViewModelContainer with linq's <code>ForEach()</code> method makes mass-updating the models contained within easy -- with a single caveat.</p>
 <p>It is important to note that the viewmodels contained within a container upon creation are simple, generic viewmodels which only contain default operations (Save, Delete, and a direct reference to the underlying Model, <em>which should not be manipulated directly</em>). To access properties and methods defined in concrete viewmodels (such as <code>Quote</code>), the container's contents must be converted to the concrete implementation via <code>ContentAs&lt;T&gt;()</code>.</p>
 <pre><code class="lang-csharp">// Example: Getting a container of Quote viewmodels -- not &quot;ViewModel&lt;Quote&gt;&quot; viewmodels
-var quote = Quote.Find(connection, (q) =&gt; q.Author = authorID).ContentAs&lt;Quote&gt;();
+var quote = Quote.Find(connection, (q) =&gt; q.AuthorID = authorID).ContentAs&lt;Quote&gt;();
 </code></pre>
 <p>Now, with the ViewModelContainer's contents casted as <code>Quote</code> viewmodels, one can access each item's <code>Quote</code> properties</p>
 <h3 id="custom-viewmodelcontainer-implementations">Custom ViewModelContainer Implementations</h3>

@@ -49,7 +49,7 @@ await _db.RunDBAction(Context, (context) =>
 
 		// We use As<Quote> since otherwise this would return a generic ViewModel<Quote>
 		// object when we specifically want a Quote object
-		var quote = Quote.FindOne(connection, (q) => q.Author == authorID).As<Quote>();
+		var quote = Quote.FindOne(connection, (q) => q.AuthorID == authorID).As<Quote>();
 
 	// Example 2: Update existing quote's recorded timestamp
 
@@ -88,7 +88,7 @@ Right away, we can use this collection to access the matching viewmodels through
 It is important to note that the viewmodels contained within a container upon creation are simple, generic viewmodels which only contain default operations (Save, Delete, and a direct reference to the underlying Model, *which should not be manipulated directly*). To access properties and methods defined in concrete viewmodels (such as `Quote`), the container's contents must be converted to the concrete implementation via `ContentAs<T>()`.
 ```csharp
 // Example: Getting a container of Quote viewmodels -- not "ViewModel<Quote>" viewmodels
-var quote = Quote.Find(connection, (q) => q.Author = authorID).ContentAs<Quote>();
+var quote = Quote.Find(connection, (q) => q.AuthorID = authorID).ContentAs<Quote>();
 ```
 Now, with the ViewModelContainer's contents casted as `Quote` viewmodels, one can access each item's `Quote` properties
 

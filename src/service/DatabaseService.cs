@@ -180,6 +180,7 @@ namespace FrankieBot.Discord.Services
 			var eb = new EmbedBuilder()
 				.WithAuthor(quote.Author)
 				.WithDescription(quote.Content)
+				.WithColor(0x00c88c)
 				.WithTimestamp(new DateTimeOffset(quote.QuoteTimeStamp.ToLocalTime()));
 
 			await context.Channel.SendMessageAsync(embed: eb.Build());
@@ -193,8 +194,16 @@ namespace FrankieBot.Discord.Services
 		/// <returns></returns>
 		public async Task PostQuote(SocketCommandContext context, int quoteID)
 		{
-			var quote = await GetQuote(context, quoteID);
-			await PostQuote(context, quote);
+			Quote quote = null;
+			try
+			{
+				quote = await GetQuote(context, quoteID);
+				await PostQuote(context, quote);
+			}
+			catch(DBException ex)
+			{
+				await context.Channel.SendMessageAsync(ex.Message);
+			}
 		}
 
 		/// <summary>
@@ -205,10 +214,6 @@ namespace FrankieBot.Discord.Services
 		/// <returns></returns>
 		public async Task PostQuoteList(SocketCommandContext context, List<Quote> quotes)
 		{
-			var eb = new EmbedBuilder()
-				.WithTitle($"Quotes by {quotes[0].Author.Username}")
-				.WithColor(0x00c88c);
-			
 			var fields = new List<EmbedFieldBuilder>();
 			foreach (var quote in quotes)
 			{
@@ -217,9 +222,13 @@ namespace FrankieBot.Discord.Services
 					.WithValue($"{quote.Content}");
 				fields.Add(newField);
 			}
-			eb.WithFields(fields);
 
-			await context.Channel.SendMessageAsync(embed: eb.Build());
+			var eb = new EmbedBuilder()
+				.WithAuthor(quotes[0].Author)
+				.WithColor(0x00c88c)
+				.WithFields(fields);
+
+			await context.Channel.SendMessageAsync(text: $"Quotes by {quotes[0].Author.Username}",embed: eb.Build());
 		}
 
 		/// <summary>
@@ -237,6 +246,10 @@ namespace FrankieBot.Discord.Services
 				{
 					var quoteID = id.ToString();
 					quote = Quote.Find(connection, id).As<Quote>();
+				}
+				if (quote.IsEmpty)
+				{
+					throw new RecordNotFoundException($"Quote with ID [{id}] not found!");
 				}
 				return quote;
 			});

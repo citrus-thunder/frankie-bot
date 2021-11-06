@@ -21,7 +21,7 @@ namespace FrankieBot.DB
 	public class ViewModel<M> : IViewModel where M : DBModel, new()
 	{
 		/// <summary>
-		/// Constructs a new ViewModel instance
+		/// Constructs a new empty ViewModel instance
 		/// </summary>
 		/// <remarks>
 		/// It is recommended to use one of the other constructors
@@ -61,6 +61,15 @@ namespace FrankieBot.DB
 			Model = connection.Table<M>().Where(expression).FirstOrDefault();
 			Initialize();
 		}
+
+		/// <summary>
+		/// Whether the ViewModel contains a valid Model
+		/// </summary>
+		/// <remarks>
+		/// An empty ViewModel suggests no valid records were found when creating it, or its internal Model
+		/// was otherwise never set
+		/// </remarks>
+		public bool IsEmpty => Model == null;
 
 		/// <summary>
 		/// Unique ID
@@ -157,12 +166,16 @@ namespace FrankieBot.DB
 		public static ViewModel<M> Find(DBConnection connection, int id)
 		{
 			var model = connection.Table<M>().Where((model) => model.ID == id).FirstOrDefault();
-			var res = new ViewModel<M>
+			ViewModel<M> res = new ViewModel<M>();
+			if (model != null)
 			{
-				Model = model,
-				Connection = connection
-			};
-			res.Initialize();
+				res = new ViewModel<M>
+				{
+					Model = model,
+					Connection = connection
+				};
+				res.Initialize();
+			}
 			return res;
 		}
 
@@ -197,9 +210,12 @@ namespace FrankieBot.DB
 		public K As<K>() where K : ViewModel<M>, new()
 		{
 			var c = new K();
-			c.Model= this.Model;
-			c.Connection = this.Connection;
-			c.Initialize();
+			if (this.Model != null)
+			{
+				c.Model = this.Model;
+				c.Connection = this.Connection;
+				c.Initialize();
+			}
 			return c;
 		}
 
