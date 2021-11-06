@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "/home/max/Projects/frankie-bot/docs-src",
+  "source_base_path": "E:/Projects/frankie-bot/docs-src",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Container.Options.html",
-          "hash": "BOo9BBPlYyrGVjw3j/YjfeAXvApjzk3dTSjk21JsgLM="
+          "hash": "dF02TEEF6FJ2C7rfDNiVB4+qFGbyiz1/G3WmC9h9XFo="
         }
       },
       "is_incremental": false,
@@ -33,10 +33,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.DBConfig.html",
-          "hash": "lqJ6bJAKfPBkcN1cIACtS976oKoE393oA6Cg6Es1oTo="
+          "hash": "JILiw73BicKPZG7gd6bxL2lJbCACGpbWDZ2QT5JQyEQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -45,10 +45,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.DBConnection.html",
-          "hash": "z6Yb5fD4t5CyiFMDWUTOGMnI5TQfmQefq7zvgIHs8W8="
+          "hash": "GYC+P/97iAPfimGOhqZGAEz+CE8DMn4Tf8HYbB10sWA="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -57,10 +57,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.DBModel.html",
-          "hash": "Sxz5xGJXcZQqiozHyvOvN8KZTjytB9I0yEIQumKTsXY="
+          "hash": "xvte47DR9fjdN2o5fkz8GAaGZ4cUIxX6Nr2IXlGgzTQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -69,10 +69,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Option.html",
-          "hash": "/qZ8QAJkwFqFRf1uk4RBvP/gSl/QtSZYuMafxjKrP5k="
+          "hash": "SNgpPqpIELmAKVS55Ve7QhQCc49dmYpdjhZOQL1sahk="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -81,10 +81,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Quote.html",
-          "hash": "rGBgDUS1oY3tuh4fT/+xN+AhhuqTKefpAG5sCAYw9H8="
+          "hash": "mTP0zalpOJbbG0Sj+mkv+XY9RfMOq1wHRWQkExBkjsk="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -93,10 +93,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.Model.Server.html",
-          "hash": "OK+ncOsAUHcFieiBTtw6eUx2bDf0iNxDZPVDNVWIAIE="
+          "hash": "TjrdGrel49QQUcKI0E0knN2GJl3u7HXpGJPd4ahu0Dc="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -108,7 +108,7 @@
           "hash": "TJ5cn3NKrWWjVmuryDGX478HyvzNrLkB1JMEzgnejBk="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel-1.html",
-          "hash": "laHUwEbTkwz25Pnt0D3WN3GZRdXD5Im1ZGF3xVrcaDY="
+          "hash": "LIM0/qv7Kw7lixhy0oC48wSha+MwFllYSBl5sDmIwTQ="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Option.html",
-          "hash": "Ymd13KcKUL3zhpR2/ENNdFxje7OTYXOmMZ7HQImRVzM="
+          "hash": "L9a1tU5FEJvJYiEtzhuuE3+VgjstVYSiInaQPzQTu/U="
         }
       },
       "is_incremental": false,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Quote.html",
-          "hash": "Gvbz+rREuMiKcDxl+Qr7t3uhM3Yy82IrYOCUF1TBzN4="
+          "hash": "AZNmtRdWbbrvtSfomRXQ0BOby/Ck4ZGKojUcOoaoTHM="
         }
       },
       "is_incremental": false,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModel.Server.html",
-          "hash": "hmYECGZDSGj9KnJYs8uC2y+3t3vKiQoG8+0ryeldAG0="
+          "hash": "QQ6frUAm3NNs1TcCc/lZculFslVl7Rh0+2YUu7fbh5k="
         }
       },
       "is_incremental": false,
@@ -177,10 +177,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DB.ViewModelContainer-1.html",
-          "hash": "zs542s5mQDrtYWyBB5QIlA+OOi2irsA2MGf+vsNmFgw="
+          "hash": "pjshEufbiDmfZADqeb6FQ1QKboOQdQZd8xbsUjSHgY0="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -201,10 +201,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Bot.html",
-          "hash": "+YgOOTQsNqrNVqyefLDNuhC7KqjLXf3AnZimcMXBuyc="
+          "hash": "MO011+0mlYcuICcAO9aGBwqMM0qkyAtV4c4XJnP1yfQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.AdminModule.html",
-          "hash": "zMP2UT32T3v15AcobkC4U0St9oqXsyCZ13WcIer4pZ0="
+          "hash": "YkpKixS/Idke5rwqxijdS48n40DiW5W0NWM9PaSmqe8="
         }
       },
       "is_incremental": false,
@@ -225,10 +225,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.ChatModule.html",
-          "hash": "R0JY5mUY2Qb8iP60tjhlp37w5nsUNCJ2ZdfqoSuzIMk="
+          "hash": "xE20HWtmuDJ5ZTba33dg9Qb99uEe36v3m20ttF6wn6k="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -237,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Modules.QuoteModule.html",
-          "hash": "gK1ERLRyBNO1RT8LBk0xjHyMLHp+YUn9bckIp7MUyZQ="
+          "hash": "vxlfMj75Eymuu7svK0U+ym62bvM60B/QuVFdhd2VNtU="
         }
       },
       "is_incremental": false,
@@ -261,10 +261,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.CommandHandlerService.html",
-          "hash": "bnYu3bWYOgrupKd9KTMdBQd9RXSyb/0EwsFfO34aLeA="
+          "hash": "o2Ag4lC9rs8atLv/wcc6iuG6dnFxVid2gvgjxD2r0X0="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -273,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.DataBaseService.html",
-          "hash": "5wwCEwP0bmD8iToTOXfbA3KjGZGjLFlQXTcfg12LWA8="
+          "hash": "PB89KyVWL8mAdJggIs8KGtJ65EKUhVngVyzY14H2EaI="
         }
       },
       "is_incremental": false,
@@ -285,10 +285,10 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.Discord.Services.EavesDropperService.html",
-          "hash": "Ay9B5L7ji4z1xsk8gwuzMfEU3VO8yn1MPeQB5T3za7s="
+          "hash": "+GvdNn5/OM3fSctmn6x1OFVptvSRJB8flQF5KvGK6jQ="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -312,7 +312,7 @@
           "hash": "9fFh/jmAi9bnCOoEHD9NfcUdHW0H9qEDhNdTiVdZkH4="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -321,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/FrankieBot.DunceDetector.html",
-          "hash": "nZshwRurp5VXw6vSQSfieXp98tnyImA8GHH0/oZVjpI="
+          "hash": "OYDYa3Z6O2OQeDPabq/QP641STn4Z9E6EeVxfJxoRjE="
         }
       },
       "is_incremental": false,
@@ -348,7 +348,7 @@
           "hash": "5iRAuldpj6x7veLbyLRTDr6IHm9qfqAqTs2M/R8kg+c="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -384,7 +384,7 @@
           "hash": "27hExnmzZDkRmXLxx8KSny/nLDBaoCPnVAAEgCE2oz0="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -408,7 +408,7 @@
           "hash": "zFGbuf7MMbEap6KdDEsgH9OvoW+7OK2sbB/pVT8pDp4="
         }
       },
-      "is_incremental": true,
+      "is_incremental": false,
       "version": ""
     },
     {
@@ -443,7 +443,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 28,
-          "skipped_file_count": 21
+          "skipped_file_count": 17
         },
         "TocDocumentProcessor": {
           "can_incremental": false,
