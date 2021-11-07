@@ -102,7 +102,6 @@ namespace FrankieBot.Discord.Services
 				{
 					using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild)))
 					{
-						//var options = Option.FindAll(connection).ContentAs<Option>().ContainerAs<Options>();
 						var options = Option.FindAll(connection).As<Options, Option>();
 						var prefix = options.Get("command_prefix");
 						validPrefix = message.HasStringPrefix(prefix, ref argPos);

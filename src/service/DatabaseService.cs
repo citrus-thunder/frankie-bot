@@ -77,6 +77,7 @@ namespace FrankieBot.Discord.Services
 						connection.CreateTable<Model.Option>();
 						connection.CreateTable<Model.Quote>();
 						connection.CreateTable<Model.Server>();
+						connection.CreateTable<Model.CronJob>();
 
 						// temp: once we have more options, we should have a separate
 						// method to set defaults

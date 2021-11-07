@@ -33,7 +33,7 @@ namespace FrankieBot.Discord
 		{
 			using (var services = ConfigureServices())
 			{
-				var client = services.GetRequiredService<DiscordSocketClient>();		
+				var client = services.GetRequiredService<DiscordSocketClient>();
 				await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("FRANKIE_TOKEN"));
 
 				await client.StartAsync();
@@ -68,6 +68,7 @@ namespace FrankieBot.Discord
 				.AddSingleton<CommandService>()
 				.AddSingleton<CommandHandlerService>()
 				.AddSingleton<DataBaseService>()
+				.AddSingleton<SchedulerService>()
 				.BuildServiceProvider();
 		}
 	}
