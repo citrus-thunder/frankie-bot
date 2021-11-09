@@ -1,3 +1,5 @@
+#pragma warning disable 1591 // Hide XMLdoc warnings.
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,6 +15,12 @@ namespace FrankieBot.Discord.Modules
 	/// </summary>
 	public class TestModule : ModuleBase<SocketCommandContext>
 	{
+		/// <summary>
+		/// Reference to SchedulerService
+		/// </summary>
+		/// <remarks>
+		/// Set automatically via Dependency Injection
+		/// </remarks>
 		public SchedulerService SchedulerService { get; set; }
 
 		/// <summary>
@@ -42,9 +50,10 @@ namespace FrankieBot.Discord.Modules
 
 		[Command("stopcron")]
 		[RequireOwner]
-		public async Task StopCron()
+		public void StopCron()
 		{
 			SchedulerService.GetJob(Context.Guild, "test job")?.Stop();
 		}
 	}
 }
+#pragma warning restore 1591
