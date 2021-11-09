@@ -81,35 +81,11 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">DBConfig</span></div>
   </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetHashCode()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.GetType()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.MemberwiseClone()</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
-    </div>
-    <div>
-      <span class="xref">System.Object.ToString()</span>
-    </div>
-  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="FrankieBot.DB.html">FrankieBot.DB</a></h6>
   <h6><strong>Assembly</strong>: frankie-bot.dll</h6>
   <h5 id="FrankieBot_DB_DBConfig_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class DBConfig</code></pre>
+    <pre><code class="lang-csharp hljs">public static class DBConfig : object</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -126,7 +102,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public const string DATABASE_FILE_EXTENSION = &quot;.db&quot;</code></pre>
+    <pre><code class="lang-csharp hljs">public const string DATABASE_FILE_EXTENSION = null</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -175,18 +151,48 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_DBConfig_METADATA_ROOT.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConfig.METADATA_ROOT%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_DBConfig_GLOBAL_DATA_FILE.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConfig.GLOBAL_DATA_FILE%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/DBConfig.cs/#L25">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/DBConfig.cs/#L37">View Source</a>
   </span>
-  <h4 id="FrankieBot_DB_DBConfig_METADATA_ROOT" data-uid="FrankieBot.DB.DBConfig.METADATA_ROOT">METADATA_ROOT</h4>
-  <div class="markdown level1 summary"><p>Root directory for FrankieBot's metadata files</p>
+  <h4 id="FrankieBot_DB_DBConfig_GLOBAL_DATA_FILE" data-uid="FrankieBot.DB.DBConfig.GLOBAL_DATA_FILE">GLOBAL_DATA_FILE</h4>
+  <div class="markdown level1 summary"><p>Location of FrankieBot's server global data db file</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly string METADATA_ROOT</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly string GLOBAL_DATA_FILE</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_DBConfig_GLOBAL_DATA_ROOT.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConfig.GLOBAL_DATA_ROOT%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/DBConfig.cs/#L25">View Source</a>
+  </span>
+  <h4 id="FrankieBot_DB_DBConfig_GLOBAL_DATA_ROOT" data-uid="FrankieBot.DB.DBConfig.GLOBAL_DATA_ROOT">GLOBAL_DATA_ROOT</h4>
+  <div class="markdown level1 summary"><p>Root directory for FrankieBot's global data files</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly string GLOBAL_DATA_ROOT</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -217,36 +223,6 @@
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public static readonly string SERVER_DATA_ROOT</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.String</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_DBConfig_SERVER_META_FILE.md&amp;value=---%0Auid%3A%20FrankieBot.DB.DBConfig.SERVER_META_FILE%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/DBConfig.cs/#L37">View Source</a>
-  </span>
-  <h4 id="FrankieBot_DB_DBConfig_SERVER_META_FILE" data-uid="FrankieBot.DB.DBConfig.SERVER_META_FILE">SERVER_META_FILE</h4>
-  <div class="markdown level1 summary"><p>Location of FrankieBot's server metadata file</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static readonly string SERVER_META_FILE</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">

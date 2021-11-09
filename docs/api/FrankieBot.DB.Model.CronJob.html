@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class AdminModule
+    <title>Class CronJob
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class AdminModule
+    <meta name="title" content="Class CronJob
    ">
     <meta name="generator" content="docfx 2.58.0.0">
     
@@ -68,42 +68,49 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="FrankieBot.Discord.Modules.AdminModule">
+            <article class="content wrap" id="_content" data-uid="FrankieBot.DB.Model.CronJob">
   
   
-  <h1 id="FrankieBot_Discord_Modules_AdminModule" data-uid="FrankieBot.Discord.Modules.AdminModule" class="text-break">Class AdminModule
+  <h1 id="FrankieBot_DB_Model_CronJob" data-uid="FrankieBot.DB.Model.CronJob" class="text-break">Class CronJob
   </h1>
-  <div class="markdown level0 summary"><p>Administrative command module</p>
+  <div class="markdown level0 summary"><p>Model object representing a scheduled job</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">AdminModule</span></div>
+    <div class="level1"><a class="xref" href="FrankieBot.DB.Model.DBModel.html">DBModel</a></div>
+    <div class="level2"><span class="xref">CronJob</span></div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="FrankieBot.Discord.Modules.html">FrankieBot.Discord.Modules</a></h6>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="FrankieBot.DB.Model.DBModel.html#FrankieBot_DB_Model_DBModel_ID">DBModel.ID</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="FrankieBot.DB.Model.html">FrankieBot.DB.Model</a></h6>
   <h6><strong>Assembly</strong>: frankie-bot.dll</h6>
-  <h5 id="FrankieBot_Discord_Modules_AdminModule_syntax">Syntax</h5>
+  <h5 id="FrankieBot_DB_Model_CronJob_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AdminModule : ModuleBase&lt;SocketCommandContext&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class CronJob : DBModel</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_Discord_Modules_AdminModule_CommandHandlerService.md&amp;value=---%0Auid%3A%20FrankieBot.Discord.Modules.AdminModule.CommandHandlerService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_Model_CronJob_Active.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.CronJob.Active%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/module/AdminModule.cs/#L34">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/model/CronJob.cs/#L33">View Source</a>
   </span>
-  <a id="FrankieBot_Discord_Modules_AdminModule_CommandHandlerService_" data-uid="FrankieBot.Discord.Modules.AdminModule.CommandHandlerService*"></a>
-  <h4 id="FrankieBot_Discord_Modules_AdminModule_CommandHandlerService" data-uid="FrankieBot.Discord.Modules.AdminModule.CommandHandlerService">CommandHandlerService</h4>
-  <div class="markdown level1 summary"><p>Provides command handling services</p>
+  <a id="FrankieBot_DB_Model_CronJob_Active_" data-uid="FrankieBot.DB.Model.CronJob.Active*"></a>
+  <h4 id="FrankieBot_DB_Model_CronJob_Active" data-uid="FrankieBot.DB.Model.CronJob.Active">Active</h4>
+  <div class="markdown level1 summary"><p>Whether the job is active</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public CommandHandlerService CommandHandlerService { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool Active { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -115,78 +122,59 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="FrankieBot.Discord.Services.CommandHandlerService.html">CommandHandlerService</a></td>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_Discord_Modules_AdminModule_DataBaseService.md&amp;value=---%0Auid%3A%20FrankieBot.Discord.Modules.AdminModule.DataBaseService%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_Model_CronJob_CronString.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.CronJob.CronString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/module/AdminModule.cs/#L28">View Source</a>
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/model/CronJob.cs/#L21">View Source</a>
   </span>
-  <a id="FrankieBot_Discord_Modules_AdminModule_DataBaseService_" data-uid="FrankieBot.Discord.Modules.AdminModule.DataBaseService*"></a>
-  <h4 id="FrankieBot_Discord_Modules_AdminModule_DataBaseService" data-uid="FrankieBot.Discord.Modules.AdminModule.DataBaseService">DataBaseService</h4>
-  <div class="markdown level1 summary"><p>Provides database services</p>
+  <a id="FrankieBot_DB_Model_CronJob_CronString_" data-uid="FrankieBot.DB.Model.CronJob.CronString*"></a>
+  <h4 id="FrankieBot_DB_Model_CronJob_CronString" data-uid="FrankieBot.DB.Model.CronJob.CronString">CronString</h4>
+  <div class="markdown level1 summary"><p>String representing the job's cron schedule</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DataBaseService DataBaseService { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string CronString { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="FrankieBot.Discord.Services.DataBaseService.html">DataBaseService</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="methods">Methods
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_Discord_Modules_AdminModule_SetPrefix_System_String_.md&amp;value=---%0Auid%3A%20FrankieBot.Discord.Modules.AdminModule.SetPrefix(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/module/AdminModule.cs/#L41">View Source</a>
-  </span>
-  <a id="FrankieBot_Discord_Modules_AdminModule_SetPrefix_" data-uid="FrankieBot.Discord.Modules.AdminModule.SetPrefix*"></a>
-  <h4 id="FrankieBot_Discord_Modules_AdminModule_SetPrefix_System_String_" data-uid="FrankieBot.Discord.Modules.AdminModule.SetPrefix(System.String)">SetPrefix(String)</h4>
-  <div class="markdown level1 summary"><p>Sets the prefix used to identify commands in chat messages</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public async Task SetPrefix(string prefix)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">prefix</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_Model_CronJob_GuildID.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.CronJob.GuildID%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/model/CronJob.cs/#L15">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_Model_CronJob_GuildID_" data-uid="FrankieBot.DB.Model.CronJob.GuildID*"></a>
+  <h4 id="FrankieBot_DB_Model_CronJob_GuildID" data-uid="FrankieBot.DB.Model.CronJob.GuildID">GuildID</h4>
+  <div class="markdown level1 summary"><p>ID of Guild which owns the job</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string GuildID { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -196,7 +184,38 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Task</span></td>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_Model_CronJob_Name.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.CronJob.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/model/CronJob.cs/#L27">View Source</a>
+  </span>
+  <a id="FrankieBot_DB_Model_CronJob_Name_" data-uid="FrankieBot.DB.Model.CronJob.Name*"></a>
+  <h4 id="FrankieBot_DB_Model_CronJob_Name" data-uid="FrankieBot.DB.Model.CronJob.Name">Name</h4>
+  <div class="markdown level1 summary"><p>Name of the job</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -209,10 +228,10 @@
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_Discord_Modules_AdminModule.md&amp;value=---%0Auid%3A%20FrankieBot.Discord.Modules.AdminModule%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/new/main/apiSpec/new?filename=FrankieBot_DB_Model_CronJob.md&amp;value=---%0Auid%3A%20FrankieBot.DB.Model.CronJob%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/module/AdminModule.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/citrus-thunder/frankie-bot/blob/main/src/db/model/CronJob.cs/#L8" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

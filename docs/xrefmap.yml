@@ -84,35 +84,35 @@ references:
   commentId: F:FrankieBot.DB.DBConfig.DATABASE_ROOT
   fullName: FrankieBot.DB.DBConfig.DATABASE_ROOT
   nameWithType: DBConfig.DATABASE_ROOT
-- uid: FrankieBot.DB.DBConfig.METADATA_ROOT
-  name: METADATA_ROOT
-  href: api/FrankieBot.DB.DBConfig.html#FrankieBot_DB_DBConfig_METADATA_ROOT
-  commentId: F:FrankieBot.DB.DBConfig.METADATA_ROOT
-  fullName: FrankieBot.DB.DBConfig.METADATA_ROOT
-  nameWithType: DBConfig.METADATA_ROOT
+- uid: FrankieBot.DB.DBConfig.GLOBAL_DATA_FILE
+  name: GLOBAL_DATA_FILE
+  href: api/FrankieBot.DB.DBConfig.html#FrankieBot_DB_DBConfig_GLOBAL_DATA_FILE
+  commentId: F:FrankieBot.DB.DBConfig.GLOBAL_DATA_FILE
+  fullName: FrankieBot.DB.DBConfig.GLOBAL_DATA_FILE
+  nameWithType: DBConfig.GLOBAL_DATA_FILE
+- uid: FrankieBot.DB.DBConfig.GLOBAL_DATA_ROOT
+  name: GLOBAL_DATA_ROOT
+  href: api/FrankieBot.DB.DBConfig.html#FrankieBot_DB_DBConfig_GLOBAL_DATA_ROOT
+  commentId: F:FrankieBot.DB.DBConfig.GLOBAL_DATA_ROOT
+  fullName: FrankieBot.DB.DBConfig.GLOBAL_DATA_ROOT
+  nameWithType: DBConfig.GLOBAL_DATA_ROOT
 - uid: FrankieBot.DB.DBConfig.SERVER_DATA_ROOT
   name: SERVER_DATA_ROOT
   href: api/FrankieBot.DB.DBConfig.html#FrankieBot_DB_DBConfig_SERVER_DATA_ROOT
   commentId: F:FrankieBot.DB.DBConfig.SERVER_DATA_ROOT
   fullName: FrankieBot.DB.DBConfig.SERVER_DATA_ROOT
   nameWithType: DBConfig.SERVER_DATA_ROOT
-- uid: FrankieBot.DB.DBConfig.SERVER_META_FILE
-  name: SERVER_META_FILE
-  href: api/FrankieBot.DB.DBConfig.html#FrankieBot_DB_DBConfig_SERVER_META_FILE
-  commentId: F:FrankieBot.DB.DBConfig.SERVER_META_FILE
-  fullName: FrankieBot.DB.DBConfig.SERVER_META_FILE
-  nameWithType: DBConfig.SERVER_META_FILE
 - uid: FrankieBot.DB.DBConnection
   name: DBConnection
   href: api/FrankieBot.DB.DBConnection.html
   commentId: T:FrankieBot.DB.DBConnection
   fullName: FrankieBot.DB.DBConnection
   nameWithType: DBConnection
-- uid: FrankieBot.DB.DBConnection.#ctor(Discord.Commands.SocketCommandContext,System.String)
+- uid: FrankieBot.DB.DBConnection.#ctor(SocketCommandContext,System.String)
   name: DBConnection(SocketCommandContext, String)
-  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection__ctor_Discord_Commands_SocketCommandContext_System_String_
-  commentId: M:FrankieBot.DB.DBConnection.#ctor(Discord.Commands.SocketCommandContext,System.String)
-  fullName: FrankieBot.DB.DBConnection.DBConnection(Discord.Commands.SocketCommandContext, System.String)
+  href: api/FrankieBot.DB.DBConnection.html#FrankieBot_DB_DBConnection__ctor_SocketCommandContext_System_String_
+  commentId: M:FrankieBot.DB.DBConnection.#ctor(SocketCommandContext,System.String)
+  fullName: FrankieBot.DB.DBConnection.DBConnection(SocketCommandContext, System.String)
   nameWithType: DBConnection.DBConnection(SocketCommandContext, String)
 - uid: FrankieBot.DB.DBConnection.#ctor*
   name: DBConnection
@@ -140,6 +140,64 @@ references:
   commentId: N:FrankieBot.DB.Model
   fullName: FrankieBot.DB.Model
   nameWithType: FrankieBot.DB.Model
+- uid: FrankieBot.DB.Model.CronJob
+  name: CronJob
+  href: api/FrankieBot.DB.Model.CronJob.html
+  commentId: T:FrankieBot.DB.Model.CronJob
+  fullName: FrankieBot.DB.Model.CronJob
+  nameWithType: CronJob
+- uid: FrankieBot.DB.Model.CronJob.Active
+  name: Active
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_Active
+  commentId: P:FrankieBot.DB.Model.CronJob.Active
+  fullName: FrankieBot.DB.Model.CronJob.Active
+  nameWithType: CronJob.Active
+- uid: FrankieBot.DB.Model.CronJob.Active*
+  name: Active
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_Active_
+  commentId: Overload:FrankieBot.DB.Model.CronJob.Active
+  isSpec: "True"
+  fullName: FrankieBot.DB.Model.CronJob.Active
+  nameWithType: CronJob.Active
+- uid: FrankieBot.DB.Model.CronJob.CronString
+  name: CronString
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_CronString
+  commentId: P:FrankieBot.DB.Model.CronJob.CronString
+  fullName: FrankieBot.DB.Model.CronJob.CronString
+  nameWithType: CronJob.CronString
+- uid: FrankieBot.DB.Model.CronJob.CronString*
+  name: CronString
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_CronString_
+  commentId: Overload:FrankieBot.DB.Model.CronJob.CronString
+  isSpec: "True"
+  fullName: FrankieBot.DB.Model.CronJob.CronString
+  nameWithType: CronJob.CronString
+- uid: FrankieBot.DB.Model.CronJob.GuildID
+  name: GuildID
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_GuildID
+  commentId: P:FrankieBot.DB.Model.CronJob.GuildID
+  fullName: FrankieBot.DB.Model.CronJob.GuildID
+  nameWithType: CronJob.GuildID
+- uid: FrankieBot.DB.Model.CronJob.GuildID*
+  name: GuildID
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_GuildID_
+  commentId: Overload:FrankieBot.DB.Model.CronJob.GuildID
+  isSpec: "True"
+  fullName: FrankieBot.DB.Model.CronJob.GuildID
+  nameWithType: CronJob.GuildID
+- uid: FrankieBot.DB.Model.CronJob.Name
+  name: Name
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_Name
+  commentId: P:FrankieBot.DB.Model.CronJob.Name
+  fullName: FrankieBot.DB.Model.CronJob.Name
+  nameWithType: CronJob.Name
+- uid: FrankieBot.DB.Model.CronJob.Name*
+  name: Name
+  href: api/FrankieBot.DB.Model.CronJob.html#FrankieBot_DB_Model_CronJob_Name_
+  commentId: Overload:FrankieBot.DB.Model.CronJob.Name
+  isSpec: "True"
+  fullName: FrankieBot.DB.Model.CronJob.Name
+  nameWithType: CronJob.Name
 - uid: FrankieBot.DB.Model.DBModel
   name: DBModel
   href: api/FrankieBot.DB.Model.DBModel.html
@@ -326,6 +384,154 @@ references:
   commentId: N:FrankieBot.DB.ViewModel
   fullName: FrankieBot.DB.ViewModel
   nameWithType: FrankieBot.DB.ViewModel
+- uid: FrankieBot.DB.ViewModel.CronJob
+  name: CronJob
+  href: api/FrankieBot.DB.ViewModel.CronJob.html
+  commentId: T:FrankieBot.DB.ViewModel.CronJob
+  fullName: FrankieBot.DB.ViewModel.CronJob
+  nameWithType: CronJob
+- uid: FrankieBot.DB.ViewModel.CronJob.#ctor
+  name: CronJob()
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob__ctor
+  commentId: M:FrankieBot.DB.ViewModel.CronJob.#ctor
+  fullName: FrankieBot.DB.ViewModel.CronJob.CronJob()
+  nameWithType: CronJob.CronJob()
+- uid: FrankieBot.DB.ViewModel.CronJob.#ctor(FrankieBot.DB.DBConnection)
+  name: CronJob(DBConnection)
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob__ctor_FrankieBot_DB_DBConnection_
+  commentId: M:FrankieBot.DB.ViewModel.CronJob.#ctor(FrankieBot.DB.DBConnection)
+  fullName: FrankieBot.DB.ViewModel.CronJob.CronJob(FrankieBot.DB.DBConnection)
+  nameWithType: CronJob.CronJob(DBConnection)
+- uid: FrankieBot.DB.ViewModel.CronJob.#ctor*
+  name: CronJob
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob__ctor_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.#ctor
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.CronJob
+  nameWithType: CronJob.CronJob
+- uid: FrankieBot.DB.ViewModel.CronJob.Active
+  name: Active
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Active
+  commentId: P:FrankieBot.DB.ViewModel.CronJob.Active
+  fullName: FrankieBot.DB.ViewModel.CronJob.Active
+  nameWithType: CronJob.Active
+- uid: FrankieBot.DB.ViewModel.CronJob.Active*
+  name: Active
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Active_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.Active
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.Active
+  nameWithType: CronJob.Active
+- uid: FrankieBot.DB.ViewModel.CronJob.Cron
+  name: Cron
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Cron
+  commentId: P:FrankieBot.DB.ViewModel.CronJob.Cron
+  fullName: FrankieBot.DB.ViewModel.CronJob.Cron
+  nameWithType: CronJob.Cron
+- uid: FrankieBot.DB.ViewModel.CronJob.Cron*
+  name: Cron
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Cron_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.Cron
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.Cron
+  nameWithType: CronJob.Cron
+- uid: FrankieBot.DB.ViewModel.CronJob.CronString
+  name: CronString
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_CronString
+  commentId: P:FrankieBot.DB.ViewModel.CronJob.CronString
+  fullName: FrankieBot.DB.ViewModel.CronJob.CronString
+  nameWithType: CronJob.CronString
+- uid: FrankieBot.DB.ViewModel.CronJob.CronString*
+  name: CronString
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_CronString_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.CronString
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.CronString
+  nameWithType: CronJob.CronString
+- uid: FrankieBot.DB.ViewModel.CronJob.GetHashCode
+  name: GetHashCode()
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_GetHashCode
+  commentId: M:FrankieBot.DB.ViewModel.CronJob.GetHashCode
+  fullName: FrankieBot.DB.ViewModel.CronJob.GetHashCode()
+  nameWithType: CronJob.GetHashCode()
+- uid: FrankieBot.DB.ViewModel.CronJob.GetHashCode*
+  name: GetHashCode
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_GetHashCode_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.GetHashCode
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.GetHashCode
+  nameWithType: CronJob.GetHashCode
+- uid: FrankieBot.DB.ViewModel.CronJob.Guild
+  name: Guild
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Guild
+  commentId: P:FrankieBot.DB.ViewModel.CronJob.Guild
+  fullName: FrankieBot.DB.ViewModel.CronJob.Guild
+  nameWithType: CronJob.Guild
+- uid: FrankieBot.DB.ViewModel.CronJob.Guild*
+  name: Guild
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Guild_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.Guild
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.Guild
+  nameWithType: CronJob.Guild
+- uid: FrankieBot.DB.ViewModel.CronJob.Name
+  name: Name
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Name
+  commentId: P:FrankieBot.DB.ViewModel.CronJob.Name
+  fullName: FrankieBot.DB.ViewModel.CronJob.Name
+  nameWithType: CronJob.Name
+- uid: FrankieBot.DB.ViewModel.CronJob.Name*
+  name: Name
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Name_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.Name
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.Name
+  nameWithType: CronJob.Name
+- uid: FrankieBot.DB.ViewModel.CronJob.Run
+  name: Run
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Run
+  commentId: E:FrankieBot.DB.ViewModel.CronJob.Run
+  fullName: FrankieBot.DB.ViewModel.CronJob.Run
+  nameWithType: CronJob.Run
+- uid: FrankieBot.DB.ViewModel.CronJob.Start
+  name: Start()
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Start
+  commentId: M:FrankieBot.DB.ViewModel.CronJob.Start
+  fullName: FrankieBot.DB.ViewModel.CronJob.Start()
+  nameWithType: CronJob.Start()
+- uid: FrankieBot.DB.ViewModel.CronJob.Start*
+  name: Start
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Start_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.Start
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.Start
+  nameWithType: CronJob.Start
+- uid: FrankieBot.DB.ViewModel.CronJob.Stop
+  name: Stop()
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Stop
+  commentId: M:FrankieBot.DB.ViewModel.CronJob.Stop
+  fullName: FrankieBot.DB.ViewModel.CronJob.Stop()
+  nameWithType: CronJob.Stop()
+- uid: FrankieBot.DB.ViewModel.CronJob.Stop*
+  name: Stop
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Stop_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.Stop
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.Stop
+  nameWithType: CronJob.Stop
+- uid: FrankieBot.DB.ViewModel.CronJob.Timer
+  name: Timer
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Timer
+  commentId: P:FrankieBot.DB.ViewModel.CronJob.Timer
+  fullName: FrankieBot.DB.ViewModel.CronJob.Timer
+  nameWithType: CronJob.Timer
+- uid: FrankieBot.DB.ViewModel.CronJob.Timer*
+  name: Timer
+  href: api/FrankieBot.DB.ViewModel.CronJob.html#FrankieBot_DB_ViewModel_CronJob_Timer_
+  commentId: Overload:FrankieBot.DB.ViewModel.CronJob.Timer
+  isSpec: "True"
+  fullName: FrankieBot.DB.ViewModel.CronJob.Timer
+  nameWithType: CronJob.Timer
 - uid: FrankieBot.DB.ViewModel.Option
   name: Option
   href: api/FrankieBot.DB.ViewModel.Option.html
@@ -492,13 +698,13 @@ references:
   fullName.vb: FrankieBot.DB.ViewModel(Of M).ViewModel(FrankieBot.DB.DBConnection)
   nameWithType: ViewModel<M>.ViewModel(DBConnection)
   nameWithType.vb: ViewModel(Of M).ViewModel(DBConnection)
-- uid: FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+- uid: FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection,Func{`0,System.Boolean})
   name: ViewModel(DBConnection, Func<M, Boolean>)
-  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1__ctor_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__
-  commentId: M:FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1__ctor_FrankieBot_DB_DBConnection_Func__0_System_Boolean__
+  commentId: M:FrankieBot.DB.ViewModel`1.#ctor(FrankieBot.DB.DBConnection,Func{`0,System.Boolean})
   name.vb: ViewModel(DBConnection, Func(Of M, Boolean))
-  fullName: FrankieBot.DB.ViewModel<M>.ViewModel(FrankieBot.DB.DBConnection, System.Func<M, System.Boolean>)
-  fullName.vb: FrankieBot.DB.ViewModel(Of M).ViewModel(FrankieBot.DB.DBConnection, System.Func(Of M, System.Boolean))
+  fullName: FrankieBot.DB.ViewModel<M>.ViewModel(FrankieBot.DB.DBConnection, Func<M, System.Boolean>)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).ViewModel(FrankieBot.DB.DBConnection, Func(Of M, System.Boolean))
   nameWithType: ViewModel<M>.ViewModel(DBConnection, Func<M, Boolean>)
   nameWithType.vb: ViewModel(Of M).ViewModel(DBConnection, Func(Of M, Boolean))
 - uid: FrankieBot.DB.ViewModel`1.#ctor*
@@ -587,13 +793,13 @@ references:
   fullName.vb: FrankieBot.DB.ViewModel(Of M).Delete
   nameWithType: ViewModel<M>.Delete
   nameWithType.vb: ViewModel(Of M).Delete
-- uid: FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+- uid: FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,Func{`0,System.Boolean})
   name: Find(DBConnection, Func<M, Boolean>)
-  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__
-  commentId: M:FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_Find_FrankieBot_DB_DBConnection_Func__0_System_Boolean__
+  commentId: M:FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,Func{`0,System.Boolean})
   name.vb: Find(DBConnection, Func(Of M, Boolean))
-  fullName: FrankieBot.DB.ViewModel<M>.Find(FrankieBot.DB.DBConnection, System.Func<M, System.Boolean>)
-  fullName.vb: FrankieBot.DB.ViewModel(Of M).Find(FrankieBot.DB.DBConnection, System.Func(Of M, System.Boolean))
+  fullName: FrankieBot.DB.ViewModel<M>.Find(FrankieBot.DB.DBConnection, Func<M, System.Boolean>)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).Find(FrankieBot.DB.DBConnection, Func(Of M, System.Boolean))
   nameWithType: ViewModel<M>.Find(DBConnection, Func<M, Boolean>)
   nameWithType.vb: ViewModel(Of M).Find(DBConnection, Func(Of M, Boolean))
 - uid: FrankieBot.DB.ViewModel`1.Find(FrankieBot.DB.DBConnection,System.Int32)
@@ -630,13 +836,13 @@ references:
   fullName.vb: FrankieBot.DB.ViewModel(Of M).FindAll
   nameWithType: ViewModel<M>.FindAll
   nameWithType.vb: ViewModel(Of M).FindAll
-- uid: FrankieBot.DB.ViewModel`1.FindOne(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+- uid: FrankieBot.DB.ViewModel`1.FindOne(FrankieBot.DB.DBConnection,Func{`0,System.Boolean})
   name: FindOne(DBConnection, Func<M, Boolean>)
-  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_FindOne_FrankieBot_DB_DBConnection_System_Func__0_System_Boolean__
-  commentId: M:FrankieBot.DB.ViewModel`1.FindOne(FrankieBot.DB.DBConnection,System.Func{`0,System.Boolean})
+  href: api/FrankieBot.DB.ViewModel-1.html#FrankieBot_DB_ViewModel_1_FindOne_FrankieBot_DB_DBConnection_Func__0_System_Boolean__
+  commentId: M:FrankieBot.DB.ViewModel`1.FindOne(FrankieBot.DB.DBConnection,Func{`0,System.Boolean})
   name.vb: FindOne(DBConnection, Func(Of M, Boolean))
-  fullName: FrankieBot.DB.ViewModel<M>.FindOne(FrankieBot.DB.DBConnection, System.Func<M, System.Boolean>)
-  fullName.vb: FrankieBot.DB.ViewModel(Of M).FindOne(FrankieBot.DB.DBConnection, System.Func(Of M, System.Boolean))
+  fullName: FrankieBot.DB.ViewModel<M>.FindOne(FrankieBot.DB.DBConnection, Func<M, System.Boolean>)
+  fullName.vb: FrankieBot.DB.ViewModel(Of M).FindOne(FrankieBot.DB.DBConnection, Func(Of M, System.Boolean))
   nameWithType: ViewModel<M>.FindOne(DBConnection, Func<M, Boolean>)
   nameWithType.vb: ViewModel(Of M).FindOne(DBConnection, Func(Of M, Boolean))
 - uid: FrankieBot.DB.ViewModel`1.FindOne*
@@ -953,25 +1159,6 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Modules.AdminModule.SetPrefix
   nameWithType: AdminModule.SetPrefix
-- uid: FrankieBot.Discord.Modules.ChatModule
-  name: ChatModule
-  href: api/FrankieBot.Discord.Modules.ChatModule.html
-  commentId: T:FrankieBot.Discord.Modules.ChatModule
-  fullName: FrankieBot.Discord.Modules.ChatModule
-  nameWithType: ChatModule
-- uid: FrankieBot.Discord.Modules.ChatModule.PingAsync
-  name: PingAsync()
-  href: api/FrankieBot.Discord.Modules.ChatModule.html#FrankieBot_Discord_Modules_ChatModule_PingAsync
-  commentId: M:FrankieBot.Discord.Modules.ChatModule.PingAsync
-  fullName: FrankieBot.Discord.Modules.ChatModule.PingAsync()
-  nameWithType: ChatModule.PingAsync()
-- uid: FrankieBot.Discord.Modules.ChatModule.PingAsync*
-  name: PingAsync
-  href: api/FrankieBot.Discord.Modules.ChatModule.html#FrankieBot_Discord_Modules_ChatModule_PingAsync_
-  commentId: Overload:FrankieBot.Discord.Modules.ChatModule.PingAsync
-  isSpec: "True"
-  fullName: FrankieBot.Discord.Modules.ChatModule.PingAsync
-  nameWithType: ChatModule.PingAsync
 - uid: FrankieBot.Discord.Modules.QuoteModule
   name: QuoteModule
   href: api/FrankieBot.Discord.Modules.QuoteModule.html
@@ -984,11 +1171,11 @@ references:
   commentId: M:FrankieBot.Discord.Modules.QuoteModule.AddQuote
   fullName: FrankieBot.Discord.Modules.QuoteModule.AddQuote()
   nameWithType: QuoteModule.AddQuote()
-- uid: FrankieBot.Discord.Modules.QuoteModule.AddQuote(Discord.IUser,System.String)
+- uid: FrankieBot.Discord.Modules.QuoteModule.AddQuote(IUser,System.String)
   name: AddQuote(IUser, String)
-  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_AddQuote_Discord_IUser_System_String_
-  commentId: M:FrankieBot.Discord.Modules.QuoteModule.AddQuote(Discord.IUser,System.String)
-  fullName: FrankieBot.Discord.Modules.QuoteModule.AddQuote(Discord.IUser, System.String)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_AddQuote_IUser_System_String_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.AddQuote(IUser,System.String)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.AddQuote(IUser, System.String)
   nameWithType: QuoteModule.AddQuote(IUser, String)
 - uid: FrankieBot.Discord.Modules.QuoteModule.AddQuote*
   name: AddQuote
@@ -1010,11 +1197,11 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Modules.QuoteModule.DataBaseService
   nameWithType: QuoteModule.DataBaseService
-- uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(Discord.IUser)
+- uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(IUser)
   name: ListQuotes(IUser)
-  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_ListQuotes_Discord_IUser_
-  commentId: M:FrankieBot.Discord.Modules.QuoteModule.ListQuotes(Discord.IUser)
-  fullName: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(Discord.IUser)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_ListQuotes_IUser_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.ListQuotes(IUser)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.ListQuotes(IUser)
   nameWithType: QuoteModule.ListQuotes(IUser)
 - uid: FrankieBot.Discord.Modules.QuoteModule.ListQuotes*
   name: ListQuotes
@@ -1029,11 +1216,11 @@ references:
   commentId: M:FrankieBot.Discord.Modules.QuoteModule.Quote
   fullName: FrankieBot.Discord.Modules.QuoteModule.Quote()
   nameWithType: QuoteModule.Quote()
-- uid: FrankieBot.Discord.Modules.QuoteModule.Quote(Discord.IUser)
+- uid: FrankieBot.Discord.Modules.QuoteModule.Quote(IUser)
   name: Quote(IUser)
-  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_Quote_Discord_IUser_
-  commentId: M:FrankieBot.Discord.Modules.QuoteModule.Quote(Discord.IUser)
-  fullName: FrankieBot.Discord.Modules.QuoteModule.Quote(Discord.IUser)
+  href: api/FrankieBot.Discord.Modules.QuoteModule.html#FrankieBot_Discord_Modules_QuoteModule_Quote_IUser_
+  commentId: M:FrankieBot.Discord.Modules.QuoteModule.Quote(IUser)
+  fullName: FrankieBot.Discord.Modules.QuoteModule.Quote(IUser)
   nameWithType: QuoteModule.Quote(IUser)
 - uid: FrankieBot.Discord.Modules.QuoteModule.Quote(System.Int32)
   name: Quote(Int32)
@@ -1061,6 +1248,64 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Modules.QuoteModule.RemoveQuote
   nameWithType: QuoteModule.RemoveQuote
+- uid: FrankieBot.Discord.Modules.TestModule
+  name: TestModule
+  href: api/FrankieBot.Discord.Modules.TestModule.html
+  commentId: T:FrankieBot.Discord.Modules.TestModule
+  fullName: FrankieBot.Discord.Modules.TestModule
+  nameWithType: TestModule
+- uid: FrankieBot.Discord.Modules.TestModule.CronTest(System.String)
+  name: CronTest(String)
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_CronTest_System_String_
+  commentId: M:FrankieBot.Discord.Modules.TestModule.CronTest(System.String)
+  fullName: FrankieBot.Discord.Modules.TestModule.CronTest(System.String)
+  nameWithType: TestModule.CronTest(String)
+- uid: FrankieBot.Discord.Modules.TestModule.CronTest*
+  name: CronTest
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_CronTest_
+  commentId: Overload:FrankieBot.Discord.Modules.TestModule.CronTest
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Modules.TestModule.CronTest
+  nameWithType: TestModule.CronTest
+- uid: FrankieBot.Discord.Modules.TestModule.PingAsync
+  name: PingAsync()
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_PingAsync
+  commentId: M:FrankieBot.Discord.Modules.TestModule.PingAsync
+  fullName: FrankieBot.Discord.Modules.TestModule.PingAsync()
+  nameWithType: TestModule.PingAsync()
+- uid: FrankieBot.Discord.Modules.TestModule.PingAsync*
+  name: PingAsync
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_PingAsync_
+  commentId: Overload:FrankieBot.Discord.Modules.TestModule.PingAsync
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Modules.TestModule.PingAsync
+  nameWithType: TestModule.PingAsync
+- uid: FrankieBot.Discord.Modules.TestModule.SchedulerService
+  name: SchedulerService
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_SchedulerService
+  commentId: P:FrankieBot.Discord.Modules.TestModule.SchedulerService
+  fullName: FrankieBot.Discord.Modules.TestModule.SchedulerService
+  nameWithType: TestModule.SchedulerService
+- uid: FrankieBot.Discord.Modules.TestModule.SchedulerService*
+  name: SchedulerService
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_SchedulerService_
+  commentId: Overload:FrankieBot.Discord.Modules.TestModule.SchedulerService
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Modules.TestModule.SchedulerService
+  nameWithType: TestModule.SchedulerService
+- uid: FrankieBot.Discord.Modules.TestModule.StopCron
+  name: StopCron()
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_StopCron
+  commentId: M:FrankieBot.Discord.Modules.TestModule.StopCron
+  fullName: FrankieBot.Discord.Modules.TestModule.StopCron()
+  nameWithType: TestModule.StopCron()
+- uid: FrankieBot.Discord.Modules.TestModule.StopCron*
+  name: StopCron
+  href: api/FrankieBot.Discord.Modules.TestModule.html#FrankieBot_Discord_Modules_TestModule_StopCron_
+  commentId: Overload:FrankieBot.Discord.Modules.TestModule.StopCron
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Modules.TestModule.StopCron
+  nameWithType: TestModule.StopCron
 - uid: FrankieBot.Discord.Services
   name: FrankieBot.Discord.Services
   href: api/FrankieBot.Discord.Services.html
@@ -1073,11 +1318,11 @@ references:
   commentId: T:FrankieBot.Discord.Services.CommandHandlerService
   fullName: FrankieBot.Discord.Services.CommandHandlerService
   nameWithType: CommandHandlerService
-- uid: FrankieBot.Discord.Services.CommandHandlerService.#ctor(System.IServiceProvider)
+- uid: FrankieBot.Discord.Services.CommandHandlerService.#ctor(IServiceProvider)
   name: CommandHandlerService(IServiceProvider)
-  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService__ctor_System_IServiceProvider_
-  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.#ctor(System.IServiceProvider)
-  fullName: FrankieBot.Discord.Services.CommandHandlerService.CommandHandlerService(System.IServiceProvider)
+  href: api/FrankieBot.Discord.Services.CommandHandlerService.html#FrankieBot_Discord_Services_CommandHandlerService__ctor_IServiceProvider_
+  commentId: M:FrankieBot.Discord.Services.CommandHandlerService.#ctor(IServiceProvider)
+  fullName: FrankieBot.Discord.Services.CommandHandlerService.CommandHandlerService(IServiceProvider)
   nameWithType: CommandHandlerService.CommandHandlerService(IServiceProvider)
 - uid: FrankieBot.Discord.Services.CommandHandlerService.#ctor*
   name: CommandHandlerService
@@ -1111,11 +1356,11 @@ references:
   commentId: T:FrankieBot.Discord.Services.DataBaseService
   fullName: FrankieBot.Discord.Services.DataBaseService
   nameWithType: DataBaseService
-- uid: FrankieBot.Discord.Services.DataBaseService.#ctor(System.IServiceProvider)
+- uid: FrankieBot.Discord.Services.DataBaseService.#ctor(IServiceProvider)
   name: DataBaseService(IServiceProvider)
-  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService__ctor_System_IServiceProvider_
-  commentId: M:FrankieBot.Discord.Services.DataBaseService.#ctor(System.IServiceProvider)
-  fullName: FrankieBot.Discord.Services.DataBaseService.DataBaseService(System.IServiceProvider)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService__ctor_IServiceProvider_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.#ctor(IServiceProvider)
+  fullName: FrankieBot.Discord.Services.DataBaseService.DataBaseService(IServiceProvider)
   nameWithType: DataBaseService.DataBaseService(IServiceProvider)
 - uid: FrankieBot.Discord.Services.DataBaseService.#ctor*
   name: DataBaseService
@@ -1124,11 +1369,11 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.DataBaseService.DataBaseService
   nameWithType: DataBaseService.DataBaseService
-- uid: FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath(Discord.WebSocket.SocketGuild)
+- uid: FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath(SocketGuild)
   name: GetServerDBFilePath(SocketGuild)
-  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_GetServerDBFilePath_Discord_WebSocket_SocketGuild_
-  commentId: M:FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath(Discord.WebSocket.SocketGuild)
-  fullName: FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath(Discord.WebSocket.SocketGuild)
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_GetServerDBFilePath_SocketGuild_
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath(SocketGuild)
+  fullName: FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath(SocketGuild)
   nameWithType: DataBaseService.GetServerDBFilePath(SocketGuild)
 - uid: FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath(System.UInt64)
   name: GetServerDBFilePath(UInt64)
@@ -1143,13 +1388,13 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.DataBaseService.GetServerDBFilePath
   nameWithType: DataBaseService.GetServerDBFilePath
-- uid: FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext,System.Action{Discord.Commands.SocketCommandContext})
+- uid: FrankieBot.Discord.Services.DataBaseService.RunDBAction(SocketCommandContext,Action{SocketCommandContext})
   name: RunDBAction(SocketCommandContext, Action<SocketCommandContext>)
-  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_RunDBAction_Discord_Commands_SocketCommandContext_System_Action_Discord_Commands_SocketCommandContext__
-  commentId: M:FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext,System.Action{Discord.Commands.SocketCommandContext})
+  href: api/FrankieBot.Discord.Services.DataBaseService.html#FrankieBot_Discord_Services_DataBaseService_RunDBAction_SocketCommandContext_Action_SocketCommandContext__
+  commentId: M:FrankieBot.Discord.Services.DataBaseService.RunDBAction(SocketCommandContext,Action{SocketCommandContext})
   name.vb: RunDBAction(SocketCommandContext, Action(Of SocketCommandContext))
-  fullName: FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext, System.Action<Discord.Commands.SocketCommandContext>)
-  fullName.vb: FrankieBot.Discord.Services.DataBaseService.RunDBAction(Discord.Commands.SocketCommandContext, System.Action(Of Discord.Commands.SocketCommandContext))
+  fullName: FrankieBot.Discord.Services.DataBaseService.RunDBAction(SocketCommandContext, Action<SocketCommandContext>)
+  fullName.vb: FrankieBot.Discord.Services.DataBaseService.RunDBAction(SocketCommandContext, Action(Of SocketCommandContext))
   nameWithType: DataBaseService.RunDBAction(SocketCommandContext, Action<SocketCommandContext>)
   nameWithType.vb: DataBaseService.RunDBAction(SocketCommandContext, Action(Of SocketCommandContext))
 - uid: FrankieBot.Discord.Services.DataBaseService.RunDBAction*
@@ -1165,11 +1410,11 @@ references:
   commentId: T:FrankieBot.Discord.Services.EavesDropperService
   fullName: FrankieBot.Discord.Services.EavesDropperService
   nameWithType: EavesDropperService
-- uid: FrankieBot.Discord.Services.EavesDropperService.#ctor(System.IServiceProvider)
+- uid: FrankieBot.Discord.Services.EavesDropperService.#ctor(IServiceProvider)
   name: EavesDropperService(IServiceProvider)
-  href: api/FrankieBot.Discord.Services.EavesDropperService.html#FrankieBot_Discord_Services_EavesDropperService__ctor_System_IServiceProvider_
-  commentId: M:FrankieBot.Discord.Services.EavesDropperService.#ctor(System.IServiceProvider)
-  fullName: FrankieBot.Discord.Services.EavesDropperService.EavesDropperService(System.IServiceProvider)
+  href: api/FrankieBot.Discord.Services.EavesDropperService.html#FrankieBot_Discord_Services_EavesDropperService__ctor_IServiceProvider_
+  commentId: M:FrankieBot.Discord.Services.EavesDropperService.#ctor(IServiceProvider)
+  fullName: FrankieBot.Discord.Services.EavesDropperService.EavesDropperService(IServiceProvider)
   nameWithType: EavesDropperService.EavesDropperService(IServiceProvider)
 - uid: FrankieBot.Discord.Services.EavesDropperService.#ctor*
   name: EavesDropperService
@@ -1191,6 +1436,57 @@ references:
   isSpec: "True"
   fullName: FrankieBot.Discord.Services.EavesDropperService.InitializeAsync
   nameWithType: EavesDropperService.InitializeAsync
+- uid: FrankieBot.Discord.Services.SchedulerService
+  name: SchedulerService
+  href: api/FrankieBot.Discord.Services.SchedulerService.html
+  commentId: T:FrankieBot.Discord.Services.SchedulerService
+  fullName: FrankieBot.Discord.Services.SchedulerService
+  nameWithType: SchedulerService
+- uid: FrankieBot.Discord.Services.SchedulerService.#ctor(IServiceProvider)
+  name: SchedulerService(IServiceProvider)
+  href: api/FrankieBot.Discord.Services.SchedulerService.html#FrankieBot_Discord_Services_SchedulerService__ctor_IServiceProvider_
+  commentId: M:FrankieBot.Discord.Services.SchedulerService.#ctor(IServiceProvider)
+  fullName: FrankieBot.Discord.Services.SchedulerService.SchedulerService(IServiceProvider)
+  nameWithType: SchedulerService.SchedulerService(IServiceProvider)
+- uid: FrankieBot.Discord.Services.SchedulerService.#ctor*
+  name: SchedulerService
+  href: api/FrankieBot.Discord.Services.SchedulerService.html#FrankieBot_Discord_Services_SchedulerService__ctor_
+  commentId: Overload:FrankieBot.Discord.Services.SchedulerService.#ctor
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.SchedulerService.SchedulerService
+  nameWithType: SchedulerService.SchedulerService
+- uid: FrankieBot.Discord.Services.SchedulerService.AddJob(FrankieBot.DB.ViewModel.CronJob)
+  name: AddJob(CronJob)
+  href: api/FrankieBot.Discord.Services.SchedulerService.html#FrankieBot_Discord_Services_SchedulerService_AddJob_FrankieBot_DB_ViewModel_CronJob_
+  commentId: M:FrankieBot.Discord.Services.SchedulerService.AddJob(FrankieBot.DB.ViewModel.CronJob)
+  fullName: FrankieBot.Discord.Services.SchedulerService.AddJob(FrankieBot.DB.ViewModel.CronJob)
+  nameWithType: SchedulerService.AddJob(CronJob)
+- uid: FrankieBot.Discord.Services.SchedulerService.AddJob(SocketCommandContext,System.String,System.String)
+  name: AddJob(SocketCommandContext, String, String)
+  href: api/FrankieBot.Discord.Services.SchedulerService.html#FrankieBot_Discord_Services_SchedulerService_AddJob_SocketCommandContext_System_String_System_String_
+  commentId: M:FrankieBot.Discord.Services.SchedulerService.AddJob(SocketCommandContext,System.String,System.String)
+  fullName: FrankieBot.Discord.Services.SchedulerService.AddJob(SocketCommandContext, System.String, System.String)
+  nameWithType: SchedulerService.AddJob(SocketCommandContext, String, String)
+- uid: FrankieBot.Discord.Services.SchedulerService.AddJob*
+  name: AddJob
+  href: api/FrankieBot.Discord.Services.SchedulerService.html#FrankieBot_Discord_Services_SchedulerService_AddJob_
+  commentId: Overload:FrankieBot.Discord.Services.SchedulerService.AddJob
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.SchedulerService.AddJob
+  nameWithType: SchedulerService.AddJob
+- uid: FrankieBot.Discord.Services.SchedulerService.GetJob(IGuild,System.String)
+  name: GetJob(IGuild, String)
+  href: api/FrankieBot.Discord.Services.SchedulerService.html#FrankieBot_Discord_Services_SchedulerService_GetJob_IGuild_System_String_
+  commentId: M:FrankieBot.Discord.Services.SchedulerService.GetJob(IGuild,System.String)
+  fullName: FrankieBot.Discord.Services.SchedulerService.GetJob(IGuild, System.String)
+  nameWithType: SchedulerService.GetJob(IGuild, String)
+- uid: FrankieBot.Discord.Services.SchedulerService.GetJob*
+  name: GetJob
+  href: api/FrankieBot.Discord.Services.SchedulerService.html#FrankieBot_Discord_Services_SchedulerService_GetJob_
+  commentId: Overload:FrankieBot.Discord.Services.SchedulerService.GetJob
+  isSpec: "True"
+  fullName: FrankieBot.Discord.Services.SchedulerService.GetJob
+  nameWithType: SchedulerService.GetJob
 - uid: FrankieBot.DunceDetector
   name: DunceDetector
   href: api/FrankieBot.DunceDetector.html
