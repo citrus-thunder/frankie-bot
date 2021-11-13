@@ -11,6 +11,9 @@ namespace FrankieBot.DB.ViewModel
 	/// </summary>
 	public class Option : ViewModel<Model.Option>
 	{
+		/// <summary>
+		/// Default values for common options
+		/// </summary>
 		public static readonly Dictionary<string, string> DefaultValues;
 		static Option()
 		{
@@ -23,11 +26,22 @@ namespace FrankieBot.DB.ViewModel
 			};
 		}
 
+		/// <summary>
+		/// Creates a new Option ViewModel instance
+		/// </summary>
+		/// <remarks>
+		/// It is recommended to use one of the other constructors whenever possible
+		/// </remarks>
 		public Option() : base()
 		{
 
 		}
 
+		/// <summary>
+		/// Creates a new Option ViewModel instance
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <returns></returns>
 		public Option(DBConnection connection) : base(connection)
 		{
 

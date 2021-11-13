@@ -50,3 +50,27 @@ public class RecordNotFoundException : DBException
 
 	}
 }
+
+/// <summary>
+/// Represents an exception encountered when a database operation
+/// attempts to violate a constraint
+/// </summary>
+public class ConstraintViolationException : DBException
+{
+	/// <summary>
+	/// Creates a new ConstraintViolationException instance
+	/// </summary>
+	public ConstraintViolationException() : base()
+	{
+
+	}
+
+	/// <summary>
+	/// Creates a new ConstraintViolationException instance
+	/// </summary>
+	/// <param name="message"></param>
+	public ConstraintViolationException(string message) : base(message)
+	{
+
+	}
+}

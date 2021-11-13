@@ -70,6 +70,12 @@ namespace FrankieBot.DB.Container
 			return res;
 		}
 
+		/// <summary>
+		/// Attempts to get an option with the given title.
+		/// </summary>
+		/// <param name="name"></param>
+		/// <param name="value"></param>
+		/// <returns>True if an option is found, otherise false</returns>
 		public bool TryGet(string name, out string value)
 		{
 			value = Content.Where(o => o.Name == name).FirstOrDefault()?.Value;

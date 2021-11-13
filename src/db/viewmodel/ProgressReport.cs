@@ -6,8 +6,15 @@ using Model = FrankieBot.DB.Model;
 
 namespace FrankieBot.DB.ViewModel
 {
+	/// <summary>
+	/// Represents a user-submitted progress report
+	/// </summary>
 	public class ProgressReport : ViewModel<Model.ProgressReport>
 	{
+		/// <summary>
+		/// User who submitted the progress report
+		/// </summary>
+		/// <value></value>
 		public IUser User
 		{
 			get => m_User;
@@ -22,6 +29,10 @@ namespace FrankieBot.DB.ViewModel
 		}
 		private IUser m_User;
 
+		/// <summary>
+		/// The <see cref="ProgressReportWindow"/> this report was submitted to
+		/// </summary>
+		/// <value></value>
 		public ProgressReportWindow Window
 		{
 			get => m_Window;
@@ -36,18 +47,30 @@ namespace FrankieBot.DB.ViewModel
 		}
 		private ProgressReportWindow m_Window;
 
+		/// <summary>
+		/// Word count recorded as part of this progress report
+		/// </summary>
+		/// <value></value>
 		public int WordCount
 		{
 			get => Model.WordCount;
 			set => Model.WordCount = value;
 		}
 
+		/// <summary>
+		/// Optional user note recorded as part of this progress report
+		/// </summary>
+		/// <value></value>
 		public string Note
 		{
 			get => Model.Note;
 			set => Model.Note = value;
 		}
 
+		/// <summary>
+		/// Time the progress report was submitted
+		/// </summary>
+		/// <value></value>
 		public DateTime TimeStamp
 		{
 			get => Model.TimeStamp;
