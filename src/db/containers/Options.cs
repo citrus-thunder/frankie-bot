@@ -35,7 +35,7 @@ namespace FrankieBot.DB.Container
 		/// <returns></returns>
 		public string Get(string name)
 		{
-			return Content.Where(o => o.Name == name).FirstOrDefault().Value;
+			return Content.Where(o => o.Name == name).FirstOrDefault()?.Value;
 		}
 
 		/// <summary>
@@ -68,6 +68,12 @@ namespace FrankieBot.DB.Container
 				}
 			}
 			return res;
+		}
+
+		public bool TryGet(string name, out string value)
+		{
+			value = Content.Where(o => o.Name == name).FirstOrDefault()?.Value;
+			return value != null;
 		}
 	}
 }

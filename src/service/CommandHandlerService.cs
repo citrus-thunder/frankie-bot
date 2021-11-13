@@ -25,6 +25,11 @@ namespace FrankieBot.Discord.Services
 	public class CommandHandlerService
 	{
 		/// <summary>
+		/// Option title for command prefix option
+		/// </summary>
+		public const string OptionCommandPrefix = "command_prefix";
+
+		/// <summary>
 		/// Available prefix options for Frankie commands
 		/// </summary>
 		/// <value></value>
@@ -102,9 +107,17 @@ namespace FrankieBot.Discord.Services
 				{
 					using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild)))
 					{
-						var options = Option.FindAll(connection).As<Options, Option>();
-						var prefix = options.Get("command_prefix");
-						validPrefix = message.HasStringPrefix(prefix, ref argPos);
+						var option = Option.FindOne(connection, o => o.Name == OptionCommandPrefix).As<Option>();
+						if (option.IsEmpty)
+						{
+							option = new Option(connection)
+							{
+								Name = OptionCommandPrefix
+							};
+							option.Initialize();
+							option.Save();
+						}
+						validPrefix = message.HasStringPrefix(option.Value, ref argPos);
 					}
 				});
 

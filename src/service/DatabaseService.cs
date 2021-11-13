@@ -78,13 +78,8 @@ namespace FrankieBot.Discord.Services
 						connection.CreateTable<Model.Quote>();
 						connection.CreateTable<Model.Server>();
 						connection.CreateTable<Model.CronJob>();
-
-						// temp: once we have more options, we should have a separate
-						// method to set defaults
-						var prefixOption = Option.Create(connection).As<Option>();
-						prefixOption.Name = "command_prefix";
-						prefixOption.Value = ".";
-						prefixOption.Save();
+						connection.CreateTable<Model.ProgressReportWindow>();
+						connection.CreateTable<Model.ProgressReport>();
 					}
 				}
 			});

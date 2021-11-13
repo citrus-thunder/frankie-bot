@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 using Model = FrankieBot.DB.Model;
 using Module = FrankieBot.Discord.Modules;
+using Service = FrankieBot.Discord.Services;
 
 namespace FrankieBot.DB.ViewModel
 {
@@ -17,7 +18,8 @@ namespace FrankieBot.DB.ViewModel
 			{
 			{Module.ProgressReportModule.OptionEnabled, "false"},
 			{Module.ProgressReportModule.OptionWindowOpen, "0 0 * * 6"},
-			{Module.ProgressReportModule.OptionWindowDuration, "72"}
+			{Module.ProgressReportModule.OptionWindowDuration, "72"},
+			{Service.CommandHandlerService.OptionCommandPrefix, "."}
 			};
 		}
 
@@ -51,8 +53,16 @@ namespace FrankieBot.DB.ViewModel
 			set => Model.Value = value;
 		}
 
+		/// <summary>
+		/// Initializes a new Option, setting default values if a value is not already set
+		/// </summary>
 		public override void Initialize()
 		{
+			if (Name == null)
+			{
+				return;
+			}
+
 			if (Value == null || Value == string.Empty)
 			{
 				if (DefaultValues.TryGetValue(Name, out string value))
