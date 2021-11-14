@@ -20,8 +20,8 @@ namespace FrankieBot.DB.ViewModel
 			DefaultValues = new Dictionary<string, string>
 			{
 			{Module.ProgressReportModule.OptionEnabled, "false"},
-			{Module.ProgressReportModule.OptionWindowOpen, "0 0 * * 6"},
-			{Module.ProgressReportModule.OptionWindowDuration, "72"},
+			{Module.ProgressReportModule.OptionWindowOpen, "0 0 * * 5"},
+			{Module.ProgressReportModule.OptionWindowDuration, "96"},
 			{Service.CommandHandlerService.OptionCommandPrefix, "."}
 			};
 		}

@@ -174,6 +174,12 @@ namespace FrankieBot.Discord.Modules
 			await Context.Channel.SendMessageAsync("Progress report module disabled");
 		}
 
+		/// <summary>
+		/// Forces open a submission window starting at the current time and
+		/// lasting for the given duration
+		/// </summary>
+		/// <param name="duration"></param>
+		/// <returns></returns>
 		[Command("forceopen")]
 		[RequireUserPermission(GuildPermission.Administrator)]
 		public async Task ForceOpenWindow(int duration)
@@ -266,7 +272,7 @@ namespace FrankieBot.Discord.Modules
 								// should this be part of the CloseWindow command?
 								await announceChannel.SendMessageAsync("The progress report submission window is now closed!");
 							}
-							await CloseWindow(context.Guild);
+							await CloseWindow(context.Guild, window);
 						};
 
 						await scheduler.AddJob(closeJobRecord, false);
@@ -281,7 +287,7 @@ namespace FrankieBot.Discord.Modules
 			});
 		}
 
-		private async Task CloseWindow(IGuild guild)
+		private async Task CloseWindow(IGuild guild, ProgressReportWindow window)
 		{
 			// convenience alias
 			var scheduler = SchedulerService;
@@ -408,6 +414,11 @@ namespace FrankieBot.Discord.Modules
 				await Context.Channel.SendMessageAsync($"Progress report window duration updated. Windows will be open for {duration} hour(s).");
 			}
 
+			/// <summary>
+			/// Sets the channel where submission window open/close announcements are posted
+			/// </summary>
+			/// <param name="channel"></param>
+			/// <returns></returns>
 			[Command("announcechannel")]
 			[Alias("announceat", "announce")]
 			public async Task SetAnnouncementChannel(IMessageChannel channel)

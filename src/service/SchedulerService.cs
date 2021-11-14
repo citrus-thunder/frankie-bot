@@ -38,14 +38,24 @@ namespace FrankieBot.Discord.Services
 			_db = services.GetRequiredService<DataBaseService>();
 		}
 
+		/// <summary>
+		/// Initializes jobs for all guilds
+		/// </summary>
+		/// <returns></returns>
 		public async Task Initialize()
 		{
 			// todo: loop through guilds and init all jobs (call other oberload for each guild)
 			await Task.CompletedTask; // temp
 		}
 
+		/// <summary>
+		/// Initializes jobs for the given guild
+		/// </summary>
+		/// <param name="guild"></param>
+		/// <returns></returns>
 		public async Task Initialize(IGuild guild)
 		{
+			await ClearJobs(guild);
 			// todo: loop through guild's jobs and get them started if active
 			// - we may need an OnResume() method in the CronJob viewmodel to
 			// special cases when picking up a job after it's started
@@ -111,9 +121,19 @@ namespace FrankieBot.Discord.Services
 			return res;
 		}
 
+		/// <summary>
+		/// Stops a job and removes it from the scheduler
+		/// </summary>
+		/// <param name="context"></param>
+		/// <param name="name"></param>
 		public void RemoveJob(SocketCommandContext context, string name)
 		=> RemoveJob(context.Guild, name);
 
+		/// <summary>
+		/// Stops a job and removes it from the scheduler
+		/// </summary>
+		/// <param name="guild"></param>
+		/// <param name="name"></param>
 		public void RemoveJob(IGuild guild, string name)
 		{
 			var job = _jobs.Where(j => j.Name == name).FirstOrDefault();
@@ -142,13 +162,15 @@ namespace FrankieBot.Discord.Services
 		public CronJob GetJob(IGuild guild, string name)
 			=> _jobs.Where(j => j.Guild == guild && j.Name == name).FirstOrDefault();
 
-		private void ClearJobs()
+		private async Task ClearJobs(IGuild guild)
 		{
-			foreach (var job in _jobs)
+			await Task.Run(() =>
 			{
-				job.Stop();
-			}
-			_jobs.Clear();
+				_jobs.Where(j => j.Guild.Id == guild.Id).ToList().ForEach((job) =>
+				{
+					RemoveJob(guild, job.Name);
+				});
+			});
 		}
 	}
 }
