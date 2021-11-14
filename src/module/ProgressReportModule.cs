@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using Discord;
+using Discord.WebSocket;
 using Discord.Commands;
 
 using SQLite;
+using Cronos;
 
 using FrankieBot.DB;
 using FrankieBot.DB.ViewModel;
@@ -23,6 +26,8 @@ namespace FrankieBot.Discord.Modules
 	[Alias("p", "pr")]
 	public class ProgressReportModule : ModuleBase<SocketCommandContext>
 	{
+		#region Options
+
 		/// <summary>
 		/// Option title for option which enables the Progress Report module
 		/// </summary>
@@ -49,6 +54,10 @@ namespace FrankieBot.Discord.Modules
 		/// </summary>
 		public const string OptionWindowReminderRole = "progress_report_reminder_role";
 
+		#endregion // Options
+
+		#region Jobs
+
 		/// <summary>
 		/// Title of job responsible for opening scheduled progress report windows
 		/// </summary>
@@ -58,6 +67,8 @@ namespace FrankieBot.Discord.Modules
 		/// Title of job responsible for announcing the closure of scheduled progress report windows
 		/// </summary>
 		public const string JobAnnounceWindowClosed = "progress_report_announce_window_closed";
+
+		#endregion // Jobs
 
 		/// <summary>
 		/// DataBaseService reference
@@ -83,8 +94,11 @@ namespace FrankieBot.Discord.Modules
 		/// <returns></returns>
 		protected static async Task RebuildJobs(SocketCommandContext context, SchedulerService scheduler)
 		{
+			// todo
 			// if module is disabled, find and stop jobs (if found)
 			// if enabled, start jobs w/ current options
+
+			// todo: check if a window is currently open, set close job
 			await Task.CompletedTask; // temp
 		}
 
@@ -160,9 +174,120 @@ namespace FrankieBot.Discord.Modules
 			await Context.Channel.SendMessageAsync("Progress report module disabled");
 		}
 
-		private async Task OpenWindow(int duration)
+		[Command("forceopen")]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public async Task ForceOpenWindow(int duration)
+		=> await OpenWindow(duration);
+
+		private async Task OpenWindow(int duration = -1)
 		{
-			await Task.CompletedTask; // temp
+			// convenience alias
+			var db = DataBaseService;
+
+			await db.RunDBAction(Context, async context =>
+			{
+				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				{
+					try
+					{
+						var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
+						var announce = !announcementChannelOption.IsEmpty;
+						ISocketMessageChannel announceChannel = null;
+						if (announce)
+						{
+							announceChannel = Context.Guild.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
+							if (announceChannel == null)
+							{
+								// todo: log that the specified channel is not found
+								announce = false;
+							}
+						}
+
+						// Create Window
+
+						if (duration <= -1)
+						{
+							var durationOption = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
+							if (durationOption.IsEmpty)
+							{
+								durationOption = new Option(connection)
+								{
+									Name = OptionWindowDuration
+								};
+								durationOption.Initialize();
+								durationOption.Save();
+							}
+							duration = int.Parse(durationOption.Value);
+						}
+
+						var window = new ProgressReportWindow(connection)
+						{
+							StartTime = DateTime.UtcNow,
+							Duration = duration
+						};
+
+						window.Save();
+
+						if (announce)
+						{
+							await announceChannel.SendMessageAsync($"Progress report submissions are now open! Submissions will be accepted from <t:{new DateTimeOffset(window.StartTime).ToUnixTimeSeconds()}:F> until <t:{new DateTimeOffset(window.EndTime).ToUnixTimeSeconds()}:F>.");
+						}
+
+						// Create Job
+						// - Update/Add Job in DB
+						// - Start Window Close Job
+
+						// convenience alias
+						var scheduler = SchedulerService;
+
+						var closeJob = scheduler.GetJob(context.Guild, JobAnnounceWindowClosed);
+						if (closeJob != null)
+						{
+							closeJob.Stop();
+							scheduler.RemoveJob(context, closeJob.Name);
+						}
+
+						var guildId = context.Guild.Id.ToString();
+						var closeJobRecord = CronJob.FindOne(connection, j => j.Name == JobAnnounceWindowClosed && j.GuildID == guildId).As<CronJob>();
+						if (closeJobRecord.IsEmpty)
+						{
+							closeJobRecord = new CronJob(connection)
+							{
+								Name = JobAnnounceWindowClosed,
+								Guild = context.Guild
+							};
+						}
+
+						closeJobRecord.Run += async (object sender, EventArgs e) =>
+						{
+							closeJobRecord.Stop();
+							if (announce)
+							{
+								// should this be part of the CloseWindow command?
+								await announceChannel.SendMessageAsync("The progress report submission window is now closed!");
+							}
+							await CloseWindow(context.Guild);
+						};
+
+						await scheduler.AddJob(closeJobRecord, false);
+						closeJobRecord.StartAt(window.EndTime, Timeout.InfiniteTimeSpan);
+					}
+					catch (DBException ex)
+					{
+						// log exception
+						await Context.Channel.SendMessageAsync($"Unable to force open window: {ex.Message}");
+					}
+				}
+			});
+		}
+
+		private async Task CloseWindow(IGuild guild)
+		{
+			// convenience alias
+			var scheduler = SchedulerService;
+
+			scheduler.RemoveJob(guild, JobAnnounceWindowClosed);
+			await Task.CompletedTask; //temp
 		}
 
 		/// <summary>
@@ -249,6 +374,11 @@ namespace FrankieBot.Discord.Modules
 			[Alias("windowlength", "length", "duration")]
 			public async Task SetWindowDuration(int duration)
 			{
+				if (duration < 1)
+				{
+					await Context.Channel.SendMessageAsync("Error setting submission window duration. Duration must be at least 1");
+					return;
+				}
 				// todo: validate cron string
 				var db = DataBaseService;
 
@@ -275,7 +405,39 @@ namespace FrankieBot.Discord.Modules
 				// Set up/update jobs
 				await RebuildJobs(Context, SchedulerService);
 
-				await Context.Channel.SendMessageAsync("Progress report window open updated");
+				await Context.Channel.SendMessageAsync($"Progress report window duration updated. Windows will be open for {duration} hour(s).");
+			}
+
+			[Command("announcechannel")]
+			[Alias("announceat", "announce")]
+			public async Task SetAnnouncementChannel(IMessageChannel channel)
+			{
+				if (channel is SocketChannel socketChannel)
+				{
+					// convenience alias
+					var db = DataBaseService;
+					await db.RunDBAction(Context, context => {
+						using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+						{
+							var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
+							if (announcementChannelOption.IsEmpty)
+							{
+								announcementChannelOption = new Option(connection)
+								{
+									Name = OptionAnnouncementChannel,
+								};
+								announcementChannelOption.Initialize();
+							}
+							announcementChannelOption.Value = socketChannel.Id.ToString();
+							announcementChannelOption.Save();
+						}
+					});
+					await Context.Channel.SendMessageAsync($"Progress report announcement channel set to <#{channel.Id}>");
+				}
+				else
+				{
+					await Context.Channel.SendMessageAsync("Invalid channel specified");
+				}
 			}
 		}
 	}
@@ -296,7 +458,7 @@ namespace FrankieBot.Discord.Modules
 		[Command]
 		public async Task SubmitReport(int wordCount, string description)
 		{
-			await Task.CompletedTask; // temp
+			await SubmitReport(Context.User, wordCount, description);
 		}
 
 		/// <summary>

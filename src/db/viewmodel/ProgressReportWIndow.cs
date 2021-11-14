@@ -12,6 +12,25 @@ namespace FrankieBot.DB.ViewModel
 	public class ProgressReportWindow : ViewModel<Model.ProgressReportWindow>
 	{
 		/// <summary>
+		/// Creates a new ProgressReportWindow instance
+		/// </summary>
+		/// <returns></returns>
+		public ProgressReportWindow() : base()
+		{
+
+		}
+
+		/// <summary>
+		/// Creates a new ProgressReportWindow instance
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <returns></returns>
+		public ProgressReportWindow(DBConnection connection) : base(connection)
+		{
+
+		}
+
+		/// <summary>
 		/// Time the ProgressReportWindow is set to open
 		/// </summary>
 		/// <value></value>
@@ -62,7 +81,7 @@ namespace FrankieBot.DB.ViewModel
 			{
 				if (CheckOverlap(window))
 				{
-					throw new ConstraintViolationException($"Cannot save new Progress Report Window. Overlapping window exists ({window.ID})");
+					throw new ConstraintViolationException($"Cannot save new Progress Report Window. Overlapping window exists (ID#{window.ID})");
 				}
 			}
 			base.Save();

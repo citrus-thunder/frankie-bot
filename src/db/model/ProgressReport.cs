@@ -13,26 +13,26 @@ namespace FrankieBot.DB.Model
 		/// <summary>
 		/// User ID representing the author of the progress report
 		/// </summary>
-		public string UserID;
+		public string UserID { get; set; }
 		
 		/// <summary>
 		/// ID of the progress report window this report was submitted to
 		/// </summary>
-		public int WindowID;
+		public int WindowID { get; set; }
 		
 		/// <summary>
 		/// User's submitted word count
 		/// </summary>
-		public int WordCount;
+		public int WordCount { get; set; }
 
 		/// <summary>
 		/// Optional user note
 		/// </summary>
-		public string Note;
+		public string Note { get; set; }
 
 		/// <summary>
 		/// Time the progress report was submitted
 		/// </summary>
-		public DateTime TimeStamp;
+		public DateTime TimeStamp { get; set; }
 	}
 }

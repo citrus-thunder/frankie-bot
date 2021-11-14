@@ -116,6 +116,25 @@ namespace FrankieBot.DB.ViewModel
 		}
 
 		/// <summary>
+		/// Starts the job at the given time
+		/// </summary>
+		/// <param name="time"></param>
+		/// <param name="interval"></param>
+		public void StartAt(DateTime time, TimeSpan interval)
+		{
+			if (time < DateTime.UtcNow)
+			{
+				return;
+			}
+
+			Timer = new Timer(
+				(state) => Run?.Invoke(this, EventArgs.Empty),
+				null,
+				time - DateTime.UtcNow,
+				interval);
+		}
+
+		/// <summary>
 		/// Stops the job
 		/// </summary>
 		public void Stop()

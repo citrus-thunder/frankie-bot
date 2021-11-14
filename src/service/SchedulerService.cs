@@ -38,17 +38,35 @@ namespace FrankieBot.Discord.Services
 			_db = services.GetRequiredService<DataBaseService>();
 		}
 
+		public async Task Initialize()
+		{
+			// todo: loop through guilds and init all jobs (call other oberload for each guild)
+			await Task.CompletedTask; // temp
+		}
+
+		public async Task Initialize(IGuild guild)
+		{
+			// todo: loop through guild's jobs and get them started if active
+			// - we may need an OnResume() method in the CronJob viewmodel to
+			// special cases when picking up a job after it's started
+			await Task.CompletedTask; // temp
+		}
+
 		/// <summary>
 		/// Adds a job to the scheduler
 		/// </summary>
 		/// <param name="job"></param>
+		/// <param name="autoStart"></param>
 		/// <returns></returns>
-		public async Task AddJob(CronJob job)
+		public async Task AddJob(CronJob job, bool autoStart = true)
 		{
 			if (!_jobs.Contains(job))
 			{
 				_jobs.Add(job);
-				job.Start();
+				if (autoStart)
+				{
+					job.Start();
+				}
 			}
 			else
 			{
@@ -65,8 +83,9 @@ namespace FrankieBot.Discord.Services
 		/// <param name="context"></param>
 		/// <param name="name"></param>
 		/// <param name="cron"></param>
+		/// <param name="autoStart"></param>
 		/// <returns></returns>
-		public async Task<CronJob> AddJob(SocketCommandContext context, string name, string cron)
+		public async Task<CronJob> AddJob(SocketCommandContext context, string name, string cron, bool autoStart = true)
 		{
 			CronJob res = null;
 			await _db.RunDBAction(context, c =>
@@ -88,9 +107,31 @@ namespace FrankieBot.Discord.Services
 					res = job;
 				}
 			});
-			await AddJob(res);
+			await AddJob(res, autoStart);
 			return res;
 		}
+
+		public void RemoveJob(SocketCommandContext context, string name)
+		=> RemoveJob(context.Guild, name);
+
+		public void RemoveJob(IGuild guild, string name)
+		{
+			var job = _jobs.Where(j => j.Name == name).FirstOrDefault();
+			if (job != null)
+			{
+				job.Stop();
+				_jobs.Remove(job);
+			}
+		}
+
+		/// <summary>
+		/// Finds a matching job in the scheduler
+		/// </summary>
+		/// <param name="context"></param>
+		/// <param name="name"></param>
+		/// <returns></returns>
+		public CronJob GetJob(SocketCommandContext context, string name)
+		=> GetJob(context.Guild, name);
 
 		/// <summary>
 		/// Finds a matching job in the scheduler

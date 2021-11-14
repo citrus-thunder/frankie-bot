@@ -12,11 +12,11 @@ namespace FrankieBot.DB.Model
 		/// <summary>
 		/// Time the window is set to open
 		/// </summary>
-		public DateTime StartTime;
+		public DateTime StartTime { get; set; }
 
 		/// <summary>
 		/// Duration, in hours, the window is to remain open
 		/// </summary>
-		public int Duration;
+		public int Duration { get; set; }
 	}
 }
