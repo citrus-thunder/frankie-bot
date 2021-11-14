@@ -18,6 +18,11 @@ namespace FrankieBot.DB
 		public List<V> Content { get; set; } = new List<V>();
 
 		/// <summary>
+		/// Whether this container contains any ViewModels
+		/// </summary>
+		public bool IsEmpty => Content.Count == 0;
+
+		/// <summary>
 		/// Converts the ViewModelContainer to a container of a specified type
 		/// containing a specified ViewModel type
 		/// </summary>

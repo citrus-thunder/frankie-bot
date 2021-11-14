@@ -195,6 +195,69 @@ namespace FrankieBot.Discord.Modules
 		public async Task ForceOpenWindow(int duration)
 		=> await OpenWindow(duration);
 
+		/// <summary>
+		/// Lists the current user's Progress Reports
+		/// </summary>
+		/// <returns></returns>
+		[Command("list")]
+		public async Task ListReports()
+		=> await ListReports(Context.Message.Author, 1);
+
+		/// <summary>
+		/// Lists a given user's Progress Reports
+		/// </summary>
+		/// <param name="user"></param>
+		/// <returns></returns>
+		[Command("list")]
+		public async Task ListReports(IUser user)
+		=> await ListReports(user, 1);
+
+		/// <summary>
+		/// Lists a given user's progress reports at the given offset
+		/// </summary>
+		/// <param name="user"></param>
+		/// <param name="page"></param>
+		/// <returns></returns>
+		[Command ("list")]
+		public async Task ListReports(IUser user, int page)
+		{
+			ViewModelContainer<ProgressReport> reports = null;
+
+			// convenience alias
+			var db = DataBaseService;
+			await db.RunDBAction(Context, context =>
+			{
+				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				{
+					var userID = user.Id.ToString();
+					reports = ProgressReport.Find(connection, pr => pr.UserID == userID).ContentAs<ProgressReport>();
+				}
+			});
+			
+			if (reports.IsEmpty)
+			{
+				await Context.Channel.SendMessageAsync($"<@{user.Id}> does not have any reports to list!");
+			}
+
+			// build embed and post
+			var fields = new List<EmbedFieldBuilder>();
+			foreach (var report in reports.Content)
+			{
+				var note = report.Note != "" ? 
+					$"\n {report.Note}" : 
+					"";
+				var newField = new EmbedFieldBuilder()
+					.WithName($"[#{report.ID}]: {new DateTimeOffset(report.TimeStamp.ToLocalTime()).ToString("d/M/yyyy hh:mm tt K")}")
+					.WithValue($"`{report.WordCount} words`{note}");
+				fields.Add(newField);
+			}
+			var embed = new EmbedBuilder()
+				.WithAuthor(user)
+				.WithFields(fields);
+
+			await Context.Channel.SendMessageAsync(text: $"Reports for <@{user.Id}>", embed: embed.Build());
+		}
+
 		private async Task OpenWindow(int duration = -1)
 		{
 			// convenience alias
@@ -462,6 +525,11 @@ namespace FrankieBot.Discord.Modules
 				}
 			}
 
+			/// <summary>
+			/// Sets the channel reports must be submitted to
+			/// </summary>
+			/// <param name="channel"></param>
+			/// <returns></returns>
 			[Command("reportchannel")]
 			[Alias("reportat", "submitchannel", "submitat")]
 			public async Task SetReportChannel(IMessageChannel channel)
@@ -507,6 +575,10 @@ namespace FrankieBot.Discord.Modules
 				}
 			}
 
+			/// <summary>
+			/// Unsets the report channel and the restricted report channel option
+			/// </summary>
+			/// <returns></returns>
 			[Command("clearreportchannel")]
 			public async Task ClearReportChannel()
 			{
@@ -559,24 +631,33 @@ namespace FrankieBot.Discord.Modules
 		/// Submits a progress report
 		/// </summary>
 		/// <param name="wordCount"></param>
-		/// <param name="description"></param>
+		/// <param name="note"></param>
 		/// <returns></returns>
 		[Command]
-		public async Task SubmitReport(int wordCount, [Remainder] string description)
+		public async Task SubmitReport(int wordCount, [Remainder] string note)
 		{
-			await SubmitReport(Context.User, wordCount, description);
+			await SubmitReport(Context.User, wordCount, note);
 		}
+
+		/// <summary>
+		/// Submits a progress report
+		/// </summary>
+		/// <param name="wordcount"></param>
+		/// <returns></returns>
+		[Command]
+		public async Task SubmitReport(int wordcount)
+		=> await SubmitReport(wordcount, "");
 
 		/// <summary>
 		/// Submits a progress report on behalf of a user
 		/// </summary>
 		/// <param name="user"></param>
-		/// <param name="wordcount"></param>
-		/// <param name="description"></param>
+		/// <param name="wordCount"></param>
+		/// <param name="note"></param>
 		/// <returns></returns>
 		[Command]
 		[RequireUserPermission(GuildPermission.Administrator)]
-		public async Task SubmitReport(IUser user, int wordcount, [Remainder] string description)
+		public async Task SubmitReport(IUser user, int wordCount, [Remainder] string note)
 		{
 			// convenience alias
 			var db = DataBaseService;
@@ -615,19 +696,52 @@ namespace FrankieBot.Discord.Modules
 						}
 					}
 
+					// Check to make sure a submission window is active
 					var time = Context.Message.Timestamp.UtcDateTime;
 					var window = ProgressReportWindow.FindOne(connection, w => 
 					{
 						return time > w.StartTime && time < w.StartTime.AddHours(w.Duration);
-					});
-
+					}).As<ProgressReportWindow>();
 					if (window.IsEmpty)
 					{
 						await Context.Channel.SendMessageAsync("Error recording submission: Progress report submissions are not currently open.");
 						return;
 					}
+
+					// Update report for current user and window if one exists; otherwise make a new one
+					var userID = user.Id.ToString();
+					var windowID = window.ID.ToString();
+					var report = ProgressReport.FindOne(connection, pr => pr.UserID == userID && pr.WindowID == window.ID).As<ProgressReport>();
+					var statusText = "updated";
+					if (report.IsEmpty)
+					{
+						statusText = "submitted";
+						report = new ProgressReport(connection)
+						{
+							User = user,
+							Window = window
+						};
+						report.Initialize();
+					}
+					report.WordCount = wordCount;
+					report.Note = note;
+					report.TimeStamp = Context.Message.Timestamp.UtcDateTime;
+
+					report.Save();
+					await Context.Channel.SendMessageAsync($"Progress report {statusText}. Great work, <@{user.Id}>!");
 				}
 			});
 		}
+
+		/// <summary>
+		/// Submits a progress report on behalf of a user
+		/// </summary>
+		/// <param name="user"></param>
+		/// <param name="wordCount"></param>
+		/// <returns></returns>
+		[Command]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public async Task SubmitReport(IUser user, int wordCount)
+		=> await SubmitReport(user, wordCount, "");
 	}
 }

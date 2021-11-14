@@ -12,6 +12,27 @@ namespace FrankieBot.DB.ViewModel
 	public class ProgressReport : ViewModel<Model.ProgressReport>
 	{
 		/// <summary>
+		/// Creates a new ProgressReport instance
+		/// </summary>
+		/// <remarks>
+		/// It is recommended to use the other constructor whenever possible
+		/// </remarks>
+		public ProgressReport() : base()
+		{
+
+		}
+
+		/// <summary>
+		/// Creates a new ProgressReport instance
+		/// </summary>
+		/// <param name="connection"></param>
+		/// <returns></returns>
+		public ProgressReport(DBConnection connection) : base(connection)
+		{
+
+		}
+
+		/// <summary>
 		/// User who submitted the progress report
 		/// </summary>
 		/// <value></value>
