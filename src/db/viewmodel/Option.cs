@@ -22,6 +22,7 @@ namespace FrankieBot.DB.ViewModel
 			{Module.ProgressReportModule.OptionEnabled, "false"},
 			{Module.ProgressReportModule.OptionWindowOpen, "0 0 * * 5"},
 			{Module.ProgressReportModule.OptionWindowDuration, "96"},
+			{Module.ProgressReportModule.OptionRestrictReportChannel, "false"},
 			{Service.CommandHandlerService.OptionCommandPrefix, "."}
 			};
 		}

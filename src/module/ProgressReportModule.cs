@@ -49,6 +49,16 @@ namespace FrankieBot.Discord.Modules
 		public const string OptionAnnouncementChannel = "progress_report_announcement_channel";
 
 		/// <summary>
+		/// Option title for option which sets whether report submissions must be in a particular channel
+		/// </summary>
+		public const string OptionRestrictReportChannel = "progress_report_restrict_report_channel";
+
+		/// <summary>
+		/// Option title for option which sets the channel reports must be submitted in
+		/// </summary>
+		public const string OptionReportChannel = "progress_report_report_channel";
+
+		/// <summary>
 		/// Option title for option which sets the role Frankie pings to remind users of progress report
 		/// window openings/closings
 		/// </summary>
@@ -427,7 +437,8 @@ namespace FrankieBot.Discord.Modules
 				{
 					// convenience alias
 					var db = DataBaseService;
-					await db.RunDBAction(Context, context => {
+					await db.RunDBAction(Context, context =>
+					{
 						using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
 						{
 							var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
@@ -450,6 +461,82 @@ namespace FrankieBot.Discord.Modules
 					await Context.Channel.SendMessageAsync("Invalid channel specified");
 				}
 			}
+
+			[Command("reportchannel")]
+			[Alias("reportat", "submitchannel", "submitat")]
+			public async Task SetReportChannel(IMessageChannel channel)
+			{
+				if (channel is SocketChannel socketChannel)
+				{
+					// convenience alias
+					var db = DataBaseService;
+					await db.RunDBAction(Context, context =>
+					{
+						using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+						{
+							var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+							if (reportChannelOption.IsEmpty)
+							{
+								reportChannelOption = new Option(connection)
+								{
+									Name = OptionReportChannel,
+								};
+								reportChannelOption.Initialize();
+							}
+							reportChannelOption.Value = socketChannel.Id.ToString();
+							reportChannelOption.Save();
+
+							var restrictChannelOption = Option.FindOne(connection, o => o.Name == OptionRestrictReportChannel).As<Option>();
+							if (restrictChannelOption.IsEmpty)
+							{
+								restrictChannelOption = new Option(connection)
+								{
+									Name = OptionRestrictReportChannel
+								};
+								restrictChannelOption.Initialize();
+							}
+							restrictChannelOption.Value = "true";
+							restrictChannelOption.Save();
+						}
+					});
+					await Context.Channel.SendMessageAsync($"Progress report submission channel set to <#{channel.Id}>");
+				}
+				else
+				{
+					await Context.Channel.SendMessageAsync("Invalid channel specified");
+				}
+			}
+
+			[Command("clearreportchannel")]
+			public async Task ClearReportChannel()
+			{
+				// convenience alias
+				var db = DataBaseService;
+				await db.RunDBAction(Context, context =>
+				{
+					using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+					{
+						var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+						if (!reportChannelOption.IsEmpty)
+						{
+							reportChannelOption.Delete();
+						}
+
+						var restrictChannelOption = Option.FindOne(connection, o => o.Name == OptionRestrictReportChannel).As<Option>();
+						if (restrictChannelOption.IsEmpty)
+						{
+							restrictChannelOption = new Option()
+							{
+								Name = OptionRestrictReportChannel
+							};
+							restrictChannelOption.Initialize();
+						}
+						restrictChannelOption.Value = "false";
+						restrictChannelOption.Save();
+					}
+				});
+				await Context.Channel.SendMessageAsync("Report submission channel cleared. Progress report submissions can now be submitted in any channel");
+			}
 		}
 	}
 
@@ -461,13 +548,21 @@ namespace FrankieBot.Discord.Modules
 	public class ReportModule : ModuleBase<SocketCommandContext>
 	{
 		/// <summary>
+		/// DataBaseService reference
+		/// </summary>
+		/// <remarks>
+		/// Set via Dependency Injection
+		/// </remarks>
+		public DataBaseService DataBaseService { get; set; }
+
+		/// <summary>
 		/// Submits a progress report
 		/// </summary>
 		/// <param name="wordCount"></param>
 		/// <param name="description"></param>
 		/// <returns></returns>
 		[Command]
-		public async Task SubmitReport(int wordCount, string description)
+		public async Task SubmitReport(int wordCount, [Remainder] string description)
 		{
 			await SubmitReport(Context.User, wordCount, description);
 		}
@@ -481,9 +576,58 @@ namespace FrankieBot.Discord.Modules
 		/// <returns></returns>
 		[Command]
 		[RequireUserPermission(GuildPermission.Administrator)]
-		public async Task SubmitReport(IUser user, int wordcount, string description)
+		public async Task SubmitReport(IUser user, int wordcount, [Remainder] string description)
 		{
-			await Task.CompletedTask; // temp
+			// convenience alias
+			var db = DataBaseService;
+			await db.RunDBAction(Context, async context =>
+			{
+				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				{
+					// Check to make sure the report was submitted in the correct channel (if restricted report channel is set)
+					var restrictedOption = Option.FindOne(connection, o => o.Name == ProgressReportModule.OptionRestrictReportChannel).As<Option>();
+					if (restrictedOption.IsEmpty)
+					{
+						restrictedOption = new Option(connection)
+						{
+							Name = ProgressReportModule.OptionRestrictReportChannel
+						};
+						restrictedOption.Initialize();
+					}
+					var restricted = bool.Parse(restrictedOption.Value);
+
+					if (restricted)
+					{
+						var reportChannelOption = Option.FindOne(connection, o => o.Name == ProgressReportModule.OptionReportChannel).As<Option>();
+						if (reportChannelOption.IsEmpty)
+						{
+							// todo: log that restricted is true, but no restricted channel is set
+							restricted = false;
+						}
+						else
+						{
+							var reportChannelID = ulong.Parse(reportChannelOption.Value);
+							if (Context.Channel.Id != reportChannelID)
+							{
+								await Context.Channel.SendMessageAsync($"Error recording submission: Reports must be submitted in <#{reportChannelID}>");
+								return;
+							}
+						}
+					}
+
+					var time = Context.Message.Timestamp.UtcDateTime;
+					var window = ProgressReportWindow.FindOne(connection, w => 
+					{
+						return time > w.StartTime && time < w.StartTime.AddHours(w.Duration);
+					});
+
+					if (window.IsEmpty)
+					{
+						await Context.Channel.SendMessageAsync("Error recording submission: Progress report submissions are not currently open.");
+						return;
+					}
+				}
+			});
 		}
 	}
 }
