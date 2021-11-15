@@ -76,7 +76,6 @@ namespace FrankieBot.Discord.Services
 					{
 						connection.CreateTable<Model.Option>();
 						connection.CreateTable<Model.Quote>();
-						connection.CreateTable<Model.Server>();
 						connection.CreateTable<Model.CronJob>();
 						connection.CreateTable<Model.ProgressReportWindow>();
 						connection.CreateTable<Model.ProgressReport>();
