@@ -41,22 +41,24 @@ namespace FrankieBot.Discord
 				await services.GetRequiredService<CommandHandlerService>().InitializeAsync();
 				await services.GetRequiredService<EavesDropperService>().InitializeAsync();
 
+				await ProgressReportModule.Initialize(services);
+
 				// Block task until program close
 				await Task.Delay(-1);
 			}
 		}
 
-		private Task OnBotJoinedServer(SocketGuild server)
+		private async Task OnBotJoinedServer(SocketGuild server)
 		{
 			Console.WriteLine($"Joined Server: {server.Name}"); // test
-			return Task.CompletedTask; // test
+			await Task.CompletedTask; // test
 			// todo: add new server to server meta db, or set to active if already exists
 		}
 
-		private Task OnBotLeftServer(SocketGuild server)
+		private async Task OnBotLeftServer(SocketGuild server)
 		{
 			Console.WriteLine($"Left Server: {server.Name}"); // test
-			return Task.CompletedTask; // test
+			await Task.CompletedTask; // test
 			// todo: set server record in server meta db to inactive
 		}
 

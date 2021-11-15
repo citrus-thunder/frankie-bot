@@ -1,5 +1,7 @@
 using System;
 
+using SQLite;
+
 using Discord;
 using Discord.WebSocket;
 
@@ -12,8 +14,6 @@ namespace FrankieBot.DB.ViewModel
 	/// </summary>
 	public class Quote : ViewModel<Model.Quote>
 	{
-		private SocketGuild _guild;
-
 		/// <summary>
 		/// Creates a new Quote instance
 		/// </summary>
@@ -24,9 +24,15 @@ namespace FrankieBot.DB.ViewModel
 		/// </summary>
 		/// <param name="connection"></param>
 		/// <returns></returns>
-		public Quote(DBConnection connection) : base(connection)
+		//public Quote(DBConnection connection) : base(connection)
+		public Quote(SQLiteConnection connection) : base(connection)
 		{
 			
+		}
+
+		public Quote(IGuild guild, SQLiteConnection connection) : this(connection)
+		{
+			Initialize(guild);
 		}
 
 		/// <summary>
@@ -91,7 +97,7 @@ namespace FrankieBot.DB.ViewModel
 			get => Model.RecordTimeStamp;
 			set => Model.RecordTimeStamp = value;
 		}
-
+		/*
 		/// <summary>
 		/// Initializes this Quote instance, populating complex fields from
 		/// the simple data in the underlying model
@@ -101,6 +107,16 @@ namespace FrankieBot.DB.ViewModel
 			_guild = Connection.Context.Guild;
 			Author = _guild.GetUser(ulong.Parse(Model.AuthorID));
 			Recorder = _guild.GetUser(ulong.Parse(Model.RecorderID));
+		}
+		*/
+
+		public void Initialize(IGuild guild)
+		{
+			if (guild is SocketGuild socketGuild)
+			{
+				Author = socketGuild.GetUser(ulong.Parse(Model.AuthorID));
+				Recorder = socketGuild.GetUser(ulong.Parse(Model.RecorderID));
+			}
 		}
 
 		private void OnUpdateAuthor()

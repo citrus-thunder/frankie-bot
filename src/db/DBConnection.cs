@@ -1,3 +1,4 @@
+/*
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,3 +35,4 @@ namespace FrankieBot.DB
 		public SocketCommandContext Context { get; private set; }
 	}
 }
+*/

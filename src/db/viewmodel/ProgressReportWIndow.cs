@@ -1,6 +1,6 @@
 using System;
 
-using Discord;
+using SQLite;
 
 using Model = FrankieBot.DB.Model;
 
@@ -25,7 +25,8 @@ namespace FrankieBot.DB.ViewModel
 		/// </summary>
 		/// <param name="connection"></param>
 		/// <returns></returns>
-		public ProgressReportWindow(DBConnection connection) : base(connection)
+		//public ProgressReportWindow(DBConnection connection) : base(connection)
+		public ProgressReportWindow(SQLiteConnection connection) : base(connection)
 		{
 
 		}

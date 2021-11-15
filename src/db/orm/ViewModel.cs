@@ -41,7 +41,8 @@ namespace FrankieBot.DB
 		/// This constructor is recommended when manually creating a new ViewModel.
 		/// Calls the virtual Create method upon completion
 		/// </remarks>
-		public ViewModel(DBConnection connection)
+		//public ViewModel(DBConnection connection)
+		public ViewModel(SQLiteConnection connection)
 		{
 			Connection = connection;
 			Model = new M();
@@ -55,7 +56,8 @@ namespace FrankieBot.DB
 		/// <param name="connection"></param>
 		/// <param name="expression"></param>
 		/// <returns></returns>
-		public ViewModel(DBConnection connection, Func<M, bool> expression) : this()
+		//public ViewModel(DBConnection connection, Func<M, bool> expression) : this()
+		public ViewModel(SQLiteConnection connection, Func<M, bool> expression) : this()
 		{
 			Connection = connection;
 			Model = connection.Table<M>().Where(expression).FirstOrDefault();
@@ -81,7 +83,8 @@ namespace FrankieBot.DB
 		/// The connection to the database
 		/// </summary>
 		/// <value></value>
-		public DBConnection Connection { get; set; }
+		//public DBConnection Connection { get; set; }
+		public SQLiteConnection Connection { get; set; }
 
 		/// <summary>
 		/// The underlying Model managed by this ViewModel
@@ -106,7 +109,8 @@ namespace FrankieBot.DB
 		/// </summary>
 		/// <param name="connection"></param>
 		/// <returns></returns>
-		public static ViewModel<M> Create(DBConnection connection)
+		//public static ViewModel<M> Create(DBConnection connection)
+		public static ViewModel<M> Create(SQLiteConnection connection)
 		{
 			var res = new ViewModel<M>()
 			{
@@ -123,7 +127,8 @@ namespace FrankieBot.DB
 		/// <param name="connection"></param>
 		/// <param name="expression"></param>
 		/// <returns></returns>
-		public static ViewModel<M> FindOne(DBConnection connection, Func<M, bool> expression)
+		//public static ViewModel<M> FindOne(DBConnection connection, Func<M, bool> expression)
+		public static ViewModel<M> FindOne(SQLiteConnection connection, Func<M, bool> expression)
 		{
 			var model = connection.Table<M>().Where(expression).FirstOrDefault();
 			var res = new ViewModel<M>
@@ -140,7 +145,8 @@ namespace FrankieBot.DB
 		/// </summary>
 		/// <param name="connection"></param>
 		/// <returns></returns>
-		public static ViewModelContainer<IViewModel> FindAll(DBConnection connection)
+		//public static ViewModelContainer<IViewModel> FindAll(DBConnection connection)
+		public static ViewModelContainer<IViewModel> FindAll(SQLiteConnection connection)
 		{
 			var container = new ViewModelContainer<IViewModel>();
 			var models = connection.Table<M>();
@@ -163,7 +169,8 @@ namespace FrankieBot.DB
 		/// <param name="connection"></param>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		public static ViewModel<M> Find(DBConnection connection, int id)
+		//public static ViewModel<M> Find(DBConnection connection, int id)
+		public static ViewModel<M> Find(SQLiteConnection connection, int id)
 		{
 			var model = connection.Table<M>().Where((model) => model.ID == id).FirstOrDefault();
 			ViewModel<M> res = new ViewModel<M>();
@@ -185,7 +192,8 @@ namespace FrankieBot.DB
 		/// <param name="connection"></param>
 		/// <param name="expression"></param>
 		/// <returns></returns>
-		public static ViewModelContainer<IViewModel> Find(DBConnection connection, Func<M, bool> expression)
+		//public static ViewModelContainer<IViewModel> Find(DBConnection connection, Func<M, bool> expression)
+		public static ViewModelContainer<IViewModel> Find(SQLiteConnection connection, Func<M, bool> expression)
 		{
 			var container = new ViewModelContainer<IViewModel>();
 			var models = connection.Table<M>().Where(expression).ToList<M>();

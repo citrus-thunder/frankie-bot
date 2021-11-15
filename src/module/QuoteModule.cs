@@ -45,7 +45,8 @@ namespace FrankieBot.Discord.Modules
 			await db.RunDBAction(Context, async context =>
 			{
 				ViewModel.Quote quote = null;
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					var quotes = ViewModel.Quote.FindAll(connection).ContentAs<ViewModel.Quote>();
 
@@ -71,7 +72,8 @@ namespace FrankieBot.Discord.Modules
 			await db.RunDBAction(Context, async context =>
 			{
 				ViewModel.Quote quote = null;
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					var authorID = user.Id.ToString();
 					var quotes = ViewModel.Quote.Find(connection, q => q.AuthorID == authorID).ContentAs<ViewModel.Quote>();
@@ -169,7 +171,8 @@ namespace FrankieBot.Discord.Modules
 
 			await db.RunDBAction(Context, async context =>
 			{
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					var quote = ViewModel.Quote.Find(connection, quoteID);
 					if (quote.IsEmpty)
@@ -197,7 +200,8 @@ namespace FrankieBot.Discord.Modules
 			await db.RunDBAction(Context, context =>
 			{
 				ViewModel.Quote quote = null;
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					var quoteID = id.ToString();
 					quote = ViewModel.Quote.Find(connection, id).As<ViewModel.Quote>();
@@ -263,7 +267,8 @@ namespace FrankieBot.Discord.Modules
 			await db.RunDBAction(context, async (c) =>
 			{
 				List<ViewModel.Quote> quoteList;
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(c.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(c.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					var userID = user.Id.ToString();
 					var quotes = ViewModel.Quote.Find(connection, (quote) => quote.AuthorID == userID).ContentAs<ViewModel.Quote>();
@@ -288,7 +293,8 @@ namespace FrankieBot.Discord.Modules
 
 			await db.RunDBAction(context, async c =>
 			{
-				using (var connection = new DBConnection(c, db.GetServerDBFilePath(c.Guild)))
+				//using (var connection = new DBConnection(c, db.GetServerDBFilePath(c.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					var quote = new ViewModel.Quote(connection)
 					{

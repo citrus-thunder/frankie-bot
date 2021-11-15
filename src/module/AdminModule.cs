@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using SQLite;
+
 using Discord;
 using Discord.Commands;
 
@@ -49,7 +51,8 @@ namespace FrankieBot.Discord.Modules
 					return;
 				}
 
-				using (var connection = new DBConnection(context, DataBaseService.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, DataBaseService.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(DataBaseService.GetServerDBFilePath(context.Guild)))
 				{
 					var prefixOption = Option.FindOne(connection, o => o.Name == "command_prefix").As<Option>();
 					prefixOption.Value = prefix;

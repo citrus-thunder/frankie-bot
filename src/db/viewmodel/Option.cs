@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 
+using SQLite;
+
 using Model = FrankieBot.DB.Model;
 using Module = FrankieBot.Discord.Modules;
 using Service = FrankieBot.Discord.Services;
@@ -43,7 +45,8 @@ namespace FrankieBot.DB.ViewModel
 		/// </summary>
 		/// <param name="connection"></param>
 		/// <returns></returns>
-		public Option(DBConnection connection) : base(connection)
+		//public Option(DBConnection connection) : base(connection)
+		public Option(SQLiteConnection connection) : base(connection)
 		{
 
 		}

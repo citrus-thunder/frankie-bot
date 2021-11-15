@@ -1,6 +1,8 @@
 using FrankieBot.DB;
 using FrankieBot.DB.Model;
 
+using SQLite;
+
 /// <summary>
 /// ViewModel Interface
 /// </summary>
@@ -16,7 +18,8 @@ public interface IViewModel
 	/// Database Connection
 	/// </summary>
 	/// <value></value>
-	DBConnection Connection { get; set; }
+	//DBConnection Connection { get; set; }
+	SQLiteConnection Connection { get; set; }
 
 	/// <summary>
 	/// Initializes the ViewModel

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using Microsoft.Extensions.DependencyInjection;
+
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
@@ -12,6 +14,7 @@ using Cronos;
 
 using FrankieBot.DB;
 using FrankieBot.DB.ViewModel;
+using FrankieBot.DB.Container;
 using FrankieBot.Discord.Services;
 using FrankieBot.Discord;
 
@@ -71,7 +74,7 @@ namespace FrankieBot.Discord.Modules
 		/// <summary>
 		/// Title of job responsible for opening scheduled progress report windows
 		/// </summary>
-		public const string JobAnnounceWindowOpened = "progress_report_announce_window_opened";
+		public const string JobOpenWindow = "progress_report_announce_window_opened";
 
 		/// <summary>
 		/// Title of job responsible for announcing the closure of scheduled progress report windows
@@ -96,20 +99,37 @@ namespace FrankieBot.Discord.Modules
 		/// </remarks>
 		public SchedulerService SchedulerService { get; set; }
 
+		public static async Task Initialize(IServiceProvider services)
+		{
+			var database = services.GetRequiredService<DataBaseService>();
+			var scheduler = services.GetRequiredService<SchedulerService>();
+			await database.RunForAllGuilds(async (guild) =>
+			{
+				await RebuildJobs(guild, database, scheduler);
+			});
+		}
+
 		/// <summary>
 		/// Checks and ensures that correct jobs are running
 		/// </summary>
-		/// <param name="context"></param>
-		/// <param name="scheduler"></param>
+		/// <param name="guild"></param>
+		/// <param name="dataBaseService"></param>
+		/// <param name="schedulerService"></param>
 		/// <returns></returns>
-		protected static async Task RebuildJobs(SocketCommandContext context, SchedulerService scheduler)
+		protected static async Task RebuildJobs(IGuild guild, DataBaseService dataBaseService, SchedulerService schedulerService)
 		{
 			// todo
 			// if module is disabled, find and stop jobs (if found)
 			// if enabled, start jobs w/ current options
 
 			// todo: check if a window is currently open, set close job
-			await Task.CompletedTask; // temp
+			await Task.Run(() =>
+			{
+				using (var connection = new SQLiteConnection(dataBaseService.GetServerDBFilePath(guild.Id)))
+				{
+					var options = Option.FindAll(connection).As<Options, Option>();
+				}
+			});
 		}
 
 		/// <summary>
@@ -127,7 +147,8 @@ namespace FrankieBot.Discord.Modules
 			Option option = null;
 			await db.RunDBAction(Context, context =>
 			{
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
 
@@ -143,7 +164,7 @@ namespace FrankieBot.Discord.Modules
 				}
 			});
 
-			await RebuildJobs(Context, SchedulerService);
+			await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
 
 			await Context.Channel.SendMessageAsync("Progress report module enabled");
 		}
@@ -163,7 +184,8 @@ namespace FrankieBot.Discord.Modules
 			Option option = null;
 			await db.RunDBAction(Context, context =>
 			{
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
 
@@ -179,7 +201,7 @@ namespace FrankieBot.Discord.Modules
 				}
 			});
 
-			await RebuildJobs(Context, SchedulerService);
+			await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
 
 			await Context.Channel.SendMessageAsync("Progress report module disabled");
 		}
@@ -218,7 +240,7 @@ namespace FrankieBot.Discord.Modules
 		/// <param name="user"></param>
 		/// <param name="page"></param>
 		/// <returns></returns>
-		[Command ("list")]
+		[Command("list")]
 		public async Task ListReports(IUser user, int page)
 		{
 			ViewModelContainer<ProgressReport> reports = null;
@@ -227,13 +249,14 @@ namespace FrankieBot.Discord.Modules
 			var db = DataBaseService;
 			await db.RunDBAction(Context, context =>
 			{
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection =  new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					var userID = user.Id.ToString();
 					reports = ProgressReport.Find(connection, pr => pr.UserID == userID).ContentAs<ProgressReport>();
 				}
 			});
-			
+
 			if (reports.IsEmpty)
 			{
 				await Context.Channel.SendMessageAsync($"<@{user.Id}> does not have any reports to list!");
@@ -243,8 +266,8 @@ namespace FrankieBot.Discord.Modules
 			var fields = new List<EmbedFieldBuilder>();
 			foreach (var report in reports.Content)
 			{
-				var note = report.Note != "" ? 
-					$"\n {report.Note}" : 
+				var note = report.Note != "" ?
+					$"\n {report.Note}" :
 					"";
 				var newField = new EmbedFieldBuilder()
 					.WithName($"[#{report.ID}]: {new DateTimeOffset(report.TimeStamp.ToLocalTime()).ToString("d/M/yyyy hh:mm tt K")}")
@@ -265,7 +288,8 @@ namespace FrankieBot.Discord.Modules
 
 			await db.RunDBAction(Context, async context =>
 			{
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection =  new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					try
 					{
@@ -336,6 +360,7 @@ namespace FrankieBot.Discord.Modules
 								Guild = context.Guild
 							};
 						}
+						// We don't need to save this job to the DB as it is not a recurring job
 
 						closeJobRecord.Run += async (object sender, EventArgs e) =>
 						{
@@ -375,7 +400,7 @@ namespace FrankieBot.Discord.Modules
 		[Group("option")]
 		[Alias("set", "o")]
 		[RequireUserPermission(GuildPermission.Administrator)]
-		public class Options : ModuleBase<SocketCommandContext>
+		public class ModuleOptions : ModuleBase<SocketCommandContext>
 		{
 			/// <summary>
 			/// DataBaseService reference
@@ -423,7 +448,8 @@ namespace FrankieBot.Discord.Modules
 				Option option = null;
 				await db.RunDBAction(Context, context =>
 				{
-					using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+					//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+					using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 					{
 						option = Option.FindOne(connection, o => o.Name == OptionWindowOpen).As<Option>();
 
@@ -439,7 +465,7 @@ namespace FrankieBot.Discord.Modules
 					}
 				});
 
-				await RebuildJobs(Context, SchedulerService);
+				await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
 
 				await Context.Channel.SendMessageAsync("Progress report window open updated");
 			}
@@ -465,7 +491,8 @@ namespace FrankieBot.Discord.Modules
 				Option option = null;
 				await db.RunDBAction(Context, context =>
 				{
-					using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+					//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+					using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 					{
 						option = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
 
@@ -482,7 +509,7 @@ namespace FrankieBot.Discord.Modules
 				});
 
 				// Set up/update jobs
-				await RebuildJobs(Context, SchedulerService);
+				await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
 
 				await Context.Channel.SendMessageAsync($"Progress report window duration updated. Windows will be open for {duration} hour(s).");
 			}
@@ -502,7 +529,8 @@ namespace FrankieBot.Discord.Modules
 					var db = DataBaseService;
 					await db.RunDBAction(Context, context =>
 					{
-						using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+						//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+						using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 						{
 							var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
 							if (announcementChannelOption.IsEmpty)
@@ -540,7 +568,8 @@ namespace FrankieBot.Discord.Modules
 					var db = DataBaseService;
 					await db.RunDBAction(Context, context =>
 					{
-						using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+						//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+						using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 						{
 							var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
 							if (reportChannelOption.IsEmpty)
@@ -586,7 +615,8 @@ namespace FrankieBot.Discord.Modules
 				var db = DataBaseService;
 				await db.RunDBAction(Context, context =>
 				{
-					using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+					//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+					using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 					{
 						var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
 						if (!reportChannelOption.IsEmpty)
@@ -663,7 +693,8 @@ namespace FrankieBot.Discord.Modules
 			var db = DataBaseService;
 			await db.RunDBAction(Context, async context =>
 			{
-				using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
+				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
 				{
 					// Check to make sure the report was submitted in the correct channel (if restricted report channel is set)
 					var restrictedOption = Option.FindOne(connection, o => o.Name == ProgressReportModule.OptionRestrictReportChannel).As<Option>();
@@ -698,7 +729,7 @@ namespace FrankieBot.Discord.Modules
 
 					// Check to make sure a submission window is active
 					var time = Context.Message.Timestamp.UtcDateTime;
-					var window = ProgressReportWindow.FindOne(connection, w => 
+					var window = ProgressReportWindow.FindOne(connection, w =>
 					{
 						return time > w.StartTime && time < w.StartTime.AddHours(w.Duration);
 					}).As<ProgressReportWindow>();

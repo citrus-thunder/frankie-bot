@@ -40,6 +40,43 @@ namespace FrankieBot.Discord.Services
 			_client = _services.GetRequiredService<DiscordSocketClient>();
 		}
 
+		public async Task RunForAllGuilds(Action<IGuild> action)
+		{
+			var dbFiles = Directory.GetFiles(DBConfig.SERVER_DATA_ROOT);
+			foreach (var file in dbFiles)
+			{
+				IGuild guild = _client.GetGuild(ulong.Parse(Path.GetFileNameWithoutExtension(file)));
+				if (guild == null)
+				{
+					continue;
+				}
+				await Task.Run(()=>
+				{
+					action(guild);
+				});
+			}
+		}
+
+		public async Task RunForAllGuilds(Action<IGuild, SQLiteConnection> action)
+		{
+			var dbFiles = Directory.GetFiles(DBConfig.SERVER_DATA_ROOT);
+			foreach (var file in dbFiles)
+			{
+				IGuild guild = _client.GetGuild(ulong.Parse(Path.GetFileNameWithoutExtension(file)));
+				if (guild == null)
+				{
+					continue;
+				}
+				await Task.Run(() => 
+				{
+					using (var connection = new SQLiteConnection(file))
+					{
+						action(guild, connection);
+					}
+				});
+			}
+		}
+
 		/// <summary>
 		/// Runs a generic database action defined in the action parameter
 		/// </summary>
@@ -59,20 +96,40 @@ namespace FrankieBot.Discord.Services
 				return;
 			}
 
-			await CheckDB(context);
+			await CheckDB(context.Guild);
 
 			await Task.Run(() => action(context));
 		}
 
-		private async Task CheckDB(SocketCommandContext context)
+		/// <summary>
+		/// Performs a database action within the given guild's database
+		/// </summary>
+		/// <param name="guild"></param>
+		/// <param name="action"></param>
+		/// <returns></returns>
+		public async Task RunGuildDBAction(IGuild guild, Action<SQLiteConnection> action)
+		{
+			await CheckDB(guild);
+			await Task.Run(() =>
+			{
+				using (var connection = new SQLiteConnection(GetServerDBFilePath(guild)))
+				{
+					action(connection);
+				}
+			});
+		}
+
+		//private async Task CheckDB(SocketCommandContext context)
+		private async Task CheckDB(IGuild guild)
 		{
 			await Task.Run(() =>
 			{
-				var dbFile = GetServerDBFilePath(context.Guild);
+				var dbFile = GetServerDBFilePath(guild.Id);
 				if (!File.Exists(dbFile))
 				{
 					File.Create(dbFile).Close();
-					using (var connection = new DBConnection(context, dbFile))
+					//using (var connection = new DBConnection(context, dbFile))
+					using (var connection = new SQLiteConnection(dbFile))
 					{
 						connection.CreateTable<Model.Option>();
 						connection.CreateTable<Model.Quote>();
@@ -93,6 +150,14 @@ namespace FrankieBot.Discord.Services
 		{
 			return Path.Combine(DBConfig.SERVER_DATA_ROOT, guildId.ToString() + DBConfig.DATABASE_FILE_EXTENSION);
 		}
+
+		/// <summary>
+		/// Returns the file path for the given guild's server database
+		/// </summary>
+		/// <param name="guild"></param>
+		/// <returns></returns>
+		public string GetServerDBFilePath(IGuild guild)
+		=> GetServerDBFilePath(guild.Id);
 
 		/// <summary>
 		/// Returns the file path for the given guild's server database

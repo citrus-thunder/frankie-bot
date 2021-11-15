@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using System.Threading;
 using System.Threading.Tasks;
 
 using Microsoft.Extensions.DependencyInjection;
+
+using SQLite;
 
 using Discord;
 using Discord.Commands;
@@ -100,7 +101,8 @@ namespace FrankieBot.Discord.Services
 			CronJob res = null;
 			await _db.RunDBAction(context, c =>
 			{
-				using (var connection = new DBConnection(c, _db.GetServerDBFilePath(c.Guild)))
+				//using (var connection = new DBConnection(c, _db.GetServerDBFilePath(c.Guild)))
+				using (var connection = new SQLiteConnection(_db.GetServerDBFilePath(context.Guild)))
 				{
 					var job = CronJob.FindOne(connection, j => j.Name == name).As<CronJob>();
 

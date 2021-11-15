@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
+using SQLite;
+
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
@@ -105,7 +107,8 @@ namespace FrankieBot.Discord.Services
 				bool validPrefix = false;
 				await _db.RunDBAction(context, (ctx) => 
 				{
-					using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild)))
+					//using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild)))
+					using (var connection = new SQLiteConnection(_db.GetServerDBFilePath(context.Guild)))
 					{
 						var option = Option.FindOne(connection, o => o.Name == OptionCommandPrefix).As<Option>();
 						if (option.IsEmpty)

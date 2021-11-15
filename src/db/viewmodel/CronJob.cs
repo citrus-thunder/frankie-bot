@@ -1,6 +1,8 @@
 using System;
 using System.Threading;
 
+using SQLite;
+
 using Discord;
 using Discord.WebSocket;
 
@@ -27,7 +29,8 @@ namespace FrankieBot.DB.ViewModel
 		/// </summary>
 		/// <param name="connection"></param>
 		/// <returns></returns>
-		public CronJob(DBConnection connection) : base (connection)
+		//public CronJob(DBConnection connection) : base (connection)
+		public CronJob(SQLiteConnection connection) : base (connection)
 		{
 
 		}
