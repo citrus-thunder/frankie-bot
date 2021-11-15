@@ -50,7 +50,7 @@ namespace FrankieBot.Discord.Services
 				{
 					continue;
 				}
-				await Task.Run(()=>
+				await Task.Run(() =>
 				{
 					action(guild);
 				});
@@ -67,7 +67,7 @@ namespace FrankieBot.Discord.Services
 				{
 					continue;
 				}
-				await Task.Run(() => 
+				await Task.Run(() =>
 				{
 					using (var connection = new SQLiteConnection(file))
 					{
@@ -110,13 +110,14 @@ namespace FrankieBot.Discord.Services
 		public async Task RunGuildDBAction(IGuild guild, Action<SQLiteConnection> action)
 		{
 			await CheckDB(guild);
-			await Task.Run(() =>
+
+			using (var connection = new SQLiteConnection(GetServerDBFilePath(guild)))
 			{
-				using (var connection = new SQLiteConnection(GetServerDBFilePath(guild)))
+				await Task.Run(() =>
 				{
 					action(connection);
-				}
-			});
+				});
+			}
 		}
 
 		//private async Task CheckDB(SocketCommandContext context)

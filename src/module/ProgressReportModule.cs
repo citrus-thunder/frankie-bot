@@ -145,23 +145,19 @@ namespace FrankieBot.Discord.Modules
 
 			// Find or Create option and set to true
 			Option option = null;
-			await db.RunDBAction(Context, context =>
+			await db.RunGuildDBAction(Context.Guild, connection =>
 			{
-				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+				option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
+
+				if (option.IsEmpty)
 				{
-					option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
-
-					if (option.IsEmpty)
-					{
-						option = new Option(connection);
-						option.Name = OptionEnabled;
-						option.Initialize();
-					}
-
-					option.Value = "true";
-					option.Save();
+					option = new Option(connection);
+					option.Name = OptionEnabled;
+					option.Initialize();
 				}
+
+				option.Value = "true";
+				option.Save();
 			});
 
 			await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
@@ -182,23 +178,19 @@ namespace FrankieBot.Discord.Modules
 
 			// Find or Create option and set to false
 			Option option = null;
-			await db.RunDBAction(Context, context =>
+			await db.RunGuildDBAction(Context.Guild, connection =>
 			{
-				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+				option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
+
+				if (option.IsEmpty)
 				{
-					option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
-
-					if (option.IsEmpty)
-					{
-						option = new Option(connection);
-						option.Name = OptionEnabled;
-						option.Initialize();
-					}
-
-					option.Value = "false";
-					option.Save();
+					option = new Option(connection);
+					option.Name = OptionEnabled;
+					option.Initialize();
 				}
+
+				option.Value = "false";
+				option.Save();
 			});
 
 			await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
@@ -247,19 +239,16 @@ namespace FrankieBot.Discord.Modules
 
 			// convenience alias
 			var db = DataBaseService;
-			await db.RunDBAction(Context, context =>
+			await db.RunGuildDBAction(Context.Guild, connection =>
 			{
-				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-				using (var connection =  new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
-				{
-					var userID = user.Id.ToString();
-					reports = ProgressReport.Find(connection, pr => pr.UserID == userID).ContentAs<ProgressReport>();
-				}
+				var userID = user.Id.ToString();
+				reports = ProgressReport.Find(connection, pr => pr.UserID == userID).ContentAs<ProgressReport>();
 			});
 
 			if (reports.IsEmpty)
 			{
 				await Context.Channel.SendMessageAsync($"<@{user.Id}> does not have any reports to list!");
+				return;
 			}
 
 			// build embed and post
@@ -286,101 +275,96 @@ namespace FrankieBot.Discord.Modules
 			// convenience alias
 			var db = DataBaseService;
 
-			await db.RunDBAction(Context, async context =>
+			await db.RunGuildDBAction(Context.Guild, async connection =>
 			{
-				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-				using (var connection =  new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+				try
 				{
-					try
+					var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
+					var announce = !announcementChannelOption.IsEmpty;
+					ISocketMessageChannel announceChannel = null;
+					if (announce)
 					{
-						var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
-						var announce = !announcementChannelOption.IsEmpty;
-						ISocketMessageChannel announceChannel = null;
-						if (announce)
+						announceChannel = Context.Guild.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
+						if (announceChannel == null)
 						{
-							announceChannel = Context.Guild.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
-							if (announceChannel == null)
+							// todo: log that the specified channel is not found
+							announce = false;
+						}
+					}
+
+					// Create Window
+
+					if (duration <= -1)
+					{
+						var durationOption = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
+						if (durationOption.IsEmpty)
+						{
+							durationOption = new Option(connection)
 							{
-								// todo: log that the specified channel is not found
-								announce = false;
-							}
-						}
-
-						// Create Window
-
-						if (duration <= -1)
-						{
-							var durationOption = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
-							if (durationOption.IsEmpty)
-							{
-								durationOption = new Option(connection)
-								{
-									Name = OptionWindowDuration
-								};
-								durationOption.Initialize();
-								durationOption.Save();
-							}
-							duration = int.Parse(durationOption.Value);
-						}
-
-						var window = new ProgressReportWindow(connection)
-						{
-							StartTime = DateTime.UtcNow,
-							Duration = duration
-						};
-
-						window.Save();
-
-						if (announce)
-						{
-							await announceChannel.SendMessageAsync($"Progress report submissions are now open! Submissions will be accepted from <t:{new DateTimeOffset(window.StartTime).ToUnixTimeSeconds()}:F> until <t:{new DateTimeOffset(window.EndTime).ToUnixTimeSeconds()}:F>.");
-						}
-
-						// Create Job
-						// - Update/Add Job in DB
-						// - Start Window Close Job
-
-						// convenience alias
-						var scheduler = SchedulerService;
-
-						var closeJob = scheduler.GetJob(context.Guild, JobAnnounceWindowClosed);
-						if (closeJob != null)
-						{
-							closeJob.Stop();
-							scheduler.RemoveJob(context, closeJob.Name);
-						}
-
-						var guildId = context.Guild.Id.ToString();
-						var closeJobRecord = CronJob.FindOne(connection, j => j.Name == JobAnnounceWindowClosed && j.GuildID == guildId).As<CronJob>();
-						if (closeJobRecord.IsEmpty)
-						{
-							closeJobRecord = new CronJob(connection)
-							{
-								Name = JobAnnounceWindowClosed,
-								Guild = context.Guild
+								Name = OptionWindowDuration
 							};
+							durationOption.Initialize();
+							durationOption.Save();
 						}
-						// We don't need to save this job to the DB as it is not a recurring job
-
-						closeJobRecord.Run += async (object sender, EventArgs e) =>
-						{
-							closeJobRecord.Stop();
-							if (announce)
-							{
-								// should this be part of the CloseWindow command?
-								await announceChannel.SendMessageAsync("The progress report submission window is now closed!");
-							}
-							await CloseWindow(context.Guild, window);
-						};
-
-						await scheduler.AddJob(closeJobRecord, false);
-						closeJobRecord.StartAt(window.EndTime, Timeout.InfiniteTimeSpan);
+						duration = int.Parse(durationOption.Value);
 					}
-					catch (DBException ex)
+
+					var window = new ProgressReportWindow(connection)
 					{
-						// log exception
-						await Context.Channel.SendMessageAsync($"Unable to force open window: {ex.Message}");
+						StartTime = DateTime.UtcNow,
+						Duration = duration
+					};
+
+					window.Save();
+
+					// Create Job
+
+					// convenience alias
+					var scheduler = SchedulerService;
+
+					var closeJob = scheduler.GetJob(Context.Guild, JobAnnounceWindowClosed);
+					if (closeJob != null)
+					{
+						closeJob.Stop();
+						scheduler.RemoveJob(Context, closeJob.Name);
 					}
+
+					var guildId = Context.Guild.Id.ToString();
+					var closeJobRecord = CronJob.FindOne(connection, j => j.Name == JobAnnounceWindowClosed && j.GuildID == guildId).As<CronJob>();
+					if (closeJobRecord.IsEmpty)
+					{
+						closeJobRecord = new CronJob(connection)
+						{
+							Name = JobAnnounceWindowClosed,
+							Guild = Context.Guild
+						};
+					}
+					// We don't need to save this job to the DB as it is not a recurring job
+
+					closeJobRecord.Run += async (object sender, EventArgs e) =>
+			{
+				closeJobRecord.Stop();
+				if (announce)
+				{
+			// should this be part of the CloseWindow command?
+			await announceChannel.SendMessageAsync("The progress report submission window is now closed!");
+				}
+				await CloseWindow(Context.Guild, window);
+			};
+
+					// We keep the awaitables at the bottom of this process as they tend to
+					// break the SQLite connection handle.
+					await scheduler.AddJob(closeJobRecord, false);
+					closeJobRecord.StartAt(window.EndTime, Timeout.InfiniteTimeSpan);
+					if (announce)
+					{
+						await announceChannel.SendMessageAsync($"Progress report submissions are now open! Submissions will be accepted from <t:{new DateTimeOffset(window.StartTime).ToUnixTimeSeconds()}:F> until <t:{new DateTimeOffset(window.EndTime).ToUnixTimeSeconds()}:F>.");
+					}
+				}
+				catch (DBException ex)
+				{
+					// log exception
+					await Context.Channel.SendMessageAsync($"Unable to force open window: {ex.Message}");
 				}
 			});
 		}
@@ -446,23 +430,19 @@ namespace FrankieBot.Discord.Modules
 
 				// Find window open option and set
 				Option option = null;
-				await db.RunDBAction(Context, context =>
+				await db.RunGuildDBAction(Context.Guild, connection =>
 				{
-					//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-					using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+					option = Option.FindOne(connection, o => o.Name == OptionWindowOpen).As<Option>();
+
+					if (option.IsEmpty)
 					{
-						option = Option.FindOne(connection, o => o.Name == OptionWindowOpen).As<Option>();
-
-						if (option.IsEmpty)
-						{
-							option = new Option(connection);
-							option.Name = OptionWindowOpen;
-							option.Initialize();
-						}
-
-						option.Value = cron;
-						option.Save();
+						option = new Option(connection);
+						option.Name = OptionWindowOpen;
+						option.Initialize();
 					}
+
+					option.Value = cron;
+					option.Save();
 				});
 
 				await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
@@ -489,23 +469,19 @@ namespace FrankieBot.Discord.Modules
 
 				// Find window duration option and set
 				Option option = null;
-				await db.RunDBAction(Context, context =>
+				await db.RunGuildDBAction(Context.Guild, connection =>
 				{
-					//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-					using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+					option = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
+
+					if (option.IsEmpty)
 					{
-						option = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
-
-						if (option.IsEmpty)
-						{
-							option = new Option(connection);
-							option.Name = OptionWindowDuration;
-							option.Initialize();
-						}
-
-						option.Value = duration.ToString();
-						option.Save();
+						option = new Option(connection);
+						option.Name = OptionWindowDuration;
+						option.Initialize();
 					}
+
+					option.Value = duration.ToString();
+					option.Save();
 				});
 
 				// Set up/update jobs
@@ -527,23 +503,19 @@ namespace FrankieBot.Discord.Modules
 				{
 					// convenience alias
 					var db = DataBaseService;
-					await db.RunDBAction(Context, context =>
+					await db.RunGuildDBAction(Context.Guild, connection =>
 					{
-						//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-						using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+						var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
+						if (announcementChannelOption.IsEmpty)
 						{
-							var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
-							if (announcementChannelOption.IsEmpty)
+							announcementChannelOption = new Option(connection)
 							{
-								announcementChannelOption = new Option(connection)
-								{
-									Name = OptionAnnouncementChannel,
-								};
-								announcementChannelOption.Initialize();
-							}
-							announcementChannelOption.Value = socketChannel.Id.ToString();
-							announcementChannelOption.Save();
+								Name = OptionAnnouncementChannel,
+							};
+							announcementChannelOption.Initialize();
 						}
+						announcementChannelOption.Value = socketChannel.Id.ToString();
+						announcementChannelOption.Save();
 					});
 					await Context.Channel.SendMessageAsync($"Progress report announcement channel set to <#{channel.Id}>");
 				}
@@ -566,35 +538,31 @@ namespace FrankieBot.Discord.Modules
 				{
 					// convenience alias
 					var db = DataBaseService;
-					await db.RunDBAction(Context, context =>
+					await db.RunGuildDBAction(Context.Guild, connection =>
 					{
-						//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-						using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+						var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+						if (reportChannelOption.IsEmpty)
 						{
-							var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
-							if (reportChannelOption.IsEmpty)
+							reportChannelOption = new Option(connection)
 							{
-								reportChannelOption = new Option(connection)
-								{
-									Name = OptionReportChannel,
-								};
-								reportChannelOption.Initialize();
-							}
-							reportChannelOption.Value = socketChannel.Id.ToString();
-							reportChannelOption.Save();
-
-							var restrictChannelOption = Option.FindOne(connection, o => o.Name == OptionRestrictReportChannel).As<Option>();
-							if (restrictChannelOption.IsEmpty)
-							{
-								restrictChannelOption = new Option(connection)
-								{
-									Name = OptionRestrictReportChannel
-								};
-								restrictChannelOption.Initialize();
-							}
-							restrictChannelOption.Value = "true";
-							restrictChannelOption.Save();
+								Name = OptionReportChannel,
+							};
+							reportChannelOption.Initialize();
 						}
+						reportChannelOption.Value = socketChannel.Id.ToString();
+						reportChannelOption.Save();
+
+						var restrictChannelOption = Option.FindOne(connection, o => o.Name == OptionRestrictReportChannel).As<Option>();
+						if (restrictChannelOption.IsEmpty)
+						{
+							restrictChannelOption = new Option(connection)
+							{
+								Name = OptionRestrictReportChannel
+							};
+							restrictChannelOption.Initialize();
+						}
+						restrictChannelOption.Value = "true";
+						restrictChannelOption.Save();
 					});
 					await Context.Channel.SendMessageAsync($"Progress report submission channel set to <#{channel.Id}>");
 				}
@@ -613,29 +581,25 @@ namespace FrankieBot.Discord.Modules
 			{
 				// convenience alias
 				var db = DataBaseService;
-				await db.RunDBAction(Context, context =>
+				await db.RunGuildDBAction(Context.Guild, connection =>
 				{
-					//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-					using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+					var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+					if (!reportChannelOption.IsEmpty)
 					{
-						var reportChannelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
-						if (!reportChannelOption.IsEmpty)
-						{
-							reportChannelOption.Delete();
-						}
-
-						var restrictChannelOption = Option.FindOne(connection, o => o.Name == OptionRestrictReportChannel).As<Option>();
-						if (restrictChannelOption.IsEmpty)
-						{
-							restrictChannelOption = new Option()
-							{
-								Name = OptionRestrictReportChannel
-							};
-							restrictChannelOption.Initialize();
-						}
-						restrictChannelOption.Value = "false";
-						restrictChannelOption.Save();
+						reportChannelOption.Delete();
 					}
+
+					var restrictChannelOption = Option.FindOne(connection, o => o.Name == OptionRestrictReportChannel).As<Option>();
+					if (restrictChannelOption.IsEmpty)
+					{
+						restrictChannelOption = new Option(connection)
+						{
+							Name = OptionRestrictReportChannel
+						};
+						restrictChannelOption.Initialize();
+					}
+					restrictChannelOption.Value = "false";
+					restrictChannelOption.Save();
 				});
 				await Context.Channel.SendMessageAsync("Report submission channel cleared. Progress report submissions can now be submitted in any channel");
 			}
@@ -691,76 +655,73 @@ namespace FrankieBot.Discord.Modules
 		{
 			// convenience alias
 			var db = DataBaseService;
-			await db.RunDBAction(Context, async context =>
+
+			await db.RunGuildDBAction(Context.Guild, async connection =>
 			{
-				//using (var connection = new DBConnection(context, db.GetServerDBFilePath(context.Guild)))
-				using (var connection = new SQLiteConnection(db.GetServerDBFilePath(context.Guild)))
+				// Check to make sure the report was submitted in the correct channel (if restricted report channel is set)
+				var restrictedOption = Option.FindOne(connection, o => o.Name == ProgressReportModule.OptionRestrictReportChannel).As<Option>();
+				if (restrictedOption.IsEmpty)
 				{
-					// Check to make sure the report was submitted in the correct channel (if restricted report channel is set)
-					var restrictedOption = Option.FindOne(connection, o => o.Name == ProgressReportModule.OptionRestrictReportChannel).As<Option>();
-					if (restrictedOption.IsEmpty)
+					restrictedOption = new Option(connection)
 					{
-						restrictedOption = new Option(connection)
-						{
-							Name = ProgressReportModule.OptionRestrictReportChannel
-						};
-						restrictedOption.Initialize();
-					}
-					var restricted = bool.Parse(restrictedOption.Value);
-
-					if (restricted)
-					{
-						var reportChannelOption = Option.FindOne(connection, o => o.Name == ProgressReportModule.OptionReportChannel).As<Option>();
-						if (reportChannelOption.IsEmpty)
-						{
-							// todo: log that restricted is true, but no restricted channel is set
-							restricted = false;
-						}
-						else
-						{
-							var reportChannelID = ulong.Parse(reportChannelOption.Value);
-							if (Context.Channel.Id != reportChannelID)
-							{
-								await Context.Channel.SendMessageAsync($"Error recording submission: Reports must be submitted in <#{reportChannelID}>");
-								return;
-							}
-						}
-					}
-
-					// Check to make sure a submission window is active
-					var time = Context.Message.Timestamp.UtcDateTime;
-					var window = ProgressReportWindow.FindOne(connection, w =>
-					{
-						return time > w.StartTime && time < w.StartTime.AddHours(w.Duration);
-					}).As<ProgressReportWindow>();
-					if (window.IsEmpty)
-					{
-						await Context.Channel.SendMessageAsync("Error recording submission: Progress report submissions are not currently open.");
-						return;
-					}
-
-					// Update report for current user and window if one exists; otherwise make a new one
-					var userID = user.Id.ToString();
-					var windowID = window.ID.ToString();
-					var report = ProgressReport.FindOne(connection, pr => pr.UserID == userID && pr.WindowID == window.ID).As<ProgressReport>();
-					var statusText = "updated";
-					if (report.IsEmpty)
-					{
-						statusText = "submitted";
-						report = new ProgressReport(connection)
-						{
-							User = user,
-							Window = window
-						};
-						report.Initialize();
-					}
-					report.WordCount = wordCount;
-					report.Note = note;
-					report.TimeStamp = Context.Message.Timestamp.UtcDateTime;
-
-					report.Save();
-					await Context.Channel.SendMessageAsync($"Progress report {statusText}. Great work, <@{user.Id}>!");
+						Name = ProgressReportModule.OptionRestrictReportChannel
+					};
+					restrictedOption.Initialize();
 				}
+				var restricted = bool.Parse(restrictedOption.Value);
+
+				if (restricted)
+				{
+					var reportChannelOption = Option.FindOne(connection, o => o.Name == ProgressReportModule.OptionReportChannel).As<Option>();
+					if (reportChannelOption.IsEmpty)
+					{
+						// todo: log that restricted is true, but no restricted channel is set
+						restricted = false;
+					}
+					else
+					{
+						var reportChannelID = ulong.Parse(reportChannelOption.Value);
+						if (Context.Channel.Id != reportChannelID)
+						{
+							await Context.Channel.SendMessageAsync($"Error recording submission: Reports must be submitted in <#{reportChannelID}>");
+							return;
+						}
+					}
+				}
+
+				// Check to make sure a submission window is active
+				var time = Context.Message.Timestamp.UtcDateTime;
+				var window = ProgressReportWindow.FindOne(connection, w =>
+				{
+					return time > w.StartTime && time < w.StartTime.AddHours(w.Duration);
+				}).As<ProgressReportWindow>();
+				if (window.IsEmpty)
+				{
+					await Context.Channel.SendMessageAsync("Error recording submission: Progress report submissions are not currently open.");
+					return;
+				}
+
+				// Update report for current user and window if one exists; otherwise make a new one
+				var userID = user.Id.ToString();
+				var windowID = window.ID.ToString();
+				var report = ProgressReport.FindOne(connection, pr => pr.UserID == userID && pr.WindowID == window.ID).As<ProgressReport>();
+				var statusText = "updated";
+				if (report.IsEmpty)
+				{
+					statusText = "submitted";
+					report = new ProgressReport(connection)
+					{
+						User = user,
+						Window = window
+					};
+					report.Initialize();
+				}
+				report.WordCount = wordCount;
+				report.Note = note;
+				report.TimeStamp = Context.Message.Timestamp.UtcDateTime;
+
+				report.Save();
+				await Context.Channel.SendMessageAsync($"Progress report {statusText}. Great work, <@{user.Id}>!");
 			});
 		}
 

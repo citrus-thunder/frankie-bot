@@ -28,13 +28,13 @@ namespace FrankieBot.Discord.Modules
 		/// </summary>
 		/// <value></value>
 		public DataBaseService DataBaseService { get; set; }
-		
+
 		/// <summary>
 		/// Provides command handling services
 		/// </summary>
 		/// <value></value>
 		public CommandHandlerService CommandHandlerService { get; set; }
-		
+
 		/// <summary>
 		/// Sets the prefix used to identify commands in chat messages
 		/// </summary>
@@ -43,23 +43,20 @@ namespace FrankieBot.Discord.Modules
 		[Command("prefix")]
 		public async Task SetPrefix(string prefix)
 		{
-			await DataBaseService.RunDBAction(Context, async context => 
+			if (!CommandHandlerService.PrefixOptions.Contains(prefix))
 			{
-				if (!CommandHandlerService.PrefixOptions.Contains(prefix))
-				{
-					await Context.Channel.SendMessageAsync($"\"{prefix}\" is not a valid prefix option. Please select one of {string.Join(", ", CommandHandlerService.PrefixOptions)}");
-					return;
-				}
+				await Context.Channel.SendMessageAsync($"\"{prefix}\" is not a valid prefix option. Please select one of {string.Join(", ", CommandHandlerService.PrefixOptions)}");
+				return;
+			}
 
-				//using (var connection = new DBConnection(context, DataBaseService.GetServerDBFilePath(context.Guild)))
-				using (var connection = new SQLiteConnection(DataBaseService.GetServerDBFilePath(context.Guild)))
-				{
-					var prefixOption = Option.FindOne(connection, o => o.Name == "command_prefix").As<Option>();
-					prefixOption.Value = prefix;
-					prefixOption.Save();
-					await Context.Channel.SendMessageAsync($"Command prefix has been updated to \"{prefix}\"");
-				}
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+			{
+				var prefixOption = Option.FindOne(connection, o => o.Name == "command_prefix").As<Option>();
+				prefixOption.Value = prefix;
+				prefixOption.Save();
 			});
+
+			await Context.Channel.SendMessageAsync($"Command prefix has been updated to \"{prefix}\"");
 		}
 	}
 }

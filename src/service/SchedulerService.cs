@@ -99,11 +99,8 @@ namespace FrankieBot.Discord.Services
 		public async Task<CronJob> AddJob(SocketCommandContext context, string name, string cron, bool autoStart = true)
 		{
 			CronJob res = null;
-			await _db.RunDBAction(context, c =>
+			await _db.RunGuildDBAction(context.Guild, connection =>
 			{
-				//using (var connection = new DBConnection(c, _db.GetServerDBFilePath(c.Guild)))
-				using (var connection = new SQLiteConnection(_db.GetServerDBFilePath(context.Guild)))
-				{
 					var job = CronJob.FindOne(connection, j => j.Name == name).As<CronJob>();
 
 					if (job.IsEmpty)
@@ -117,7 +114,6 @@ namespace FrankieBot.Discord.Services
 					job.Save();
 
 					res = job;
-				}
 			});
 			await AddJob(res, autoStart);
 			return res;

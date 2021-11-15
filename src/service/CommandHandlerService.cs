@@ -105,23 +105,19 @@ namespace FrankieBot.Discord.Services
 			if (!message.HasMentionPrefix(_client.CurrentUser, ref argPos))
 			{
 				bool validPrefix = false;
-				await _db.RunDBAction(context, (ctx) => 
+				await _db.RunGuildDBAction(context.Guild, connection =>
 				{
-					//using (var connection = new DBConnection(context, _db.GetServerDBFilePath(context.Guild)))
-					using (var connection = new SQLiteConnection(_db.GetServerDBFilePath(context.Guild)))
+					var option = Option.FindOne(connection, o => o.Name == OptionCommandPrefix).As<Option>();
+					if (option.IsEmpty)
 					{
-						var option = Option.FindOne(connection, o => o.Name == OptionCommandPrefix).As<Option>();
-						if (option.IsEmpty)
+						option = new Option(connection)
 						{
-							option = new Option(connection)
-							{
-								Name = OptionCommandPrefix
-							};
-							option.Initialize();
-							option.Save();
-						}
-						validPrefix = message.HasStringPrefix(option.Value, ref argPos);
+							Name = OptionCommandPrefix
+						};
+						option.Initialize();
+						option.Save();
 					}
+					validPrefix = message.HasStringPrefix(option.Value, ref argPos);
 				});
 
 				if (!validPrefix)

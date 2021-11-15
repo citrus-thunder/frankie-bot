@@ -30,7 +30,7 @@ namespace FrankieBot.DB.ViewModel
 		/// <param name="connection"></param>
 		/// <returns></returns>
 		//public CronJob(DBConnection connection) : base (connection)
-		public CronJob(SQLiteConnection connection) : base (connection)
+		public CronJob(SQLiteConnection connection) : base(connection)
 		{
 
 		}

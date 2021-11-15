@@ -55,7 +55,7 @@ namespace FrankieBot.Discord.Services
 
 			if (DunceDetector.Detect(message.Content))
 			{
-				await sourceMessage.Channel.SendMessageAsync("lol dunced");
+				await sourceMessage.Channel.SendMessageAsync(text:"lol dunced", messageReference: new MessageReference(message.Id));
 			}
 
 			await Task.CompletedTask;
