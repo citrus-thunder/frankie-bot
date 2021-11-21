@@ -193,11 +193,14 @@ namespace FrankieBot.Discord.Modules
 						schedulerService.RemoveJob(closeJob);
 					}
 
-					closeJob = new CronJob()
+					await dataBaseService.RunGuildDBAction(guild, connection =>
 					{
-						Name = JobAnnounceWindowClosed,
-						Guild = guild
-					};
+						closeJob = new CronJob(connection)
+						{
+							Name = JobAnnounceWindowClosed,
+							Guild = guild
+						};
+					});
 
 					closeJob.Run += async (object sender, EventArgs e) =>
 					{
@@ -515,6 +518,11 @@ namespace FrankieBot.Discord.Modules
 			[Command("window")]
 			public async Task SetWindow(string openCron, int duration)
 			{
+				if (!CronJob.TryValidate(openCron, out string message))
+				{
+					await Context.Channel.SendMessageAsync($"Error setting open cron: {message}");
+					return;
+				}
 				await SetWindowOpen(openCron);
 				await SetWindowDuration(duration);
 			}
@@ -528,9 +536,12 @@ namespace FrankieBot.Discord.Modules
 			[Alias("open")]
 			public async Task SetWindowOpen(string cron)
 			{
-				// todo: validate cron string
-				// todo: validate window open/close sanity (no open before close, etc.) (?)
 				var db = DataBaseService;
+				if (!CronJob.TryValidate(cron, out string message))
+				{
+					await Context.Channel.SendMessageAsync($"Error setting open cron: {message}");
+					return;
+				}
 
 				// Find window open option and set
 				Option option = null;

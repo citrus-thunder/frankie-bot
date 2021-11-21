@@ -6,6 +6,8 @@ using SQLite;
 using Discord;
 using Discord.WebSocket;
 
+using Cronos;
+
 using Model = FrankieBot.DB.Model;
 
 namespace FrankieBot.DB.ViewModel
@@ -100,6 +102,38 @@ namespace FrankieBot.DB.ViewModel
 		/// </summary>
 		/// <value></value>
 		public Timer Timer { get; private set; }
+		
+		/// <summary>
+		/// Validates the CronJob, ensuring a valid cron schedule is
+		/// present
+		/// </summary>
+		/// <param name="cronString"></param>
+		/// <param name="errorDescription"></param>
+		/// <returns></returns>
+		public static bool TryValidate(string cronString, out string errorDescription)
+		{
+			var res = false;
+			errorDescription = null;
+
+			if (cronString != null && cronString != "")
+			{
+				try
+				{
+					var cron = CronExpression.Parse(cronString);
+					if (cron != null)
+					{
+						res = true;
+					}
+				}
+				catch (Exception ex)
+				{
+					errorDescription = ex.Message;
+					res = false;
+				}
+			}
+
+			return res;
+		}
 
 		/// <summary>
 		/// Starts the job
@@ -110,10 +144,10 @@ namespace FrankieBot.DB.ViewModel
 			var startAfter = Cron.GetNextOccurrence((DateTime)nextStart);
 			var wait = (TimeSpan)(nextStart - DateTime.UtcNow);
 			var nextWait = (TimeSpan)(startAfter - nextStart);
-			
+
 			Timer = new Timer(
-				(state) => Run?.Invoke(this, EventArgs.Empty), 
-				null, 
+				(state) => Run?.Invoke(this, EventArgs.Empty),
+				null,
 				wait,
 				nextWait);
 		}
@@ -146,10 +180,36 @@ namespace FrankieBot.DB.ViewModel
 		}
 
 		/// <summary>
+		/// Saves the CronJob
+		/// </summary>
+		public override void Save()
+		{
+			if (TryValidate(out string message))
+			{
+				base.Save();
+			}
+			else
+			{
+				throw new InvalidOperationException($"Error saving CronJob: {message}");
+			}
+		}
+
+		/// <summary>
 		/// Returns a unique hashcode representation of the job
 		/// </summary>
 		/// <returns></returns>
 		public override int GetHashCode()
 			=> (Guild.Id, Name).GetHashCode();
+
+		/// <summary>
+		/// Validates the CronJob, checking for valid
+		/// cron schedule
+		/// </summary>
+		/// <param name="errorDescription"></param>
+		/// <returns></returns>
+		public bool TryValidate(out string errorDescription)
+		{
+			return TryValidate(CronString, out errorDescription);
+		}
 	}
 }
