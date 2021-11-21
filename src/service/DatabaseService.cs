@@ -40,12 +40,18 @@ namespace FrankieBot.Discord.Services
 			_client = _services.GetRequiredService<DiscordSocketClient>();
 		}
 
+		/// <summary>
+		/// Runs the specified action for all Guilds
+		/// </summary>
+		/// <param name="action"></param>
+		/// <returns></returns>
 		public async Task RunForAllGuilds(Action<IGuild> action)
 		{
 			var dbFiles = Directory.GetFiles(DBConfig.SERVER_DATA_ROOT);
 			foreach (var file in dbFiles)
 			{
-				IGuild guild = _client.GetGuild(ulong.Parse(Path.GetFileNameWithoutExtension(file)));
+				var guildID = ulong.Parse(Path.GetFileNameWithoutExtension(file));
+				SocketGuild guild = _client.GetGuild(guildID);
 				if (guild == null)
 				{
 					continue;
@@ -57,6 +63,11 @@ namespace FrankieBot.Discord.Services
 			}
 		}
 
+		/// <summary>
+		/// Runs the specified action for all Guilds
+		/// </summary>
+		/// <param name="action"></param>
+		/// <returns></returns>
 		public async Task RunForAllGuilds(Action<IGuild, SQLiteConnection> action)
 		{
 			var dbFiles = Directory.GetFiles(DBConfig.SERVER_DATA_ROOT);

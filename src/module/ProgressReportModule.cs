@@ -99,6 +99,11 @@ namespace FrankieBot.Discord.Modules
 		/// </remarks>
 		public SchedulerService SchedulerService { get; set; }
 
+		/// <summary>
+		/// Initializes this module for all guilds
+		/// </summary>
+		/// <param name="services"></param>
+		/// <returns></returns>
 		public static async Task Initialize(IServiceProvider services)
 		{
 			var database = services.GetRequiredService<DataBaseService>();
@@ -118,18 +123,210 @@ namespace FrankieBot.Discord.Modules
 		/// <returns></returns>
 		protected static async Task RebuildJobs(IGuild guild, DataBaseService dataBaseService, SchedulerService schedulerService)
 		{
-			// todo
-			// if module is disabled, find and stop jobs (if found)
-			// if enabled, start jobs w/ current options
-
-			// todo: check if a window is currently open, set close job
-			await Task.Run(() =>
+			Dictionary<string, string> options = null;
+			await dataBaseService.RunGuildDBAction(guild, connection =>
 			{
-				using (var connection = new SQLiteConnection(dataBaseService.GetServerDBFilePath(guild.Id)))
+				var openOption = Option.FindOne(connection, o => o.Name == OptionWindowOpen);
+				if (openOption.IsEmpty)
 				{
-					var options = Option.FindAll(connection).As<Options, Option>();
+					openOption = new Option(connection)
+					{
+						Name = OptionWindowOpen
+					};
+					openOption.Initialize();
+					openOption.Save();
+				}
+
+				options = Option.FindAll(connection).As<Options, Option>().Get();
+			});
+
+			bool enabled = false;
+			if (options.TryGetValue(OptionEnabled, out string value))
+			{
+				enabled = bool.Parse(value);
+			}
+
+			if (enabled)
+			{
+				// build/run next open job
+				options.TryGetValue(OptionWindowOpen, out string openCronString);
+
+				var openJob = schedulerService.GetJob(guild, JobOpenWindow);
+				if (openJob != null)
+				{
+					schedulerService.RemoveJob(openJob);
+				}
+
+				await dataBaseService.RunGuildDBAction(guild, connection =>
+				{
+					openJob = new CronJob(connection)
+					{
+						Name = JobOpenWindow,
+						Guild = guild,
+						CronString = openCronString
+					};
+				});
+
+				await schedulerService.AddJob(openJob);
+				openJob.Run += async (object sender, EventArgs e) =>
+				{
+					await OpenWindow(guild, dataBaseService, schedulerService);
+				};
+
+				// check if window open. If so, recreate close job
+				ProgressReportWindow currentWindow = null;
+				await dataBaseService.RunGuildDBAction(guild, connection =>
+				{
+					var time = DateTime.UtcNow;
+					currentWindow = ProgressReportWindow.FindOne(connection, w =>
+						w.StartTime <= time && w.StartTime.AddHours(w.Duration) >= time
+						).As<ProgressReportWindow>();
+				});
+
+				if (!currentWindow.IsEmpty)
+				{
+					// a window should be active. Set up announce window close job
+					var closeJob = schedulerService.GetJob(guild, JobAnnounceWindowClosed);
+					if (closeJob != null)
+					{
+						closeJob.Stop();
+						schedulerService.RemoveJob(closeJob);
+					}
+
+					closeJob = new CronJob()
+					{
+						Name = JobAnnounceWindowClosed,
+						Guild = guild
+					};
+
+					closeJob.Run += async (object sender, EventArgs e) =>
+					{
+						closeJob.Stop();
+						await CloseWindow(guild, currentWindow, schedulerService, dataBaseService);
+					};
+
+					await schedulerService.AddJob(closeJob, false);
+					closeJob.StartAt(currentWindow.EndTime, Timeout.InfiniteTimeSpan);
+				}
+			}
+			else
+			{
+				// Module is disabled. Find any related open jobs and remove them
+				var openJob = schedulerService.GetJob(guild, JobOpenWindow);
+				if (openJob != null)
+				{
+					schedulerService.RemoveJob(openJob);
+				}
+
+				var closeJob = schedulerService.GetJob(guild, JobAnnounceWindowClosed);
+				if (closeJob != null)
+				{
+					schedulerService.RemoveJob(closeJob);
+				}
+			}
+		}
+
+		private static async Task OpenWindow(IGuild guild, DataBaseService dataBaseService, SchedulerService schedulerService, int duration = -1)
+		{
+			var g = guild as SocketGuild;
+			// convenience alias
+			var db = dataBaseService;
+
+			await db.RunGuildDBAction(guild, async connection =>
+			{
+
+				var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
+				var announce = !announcementChannelOption.IsEmpty;
+				ISocketMessageChannel announceChannel = null;
+				if (announce)
+				{
+					announceChannel = g.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
+					if (announceChannel == null)
+					{
+						// todo: log that the specified channel is not found
+						announce = false;
+					}
+				}
+
+				// Create Window
+
+				if (duration <= -1)
+				{
+					var durationOption = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
+					if (durationOption.IsEmpty)
+					{
+						durationOption = new Option(connection)
+						{
+							Name = OptionWindowDuration
+						};
+						durationOption.Initialize();
+						durationOption.Save();
+					}
+					duration = int.Parse(durationOption.Value);
+				}
+
+				var window = new ProgressReportWindow(connection)
+				{
+					StartTime = DateTime.UtcNow,
+					Duration = duration
+				};
+
+				window.Save();
+
+				// Create Job
+
+				var closeJob = schedulerService.GetJob(g, JobAnnounceWindowClosed);
+				if (closeJob != null)
+				{
+					closeJob.Stop();
+					schedulerService.RemoveJob(g, closeJob.Name);
+				}
+
+				var guildId = g.Id.ToString();
+				var closeJobRecord = CronJob.FindOne(connection, j => j.Name == JobAnnounceWindowClosed && j.GuildID == guildId).As<CronJob>();
+				if (closeJobRecord.IsEmpty)
+				{
+					closeJobRecord = new CronJob(connection)
+					{
+						Name = JobAnnounceWindowClosed,
+						Guild = g
+					};
+				}
+				// We don't need to save this job to the DB as it is not a recurring job
+
+				closeJobRecord.Run += async (object sender, EventArgs e) =>
+				{
+					closeJobRecord.Stop();
+					await CloseWindow(g, window, schedulerService, dataBaseService);
+				};
+
+				// We keep the awaitables at the bottom of this process as they tend to
+				// break the SQLite connection handle.
+				await schedulerService.AddJob(closeJobRecord, false);
+				closeJobRecord.StartAt(window.EndTime, Timeout.InfiniteTimeSpan);
+				if (announce)
+				{
+					await announceChannel.SendMessageAsync($"Progress report submissions are now open! Submissions will be accepted from <t:{new DateTimeOffset(window.StartTime).ToUnixTimeSeconds()}:F> until <t:{new DateTimeOffset(window.EndTime).ToUnixTimeSeconds()}:F>.");
 				}
 			});
+		}
+
+		private static async Task CloseWindow(IGuild guild, ProgressReportWindow window, SchedulerService schedulerService, DataBaseService dataBaseService)
+		{
+			schedulerService.RemoveJob(guild, JobAnnounceWindowClosed);
+
+			ISocketMessageChannel channel = null;
+			await dataBaseService.RunGuildDBAction(guild, connection =>
+			{
+				var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
+				if (!announcementChannelOption.IsEmpty)
+				{
+					var g = guild as SocketGuild;
+					channel = g.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
+				}
+			});
+
+			channel?.SendMessageAsync("The progress report submission window is now closed!");
 		}
 
 		/// <summary>
@@ -207,7 +404,16 @@ namespace FrankieBot.Discord.Modules
 		[Command("forceopen")]
 		[RequireUserPermission(GuildPermission.Administrator)]
 		public async Task ForceOpenWindow(int duration)
-		=> await OpenWindow(duration);
+		{
+			try
+			{
+				await OpenWindow(duration);
+			}
+			catch (DBException ex)
+			{
+				await Context.Channel.SendMessageAsync($"Unable to force open window: {ex}");
+			}
+		}
 
 		/// <summary>
 		/// Lists the current user's Progress Reports
@@ -271,112 +477,10 @@ namespace FrankieBot.Discord.Modules
 		}
 
 		private async Task OpenWindow(int duration = -1)
-		{
-			// convenience alias
-			var db = DataBaseService;
-
-			await db.RunGuildDBAction(Context.Guild, async connection =>
-			{
-				try
-				{
-					var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
-					var announce = !announcementChannelOption.IsEmpty;
-					ISocketMessageChannel announceChannel = null;
-					if (announce)
-					{
-						announceChannel = Context.Guild.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
-						if (announceChannel == null)
-						{
-							// todo: log that the specified channel is not found
-							announce = false;
-						}
-					}
-
-					// Create Window
-
-					if (duration <= -1)
-					{
-						var durationOption = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
-						if (durationOption.IsEmpty)
-						{
-							durationOption = new Option(connection)
-							{
-								Name = OptionWindowDuration
-							};
-							durationOption.Initialize();
-							durationOption.Save();
-						}
-						duration = int.Parse(durationOption.Value);
-					}
-
-					var window = new ProgressReportWindow(connection)
-					{
-						StartTime = DateTime.UtcNow,
-						Duration = duration
-					};
-
-					window.Save();
-
-					// Create Job
-
-					// convenience alias
-					var scheduler = SchedulerService;
-
-					var closeJob = scheduler.GetJob(Context.Guild, JobAnnounceWindowClosed);
-					if (closeJob != null)
-					{
-						closeJob.Stop();
-						scheduler.RemoveJob(Context, closeJob.Name);
-					}
-
-					var guildId = Context.Guild.Id.ToString();
-					var closeJobRecord = CronJob.FindOne(connection, j => j.Name == JobAnnounceWindowClosed && j.GuildID == guildId).As<CronJob>();
-					if (closeJobRecord.IsEmpty)
-					{
-						closeJobRecord = new CronJob(connection)
-						{
-							Name = JobAnnounceWindowClosed,
-							Guild = Context.Guild
-						};
-					}
-					// We don't need to save this job to the DB as it is not a recurring job
-
-					closeJobRecord.Run += async (object sender, EventArgs e) =>
-			{
-				closeJobRecord.Stop();
-				if (announce)
-				{
-			// should this be part of the CloseWindow command?
-			await announceChannel.SendMessageAsync("The progress report submission window is now closed!");
-				}
-				await CloseWindow(Context.Guild, window);
-			};
-
-					// We keep the awaitables at the bottom of this process as they tend to
-					// break the SQLite connection handle.
-					await scheduler.AddJob(closeJobRecord, false);
-					closeJobRecord.StartAt(window.EndTime, Timeout.InfiniteTimeSpan);
-					if (announce)
-					{
-						await announceChannel.SendMessageAsync($"Progress report submissions are now open! Submissions will be accepted from <t:{new DateTimeOffset(window.StartTime).ToUnixTimeSeconds()}:F> until <t:{new DateTimeOffset(window.EndTime).ToUnixTimeSeconds()}:F>.");
-					}
-				}
-				catch (DBException ex)
-				{
-					// log exception
-					await Context.Channel.SendMessageAsync($"Unable to force open window: {ex.Message}");
-				}
-			});
-		}
+		=> await OpenWindow(Context.Guild, DataBaseService, SchedulerService, duration);
 
 		private async Task CloseWindow(IGuild guild, ProgressReportWindow window)
-		{
-			// convenience alias
-			var scheduler = SchedulerService;
-
-			scheduler.RemoveJob(guild, JobAnnounceWindowClosed);
-			await Task.CompletedTask; //temp
-		}
+		=> await CloseWindow(guild, window, SchedulerService, DataBaseService);
 
 		/// <summary>
 		/// Command module containing command used to set and alter Progress Report module options
@@ -693,7 +797,7 @@ namespace FrankieBot.Discord.Modules
 				var time = Context.Message.Timestamp.UtcDateTime;
 				var window = ProgressReportWindow.FindOne(connection, w =>
 				{
-					return time > w.StartTime && time < w.StartTime.AddHours(w.Duration);
+					return time >= w.StartTime && time <= w.StartTime.AddHours(w.Duration);
 				}).As<ProgressReportWindow>();
 				if (window.IsEmpty)
 				{

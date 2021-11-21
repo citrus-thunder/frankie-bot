@@ -42,7 +42,7 @@ namespace FrankieBot.Discord.Modules
 			// Convenience alias
 			var db = DataBaseService;
 			ViewModel.Quote quote = null;
-			await db.RunGuildDBAction(Context.Guild, async connection =>
+			await db.RunGuildDBAction(Context.Guild, connection =>
 			{
 				var quotes = ViewModel.Quote.FindAll(connection).ContentAs<ViewModel.Quote>();
 				var random = new Random();

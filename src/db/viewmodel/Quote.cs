@@ -30,6 +30,12 @@ namespace FrankieBot.DB.ViewModel
 			
 		}
 
+		/// <summary>
+		/// Creates and initializes a new Quote instance
+		/// </summary>
+		/// <param name="guild"></param>
+		/// <param name="connection"></param>
+		/// <returns></returns>
 		public Quote(IGuild guild, SQLiteConnection connection) : this(connection)
 		{
 			Initialize(guild);
@@ -97,19 +103,11 @@ namespace FrankieBot.DB.ViewModel
 			get => Model.RecordTimeStamp;
 			set => Model.RecordTimeStamp = value;
 		}
-		/*
-		/// <summary>
-		/// Initializes this Quote instance, populating complex fields from
-		/// the simple data in the underlying model
-		/// </summary>
-		public override void Initialize()
-		{
-			_guild = Connection.Context.Guild;
-			Author = _guild.GetUser(ulong.Parse(Model.AuthorID));
-			Recorder = _guild.GetUser(ulong.Parse(Model.RecorderID));
-		}
-		*/
 
+		/// <summary>
+		/// Initializes this Quote instance
+		/// </summary>
+		/// <param name="guild"></param>
 		public void Initialize(IGuild guild)
 		{
 			if (guild is SocketGuild socketGuild)

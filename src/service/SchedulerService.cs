@@ -130,6 +130,13 @@ namespace FrankieBot.Discord.Services
 		/// <summary>
 		/// Stops a job and removes it from the scheduler
 		/// </summary>
+		/// <param name="job"></param>
+		public void RemoveJob(CronJob job)
+		=> RemoveJob(job.Guild, job.Name);
+
+		/// <summary>
+		/// Stops a job and removes it from the scheduler
+		/// </summary>
 		/// <param name="guild"></param>
 		/// <param name="name"></param>
 		public void RemoveJob(IGuild guild, string name)

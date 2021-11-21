@@ -34,14 +34,18 @@ namespace FrankieBot.Discord
 			using (var services = ConfigureServices())
 			{
 				var client = services.GetRequiredService<DiscordSocketClient>();
+
+				client.Ready += async () =>
+				{
+					await ProgressReportModule.Initialize(services);
+				};
+
 				await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("FRANKIE_TOKEN"));
 
 				await client.StartAsync();
 
 				await services.GetRequiredService<CommandHandlerService>().InitializeAsync();
 				await services.GetRequiredService<EavesDropperService>().InitializeAsync();
-
-				await ProgressReportModule.Initialize(services);
 
 				// Block task until program close
 				await Task.Delay(-1);
