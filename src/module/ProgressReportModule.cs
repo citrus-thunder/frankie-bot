@@ -67,6 +67,12 @@ namespace FrankieBot.Discord.Modules
 		/// </summary>
 		public const string OptionWindowReminderRole = "progress_report_reminder_role";
 
+		/// <summary>
+		/// Option title for option which sets whether the Progress Report module will automatically apply
+		/// rank roles to users
+		/// </summary>
+		public const string OptionRanksEnabled = "progress_report_ranks_enabled";
+
 		#endregion // Options
 
 		#region Jobs
@@ -328,7 +334,7 @@ namespace FrankieBot.Discord.Modules
 					channel = g.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
 				}
 			});
-
+			// todo: comb through users and apply rank changes if rank option is enabled.
 			channel?.SendMessageAsync("The progress report submission window is now closed!");
 		}
 
@@ -477,6 +483,54 @@ namespace FrankieBot.Discord.Modules
 				.WithFields(fields);
 
 			await Context.Channel.SendMessageAsync(text: $"Reports for <@{user.Id}>", embed: embed.Build());
+		}
+
+		/// <summary>
+		/// Displays rank info
+		/// </summary>
+		/// <returns></returns>
+		[Command("ranks")]
+		public async Task DisplayRanks()
+		{
+			//todo: display ranks if ranks are enabled and present.
+			var db = DataBaseService;
+
+			await db.RunGuildDBAction(Context.Guild, async connection =>
+			{
+				var enabledOption = Option.FindOne(connection, o => o.Name == OptionRanksEnabled).As<Option>();
+				
+				if (enabledOption.IsEmpty)
+				{
+					enabledOption = new Option(connection);
+					enabledOption.Name = OptionRanksEnabled;
+					enabledOption.Initialize();
+					enabledOption.Save();
+				}
+				
+				if (!bool.Parse(enabledOption.Value))
+				{
+					await Context.Channel.SendMessageAsync("Ranks are not enabled on this server");
+					return;
+				}
+
+				var ranks = Rank.FindAll(connection).ContentAs<Rank>();
+
+				if (ranks.Content.Count < 1)
+				{
+					await Context.Channel.SendMessageAsync("No ranks have been defined");
+					return;
+				}
+
+				ranks.Content.Sort((r1, r2) => r2.Threshold.CompareTo(r1.Threshold));
+
+				var message = "";
+				foreach (var rank in ranks.Content)
+				{
+					rank.Initialize(Context.Guild);
+					message += $"{rank.Role.Name}: {rank.Threshold}\n";
+				}
+				await Context.Channel.SendMessageAsync("Ranks: \n" + message);
+			});
 		}
 
 		private async Task OpenWindow(int duration = -1)
@@ -717,6 +771,196 @@ namespace FrankieBot.Discord.Modules
 					restrictChannelOption.Save();
 				});
 				await Context.Channel.SendMessageAsync("Report submission channel cleared. Progress report submissions can now be submitted in any channel");
+			}
+		}
+
+		/// <summary>
+		/// Contains commands pertaining to the progress report module's optional rank capabilities
+		/// </summary>
+		[Group("rank")]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public class RankOptions : ModuleBase<SocketCommandContext>
+		{
+			/// <summary>
+			/// DataBaseService reference
+			/// </summary>
+			/// <remarks>
+			/// Set via Dependency Injection
+			/// </remarks>
+			public DataBaseService DataBaseService { get; set; }
+
+			/// <summary>
+			/// Enables automatic rankings
+			/// </summary>
+			/// <returns></returns>
+			[Command("enable")]
+			public async Task EnableRanks()
+			{
+				var db = DataBaseService;
+
+				// Find or Create option and set to true
+				Option option = null;
+				await db.RunGuildDBAction(Context.Guild, connection =>
+				{
+					option = Option.FindOne(connection, o => o.Name == OptionRanksEnabled).As<Option>();
+
+					if (option.IsEmpty)
+					{
+						option = new Option(connection);
+						option.Name = OptionEnabled;
+						option.Initialize();
+					}
+
+					option.Value = "true";
+					option.Save();
+				});
+
+				await Context.Channel.SendMessageAsync("Progress report ranking enabled");
+			}
+
+			/// <summary>
+			/// Disables automatic rankings
+			/// </summary>
+			/// <returns></returns>
+			[Command("disable")]
+			public async Task DisableRanks()
+			{
+				var db = DataBaseService;
+
+				// Find or Create option and set to false
+				Option option = null;
+				await db.RunGuildDBAction(Context.Guild, connection =>
+				{
+					option = Option.FindOne(connection, o => o.Name == OptionRanksEnabled).As<Option>();
+
+					if (option.IsEmpty)
+					{
+						option = new Option(connection);
+						option.Name = OptionEnabled;
+						option.Initialize();
+					}
+
+					option.Value = "false";
+					option.Save();
+				});
+
+				await Context.Channel.SendMessageAsync("Progress report ranking enabled");
+			}
+
+			/// <summary>
+			/// Adds a role as a rank
+			/// </summary>
+			/// <param name="role">Role to be added as a rank</param>
+			/// <param name="threshold">Word cound threshold to qualify for the rank</param>
+			/// <returns></returns>
+			[Command("add")]
+			public async Task AddRank(IRole role, int threshold)
+			{
+				var db = DataBaseService;
+
+				await db.RunGuildDBAction(Context.Guild, async connection =>
+				{
+					try
+					{
+						var rank = new Rank(connection)
+						{
+							Role = role,
+							Threshold = threshold
+						};
+						rank.Initialize(Context.Guild);
+						rank.Save();
+						await Context.Channel.SendMessageAsync($"Rank added: \"{role.Name}\" ({threshold})");
+					}
+					catch (ConstraintViolationException ex)
+					{
+						await Context.Channel.SendMessageAsync($"Error adding new rank: {ex}");
+					}
+				});
+			}
+
+			/// <summary>
+			/// Removes a role as a rank
+			/// </summary>
+			/// <param name="role"></param>
+			/// <returns></returns>
+			[Command("remove")]
+			[Alias("delete")]
+			public async Task RemoveRank(IRole role)
+			{
+				var db = DataBaseService;
+
+				await db.RunGuildDBAction(Context.Guild, async connection =>
+				{
+					var roleId = role.Id.ToString();
+					var rank = Rank.FindOne(connection, r => r.RoleID == roleId).As<Rank>();
+					rank.Delete();
+					await Context.Channel.SendMessageAsync("Rank removed");
+				});
+			}
+
+			/// <summary>
+			/// Modifies a rank's threshold
+			/// </summary>
+			/// <param name="role"></param>
+			/// <param name="threshold"></param>
+			/// <returns></returns>
+			[Command("edit")]
+			public async Task EditRank(IRole role, int threshold)
+			{
+				var db = DataBaseService;
+
+				await db.RunGuildDBAction(Context.Guild, async connection =>
+				{
+					try
+					{
+						var roleId = role.Id.ToString();
+						var rank = Rank.FindOne(connection, r => r.RoleID == roleId).As<Rank>();
+
+						if (rank.IsEmpty)
+						{
+							await Context.Channel.SendMessageAsync("Rank not found!");
+							return;
+						}
+
+						if (rank.Threshold == threshold)
+						{
+							await Context.Channel.SendMessageAsync($"Rank already has threshold of {threshold}. No change required.");
+							return;
+						}
+
+						rank.Threshold = threshold;
+						rank.Save();
+						await Context.Channel.SendMessageAsync("Rank threshold updated!");
+					}
+					catch (ConstraintViolationException)
+					{
+						await Context.Channel.SendMessageAsync($"Error editing rank. Thresholds must be unique; ensure this threshold isn't already in use by another rank!");
+					}
+				});
+			}
+
+			/// <summary>
+			/// Clears all ranks
+			/// </summary>
+			/// <returns></returns>
+			[Command("clear")]
+			public async Task ClearRanks()
+			{
+				var db = DataBaseService;
+
+				await db.RunGuildDBAction(Context.Guild, async connection =>
+				{
+					try
+					{
+						var ranks = Rank.FindAll(connection).ContentAs<Rank>();
+						ranks.Content.ForEach(r => r.Delete());
+						await Context.Channel.SendMessageAsync("Ranks removed");
+					}
+					catch (Exception ex)
+					{
+						await Context.Channel.SendMessageAsync($"Error removing ranks: {ex}");
+					}
+				});
 			}
 		}
 	}

@@ -131,7 +131,6 @@ namespace FrankieBot.Discord.Services
 			}
 		}
 
-		//private async Task CheckDB(SocketCommandContext context)
 		private async Task CheckDB(IGuild guild)
 		{
 			await Task.Run(() =>
@@ -140,7 +139,6 @@ namespace FrankieBot.Discord.Services
 				if (!File.Exists(dbFile))
 				{
 					File.Create(dbFile).Close();
-					//using (var connection = new DBConnection(context, dbFile))
 					using (var connection = new SQLiteConnection(dbFile))
 					{
 						connection.CreateTable<Model.Option>();
@@ -148,6 +146,7 @@ namespace FrankieBot.Discord.Services
 						connection.CreateTable<Model.CronJob>();
 						connection.CreateTable<Model.ProgressReportWindow>();
 						connection.CreateTable<Model.ProgressReport>();
+						connection.CreateTable<Model.Rank>();
 					}
 				}
 			});

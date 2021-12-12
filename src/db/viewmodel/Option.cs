@@ -25,6 +25,7 @@ namespace FrankieBot.DB.ViewModel
 			{Module.ProgressReportModule.OptionWindowOpen, "0 0 * * 5"},
 			{Module.ProgressReportModule.OptionWindowDuration, "96"},
 			{Module.ProgressReportModule.OptionRestrictReportChannel, "false"},
+			{Module.ProgressReportModule.OptionRanksEnabled, "true"},
 			{Service.CommandHandlerService.OptionCommandPrefix, "."}
 			};
 		}
@@ -76,6 +77,11 @@ namespace FrankieBot.DB.ViewModel
 		/// </summary>
 		public override void Initialize()
 		{
+			if (Model == null)
+			{
+				return;
+			}
+
 			if (Name == null)
 			{
 				return;
