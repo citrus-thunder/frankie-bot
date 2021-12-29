@@ -325,6 +325,7 @@ namespace FrankieBot.Discord.Modules
 			schedulerService.RemoveJob(guild, JobAnnounceWindowClosed);
 
 			ISocketMessageChannel channel = null;
+			bool updateRanks = false;
 			await dataBaseService.RunGuildDBAction(guild, connection =>
 			{
 				var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
@@ -333,9 +334,37 @@ namespace FrankieBot.Discord.Modules
 					var g = guild as SocketGuild;
 					channel = g.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
 				}
+
+				var rankOption = Option.FindOne(connection, o => o.Name == OptionRanksEnabled).As<Option>();
+				if (rankOption.IsEmpty)
+				{
+					rankOption = new Option(connection)
+					{
+						Name = OptionRanksEnabled
+					};
+					rankOption.Initialize();
+					rankOption.Save();
+				}
+
+				updateRanks = bool.Parse(rankOption.Value);
 			});
-			// todo: comb through users and apply rank changes if rank option is enabled.
-			channel?.SendMessageAsync("The progress report submission window is now closed!");
+
+			await channel?.SendMessageAsync("The progress report submission window is now closed!");
+			
+			if (updateRanks)
+			{
+				await UpdateRanks(guild, window, dataBaseService);
+			}
+		}
+
+		private static async Task UpdateRanks(IGuild guild, ProgressReportWindow window, DataBaseService dataBaseService)
+		{
+			// todo: 
+			// - comb through users who submitted to the PR window
+			// - check the highest rank for which they qualify
+			// - check their current rank (if present) and its threshold
+			// - if current threshold is different from qualifying threshold, apply and record adjustment
+			// - output rank adjustments
 		}
 
 		/// <summary>
@@ -498,7 +527,7 @@ namespace FrankieBot.Discord.Modules
 			await db.RunGuildDBAction(Context.Guild, async connection =>
 			{
 				var enabledOption = Option.FindOne(connection, o => o.Name == OptionRanksEnabled).As<Option>();
-				
+
 				if (enabledOption.IsEmpty)
 				{
 					enabledOption = new Option(connection);
@@ -506,7 +535,7 @@ namespace FrankieBot.Discord.Modules
 					enabledOption.Initialize();
 					enabledOption.Save();
 				}
-				
+
 				if (!bool.Parse(enabledOption.Value))
 				{
 					await Context.Channel.SendMessageAsync("Ranks are not enabled on this server");
