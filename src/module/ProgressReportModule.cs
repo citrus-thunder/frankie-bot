@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -350,21 +351,165 @@ namespace FrankieBot.Discord.Modules
 			});
 
 			await channel?.SendMessageAsync("The progress report submission window is now closed!");
-			
+
 			if (updateRanks)
 			{
 				await UpdateRanks(guild, window, dataBaseService);
 			}
 		}
 
+		/// <summary>
+		/// Updates ranks based on submissions during the given progress report window
+		/// </summary>
+		/// <param name="windowID"></param>
+		/// <returns></returns>
+		[Command("updateranks")]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public async Task ForceUpdateRanks(int windowID)
+		{
+			var db = DataBaseService;
+			
+			ProgressReportWindow window = null;
+			await db.RunGuildDBAction(Context.Guild, connection =>
+			{
+				window = ProgressReportWindow.Find(connection, windowID).As<ProgressReportWindow>();
+			});
+
+			if (window != null && !window.IsEmpty)
+			{
+				await UpdateRanks(Context.Guild, window, db);
+			}
+		}
+
+		/// <summary>
+		/// Updates ranks based on submissions during the most recent progress report window
+		/// </summary>
+		/// <returns></returns>
+		[Command("updateranks")]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public async Task ForceUpdateRanks()
+		{
+			var db = DataBaseService;
+			ProgressReportWindow window = null;
+
+			await db.RunGuildDBAction(Context.Guild, connection =>
+			{
+				var windows = ProgressReportWindow.FindAll(connection).ContentAs<ProgressReportWindow>();
+				if (windows.Content.Count > 0)
+				{
+					windows.Content.Sort((a, b) => b.StartTime.CompareTo(a.StartTime));
+					window = windows.Content[0];
+				}
+			});
+
+			if (window != null && !window.IsEmpty)
+			{
+				await UpdateRanks(Context.Guild, window, db);
+			}
+			else
+			{
+				await Context.Channel.SendMessageAsync("No report windows found!");
+			}
+		}
+
 		private static async Task UpdateRanks(IGuild guild, ProgressReportWindow window, DataBaseService dataBaseService)
 		{
-			// todo: 
-			// - comb through users who submitted to the PR window
-			// - check the highest rank for which they qualify
-			// - check their current rank (if present) and its threshold
-			// - if current threshold is different from qualifying threshold, apply and record adjustment
-			// - output rank adjustments
+			List<ProgressReport> submissions = null;
+			List<Rank> ranks = null;
+			ISocketMessageChannel announceChannel = null;
+			var changeList = new List<(IGuildUser user, IRole oldRole, IRole newRole)>();
+
+			var db = dataBaseService;
+			await db.RunGuildDBAction(guild, connection =>
+			{
+				var allRanks = Rank.FindAll(connection).ContentAs<Rank>();
+				foreach (var rank in allRanks.Content)
+				{
+					rank.Initialize(guild);
+				}
+				ranks = allRanks.Content.ToList();
+
+				var allSubmissions = ProgressReport.Find(connection, pr => pr.WindowID == window.ID).ContentAs<ProgressReport>();
+				foreach (var submission in allSubmissions.Content)
+				{
+					submission.Initialize(guild);
+				}
+				submissions = allSubmissions.Content.ToList();
+
+				var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
+				if (!announcementChannelOption.IsEmpty)
+				{
+					var g = guild as SocketGuild;
+					announceChannel = g.GetChannel(ulong.Parse(announcementChannelOption.Value)) as ISocketMessageChannel;
+				}
+			});
+
+			ranks.Sort((x, y) => x.Threshold.CompareTo(y.Threshold));
+			var rankRoleIDs = ranks.Select(r => r.Role.Id).ToList();
+			
+			foreach (var submission in submissions)
+			{
+				var user = await guild.GetUserAsync(submission.User.Id);
+				var count = submission.WordCount;
+				
+				IRole newRole = null;
+				IRole currentRole = null;
+				var currentRankId = user.RoleIds.Where(rid => rankRoleIDs.Contains(rid));
+				if (currentRankId.Any())
+				{
+					currentRole = guild.GetRole(currentRankId.First());
+				}
+				
+				foreach (var rank in ranks)
+				{
+					if (count >= rank.Threshold)
+					{
+						newRole = rank.Role;
+					}
+					else if (count < rank.Threshold)
+					{
+						break;
+					}
+				}
+
+				if (newRole != null)
+				{
+					if (newRole != currentRole)
+					{
+						if (currentRole != null)
+						{
+							await user.RemoveRoleAsync(currentRole.Id);
+						}
+						await user.AddRoleAsync(newRole.Id);
+						changeList.Add((user, currentRole, newRole));
+					}
+				}
+			}
+
+			if (announceChannel != null)
+			{
+				var embed = new EmbedBuilder()
+					.WithTitle("Progress Report Rank Updates");
+				if (changeList.Count < 1)
+				{
+					embed.WithDescription("No rank changes occurred for this window");
+					await announceChannel.SendMessageAsync(embed: embed.Build());
+				}
+				else
+				{
+					var fields = new List<EmbedFieldBuilder>();
+					foreach (var change in changeList)
+					{
+						var oldRank = change.oldRole?.Name ?? "No Role";
+						var newField = new EmbedFieldBuilder()
+							.WithName(change.user.Username)
+							.WithValue($"{oldRank} => {change.newRole.Name}");
+						fields.Add(newField);
+					}
+					embed.WithFields(fields);
+					await announceChannel.SendMessageAsync(embed: embed.Build());
+				}
+			}
 		}
 
 		/// <summary>

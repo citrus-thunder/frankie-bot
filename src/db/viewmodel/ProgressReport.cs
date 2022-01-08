@@ -3,6 +3,7 @@ using System;
 using SQLite;
 
 using Discord;
+using Discord.WebSocket;
 
 using Model = FrankieBot.DB.Model;
 
@@ -99,6 +100,18 @@ namespace FrankieBot.DB.ViewModel
 		{
 			get => Model.TimeStamp;
 			set => Model.TimeStamp = value;
+		}
+
+		/// <summary>
+		/// Initializes this ProgressReport instance
+		/// </summary>
+		/// <param name="guild"></param>
+		public void Initialize(IGuild guild)
+		{
+			if (guild is SocketGuild sg)
+			{
+				User = sg.GetUser(ulong.Parse(Model.UserID));
+			}
 		}
 
 		private void OnUpdateUser()
