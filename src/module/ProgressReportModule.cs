@@ -244,7 +244,7 @@ namespace FrankieBot.Discord.Modules
 
 			await db.RunGuildDBAction(guild, async connection =>
 			{
-
+				var announceReminderOption = Option.FindOne(connection, o => o.Name == OptionWindowReminderRole).As<Option>();
 				var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
 				var announce = !announcementChannelOption.IsEmpty;
 				ISocketMessageChannel announceChannel = null;
@@ -316,7 +316,16 @@ namespace FrankieBot.Discord.Modules
 				closeJobRecord.StartAt(window.EndTime, Timeout.InfiniteTimeSpan);
 				if (announce)
 				{
-					await announceChannel.SendMessageAsync($"Progress report submissions are now open! Submissions will be accepted from <t:{new DateTimeOffset(window.StartTime).ToUnixTimeSeconds()}:F> until <t:{new DateTimeOffset(window.EndTime).ToUnixTimeSeconds()}:F>.");
+					var ping = "";
+					if (!announceReminderOption.IsEmpty)
+					{
+						var role = guild.GetRole(ulong.Parse(announceReminderOption.Value));
+						if (role != null)
+						{
+							ping = $"<@&{role.Id}> ";
+						}
+					}
+					await announceChannel.SendMessageAsync($"{ping}Progress report submissions are now open! Submissions will be accepted from <t:{new DateTimeOffset(window.StartTime).ToUnixTimeSeconds()}:F> until <t:{new DateTimeOffset(window.EndTime).ToUnixTimeSeconds()}:F>.");
 				}
 			});
 		}
@@ -326,9 +335,11 @@ namespace FrankieBot.Discord.Modules
 			schedulerService.RemoveJob(guild, JobAnnounceWindowClosed);
 
 			ISocketMessageChannel channel = null;
+			Option announceReminderRole = null;
 			bool updateRanks = false;
 			await dataBaseService.RunGuildDBAction(guild, connection =>
 			{
+				announceReminderRole = Option.FindOne(connection, o => o.Name == OptionWindowReminderRole).As<Option>();
 				var announcementChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnouncementChannel).As<Option>();
 				if (!announcementChannelOption.IsEmpty)
 				{
@@ -349,8 +360,17 @@ namespace FrankieBot.Discord.Modules
 
 				updateRanks = bool.Parse(rankOption.Value);
 			});
-
-			await channel?.SendMessageAsync("The progress report submission window is now closed!");
+			
+			var ping = "";
+			if (!announceReminderRole.IsEmpty)
+			{
+				var role = guild.GetRole(ulong.Parse(announceReminderRole.Value));
+				if (role != null)
+				{
+					ping = $"<@&{role.Id}> ";
+				}
+			}
+			await channel?.SendMessageAsync($"{ping}The progress report submission window is now closed!");
 
 			if (updateRanks)
 			{
@@ -368,7 +388,7 @@ namespace FrankieBot.Discord.Modules
 		public async Task ForceUpdateRanks(int windowID)
 		{
 			var db = DataBaseService;
-			
+
 			ProgressReportWindow window = null;
 			await db.RunGuildDBAction(Context.Guild, connection =>
 			{
@@ -446,12 +466,12 @@ namespace FrankieBot.Discord.Modules
 
 			ranks.Sort((x, y) => x.Threshold.CompareTo(y.Threshold));
 			var rankRoleIDs = ranks.Select(r => r.Role.Id).ToList();
-			
+
 			foreach (var submission in submissions)
 			{
 				var user = await guild.GetUserAsync(submission.User.Id);
 				var count = submission.WordCount;
-				
+
 				IRole newRole = null;
 				IRole currentRole = null;
 				var currentRankId = user.RoleIds.Where(rid => rankRoleIDs.Contains(rid));
@@ -459,7 +479,7 @@ namespace FrankieBot.Discord.Modules
 				{
 					currentRole = guild.GetRole(currentRankId.First());
 				}
-				
+
 				foreach (var rank in ranks)
 				{
 					if (count >= rank.Threshold)
@@ -702,7 +722,7 @@ namespace FrankieBot.Discord.Modules
 		private async Task EditUserSubmission(int submissionID, int wordCount = -1, string note = null)
 		{
 			string message = null;
-			
+
 			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
 			{
 				var submission = ProgressReport.Find(connection, submissionID).As<ProgressReport>();
@@ -814,7 +834,7 @@ namespace FrankieBot.Discord.Modules
 			{
 				var open = new DateTimeOffset(currentWindow.StartTime.ToLocalTime()).ToUnixTimeSeconds();
 				var close = new DateTimeOffset(currentWindow.EndTime.ToLocalTime()).ToUnixTimeSeconds();
-				
+
 				await Context.Channel.SendMessageAsync($"The current submission window opened at <t:{open}:F> and will remain open until <t:{close}:F>");
 			}
 
@@ -1119,6 +1139,53 @@ namespace FrankieBot.Discord.Modules
 					restrictChannelOption.Save();
 				});
 				await Context.Channel.SendMessageAsync("Report submission channel cleared. Progress report submissions can now be submitted in any channel");
+			}
+
+			/// <summary>
+			/// Sets the role to be pinged when Progress Report windows open and close
+			/// </summary>
+			/// <param name="role"></param>
+			/// <returns></returns>
+			[Command("reminder")]
+			[Alias("remind")]
+			[RequireUserPermission(GuildPermission.Administrator)]
+			public async Task SetRemindRole(IRole role)
+			{
+				await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+				{
+					var option = Option.FindOne(connection, o => o.Name == OptionWindowReminderRole).As<Option>();
+					if (option.IsEmpty)
+					{
+						option = new Option(connection)
+						{
+							Name = OptionWindowReminderRole,
+						};
+						option.Initialize();
+					}
+					option.Value = role.Id.ToString();
+					option.Save();
+				});
+				await Context.Channel.SendMessageAsync("Progress Report reminder role set!");
+			}
+
+			/// <summary>
+			/// Clears the Progress Report Window open/close reminder role
+			/// </summary>
+			/// <returns></returns>
+			[Command("unsetreminder")]
+			[Alias("clearreminder", "noreminder")]
+			[RequireUserPermission(GuildPermission.Administrator)]
+			public async Task ClearRemindRole()
+			{
+				await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+				{
+					var option = Option.FindOne(connection, o => o.Name == OptionWindowReminderRole).As<Option>();
+					if (!option.IsEmpty)
+					{
+						option.Delete();
+					}
+				});
+				await Context.Channel.SendMessageAsync("Progress Report reminder role cleared!");
 			}
 		}
 
