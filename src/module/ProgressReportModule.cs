@@ -659,18 +659,37 @@ namespace FrankieBot.Discord.Modules
 			await Context.Channel.SendMessageAsync(text: $"Reports for <@{user.Id}>", embed: embed.Build());
 		}
 
+		/// <summary>
+		/// Edits the word count and note for the Progress Report with the given ID
+		/// </summary>
+		/// <param name="submissionID"></param>
+		/// <param name="wordCount"></param>
+		/// <param name="note"></param>
+		/// <returns></returns>
 		[Command("edit")]
 		public async Task EditSubmission(int submissionID, int wordCount, [Remainder] string note)
 		{
 			await EditUserSubmission(submissionID, wordCount, note);
 		}
 
+		/// <summary>
+		/// Edits the word count for the Progress Report with the given ID
+		/// </summary>
+		/// <param name="submissionID"></param>
+		/// <param name="wordCount"></param>
+		/// <returns></returns>
 		[Command("edit")]
 		public async Task EditSubmission(int submissionID, int wordCount)
 		{
 			await EditUserSubmission(submissionID, wordCount: wordCount);
 		}
 
+		/// <summary>
+		/// Edits the note for the Progress Report with the given ID
+		/// </summary>
+		/// <param name="submissionID"></param>
+		/// <param name="note"></param>
+		/// <returns></returns>
 		[Command("edit")]
 		public async Task EditSubmission(int submissionID, [Remainder] string note)
 		{
