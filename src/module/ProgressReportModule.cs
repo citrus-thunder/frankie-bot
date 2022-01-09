@@ -523,7 +523,7 @@ namespace FrankieBot.Discord.Modules
 		{
 			var db = DataBaseService;
 
-			// Find or Create option and set to true
+			// Find or Create options and set
 			Option option = null;
 			await db.RunGuildDBAction(Context.Guild, connection =>
 			{
@@ -657,6 +657,67 @@ namespace FrankieBot.Discord.Modules
 				.WithFields(fields);
 
 			await Context.Channel.SendMessageAsync(text: $"Reports for <@{user.Id}>", embed: embed.Build());
+		}
+
+		/// <summary>
+		/// Displays info on the current Progress Report Window (if present) and the
+		/// next window, if scheduled
+		/// </summary>
+		/// <returns></returns>
+		[Command("info")]
+		public async Task DisplayInfo()
+		{
+			var db = DataBaseService;
+			bool enabled = false;
+			Option windowScheduleOption = null;
+			Option windowDurationOption = null;
+			ProgressReportWindow currentWindow = null;
+
+			await db.RunGuildDBAction(Context.Guild, connection =>
+			{
+				var enableOption = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
+				if (!enableOption.IsEmpty)
+				{
+					enabled = bool.Parse(enableOption.Value);
+				}
+
+				windowScheduleOption = Option.FindOne(connection, o => o.Name == OptionWindowOpen).As<Option>();
+				windowDurationOption = Option.FindOne(connection, o => o.Name == OptionWindowDuration).As<Option>();
+
+				var time = DateTime.UtcNow;
+				currentWindow = ProgressReportWindow.FindOne(connection, w =>
+				{
+					return time >= w.StartTime && time <= w.StartTime.AddHours(w.Duration);
+				}).As<ProgressReportWindow>();
+			});
+
+			if (!enabled)
+			{
+				await Context.Channel.SendMessageAsync("Progress Report Module is not currently enabled!");
+				return;
+			}
+
+			if (currentWindow != null && !currentWindow.IsEmpty)
+			{
+				var open = new DateTimeOffset(currentWindow.StartTime.ToLocalTime()).ToUnixTimeSeconds();
+				var close = new DateTimeOffset(currentWindow.EndTime.ToLocalTime()).ToUnixTimeSeconds();
+				
+				await Context.Channel.SendMessageAsync($"The current submission window opened at <t:{open}:F> and will remain open until <t:{close}:F>");
+			}
+
+			if (
+					(windowScheduleOption != null && !windowScheduleOption.IsEmpty) &&
+					(windowDurationOption != null && !windowDurationOption.IsEmpty)
+				)
+			{
+				var cron = CronExpression.Parse(windowScheduleOption.Value);
+				var next = cron.GetNextOccurrence(new DateTimeOffset(DateTime.Now), TimeZoneInfo.Local);
+
+				var open = next.Value.ToUnixTimeSeconds();
+				var close = next.Value.AddHours(int.Parse(windowDurationOption.Value)).ToUnixTimeSeconds();
+
+				await Context.Channel.SendMessageAsync($"The next submission window will open at <t:{open}:f> and will remain open until <t:{close}:f>");
+			}
 		}
 
 		/// <summary>
