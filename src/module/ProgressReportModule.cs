@@ -667,6 +667,7 @@ namespace FrankieBot.Discord.Modules
 		/// <param name="note"></param>
 		/// <returns></returns>
 		[Command("edit")]
+		[RequireUserPermission(GuildPermission.Administrator)]
 		public async Task EditSubmission(int submissionID, int wordCount, [Remainder] string note)
 		{
 			await EditUserSubmission(submissionID, wordCount, note);
@@ -679,6 +680,7 @@ namespace FrankieBot.Discord.Modules
 		/// <param name="wordCount"></param>
 		/// <returns></returns>
 		[Command("edit")]
+		[RequireUserPermission(GuildPermission.Administrator)]
 		public async Task EditSubmission(int submissionID, int wordCount)
 		{
 			await EditUserSubmission(submissionID, wordCount: wordCount);
@@ -691,6 +693,7 @@ namespace FrankieBot.Discord.Modules
 		/// <param name="note"></param>
 		/// <returns></returns>
 		[Command("edit")]
+		[RequireUserPermission(GuildPermission.Administrator)]
 		public async Task EditSubmission(int submissionID, [Remainder] string note)
 		{
 			await EditUserSubmission(submissionID, note: note);
@@ -728,6 +731,38 @@ namespace FrankieBot.Discord.Modules
 					{
 						submission.Save();
 					}
+				}
+			});
+
+			if (message != null && message != String.Empty)
+			{
+				await Context.Channel.SendMessageAsync(message);
+			}
+		}
+
+		/// <summary>
+		/// Deletes the Progress Report submission with the given ID
+		/// </summary>
+		/// <param name="submissionID"></param>
+		/// <returns></returns>
+		[Command("delete")]
+		[Alias("remove", "rm")]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public async Task DeleteSubmission(int submissionID)
+		{
+			string message = null;
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+			{
+				var submission = ProgressReport.Find(connection, submissionID).As<ProgressReport>();
+
+				if (!submission.IsEmpty)
+				{
+					submission.Delete();
+					message = "Progress report submission deleted!";
+				}
+				else
+				{
+					message = $"Progress report submission with ID {submissionID} not found";
 				}
 			});
 
