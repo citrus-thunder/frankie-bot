@@ -659,6 +659,65 @@ namespace FrankieBot.Discord.Modules
 			await Context.Channel.SendMessageAsync(text: $"Reports for <@{user.Id}>", embed: embed.Build());
 		}
 
+		[Command("edit")]
+		public async Task EditSubmission(int submissionID, int wordCount, [Remainder] string note)
+		{
+			await EditUserSubmission(submissionID, wordCount, note);
+		}
+
+		[Command("edit")]
+		public async Task EditSubmission(int submissionID, int wordCount)
+		{
+			await EditUserSubmission(submissionID, wordCount: wordCount);
+		}
+
+		[Command("edit")]
+		public async Task EditSubmission(int submissionID, [Remainder] string note)
+		{
+			await EditUserSubmission(submissionID, note: note);
+		}
+
+		private async Task EditUserSubmission(int submissionID, int wordCount = -1, string note = null)
+		{
+			string message = null;
+			
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+			{
+				var submission = ProgressReport.Find(connection, submissionID).As<ProgressReport>();
+				if (submission.IsEmpty)
+				{
+					message = $"Could not find submission with ID {submissionID}";
+				}
+				else
+				{
+					var saveRequired = false;
+					if (wordCount >= 0)
+					{
+						submission.WordCount = wordCount;
+						message = $"Report word count updated: {wordCount}";
+						saveRequired = true;
+					}
+
+					if (note != null)
+					{
+						submission.Note = note;
+						message += $"\nReport note updated: {note}";
+						saveRequired = true;
+					}
+
+					if (saveRequired)
+					{
+						submission.Save();
+					}
+				}
+			});
+
+			if (message != null && message != String.Empty)
+			{
+				await Context.Channel.SendMessageAsync(message);
+			}
+		}
+
 		/// <summary>
 		/// Displays info on the current Progress Report Window (if present) and the
 		/// next window, if scheduled
