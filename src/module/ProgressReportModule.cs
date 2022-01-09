@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 using Microsoft.Extensions.DependencyInjection;
 
@@ -360,7 +361,7 @@ namespace FrankieBot.Discord.Modules
 
 				updateRanks = bool.Parse(rankOption.Value);
 			});
-			
+
 			var ping = "";
 			if (!announceReminderRole.IsEmpty)
 			{
@@ -677,6 +678,122 @@ namespace FrankieBot.Discord.Modules
 				.WithFields(fields);
 
 			await Context.Channel.SendMessageAsync(text: $"Reports for <@{user.Id}>", embed: embed.Build());
+		}
+
+		/// <summary>
+		/// List reports for the current Progress Report window
+		/// </summary>
+		/// <returns></returns>
+		[Command("query")]
+		[Alias("q")]
+		public async Task QueryWindow()
+		{
+			await QueryWindow(DateTime.Now.ToString("yyyyMMdd"));
+		}
+
+		/// <summary>
+		/// List reports for the Progress Report window with the given ID
+		/// </summary>
+		/// <param name="windowID"></param>
+		/// <returns></returns>
+		[Command("query")]
+		[Alias("q")]
+		public async Task QueryWindow(int windowID)
+		{
+			ProgressReportWindow window = null;
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+			{
+				window = ProgressReportWindow.Find(connection, windowID).As<ProgressReportWindow>();
+			});
+
+			if (window != null && !window.IsEmpty)
+			{
+				await ListWindowReports(Context, window);
+			}
+			else
+			{
+				await Context.Channel.SendMessageAsync($"Could not find window with ID {windowID}");
+			}
+		}
+
+		/// <summary>
+		/// List reports for the Progress Report window which occurred on the given date
+		/// </summary>
+		/// <param name="date"></param>
+		/// <returns></returns>
+		[Command("query")]
+		[Alias("q")]
+		public async Task QueryWindow([Remainder] string date)
+		{
+			var pattern = @"(?<year>[0-9]{4})[.\-/\\_]?(?<month>[0-9]{2})[.\-/\\_]?(?<day>[0-9]{2})";
+
+			var match = Regex.Match(date, pattern);
+			if (match.Success)
+			{
+				var year = int.Parse(match.Groups["year"].Value);
+				var month = int.Parse(match.Groups["month"].Value);
+				var day = int.Parse(match.Groups["day"].Value);
+
+				var dateStamp = new DateTime(year, month, day);
+
+				ProgressReportWindow window = null;
+				await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+				{
+					window = ProgressReportWindow.FindOne(connection, w =>
+					{
+						return dateStamp >= w.StartTime.Date && dateStamp <= w.StartTime.AddHours(w.Duration).Date;
+					}).As<ProgressReportWindow>();
+				});
+
+				if (window != null && !window.IsEmpty)
+				{
+					await ListWindowReports(Context, window);
+				}
+				else
+				{
+					await Context.Channel.SendMessageAsync("No window found for the given date");
+				}
+			}
+			else
+			{
+				await Context.Channel.SendMessageAsync("Invalid date format: please use YYYYMMDD");
+			}
+		}
+
+		private async Task ListWindowReports(SocketCommandContext context, ProgressReportWindow window)
+		{
+			// todo: build report list embed
+			var submissions = new List<ProgressReport>();
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection => 
+			{
+				var subList = ProgressReport.Find(connection, pr => pr.WindowID == window.ID).ContentAs<ProgressReport>();
+				subList.Content.ForEach(s => s.Initialize(Context.Guild));
+				submissions =  subList.Content;
+			});
+
+			if (submissions.Count < 1)
+			{
+				await Context.Channel.SendMessageAsync("No submissions found for this window");
+				return;
+			}
+
+			var fields = new List<EmbedFieldBuilder>();
+			foreach (var submission in submissions)
+			{
+				var note = submission.Note != "" ?
+					$"\n{submission.Note}" :
+					"";
+				var newField = new EmbedFieldBuilder()
+					.WithName(submission.User.Username)
+					.WithValue($"`{submission.WordCount}` words{note}");
+				fields.Add(newField);
+			}
+
+			var embed = new EmbedBuilder()
+				.WithTitle($"Reports for Window #{window.ID}")
+				.WithFields(fields);
+
+			await Context.Channel.SendMessageAsync(embed: embed.Build());
 		}
 
 		/// <summary>
