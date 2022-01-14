@@ -147,6 +147,7 @@ namespace FrankieBot.Discord.Services
 						connection.CreateTable<Model.ProgressReportWindow>();
 						connection.CreateTable<Model.ProgressReport>();
 						connection.CreateTable<Model.Rank>();
+						connection.CreateTable<Model.WTSubscriber>();
 					}
 				}
 			});

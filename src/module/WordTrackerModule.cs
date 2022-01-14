@@ -92,11 +92,29 @@ namespace FrankieBot.Discord.Modules
 
 			if (enabled)
 			{
-				// build/run refresh job
-
 				// find and stop refresh job if exists
+				var refreshJob = schedulerService.GetJob(guild, JobRefresh);
+				if (refreshJob != null)
+				{
+					schedulerService.RemoveJob(refreshJob);
+				}
 
-				// start new refresh job
+				// build/run refresh job
+				await dataBaseService.RunGuildDBAction(guild, connection =>
+				{
+					refreshJob = new CronJob(connection)
+					{
+						Name = JobRefresh,
+						Guild = guild,
+						CronString = "0 0 * * *"
+					};
+				});
+
+				await schedulerService.AddJob(refreshJob);
+				refreshJob.Run += async (object sender, EventArgs e) =>
+				{
+					await RefreshTracker(guild, dataBaseService, schedulerService);
+				};
 			}
 			else
 			{
@@ -107,6 +125,19 @@ namespace FrankieBot.Discord.Modules
 					schedulerService.RemoveJob(refreshJob);
 				}
 			}
+		}
+
+		private static async Task RefreshTracker(IGuild guild, DataBaseService dataBaseService, SchedulerService schedulerService)
+		{
+			// todo: refresh tracker
+			/*
+			*	- Clear all word counts (?)
+			*		- Do we _need_ to clear anything if we keep the goal and progress in the subscriber table?
+			*	- Generate new word counts for subscribers
+			*		- Get list of subscribers
+			*		- Iterate through list, generate new wordcount entries per subscriber and set progress to zero
+			*	- Post new word counts for subscribers
+			*/
 		}
 
 		/// <summary>
