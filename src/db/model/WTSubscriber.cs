@@ -17,6 +17,12 @@ namespace FrankieBot.DB.Model
 		public string UserID { get; set; }
 
 		/// <summary>
+		/// Optional user-defined word count goal
+		/// </summary>
+		/// <value></value>
+		public int CustomGoal { get; set; }
+
+		/// <summary>
 		/// The subscriber's daily wordcount goal
 		/// </summary>
 		/// <value></value>

@@ -26,6 +26,8 @@ namespace FrankieBot.DB.ViewModel
 			{Module.ProgressReportModule.OptionWindowDuration, "96"},
 			{Module.ProgressReportModule.OptionRestrictReportChannel, "false"},
 			{Module.ProgressReportModule.OptionRanksEnabled, "true"},
+			{Module.WordTrackerModule.OptionGoalMinimum, "100"},
+			{Module.WordTrackerModule.OptionGoalMaximum, "1200"},
 			{Service.CommandHandlerService.OptionCommandPrefix, "."}
 			};
 		}

@@ -46,6 +46,16 @@ namespace FrankieBot.Discord.Modules
 		/// </summary>
 		public const string OptionReportChannel = "word_tracker_report_channel";
 
+		/// <summary>
+		/// Option title for option which sets the random word count goal minimum
+		/// </summary>
+		public const string OptionGoalMinimum = "word_tracker_goal_minimum";
+
+		/// <summary>
+		/// /// Option title for option which sets the random word count goal maximum
+		/// </summary>
+		public const string OptionGoalMaximum = "word_tracker_goal_maximum";
+
 		#endregion // Options
 
 		#region Jobs
@@ -129,15 +139,111 @@ namespace FrankieBot.Discord.Modules
 
 		private static async Task RefreshTracker(IGuild guild, DataBaseService dataBaseService, SchedulerService schedulerService)
 		{
-			// todo: refresh tracker
-			/*
-			*	- Clear all word counts (?)
-			*		- Do we _need_ to clear anything if we keep the goal and progress in the subscriber table?
-			*	- Generate new word counts for subscribers
-			*		- Get list of subscribers
-			*		- Iterate through list, generate new wordcount entries per subscriber and set progress to zero
-			*	- Post new word counts for subscribers
-			*/
+			List<WTSubscriber> subscribers = null;
+			Option announceChannelOption = null;
+
+			List<(IUser User, int Goal, int Progress)> todaysGoals = new List<(IUser User, int Goal, int Progress)>();
+			List<(IUser User, int Goal, int Progress)> tomorrowsGoals = new List<(IUser User, int Goal, int Progress)>();
+
+			var rand = new Random();
+
+			await dataBaseService.RunGuildDBAction(guild, connection =>
+			{
+				subscribers = WTSubscriber.FindAll(connection).ContentAs<WTSubscriber>().Content;
+				announceChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnounceChannel).As<Option>();
+				var minOption = Option.FindOne(connection, o => o.Name == OptionGoalMinimum).As<Option>();
+				var maxOption = Option.FindOne(connection, o => o.Name == OptionGoalMaximum).As<Option>();
+
+				if (minOption.IsEmpty)
+				{
+					minOption = new Option(connection)
+					{
+						Name = OptionGoalMinimum
+					};
+					minOption.Initialize();
+					minOption.Save();
+				}
+
+				if (maxOption.IsEmpty)
+				{
+					maxOption = new Option(connection)
+					{
+						Name = OptionGoalMaximum
+					};
+					maxOption.Initialize();
+					maxOption.Save();
+				}
+
+				var min = int.Parse(minOption.Value);
+				var max = int.Parse(maxOption.Value);
+
+				foreach (var sub in subscribers)
+				{
+					sub.Initialize(guild);
+
+					todaysGoals.Add((sub.User, sub.WordCountGoal, sub.WordCountProgress));
+
+					sub.WordCountProgress = 0;
+					sub.WordCountGoal = sub.HasCustomGoal ?
+						sub.CustomGoal :
+						rand.Next(min, max + 1);
+
+					sub.Save();
+
+					tomorrowsGoals.Add((sub.User, sub.WordCountGoal, sub.WordCountProgress));
+				}
+			});
+
+			if (announceChannelOption != null && !announceChannelOption.IsEmpty)
+			{
+				var guildChannel = await guild.GetChannelAsync(ulong.Parse(announceChannelOption.Value)) as SocketGuildChannel;
+				if (guildChannel == null)
+				{
+					// todo: log "channel not found" error
+					return;
+				}
+
+				if (guildChannel is ISocketMessageChannel channel)
+				{
+					// build embed for previous day's results & post
+					if (todaysGoals.Count > 0)
+					{
+						var eb = new EmbedBuilder()
+							.WithTitle("Yesterday's Word Tracker Results");
+
+						var fields = new List<EmbedFieldBuilder>();
+
+						foreach (var res in todaysGoals)
+						{
+							fields.Add(new EmbedFieldBuilder()
+								.WithName(res.User.Username)
+								.WithValue($"{res.Progress} / {res.Goal}"));
+						}
+
+						eb.WithFields(fields);
+						await channel.SendMessageAsync(embed: eb.Build());
+					}
+
+					// build embed for new day's goals & post
+					if (tomorrowsGoals.Count > 0)
+					{
+						var eb = new EmbedBuilder()
+							.WithTitle("Today's Word Tracker Goals");
+
+						var fields = new List<EmbedFieldBuilder>();
+
+						foreach (var res in tomorrowsGoals)
+						{
+							fields.Add(new EmbedFieldBuilder()
+								.WithName(res.User.Username)
+								.WithValue($"{res.Progress} / {res.Goal}"));
+						}
+
+						eb.WithFields(fields);
+						await channel.SendMessageAsync(embed: eb.Build());
+					}
+				}
+			}
 		}
 
 		/// <summary>

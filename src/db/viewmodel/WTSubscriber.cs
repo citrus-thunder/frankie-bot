@@ -9,6 +9,9 @@ using Model = FrankieBot.DB.Model;
 
 namespace FrankieBot.DB.ViewModel
 {
+	/// <summary>
+	/// Represents a word tracker module subscriber
+	/// </summary>
 	public class WTSubscriber : ViewModel<Model.WTSubscriber>
 	{
 		/// <summary>
@@ -49,6 +52,24 @@ namespace FrankieBot.DB.ViewModel
 			}
 		}
 		private IUser m_User;
+
+		/// <summary>
+		/// The subscriber's optional custom word count goal
+		/// </summary>
+		/// <remarks>
+		/// If less than 1, it is assumed that the user has not
+		/// set a custom goal
+		/// </remarks>
+		public int CustomGoal
+		{
+			get => Model.CustomGoal;
+			set => Model.CustomGoal = value;
+		}
+
+		/// <summary>
+		/// Whether the subscriber has set a custom word count goal
+		/// </summary>
+		public bool HasCustomGoal => CustomGoal > 0;
 
 		/// <summary>
 		/// The subscriber's daily word count goal
