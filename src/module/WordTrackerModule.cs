@@ -395,6 +395,17 @@ namespace FrankieBot.Discord.Modules
 		{
 			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
 			{
+				var channelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+				if (!channelOption.IsEmpty)
+				{
+					var channel = Context.Guild.GetChannel(ulong.Parse(channelOption.Value));
+					if (channel != null && Context.Channel != channel)
+					{
+						await Context.Channel.SendMessageAsync($"Word tracker updates must be posted in <#{channel.Id}>.");
+						return;
+					}
+				}
+
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
@@ -423,6 +434,17 @@ namespace FrankieBot.Discord.Modules
 		{
 			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
 			{
+				var channelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+				if (!channelOption.IsEmpty)
+				{
+					var channel = Context.Guild.GetChannel(ulong.Parse(channelOption.Value));
+					if (channel != null && Context.Channel != channel)
+					{
+						await Context.Channel.SendMessageAsync($"Word tracker updates must be posted in <#{channel.Id}>.");
+						return;
+					}
+				}
+
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
@@ -461,6 +483,17 @@ namespace FrankieBot.Discord.Modules
 			// command was invoked from the appropriate channel
 			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
 			{
+				var channelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+				if (!channelOption.IsEmpty)
+				{
+					var channel = Context.Guild.GetChannel(ulong.Parse(channelOption.Value));
+					if (channel != null && Context.Channel != channel)
+					{
+						await Context.Channel.SendMessageAsync($"Word tracker updates must be posted in <#{channel.Id}>.");
+						return;
+					}
+				}
+
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
@@ -495,6 +528,17 @@ namespace FrankieBot.Discord.Modules
 			// command was invoked from the appropriate channel
 			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
 			{
+				var channelOption = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+				if (!channelOption.IsEmpty)
+				{
+					var channel = Context.Guild.GetChannel(ulong.Parse(channelOption.Value));
+					if (channel != null && Context.Channel != channel)
+					{
+						await Context.Channel.SendMessageAsync($"Word tracker updates must be posted in <#{channel.Id}>.");
+						return;
+					}
+				}
+
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
