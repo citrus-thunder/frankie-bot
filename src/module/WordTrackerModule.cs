@@ -80,6 +80,21 @@ namespace FrankieBot.Discord.Modules
 		public SchedulerService SchedulerService { get; set; }
 
 		/// <summary>
+		/// Initializes the module for all guilds
+		/// </summary>
+		/// <param name="services"></param>
+		/// <returns></returns>
+		public static async Task Initialize(IServiceProvider services)
+		{
+			var database = services.GetRequiredService<DataBaseService>();
+			var scheduler = services.GetRequiredService<SchedulerService>();
+			await database.RunForAllGuilds(async guild =>
+			{
+				await RebuildJobs(guild, database, scheduler);
+			});
+		}
+
+		/// <summary>
 		/// Checks and ensures that correct jobs are running
 		/// </summary>
 		/// <param name="guild"></param>
@@ -319,6 +334,19 @@ namespace FrankieBot.Discord.Modules
 		}
 
 		/// <summary>
+		/// Forces the word tracker to refresh
+		/// </summary>
+		/// <returns></returns>
+		[Command("forcerefresh")]
+		[Alias("refresh")]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public async Task ForceRefresh()
+		{
+			await Context.Channel.SendMessageAsync("Forcing word tracker refresh...");
+			await RefreshTracker(Context.Guild, DataBaseService, SchedulerService);
+		}
+
+		/// <summary>
 		/// Subscribes the user to daily word goals
 		/// </summary>
 		/// <param name="wordCount"></param>
@@ -340,8 +368,28 @@ namespace FrankieBot.Discord.Modules
 				else
 				{
 					var rand = new Random();
+					
 					var wcMinOption = Option.FindOne(connection, o => o.Name == OptionGoalMinimum).As<Option>();
+					if (wcMinOption.IsEmpty)
+					{
+						wcMinOption = new Option(connection)
+						{
+							Name = OptionGoalMinimum
+						};
+						wcMinOption.Initialize();
+						wcMinOption.Save();
+					}
+
 					var wcMaxOption = Option.FindOne(connection, o => o.Name == OptionGoalMaximum).As<Option>();
+					if (wcMaxOption.IsEmpty)
+					{
+						wcMaxOption = new Option(connection)
+						{
+							Name = OptionGoalMaximum
+						};
+						wcMaxOption.Initialize();
+						wcMaxOption.Save();
+					}
 
 					int min = int.Parse(wcMinOption.Value);
 					int max = int.Parse(wcMaxOption.Value);
@@ -370,8 +418,9 @@ namespace FrankieBot.Discord.Modules
 			{
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
+				subscriber.Initialize(Context.Guild);
 
-				if (!subscriber.IsEmpty)
+				if (subscriber.IsEmpty)
 				{
 					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker!");
 					return;
@@ -408,7 +457,8 @@ namespace FrankieBot.Discord.Modules
 
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
-
+				subscriber.Initialize(Context.Guild);
+			
 				if (subscriber.IsEmpty)
 				{
 					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker! Please subscribe before setting a custom goal.");
@@ -447,6 +497,7 @@ namespace FrankieBot.Discord.Modules
 
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
+				subscriber.Initialize(Context.Guild);
 
 				if (subscriber.IsEmpty)
 				{
@@ -496,7 +547,8 @@ namespace FrankieBot.Discord.Modules
 
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
-
+				subscriber.Initialize(Context.Guild);
+			
 				if (subscriber.IsEmpty)
 				{
 					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker!");
@@ -505,6 +557,7 @@ namespace FrankieBot.Discord.Modules
 				{
 					subscriber.WordCountProgress += words;
 					bool metGoal = subscriber.WordCountProgress >= subscriber.WordCountGoal;
+					subscriber.Save();
 					await Context.Channel.SendMessageAsync($"Progress updated for {subscriber.User.Username}: {subscriber.WordCountProgress}/{subscriber.WordCountGoal} words");
 
 					if (metGoal)
@@ -541,7 +594,8 @@ namespace FrankieBot.Discord.Modules
 
 				var userID = Context.Message.Author.Id.ToString();
 				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
-
+				subscriber.Initialize(Context.Guild);
+			
 				if (subscriber.IsEmpty)
 				{
 					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker!");
@@ -550,6 +604,7 @@ namespace FrankieBot.Discord.Modules
 				{
 					subscriber.WordCountProgress = words;
 					bool metGoal = subscriber.WordCountProgress >= subscriber.WordCountGoal;
+					subscriber.Save();
 					await Context.Channel.SendMessageAsync($"Progress updated for {subscriber.User.Username}: {subscriber.WordCountProgress}/{subscriber.WordCountGoal} words");
 				}
 			});
@@ -614,12 +669,12 @@ namespace FrankieBot.Discord.Modules
 			/// <summary>
 			/// This module's DataBaseService reference
 			/// </summary>
-			public DataBaseService DataBaseService;
+			public DataBaseService DataBaseService { get; set; }
 
 			/// <summary>
 			/// This module's SchedulerService reference
 			/// </summary>
-			public SchedulerService SchedulerService;
+			public SchedulerService SchedulerService { get; set; }
 
 			/// <summary>
 			/// Sets the channel where word tracker refresh announcements are posted
@@ -656,6 +711,26 @@ namespace FrankieBot.Discord.Modules
 			}
 
 			/// <summary>
+			/// Clears the word tracker announcement channel, if set
+			/// </summary>
+			/// <returns></returns>
+			[Command("clearannouncechannel")]
+			[Alias("clearannounce")]
+			public async Task ClearAnnounceChannel()
+			{
+				await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+				{
+					var option = Option.FindOne(connection, o => o.Name == OptionAnnounceChannel).As<Option>();
+					if (!option.IsEmpty)
+					{
+						option.Delete();
+					}
+				});
+
+				await Context.Channel.SendMessageAsync("Word tracker announcement channel cleared");
+			}
+
+			/// <summary>
 			/// Sets the channel word tracker updates must be submitted to
 			/// </summary>
 			/// <param name="channel"></param>
@@ -687,6 +762,26 @@ namespace FrankieBot.Discord.Modules
 				{
 					await Context.Channel.SendMessageAsync("Invalid channel specified");
 				}
+			}
+
+			/// <summary>
+			/// Clears the word tracker report channel, if set
+			/// </summary>
+			/// <returns></returns>
+			[Command("clearreportchannel")]
+			[Alias("clearreport")]
+			public async Task ClearReportChannel()
+			{
+				await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+				{
+					var option = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+					if (!option.IsEmpty)
+					{
+						option.Delete();
+					}
+				});
+
+				await Context.Channel.SendMessageAsync("Word tracker report channel cleared");
 			}
 		}
 	}
