@@ -52,9 +52,14 @@ namespace FrankieBot.Discord.Modules
 		public const string OptionGoalMinimum = "word_tracker_goal_minimum";
 
 		/// <summary>
-		/// /// Option title for option which sets the random word count goal maximum
+		/// Option title for option which sets the random word count goal maximum
 		/// </summary>
 		public const string OptionGoalMaximum = "word_tracker_goal_maximum";
+
+		/// <summary>
+		/// Option title for the role to notify for word tracker events
+		/// </summary>
+		public const string OptionNotifyRole = "word_tracker_notify_role";
 
 		#endregion // Options
 
@@ -156,7 +161,7 @@ namespace FrankieBot.Discord.Modules
 		{
 			List<WTSubscriber> subscribers = null;
 			Option announceChannelOption = null;
-
+			Option notifyRoleOption = null;
 			List<(IUser User, int Goal, int Progress)> todaysGoals = new List<(IUser User, int Goal, int Progress)>();
 			List<(IUser User, int Goal, int Progress)> tomorrowsGoals = new List<(IUser User, int Goal, int Progress)>();
 
@@ -166,6 +171,7 @@ namespace FrankieBot.Discord.Modules
 			{
 				subscribers = WTSubscriber.FindAll(connection).ContentAs<WTSubscriber>().Content;
 				announceChannelOption = Option.FindOne(connection, o => o.Name == OptionAnnounceChannel).As<Option>();
+				notifyRoleOption = Option.FindOne(connection, o => o.Name == OptionNotifyRole).As<Option>();
 				var minOption = Option.FindOne(connection, o => o.Name == OptionGoalMinimum).As<Option>();
 				var maxOption = Option.FindOne(connection, o => o.Name == OptionGoalMaximum).As<Option>();
 
@@ -228,6 +234,17 @@ namespace FrankieBot.Discord.Modules
 
 				if (guildChannel is ISocketMessageChannel channel)
 				{
+					var ping = "";
+					if (!notifyRoleOption.IsEmpty)
+					{
+						var pingRole = guild.GetRole(ulong.Parse(notifyRoleOption.Value));
+						if (pingRole != null)
+						{
+							ping += $" <@&{pingRole?.Id}>";
+						}
+					}
+					await channel.SendMessageAsync($"Word tracker is being refreshed{ping}");
+
 					// build embed for previous day's results & post
 					if (todaysGoals.Count > 0)
 					{
@@ -397,7 +414,8 @@ namespace FrankieBot.Discord.Modules
 					subscriber = new WTSubscriber(connection)
 					{
 						User = Context.Message.Author,
-						WordCountGoal = wordCount > 0 ? wordCount : rand.Next(min, max + 1)
+						WordCountGoal = wordCount > 0 ? wordCount : rand.Next(min, max + 1),
+						CustomGoal = wordCount > 0 ? wordCount : 0
 					};
 
 					subscriber.Save();
@@ -782,6 +800,53 @@ namespace FrankieBot.Discord.Modules
 				});
 
 				await Context.Channel.SendMessageAsync("Word tracker report channel cleared");
+			}
+
+			/// <summary>
+			/// Sets the role to be pinged for word tracker notifications
+			/// </summary>
+			/// <param name="role"></param>
+			/// <returns></returns>
+			[Command("notifyrole")]
+			[Alias("notify", "pingrole", "ping")]
+			public async Task SetNotifyRole(IRole role)
+			{
+				await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+				{
+					var option = Option.FindOne(connection, o => o.Name == OptionNotifyRole).As<Option>();
+					if (option.IsEmpty)
+					{
+						option = new Option(connection)
+						{
+							Name = OptionNotifyRole
+						};
+						option.Initialize();
+					}
+
+					option.Value = role.Id.ToString();
+					option.Save();
+				});
+				await Context.Channel.SendMessageAsync($"Word tracker notification role set to <@&{role.Id}>");
+			}
+
+			/// <summary>
+			/// Clears the role to be pinged for word tracker notifications, if set
+			/// </summary>
+			/// <returns></returns>
+			[Command("clearnotifyrole")]
+			[Alias("clearnotify", "clearpingrole", "clearping")]
+			public async Task ClearNotifyRole()
+			{
+				await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+				{
+					var option = Option.FindOne(connection, o => o.Name == OptionNotifyRole).As<Option>();
+					if (!option.IsEmpty)
+					{
+						option.Delete();
+					}
+				});
+
+				await Context.Channel.SendMessageAsync("Word tracker notification role cleared");
 			}
 		}
 	}
