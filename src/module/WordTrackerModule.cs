@@ -180,7 +180,15 @@ namespace FrankieBot.Discord.Modules
 				foreach (var sub in subscribers)
 				{
 					sub.Initialize(guild);
-
+					if (sub.User == null)
+					{
+						// If user is null, the user is not present in the guild.
+						// Delete their subscription.
+						sub.Delete();
+						continue;
+					}
+					// todo: we can check here if the user met their goal for the day and
+					// reward them with the currency module, if enabled.
 					todaysGoals.Add((sub.User, sub.WordCountGoal, sub.WordCountProgress));
 
 					sub.WordCountProgress = 0;
@@ -255,7 +263,27 @@ namespace FrankieBot.Discord.Modules
 		[RequireUserPermission(GuildPermission.Administrator)]
 		public async Task EnableModule()
 		{
+			Option option = null;
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+			{
+				option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
 
+				if (option.IsEmpty)
+				{
+					option = new Option(connection)
+					{
+						Name = OptionEnabled
+					};
+					option.Initialize();
+				}
+
+				option.Value = "true";
+				option.Save();
+			});
+
+			await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
+
+			await Context.Channel.SendMessageAsync("Word Tracker module enabled");
 		}
 
 		/// <summary>
@@ -267,18 +295,67 @@ namespace FrankieBot.Discord.Modules
 		[RequireUserPermission(GuildPermission.Administrator)]
 		public async Task DisableModule()
 		{
+			Option option = null;
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+			{
+				option = Option.FindOne(connection, o => o.Name == OptionEnabled).As<Option>();
 
+				if (option.IsEmpty)
+				{
+					option = new Option(connection)
+					{
+						Name = OptionEnabled
+					};
+					option.Initialize();
+				}
+
+				option.Value = "false";
+				option.Save();
+			});
+
+			await RebuildJobs(Context.Guild, DataBaseService, SchedulerService);
+
+			await Context.Channel.SendMessageAsync("Word Tracker module disabled");
 		}
 
 		/// <summary>
 		/// Subscribes the user to daily word goals
 		/// </summary>
+		/// <param name="wordCount"></param>
 		/// <returns></returns>
 		[Command("subscribe")]
 		[Alias("sub")]
-		public async Task Subscribe()
+		public async Task Subscribe(int wordCount = -1)
 		{
+			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
+			{
+				var userID = Context.Message.Author.Id.ToString();
+				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
+				if (!subscriber.IsEmpty)
+				{
+					await Context.Channel.SendMessageAsync("You are already subscribed to the word tracker!");
+					return;
+				}
+				else
+				{
+					var rand = new Random();
+					var wcMinOption = Option.FindOne(connection, o => o.Name == OptionGoalMinimum).As<Option>();
+					var wcMaxOption = Option.FindOne(connection, o => o.Name == OptionGoalMaximum).As<Option>();
+
+					int min = int.Parse(wcMinOption.Value);
+					int max = int.Parse(wcMaxOption.Value);
+
+					subscriber = new WTSubscriber(connection)
+					{
+						User = Context.Message.Author,
+						WordCountGoal = wordCount > 0 ? wordCount : rand.Next(min, max + 1)
+					};
+
+					subscriber.Save();
+					await Context.Channel.SendMessageAsync($"{Context.Message.Author.Username} has subscribed to the word tracker! Their goal is {subscriber.WordCountGoal} words.");
+				}
+			});
 		}
 
 		/// <summary>
@@ -289,19 +366,86 @@ namespace FrankieBot.Discord.Modules
 		[Alias("unsub")]
 		public async Task Unsubscribe()
 		{
+			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
+			{
+				var userID = Context.Message.Author.Id.ToString();
+				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
+				if (!subscriber.IsEmpty)
+				{
+					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker!");
+					return;
+				}
+				else
+				{
+					subscriber.Delete();
+					await Context.Channel.SendMessageAsync($"{Context.Message.Author.Username} has unsubscribed from the word tracker.");
+				}
+			});
 		}
 
 		/// <summary>
-		/// Removes non-present guild members from the subscriber list
+		/// Sets a custom word count goal for the subscriber
+		/// </summary>
+		/// <param name="wordCount"></param>
+		/// <returns></returns>
+		[Command("setgoal")]
+		[Alias("goal")]
+		public async Task SetCustomGoal(int wordCount)
+		{
+			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
+			{
+				var userID = Context.Message.Author.Id.ToString();
+				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
+
+				if (subscriber.IsEmpty)
+				{
+					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker! Please subscribe before setting a custom goal.");
+				}
+				else
+				{
+					subscriber.CustomGoal = wordCount;
+					subscriber.WordCountGoal = wordCount;
+					subscriber.Save();
+
+					await Context.Channel.SendMessageAsync($"Custom word count goal for {subscriber.User.Username} has been set to {subscriber.WordCountGoal}");
+				}
+			});
+		}
+
+		/// <summary>
+		/// Clears a subscriber's custom word count goal
 		/// </summary>
 		/// <returns></returns>
-		[Command("scrubsubscribers")]
-		[Alias("scrub")]
-		[RequireUserPermission(GuildPermission.Administrator)]
-		public async Task ScrubSubscribers()
+		[Command("unsetgoal")]
+		[Alias("cleargoal")]
+		public async Task ClearCustomGoal()
 		{
+			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
+			{
+				var userID = Context.Message.Author.Id.ToString();
+				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
+				if (subscriber.IsEmpty)
+				{
+					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker! Please subscribe before setting a custom goal.");
+				}
+				else
+				{
+					var rand = new Random();
+					var wcMinOption = Option.FindOne(connection, o => o.Name == OptionGoalMinimum).As<Option>();
+					var wcMaxOption = Option.FindOne(connection, o => o.Name == OptionGoalMaximum).As<Option>();
+
+					int min = int.Parse(wcMinOption.Value);
+					int max = int.Parse(wcMaxOption.Value);
+
+					subscriber.CustomGoal = -1;
+					subscriber.WordCountGoal = rand.Next(min, max + 1);
+					subscriber.Save();
+
+					await Context.Channel.SendMessageAsync($"Custom word count goal for {subscriber.User.Username} has been cleared. Their word count has been set to {subscriber.WordCountGoal}");
+				}
+			});
 		}
 
 		/// <summary>
@@ -313,7 +457,29 @@ namespace FrankieBot.Discord.Modules
 		[Alias("a")]
 		public async Task AddToWordCount(int words)
 		{
+			// todo: check if a reporting channel is set. If so, ensure this
+			// command was invoked from the appropriate channel
+			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
+			{
+				var userID = Context.Message.Author.Id.ToString();
+				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
+				if (subscriber.IsEmpty)
+				{
+					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker!");
+				}
+				else
+				{
+					subscriber.WordCountProgress += words;
+					bool metGoal = subscriber.WordCountProgress >= subscriber.WordCountGoal;
+					await Context.Channel.SendMessageAsync($"Progress updated for {subscriber.User.Username}: {subscriber.WordCountProgress}/{subscriber.WordCountGoal} words");
+
+					if (metGoal)
+					{
+						await Context.Channel.SendMessageAsync($"Congratulations, {subscriber.User.Username}! You've met today's goal :tada:");
+					}
+				}
+			});
 		}
 
 		/// <summary>
@@ -325,7 +491,24 @@ namespace FrankieBot.Discord.Modules
 		[Alias("e")]
 		public async Task EditWordCount(int words)
 		{
+			// todo: check if a reporting channel is set. If so, ensure this
+			// command was invoked from the appropriate channel
+			await DataBaseService.RunGuildDBAction(Context.Guild, async connection =>
+			{
+				var userID = Context.Message.Author.Id.ToString();
+				var subscriber = WTSubscriber.FindOne(connection, s => s.UserID == userID).As<WTSubscriber>();
 
+				if (subscriber.IsEmpty)
+				{
+					await Context.Channel.SendMessageAsync("You are not subscribed to the word tracker!");
+				}
+				else
+				{
+					subscriber.WordCountProgress = words;
+					bool metGoal = subscriber.WordCountProgress >= subscriber.WordCountGoal;
+					await Context.Channel.SendMessageAsync($"Progress updated for {subscriber.User.Username}: {subscriber.WordCountProgress}/{subscriber.WordCountGoal} words");
+				}
+			});
 		}
 
 		/// <summary>
@@ -336,7 +519,44 @@ namespace FrankieBot.Discord.Modules
 		[Alias("ls")]
 		public async Task ListWordCounts()
 		{
+			List<WTSubscriber> subscribers = new List<WTSubscriber>();
+			await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+			{
+				var subs = WTSubscriber.FindAll(connection).ContentAs<WTSubscriber>();
 
+				// Comb through found subs and ensure the users aren't null (i.e. still in the guild)
+				// If so, add them to the outer list.
+				foreach (var sub in subs.Content)
+				{
+					sub.Initialize(Context.Guild);
+					if (!sub.IsEmpty)
+					{
+						subscribers.Add(sub);
+					}
+				}
+			});
+
+			var eb = new EmbedBuilder()
+				.WithTitle("Today's Word Tracker Progress");
+
+			if (subscribers.Count < 1)
+			{
+				eb.WithDescription("The word tracker currently has no subscribers!");
+			}
+			else
+			{
+				var fields = new List<EmbedFieldBuilder>();
+				foreach (var sub in subscribers)
+				{
+					fields.Add(new EmbedFieldBuilder()
+						.WithName(sub.User.Username)
+						.WithValue($"`{sub.WordCountProgress}/{sub.WordCountGoal} words`")
+						);
+				}
+				eb.WithFields(fields);
+			}
+
+			await Context.Channel.SendMessageAsync(embed: eb.Build());
 		}
 
 		/// <summary>
@@ -357,18 +577,72 @@ namespace FrankieBot.Discord.Modules
 			/// </summary>
 			public SchedulerService SchedulerService;
 
+			/// <summary>
+			/// Sets the channel where word tracker refresh announcements are posted
+			/// </summary>
+			/// <param name="channel"></param>
+			/// <returns></returns>
 			[Command("announcechannel")]
 			[Alias("announce")]
 			public async Task SetAnnounceChannel(IChannel channel)
 			{
+				if (channel is SocketChannel socketChannel)
+				{
+					await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+					{
+						var option = Option.FindOne(connection, o => o.Name == OptionAnnounceChannel).As<Option>();
+						if (option.IsEmpty)
+						{
+							option = new Option(connection)
+							{
+								Name = OptionAnnounceChannel
+							};
+							option.Initialize();
+						}
+						option.Value = socketChannel.Id.ToString();
+						option.Save();
+					});
 
+					await Context.Channel.SendMessageAsync($"Word tracker announcement channel set to <#{channel.Id}>");
+				}
+				else
+				{
+					await Context.Channel.SendMessageAsync("Invalid channel specified");
+				}
 			}
 
+			/// <summary>
+			/// Sets the channel word tracker updates must be submitted to
+			/// </summary>
+			/// <param name="channel"></param>
+			/// <returns></returns>
 			[Command("reportchannel")]
 			[Alias("report")]
 			public async Task SetReportChannel(IChannel channel)
 			{
+				if (channel is SocketChannel socketChannel)
+				{
+					await DataBaseService.RunGuildDBAction(Context.Guild, connection =>
+					{
+						var option = Option.FindOne(connection, o => o.Name == OptionReportChannel).As<Option>();
+						if (option.IsEmpty)
+						{
+							option = new Option(connection)
+							{
+								Name = OptionReportChannel
+							};
+							option.Initialize();
+						}
+						option.Value = socketChannel.Id.ToString();
+						option.Save();
+					});
 
+					await Context.Channel.SendMessageAsync($"Word tracker reporting channel set to <#{channel.Id}>");
+				}
+				else
+				{
+					await Context.Channel.SendMessageAsync("Invalid channel specified");
+				}
 			}
 		}
 	}

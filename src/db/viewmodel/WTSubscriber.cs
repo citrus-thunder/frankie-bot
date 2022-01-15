@@ -36,6 +36,12 @@ namespace FrankieBot.DB.ViewModel
 		}
 
 		/// <summary>
+		/// Subscriber's unique Discord user ID
+		/// </summary>
+		/// <returns></returns>
+		public ulong UserID => ulong.Parse(Model.UserID);
+
+		/// <summary>
 		/// Represents the subscriber
 		/// </summary>
 		/// <value></value>
