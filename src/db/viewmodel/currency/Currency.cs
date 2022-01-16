@@ -48,5 +48,18 @@ namespace FrankieBot.DB.ViewModel
 			get => Model.Description;
 			set => Model.Description = value;
 		}
+
+		/// <summary>
+		/// Priority for using this currency over other
+		/// equivalent currency
+		/// </summary>
+		/// <remarks>
+		/// Higher value equals higher priority
+		/// </remarks>
+		public int Priority
+		{
+			get => Model.Priority;
+			set => Model.Priority = value;
+		}
 	}
 }

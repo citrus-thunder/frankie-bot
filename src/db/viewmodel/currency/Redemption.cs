@@ -28,5 +28,14 @@ namespace FrankieBot.DB.ViewModel
 			get => Model.Description;
 			set => Model.Description = value;
 		}
+
+		public override void Delete()
+		{
+			if (Connection != null)
+			{
+				// todo: remove prices assocated with this redemption
+				base.Delete();
+			}
+		}
 	}
 }

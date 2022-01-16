@@ -39,6 +39,7 @@ namespace FrankieBot.Discord
 				{
 					await ProgressReportModule.Initialize(services);
 					await WordTrackerModule.Initialize(services);
+					await CurrencyModule.Initialize(services);
 				};
 
 				await client.LoginAsync(TokenType.Bot, Environment.GetEnvironmentVariable("FRANKIE_TOKEN"));
