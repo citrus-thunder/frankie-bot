@@ -182,6 +182,56 @@ namespace FrankieBot.Discord.Modules
 		}
 
 		/// <summary>
+		/// Submodule containing currency management commands
+		/// </summary>
+		[Group("mint")]
+		[RequireUserPermission(GuildPermission.Administrator)]
+		public class MintOptions : ModuleBase<SocketCommandContext>
+		{
+			[Command("list")]
+			[Alias("ls")]
+			public async Task ListCurrencies()
+			{
+
+			}
+
+			[Command("new")]
+			[Alias("add")]
+			public async Task AddCurrency([Remainder] string currencyName)
+			{
+
+			}
+
+			[Command("remove")]
+			[Alias("delete", "destroy")]
+			public async Task RemoveCurrency(int currencyID)
+			{
+				// note: also delete all currency2user and price records for destroyed currency type
+			}
+
+			[Command("editname")]
+			[Alias("rename", "name")]
+			public async Task EditName(int currencyID, [Remainder] string currencyName)
+			{
+
+			}
+
+			[Command("editdescription")]
+			[Alias("setdescription", "description")]
+			public async Task EditDescription(int currencyID, [Remainder] string description)
+			{
+
+			}
+
+			[Command("setpriority")]
+			[Alias("priority")]
+			public async Task EditPriority(int currencyID, int priority)
+			{
+
+			}
+		}
+
+		/// <summary>
 		/// Submodule containing redemption management commands
 		/// </summary>
 		[Group("redemption")]
