@@ -136,8 +136,8 @@ namespace FrankieBot.Discord.Modules
 		{
 			/* todo
 			* Validate user & currency
-			  * ensure currency valid & giver has enough
-				  * validate currency via name.tolower
+				* ensure currency valid & giver has enough
+					* validate currency via name.tolower
 				* ensure target user is valid
 			* Reduce invoking user's chosen currency by amount
 			* Increase target user's chosen currency by amount
