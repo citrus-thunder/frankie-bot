@@ -47,7 +47,7 @@ namespace FrankieBot.DB.Container
 			var res = new Dictionary<string, string>();
 			foreach (var option in Content)
 			{
-				res.Add(option.Name, option.Value);
+				res.TryAdd(option.Name, option.Value); //todo: log error
 			}
 			return res;
 		}
@@ -64,7 +64,7 @@ namespace FrankieBot.DB.Container
 			{
 				if (options.Contains(option.Name))
 				{
-					res.Add(option.Name, option.Value);
+					res.TryAdd(option.Name, option.Value); //todo: log error
 				}
 			}
 			return res;
