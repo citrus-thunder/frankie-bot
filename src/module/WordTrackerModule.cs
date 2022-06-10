@@ -666,7 +666,7 @@ namespace FrankieBot.Discord.Modules
 				foreach (var sub in subscribers)
 				{
 					fields.Add(new EmbedFieldBuilder()
-						.WithName(sub.User.Username)
+						.WithName(sub.User?.Username ?? $"User {sub.UserID}")
 						.WithValue($"`{sub.WordCountProgress}/{sub.WordCountGoal} words`")
 						);
 				}

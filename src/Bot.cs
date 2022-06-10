@@ -70,8 +70,17 @@ namespace FrankieBot.Discord
 
 		private ServiceProvider ConfigureServices()
 		{
+			var config = new DiscordSocketConfig()
+				{
+				GatewayIntents = GatewayIntents.All,
+				AlwaysDownloadUsers = true
+				};
+
+			var client = new DiscordSocketClient(config);
+
 			return new ServiceCollection()
-				.AddSingleton<DiscordSocketClient>()
+				//.AddSingleton<DiscordSocketClient>()
+				.AddSingleton(client)
 				.AddSingleton<EavesDropperService>()
 				.AddSingleton<CommandService>()
 				.AddSingleton<CommandHandlerService>()
