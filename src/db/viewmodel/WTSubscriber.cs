@@ -106,7 +106,7 @@ namespace FrankieBot.DB.ViewModel
 		/// </remarks>
 		public void Initialize(IGuild guild)
 		{
-			if (guild is SocketGuild sg)
+			if (Model != null && guild is SocketGuild sg)
 			{
 				User = sg.GetUser(ulong.Parse(Model.UserID));
 			}
