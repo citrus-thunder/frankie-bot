@@ -167,6 +167,14 @@ namespace FrankieBot.Discord.Services
 		public CronJob GetJob(IGuild guild, string name)
 			=> _jobs.Where(j => j.Guild == guild && j.Name == name).FirstOrDefault();
 
+		/// <summary>
+		/// Finds all jobs for given guild
+		/// </summary>
+		/// <param name="guild"></param>
+		/// <returns></returns>
+		public List<CronJob> GetJobs(IGuild guild)
+		=> _jobs.Where(j => j.Guild == guild).ToList();
+
 		private async Task ClearJobs(IGuild guild)
 		{
 			await Task.Run(() =>

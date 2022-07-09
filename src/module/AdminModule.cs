@@ -30,6 +30,12 @@ namespace FrankieBot.Discord.Modules
 		public DataBaseService DataBaseService { get; set; }
 
 		/// <summary>
+		/// Provides scheduling services
+		/// </summary>
+		/// <value></value>
+		public SchedulerService SchedulerService { get; set; }
+
+		/// <summary>
 		/// Provides command handling services
 		/// </summary>
 		/// <value></value>
@@ -57,6 +63,27 @@ namespace FrankieBot.Discord.Modules
 			});
 
 			await Context.Channel.SendMessageAsync($"Command prefix has been updated to \"{prefix}\"");
+		}
+
+		[Command("jobs")]
+		public async Task GetAllJobs()
+		{
+			var jobs = SchedulerService.GetJobs(Context.Guild);
+
+			if (jobs.Count < 1)
+			{
+				await Context.Channel.SendMessageAsync("No jobs were found for this server!");
+				return;
+			}
+			
+			var msg = "";
+
+			foreach (var job in jobs)
+			{
+				msg += $"{job.Name} : {job.CronString} : {job.Cron.GetNextOccurrence(DateTime.UtcNow)} \n";
+			}
+
+			await Context.Channel.SendMessageAsync(msg);
 		}
 	}
 }
