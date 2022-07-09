@@ -65,6 +65,10 @@ namespace FrankieBot.Discord.Modules
 			await Context.Channel.SendMessageAsync($"Command prefix has been updated to \"{prefix}\"");
 		}
 
+		/// <summary>
+		/// Prints out all current jobs for the current guild
+		/// </summary>
+		/// <returns></returns>
 		[Command("jobs")]
 		public async Task GetAllJobs()
 		{
@@ -80,7 +84,12 @@ namespace FrankieBot.Discord.Modules
 
 			foreach (var job in jobs)
 			{
-				msg += $"{job.Name} : {job.CronString} : {job.Cron.GetNextOccurrence(DateTime.UtcNow)} \n";
+				// todo: extend timer so that we can get the time until run from the timer instead of parsing the cronstring (which isn't always used)
+				msg += job.Name;
+				if (job.CronString != null && job.CronString != String.Empty)
+				{
+					msg += $" : {job.CronString} : {job.Cron.GetNextOccurrence(DateTime.UtcNow)} \n";
+				}
 			}
 
 			await Context.Channel.SendMessageAsync(msg);
