@@ -162,8 +162,8 @@ namespace FrankieBot.Discord.Modules
 			List<WTSubscriber> subscribers = null;
 			Option announceChannelOption = null;
 			Option notifyRoleOption = null;
-			List<(IUser User, int Goal, int Progress)> todaysGoals = new List<(IUser User, int Goal, int Progress)>();
-			List<(IUser User, int Goal, int Progress)> tomorrowsGoals = new List<(IUser User, int Goal, int Progress)>();
+
+			List<(IUser user, int currentGoal, int currentProgress, int nextGoal)> userGoals = new List<(IUser user, int currentGoal, int currentProgress, int nextGoal)>();
 
 			var rand = new Random();
 
@@ -208,9 +208,16 @@ namespace FrankieBot.Discord.Modules
 						sub.Delete();
 						continue;
 					}
+
+					if (sub.WordCountProgress < 1)
+					{
+						continue;
+					}
 					// todo: we can check here if the user met their goal for the day and
 					// reward them with the currency module, if enabled.
-					todaysGoals.Add((sub.User, sub.WordCountGoal, sub.WordCountProgress));
+
+					var currentGoal = sub.WordCountGoal;
+					var currentProgress = sub.WordCountProgress;
 
 					sub.WordCountProgress = 0;
 					sub.WordCountGoal = sub.HasCustomGoal ?
@@ -219,11 +226,13 @@ namespace FrankieBot.Discord.Modules
 
 					sub.Save();
 
-					tomorrowsGoals.Add((sub.User, sub.WordCountGoal, sub.WordCountProgress));
+					var nextGoal = sub.WordCountGoal;
+
+					userGoals.Add((sub.User, currentGoal, currentProgress, nextGoal));
 				}
 			});
 
-			if (announceChannelOption != null && !announceChannelOption.IsEmpty)
+			if (announceChannelOption != null && !announceChannelOption.IsEmpty && userGoals.Count > 0)
 			{
 				var guildChannel = await guild.GetChannelAsync(ulong.Parse(announceChannelOption.Value)) as SocketGuildChannel;
 				if (guildChannel == null)
@@ -245,42 +254,41 @@ namespace FrankieBot.Discord.Modules
 					}
 					await channel.SendMessageAsync($"Word tracker is being refreshed{ping}");
 
-					// build embed for previous day's results & post
-					if (todaysGoals.Count > 0)
+					var embeds = new List<EmbedBuilder>();
+					var goalGroups = userGoals.Chunk(25);
+					var embedPage = 1;
+
+					foreach (var group in goalGroups)
 					{
-						var eb = new EmbedBuilder()
-							.WithTitle("Yesterday's Word Tracker Results");
+						var title = goalGroups.Count() > 1 ?
+							$"Word Tracker Results - Page {embedPage}" :
+							"Word Tracker Results";
+
+						var embed = new EmbedBuilder()
+							.WithTitle(title);
 
 						var fields = new List<EmbedFieldBuilder>();
 
-						foreach (var res in todaysGoals)
+						foreach (var userGoal in group)
 						{
+							var u = userGoal.user;
+							var name = userGoal.currentProgress >= userGoal.currentGoal ?
+								$"{u.Username} :star:" :
+								u.Username;
+
 							fields.Add(new EmbedFieldBuilder()
-								.WithName(res.User.Username)
-								.WithValue($"{res.Progress} / {res.Goal}"));
+								.WithName(name)
+								.WithValue($"{userGoal.currentProgress} / {userGoal.currentGoal} => 0 / {userGoal.nextGoal}"));
 						}
 
-						eb.WithFields(fields);
-						await channel.SendMessageAsync(embed: eb.Build());
+						embed.WithFields(fields);
+						embeds.Add(embed);
+						embedPage++;
 					}
 
-					// build embed for new day's goals & post
-					if (tomorrowsGoals.Count > 0)
+					foreach (var embed in embeds)
 					{
-						var eb = new EmbedBuilder()
-							.WithTitle("Today's Word Tracker Goals");
-
-						var fields = new List<EmbedFieldBuilder>();
-
-						foreach (var res in tomorrowsGoals)
-						{
-							fields.Add(new EmbedFieldBuilder()
-								.WithName(res.User.Username)
-								.WithValue($"{res.Progress} / {res.Goal}"));
-						}
-
-						eb.WithFields(fields);
-						await channel.SendMessageAsync(embed: eb.Build());
+						await channel.SendMessageAsync(embed: embed.Build());
 					}
 				}
 			}
@@ -653,27 +661,46 @@ namespace FrankieBot.Discord.Modules
 				}
 			});
 
-			var eb = new EmbedBuilder()
-				.WithTitle("Today's Word Tracker Progress");
-
 			if (subscribers.Count < 1)
 			{
-				eb.WithDescription("The word tracker currently has no subscribers!");
+				await Context.Channel.SendMessageAsync("The word tracker currently has no subscribers!");
 			}
 			else
 			{
-				var fields = new List<EmbedFieldBuilder>();
-				foreach (var sub in subscribers)
+				var subGroups = subscribers.Chunk(25);
+				var embeds = new List<EmbedBuilder>();
+				var page = 1;
+				foreach (var group in subGroups)
 				{
-					fields.Add(new EmbedFieldBuilder()
-						.WithName(sub.User?.Username ?? $"User {sub.UserID}")
-						.WithValue($"`{sub.WordCountProgress}/{sub.WordCountGoal} words`")
-						);
-				}
-				eb.WithFields(fields);
-			}
+					var title = subGroups.Count() > 1 ?
+					$"Today's Word Tracker Progress - Page {page}" :
+					"Today's Word Tracker Progress";
 
-			await Context.Channel.SendMessageAsync(embed: eb.Build());
+					var eb = new EmbedBuilder()
+						.WithTitle(title);
+
+					var fields = new List<EmbedFieldBuilder>();
+					foreach (var sub in group)
+					{
+						var name = sub.WordCountProgress > sub.WordCountGoal ?
+						$"{sub.User.Username ?? sub.UserID.ToString()} :star:" :
+						sub.User.Username ?? sub.UserID.ToString();
+
+						fields.Add(new EmbedFieldBuilder()
+							.WithName(name)
+							.WithValue($"`{sub.WordCountProgress} / {sub.WordCountGoal} words`"));
+					}
+
+					eb.WithFields(fields);
+					embeds.Add(eb);
+					page++;
+				}
+
+				foreach(var embed in embeds)
+				{
+					await Context.Channel.SendMessageAsync(embed: embed.Build());
+				}
+			}
 		}
 
 		/// <summary>
