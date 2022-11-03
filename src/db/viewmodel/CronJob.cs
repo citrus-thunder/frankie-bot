@@ -176,7 +176,9 @@ namespace FrankieBot.DB.ViewModel
 		/// </summary>
 		public void Stop()
 		{
+			Timer.Change(Timeout.Infinite, Timeout.Infinite);
 			Timer.Dispose();
+			Timer = null;
 		}
 
 		/// <summary>
